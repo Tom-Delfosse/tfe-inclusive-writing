@@ -1,0 +1,8 @@
+textarea{
+    font-size: 20px;
+    max-width: 100%;
+    max-height: 50%;
+    font-family: 'Poppins', sans-serif;
+    line-height: 180%;
+    font-weight: 400;
+}
