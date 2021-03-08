@@ -79,13 +79,17 @@ function textJoin() {
 }
 
 
-
-
-
-
 // ____TO_DO____
 // Ajouter une classe succès ! ✅
 // Ajouter un bouton de retour en arrière ✅
 // Ajouter un bouton 'copier dans le presse-papier' ✅
 // Si pas de texte, ajouter une option "ajoutez du texte pour le convertir !" ✅
 // Si rien de changé, ajouter une nouvelle classe 'rien ne nécessite d'êtrem modifié !'
+
+
+// __LATER__
+// Faire les options de modifications du site.
+// Option pour personnaliser les modifications à effectuer
+// Stocker ces données perso dans le LocalStorage
+// Highlighter les changements effectués ?
+// Montrer, pendant la modification du site, que le site est en train de travailler dans le background.
