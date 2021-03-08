@@ -1,0 +1,20 @@
+{
+  "name": "tfe-inclusive-writing",
+  "version": "0.0.1",
+  "description": "Travail de fin d'année sur l'écriture inclusive et son emploi sur le web francophone.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tom-Delfosse/tfe-inclusive-writing.git"
+  },
+  "keywords": [],
+  "author": "Tom Delfosse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tom-Delfosse/tfe-inclusive-writing/issues"
+  },
+  "homepage": "https://github.com/Tom-Delfosse/tfe-inclusive-writing#readme"
+}
