@@ -6,3 +6,7 @@ textarea{
     line-height: 180%;
     font-weight: 400;
 }
+
+.textarea--checked{
+    border: 1px solid rgb(72, 150, 65);
+}
