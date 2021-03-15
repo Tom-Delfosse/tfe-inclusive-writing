@@ -1,24 +1,24 @@
 "use strict";
-let btnCheck = document.querySelector(".btn--check");
-let btnCancel = document.querySelector(".btn--cancel");
-let btnCopy = document.querySelector(".btn--copy");
-let textArea = document.querySelector(".textarea");
+const btnCheck = document.querySelector(".btn--check");
+const btnCancel = document.querySelector(".btn--cancel");
+const btnCopy = document.querySelector(".btn--copy");
+const textArea = document.querySelector(".textarea");
+const data = import('./checker.json');
 let userText = [];
 let newText = [];
 let text = '';
 
-// window.addEventListener("load", (e) =>{
-//     return textCheck();
-// })
 
 btnCheck.addEventListener("click", (e) =>{
-    // e.preventDefault();
     return textCompact();
+})
+
+window.addEventListener("load", (e) =>{
+    console.log(data)
 })
 
 btnCancel.addEventListener('click', (e) =>{
     // ce bouton permet simplement d'annuler les modifications effectuées.
-    // e.preventDefault();
     console.clear();
     newText = text;
     btnCancel.setAttribute('disabled', true);
@@ -54,9 +54,17 @@ function textCompact() {
         userText[index].forEach((subElement, subIndex) => {
 
             // c'est ici que l'on check pour les différents mots à changer.
-            if (subElement.match(/(Maintenant)/g)){
-                userText[index][subIndex] = subElement.replace(/(Maintenant)/g, 'chaton')
+            if (subElement.match(/(Normalement)/g)){
+                userText[index][subIndex] = subElement.replace(/(Normalement)/g, 'Étonnamment')
             }
+
+            // switch (true) {
+            //     case subElement.test(maintenant):
+            //         console.log("Maintenant est ici !")
+            //     break;
+            //     default: 
+            //     console.log('aucun changement à effectuer !');
+            // }
         });
 
         // Après avoir corrigé le texte, on vient rassembler les paragraphes afin de supprimer les caractères inutiles qui permettent de structurer les tableaux.
@@ -85,6 +93,7 @@ function textJoin() {
 // Ajouter un bouton 'copier dans le presse-papier' ✅
 // Si pas de texte, ajouter une option "ajoutez du texte pour le convertir !" ✅
 // Si rien de changé, ajouter une nouvelle classe 'rien ne nécessite d'êtrem modifié !'
+// Highlight les endroits changés dans un span et possibilité de les annuler.
 
 
 // __LATER__
