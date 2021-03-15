@@ -59,7 +59,7 @@ function textCompact() {
 
 
             words.forEach((word, index) => {
-                let regex = new RegExp('\\b'+'(' + word.toCheck + ')'+'\\W', 'g')
+                let regex = new RegExp('\\b'+'(' + word.toCheck + ')'+'(?=\\W)', 'g')
                 if (subElement.match(regex)) {    
                     console.log(regex)            
                     subElement = subElement.replace(regex, '<span class="corrected">'+word.checked+'</span>');
