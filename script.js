@@ -8,7 +8,6 @@ let newText = [];
 let text = '';
 let words = '';
 
-
 function checkerLoader(){
     // Cette fonction a pour simple objectif de récupérer les données JSON de la base de donnée et de les attribuer dans une variable accessible sans faire de requêtes supplémentaires.
     fetch('./checker.json')
@@ -39,8 +38,6 @@ btnCancel.addEventListener('click', (e) =>{
     textbackinTxtArea();
 })
 
-
-
 function textCompact() {
     // console.clear();
     userText = [];
@@ -62,11 +59,10 @@ function textCompact() {
 
 
             words.forEach((word, index) => {
-                let regex = new RegExp('\\b'+'(' + word.toCheck + ')'+'\\b', 'g')
-
-                if (subElement.match(regex)) {                
+                let regex = new RegExp('\\b'+'(' + word.toCheck + ')'+'\\W', 'g')
+                if (subElement.match(regex)) {    
+                    console.log(regex)            
                     subElement = subElement.replace(regex, '<span class="corrected">'+word.checked+'</span>');
-                    // subElement = subElement.replace(regex, word.checked);
                 }
             })
             userText[index][subIndex] = subElement

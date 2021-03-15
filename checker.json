@@ -326,5 +326,37 @@
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
     "originalWordGender": "f"
+  },
+  {
+    "toCheck": "concernées",
+    "checked": "concerné‧e‧s",
+    "checkedAlt": "",
+    "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
+    "wordType": "adjectif",
+    "originalWordGender": "f"
+  },
+  {
+    "toCheck": "concernés",
+    "checked": "concerné‧e‧s",
+    "checkedAlt": "",
+    "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
+    "wordType": "adjectif",
+    "originalWordGender": "m"
+  },
+  {
+    "toCheck": "satisfaites",
+    "checked": "satisfait‧e‧s",
+    "checkedAlt": "",
+    "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
+    "wordType": "adjectif",
+    "originalWordGender": "f"
+  },
+  {
+    "toCheck": "chanteurs",
+    "checked": "chanteur‧euse‧s",
+    "checkedAlt": "",
+    "explanation": "Le nom commum est remplacé par son équivalent inclusif.",
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   }
 ]
