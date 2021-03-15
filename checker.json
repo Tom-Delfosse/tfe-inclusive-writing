@@ -4,244 +4,327 @@
     "checked": "iel",
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
-    "wordType": "pronom"
+    "wordType": "pronom",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "elle",
     "checked": "iel",
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
-    "wordType": "pronom"
+    "wordType": "pronom",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "lui",
     "checked": "ellui",
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
-    "wordType": "pronom"
+    "wordType": "pronom",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "beau",
     "checked": "beau‧belle",
     "checkedAlt": "belleau",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "belle",
     "checked": "beau‧belle",
     "checkedAlt": "belleau",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "satisfait",
     "checked": "satisfait‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "content",
     "checked": "content‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "concerné",
     "checked": "concerné‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "concernée",
     "checked": "concerné‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "chanteur",
     "checked": "chanteur‧euse",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "chanteuse",
     "checked": "chanteur‧euse",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "acteur",
     "checked": "acteur‧trice",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "actrice",
     "checked": "acteur‧trice",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "menteur",
     "checked": "menteur‧euse",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "menteuse",
     "checked": "menteur‧euse",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "auteur",
     "checked": "auteur‧e",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "auteure",
     "checked": "auteur‧e",
     "checkedAlt": "autrice",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "établi",
     "checked": "établi‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "établie",
     "checked": "établi‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "heureux",
     "checked": "heureux‧se",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "heureuse",
     "checked": "heureux‧se",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "joyeux",
     "checked": "joyeux‧se",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "joyeuse",
     "checked": "joyeux‧se",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "connecté",
     "checked": "connecté‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "connectée",
     "checked": "connecté‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "lancé",
     "checked": "lancé‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "lancée",
     "checked": "lancé‧e",
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
-    "wordType": "adjectif"
+    "wordType": "adjectif",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "copain",
     "checked": "copain‧ine",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "copine",
     "checked": "copain‧ine",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "ami",
     "checked": "ami‧e",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "amie",
     "checked": "ami‧e",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "petit-ami",
     "checked": "petit-ami‧e",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "petit-amie",
     "checked": "petit-ami‧e",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
   },
   {
     "toCheck": "amis",
     "checked": "ami‧e‧s",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "m"
   },
   {
     "toCheck": "amies",
     "checked": "ami‧e‧s",
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
-    "wordType": "nom commun"
+    "wordType": "nom commun",
+    "originalWordGender": "f"
+  },
+  {
+    "toCheck": "Il",
+    "checked": "Iel",
+    "checkedAlt": "",
+    "explanation": "Le pronom est remplacé par son alternative non genrée",
+    "wordType": "pronom",
+    "originalWordGender": "m"
+  },
+  {
+    "toCheck": "Elle",
+    "checked": "Iel",
+    "checkedAlt": "",
+    "explanation": "Le pronom est remplacé par son alternative non genrée",
+    "wordType": "pronom",
+    "originalWordGender": "f"
+  },
+  {
+    "toCheck": "ils",
+    "checked": "Iels",
+    "checkedAlt": "",
+    "explanation": "Le pronom est remplacé par son alternative non genrée",
+    "wordType": "pronom",
+    "originalWordGender": "m"
+  },
+  {
+    "toCheck": "elles",
+    "checked": "Iels",
+    "checkedAlt": "",
+    "explanation": "Le pronom est remplacé par son alternative non genrée",
+    "wordType": "pronom",
+    "originalWordGender": "f"
+  },
+  {
+    "toCheck": "Ils",
+    "checked": "Iels",
+    "checkedAlt": "",
+    "explanation": "Le pronom est remplacé par son alternative non genrée",
+    "wordType": "pronom",
+    "originalWordGender": "m"
+  },
+  {
+    "toCheck": "Elles",
+    "checked": "Iels",
+    "checkedAlt": "",
+    "explanation": "Le pronom est remplacé par son alternative non genrée",
+    "wordType": "pronom",
+    "originalWordGender": "f"
   }
 ]
