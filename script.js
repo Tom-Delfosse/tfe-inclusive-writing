@@ -8,9 +8,9 @@ let newText = [];
 let text = '';
 let words = '';
 
-function checkerLoader(){
+async function checkerLoader(){
     // Cette fonction a pour simple objectif de récupérer les données JSON de la base de donnée et de les attribuer dans une variable accessible sans faire de requêtes supplémentaires.
-    fetch('./checker.json')
+    await fetch('./terminaisons/newChecker.json')
     .then(function (response) { return response.json()})
     .then(function (data) {
         return words = data;
@@ -20,6 +20,7 @@ function checkerLoader(){
     })
 }
 checkerLoader();
+
 
 window.addEventListener("load", (e) =>{
     // Cet écouteur d'évenements a pour objectif d'attendre que les données soient bien téléchargées afin de donner accès aux modifications.
@@ -60,7 +61,7 @@ function textCompact() {
                 let regex = new RegExp('\\b'+'(' + word.toCheck + ')'+'(?=\\W)', 'g')
                 if (subElement.match(regex)) {    
                     console.log(regex)            
-                    subElement = subElement.replace(regex, '<span class="corrected corrected--'+word.wordNumb+'">'+word.checked+'</span>');
+                    subElement = subElement.replace(regex, '<span class="corrected corrected--'+word.wordID+'">'+word.checked+'</span>');
                 }
             })
             userText[index][subIndex] = subElement
@@ -111,11 +112,8 @@ function spanDetector() {
     spanBtnList.forEach((button, index) => {
         button.addEventListener("click", (e) =>{
             words.forEach(word => {
-                if (spanList[index].classList.contains("corrected--"+word.wordNumb)) {
+                if (spanList[index].classList.contains("corrected--"+word.wordID)) {
                     spanList[index].parentNode.replaceChild(document.createTextNode(word.toCheck), spanList[index])
-                    // console.log(spanList[index].parentNode)
-                    // spanList[index].parentNode.insertBefore(word.toCheck.spanList[index], spanList[index]);
-                    // spanList[index].parentNode.removeChild(spanList[index], true);
                 }
             })
         })
@@ -148,7 +146,7 @@ btnCopy.addEventListener('click', (e) =>{
 // Si pas de texte, ajouter une option "ajoutez du texte pour le convertir !" ✅
 // Si rien de changé, ajouter une nouvelle classe 'rien ne nécessite d'êtrem modifié !' ✅
 // Highlight les endroits changés dans un span✅
-// possibilité d'annuler les changements localement.
+// possibilité d'annuler les changements localement. ✅
 // afficher l'explication au hover du span.
 // montrer que l'article a déjà été déjà été modifié
 
