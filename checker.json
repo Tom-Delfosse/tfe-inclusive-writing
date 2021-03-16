@@ -5,7 +5,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 1
   },
   {
     "toCheck": "elle",
@@ -13,7 +14,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 2
   },
   {
     "toCheck": "lui",
@@ -21,7 +23,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 3
   },
   {
     "toCheck": "beau",
@@ -29,7 +32,8 @@
     "checkedAlt": "belleau",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 4
   },
   {
     "toCheck": "belle",
@@ -37,7 +41,8 @@
     "checkedAlt": "belleau",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 5
   },
   {
     "toCheck": "satisfait",
@@ -45,7 +50,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 6
   },
   {
     "toCheck": "content",
@@ -53,7 +59,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 7
   },
   {
     "toCheck": "concerné",
@@ -61,7 +68,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 8
   },
   {
     "toCheck": "concernée",
@@ -69,7 +77,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 9
   },
   {
     "toCheck": "chanteur",
@@ -77,7 +86,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 10
   },
   {
     "toCheck": "chanteuse",
@@ -85,7 +95,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 11
   },
   {
     "toCheck": "acteur",
@@ -93,7 +104,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 12
   },
   {
     "toCheck": "actrice",
@@ -101,7 +113,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 13
   },
   {
     "toCheck": "menteur",
@@ -109,7 +122,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 14
   },
   {
     "toCheck": "menteuse",
@@ -117,7 +131,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 15
   },
   {
     "toCheck": "auteur",
@@ -125,7 +140,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 16
   },
   {
     "toCheck": "auteure",
@@ -133,7 +149,8 @@
     "checkedAlt": "autrice",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 17
   },
   {
     "toCheck": "établi",
@@ -141,7 +158,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 18
   },
   {
     "toCheck": "établie",
@@ -149,7 +167,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 19
   },
   {
     "toCheck": "heureux",
@@ -157,7 +176,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 20
   },
   {
     "toCheck": "heureuse",
@@ -165,7 +185,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 21
   },
   {
     "toCheck": "joyeux",
@@ -173,7 +194,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 22
   },
   {
     "toCheck": "joyeuse",
@@ -181,7 +203,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 23
   },
   {
     "toCheck": "connecté",
@@ -189,7 +212,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 24
   },
   {
     "toCheck": "connectée",
@@ -197,7 +221,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 25
   },
   {
     "toCheck": "lancé",
@@ -205,7 +230,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 26
   },
   {
     "toCheck": "lancée",
@@ -213,7 +239,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 27
   },
   {
     "toCheck": "copain",
@@ -221,7 +248,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 28
   },
   {
     "toCheck": "copine",
@@ -229,7 +257,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 29
   },
   {
     "toCheck": "ami",
@@ -237,7 +266,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 30
   },
   {
     "toCheck": "amie",
@@ -245,7 +275,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 31
   },
   {
     "toCheck": "petit-ami",
@@ -253,7 +284,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 32
   },
   {
     "toCheck": "petit-amie",
@@ -261,7 +293,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 33
   },
   {
     "toCheck": "amis",
@@ -269,7 +302,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 34
   },
   {
     "toCheck": "amies",
@@ -277,7 +311,8 @@
     "checkedAlt": "",
     "explanation": "Le nom commun est remplacé par son équivalent non genré.",
     "wordType": "nom commun",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 35
   },
   {
     "toCheck": "Il",
@@ -285,7 +320,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 36
   },
   {
     "toCheck": "Elle",
@@ -293,7 +329,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 37
   },
   {
     "toCheck": "ils",
@@ -301,7 +338,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 38
   },
   {
     "toCheck": "elles",
@@ -309,7 +347,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 39
   },
   {
     "toCheck": "Ils",
@@ -317,7 +356,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 40
   },
   {
     "toCheck": "Elles",
@@ -325,7 +365,8 @@
     "checkedAlt": "",
     "explanation": "Le pronom est remplacé par son alternative non genrée",
     "wordType": "pronom",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 41
   },
   {
     "toCheck": "concernées",
@@ -333,7 +374,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 42
   },
   {
     "toCheck": "concernés",
@@ -341,7 +383,8 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "m"
+    "originalWordGender": "m",
+    "wordNumb": 43
   },
   {
     "toCheck": "satisfaites",
@@ -349,14 +392,16 @@
     "checkedAlt": "",
     "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
     "wordType": "adjectif",
-    "originalWordGender": "f"
+    "originalWordGender": "f",
+    "wordNumb": 44
   },
   {
-    "toCheck": "chanteurs",
-    "checked": "chanteur‧euse‧s",
+    "toCheck": "satisfaits",
+    "checked": "satisfait‧e‧s",
     "checkedAlt": "",
-    "explanation": "Le nom commum est remplacé par son équivalent inclusif.",
-    "wordType": "nom commun",
-    "originalWordGender": "m"
+    "explanation": "L'adjectif est remplacé par son équivalent inclusif.",
+    "wordType": "adjectif",
+    "originalWordGender": "m",
+    "wordNumb": 45
   }
 ]

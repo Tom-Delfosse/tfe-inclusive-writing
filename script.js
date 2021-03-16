@@ -42,7 +42,6 @@ function textCompact() {
     // console.clear();
     userText = [];
     text = textArea.value;
-
     // On check si le textArea est vide et si c'est le cas, on annule la modification du site.
     if (!text) {
         return alert("ajoutez du texte pour qu'il soit converti !")
@@ -57,12 +56,11 @@ function textCompact() {
         userText[index] = e.replace(/([.?!])\s*(?=[A-Z])/g, '$1|').split('|');
         userText[index].forEach((subElement, subIndex) => {
 
-
             words.forEach((word, index) => {
                 let regex = new RegExp('\\b'+'(' + word.toCheck + ')'+'(?=\\W)', 'g')
                 if (subElement.match(regex)) {    
                     console.log(regex)            
-                    subElement = subElement.replace(regex, '<span class="corrected">'+word.checked+'</span>');
+                    subElement = subElement.replace(regex, '<span class="corrected corrected--'+word.wordNumb+'">'+word.checked+'</span>');
                 }
             })
             userText[index][subIndex] = subElement
@@ -98,7 +96,6 @@ function textInNewDiv(){
     document.body.replaceChild(textDiv, textArea)
     btnCheck.setAttribute('disabled', true);
     spanDetector();
-
 }
 
 function spanDetector() {
@@ -113,12 +110,12 @@ function spanDetector() {
     let spanBtnList = document.querySelectorAll('.btn--delete');
     spanBtnList.forEach((button, index) => {
         button.addEventListener("click", (e) =>{
-            // console.log(spanList[index].innerHTML)
-            
             words.forEach(word => {
-                if (spanList[index].innerHTML.match(word.checked)) {
-                    console.log("même mot")
-                    console.log(word.checked)
+                if (spanList[index].classList.contains("corrected--"+word.wordNumb)) {
+                    spanList[index].parentNode.replaceChild(document.createTextNode(word.toCheck), spanList[index])
+                    // console.log(spanList[index].parentNode)
+                    // spanList[index].parentNode.insertBefore(word.toCheck.spanList[index], spanList[index]);
+                    // spanList[index].parentNode.removeChild(spanList[index], true);
                 }
             })
         })
@@ -132,24 +129,18 @@ function textbackinTxtArea(){
     btnCheck.removeAttribute('disabled');
 }
 
-
 btnCopy.addEventListener('click', (e) =>{
     // Ce bouton permet tout simplement de copier dans le presse-papier le texte modifié.
-    copyToClip();
-})
-
-function copyToClip() {
     let textCopied = document.querySelector(".text-container").innerText.replace(/\B(supprimer)/g, '');
-    console.log(textCopied)
-
-
-    // console.log(textCopied)
     navigator.clipboard.writeText(textCopied).then(function() {
         console.log('Le texte fut copié dans le presse papier avec succès !')
     }, function() {
         console.log('Une erreur est survenue, impossible de copier dans le presse papier.')
     })
-}
+
+    console.log(textCopied)
+})
+
 // ____TO_DO____
 // Ajouter une classe succès ! ✅
 // Ajouter un bouton de retour en arrière ✅
