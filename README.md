@@ -1,2 +1,8 @@
 # tfe-inclusive-writing
-Travail de fin d'année sur l'écriture inclusive et son emploi sur le web francophone.
+
+
+
+### Credit
+- Pallier, Christophe & New, Boris (2019** Openlexicon, GitHub repository, https://github.com/chrplr/openlexicon
+### License
+This repository is distributed under a CC BY-SA 4.0 LICENSE.
