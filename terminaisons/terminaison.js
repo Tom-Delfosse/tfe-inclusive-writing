@@ -4,90 +4,207 @@ async function checkerLoader(){
     const words = await response.json();
     return words;
 }
+
 const correctedWords = [];
+let emptyCells = null;
 checkerLoader().then(words => {
 
-    words.forEach((word, index) => {
+    words.forEach((word) => {
         let correctedWord = '';
-        if (word.toCheck.match(/(ée?s\b)/g)){
-            correctedWord = word.toCheck.replace(/(ée?s)\b/g, 'é‧e‧s')
+        if (word.toCheck.match(/(ée?s(?!(-))(?![^\x00-\x7F])\b)/g)){
+            correctedWord = word.toCheck.replace(/(ée?s)(?!(-))(?![^\x00-\x7F])\b/g, 'é‧e‧s')
             correctedWords.push(correctedWord)
-        } else if (word.toCheck.match(/(ée)/g)) {
-            correctedWord = word.toCheck.replace(/(ée)\b/g, 'é‧e')
+        } else if (word.toCheck.match(/(ée)(?!(-))(?![^\x00-\x7F])/g)) {
+            correctedWord = word.toCheck.replace(/(ée)(?!(-))(?![^\x00-\x7F])\b/g, 'é‧e')
             correctedWords.push(correctedWord)
+
         } else if (word.toCheck.match(/é\B/g)) {
             correctedWord = word.toCheck.replace(/é\B/g, 'é‧e')
             correctedWords.push(correctedWord)
 
-        } else if (word.toCheck.match(/(une?s)\b/g)){
-            correctedWord = word.toCheck.replace(/une?s\b/g, 'un‧e‧s')
+
+        } else if (word.toCheck.match(/(une?|ine?)s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/une?s(?!(-))(?![^\x00-\x7F])\b/g, 'un‧e‧s')
             correctedWords.push(correctedWord)
-        } else if (word.toCheck.match(/(une)\b/g)){
-            correctedWord = word.toCheck.replace(/une\b/g, 'un‧e')
+            // console.log(correctedWord)  
+
+        } else if (word.toCheck.match(/(une?|ine?)(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/ne?(?!(-))(?![^\x00-\x7F])\b/g, 'n‧e')
             correctedWords.push(correctedWord)
-        } else if (word.toCheck.match(/(un)\b/g)){
-            correctedWord = word.toCheck.replace(/un\b/g, 'un‧e')
+            // console.log(correctedWord)  
+
+
+        } else if (word.toCheck.match(/oise?s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/oise?s(?!(-))(?![^\x00-\x7F])\b/g, 'ois‧e‧s')
             correctedWords.push(correctedWord)
 
-        } else if (word.toCheck.match(/oise?s\b/g)){
-            correctedWord = word.toCheck.replace(/oise?s\b/g, 'ois‧e‧s')
-            correctedWords.push(correctedWord)
-        } else if (word.toCheck.match(/oise?\b/g)){
-            correctedWord = word.toCheck.replace(/oise?\b/g, 'ois‧e')
+        } else if (word.toCheck.match(/oise?(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/oise?(?!(-))(?![^\x00-\x7F])\b/g, 'ois‧e')
             correctedWords.push(correctedWord)
 
-        } else if (word.toCheck.match(/f\b|ve\b/g)){
-            correctedWord = word.toCheck.replace(/f\b|ve\b/g, 'f‧ve')
+
+        } else if (word.toCheck.match(/(f|ve)(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/(f|ve)(?!(-))(?![^\x00-\x7F])\b/g, 'f‧ve')
             correctedWords.push(correctedWord)
-        } else if (word.toCheck.match(/ves\b|fs\b/g)){
-            correctedWord = word.toCheck.replace(/ves\b|fs\b/g, 'f‧ve‧s')
+
+        } else if (word.toCheck.match(/(ve|f)s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/(ve|f)s(?!(-))(?![^\x00-\x7F])\b/g, 'f‧ve‧s')
             correctedWords.push(correctedWord)
             
-        } else if (word.toCheck.match(/aise?\b/g)){
-            correctedWord = word.toCheck.replace(/aise?\b/g, 'ais‧e')
+
+        } else if (word.toCheck.match(/aise?(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/aise?(?!(-))(?![^\x00-\x7F])\b/g, 'ais‧e')
             correctedWords.push(correctedWord)
             // console.log(correctedWord)
-        } else if (word.toCheck.match(/aises\b/g)){
-            correctedWord = word.toCheck.replace(/aises\b/g, 'ais‧e‧s')
+        } else if (word.toCheck.match(/aises(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/aises(?!(-))(?![^\x00-\x7F])\b/g, 'ais‧e‧s')
             correctedWords.push(correctedWord)
             // console.log(correctedWord)  
 
-        } else if (word.toCheck.match(/en(ne)?\b/g)){
-            correctedWord = word.toCheck.replace(/en\b/g, 'en‧ne')
+
+        } else if (word.toCheck.match(/nn?e?(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/nn?e?(?!(-))(?![^\x00-\x7F])\b/g, 'n‧ne')
             correctedWords.push(correctedWord)
-            // console.log(correctedWord)     
-        } else if (word.toCheck.match(/en(ne)?s\b/g)){
-            correctedWord = word.toCheck.replace(/en(ne)?s\b/g, 'en‧ne‧s')
+            // console.log(correctedWord) 
+                
+        } else if (word.toCheck.match(/nn?e?s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/nn?e?s(?!(-))(?![^\x00-\x7F])\b/g, 'n‧ne‧s')
             correctedWords.push(correctedWord)
             // console.log(correctedWord)  
 
-        } else if (word.toCheck.match(/er\b|ère\b/g)){
-            correctedWord = word.toCheck.replace(/er\b|ère\b/g, 'er‧ère')
+
+        } else if (word.toCheck.match(/(er|ère)(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/(er|ère)(?!(-))(?![^\x00-\x7F])\b/g, 'er‧ère')
             correctedWords.push(correctedWord)
             // console.log(correctedWord)     
-        } else if (word.toCheck.match(/ers\b|ères\b/g)){
-            correctedWord = word.toCheck.replace(/ers\b|ères\b/g, 'er‧ère‧s')
+        } else if (word.toCheck.match(/(er|ère)s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/(er|ère)s(?!(-))(?![^\x00-\x7F])\b/g, 'er‧ère‧s')
             correctedWords.push(correctedWord)
             // console.log(correctedWord)     
 
-        } else if (word.toCheck.match(/(?<!q)ue?\b/g)){
+
+        } else if (word.toCheck.match(/(?<!q)ue?(?!(-))(?![^\x00-\x7F])\b/g)){
             correctedWord = word.toCheck.replace(/ue?\b/g, 'u‧e')
             correctedWords.push(correctedWord)
-            console.log(correctedWord)     
-        } else if (word.toCheck.match(/(?<!q)ue?s\b/g)){
+            // console.log(correctedWord)     
+        } else if (word.toCheck.match(/(?<!q)ue?s(?!(-))(?![^\x00-\x7F])\b/g)){
             correctedWord = word.toCheck.replace(/ue?s\b/g, 'u‧e‧s')
             correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+
+        } else if (word.toCheck.match(/ie?s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/ie?s(?!(-))(?![^\x00-\x7F])\b/g, 'i‧e‧s')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+        } else if (word.toCheck.match(/ie?(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/ie?(?!(-))(?![^\x00-\x7F])\b/g, 'i‧e')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+
+        } else if (word.toCheck.match(/tante?s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/tante?s(?!(-))(?![^\x00-\x7F])\b/g, 'tant‧e‧s')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+        } else if (word.toCheck.match(/tante?(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/tante?(?!(-))(?![^\x00-\x7F])\b/g, 'tant‧e')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+
+        } else if (word.toCheck.match(/(teur|trice)s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/(teur|trice)s(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧trice‧s')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+        } else if (word.toCheck.match(/(teur|trice)(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/(teur|trice)(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧trice')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+        } else if (word.toCheck.match(/teuse(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/teuse(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧teuse')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+
+        // } else if (word.toCheck.match(/te?(?!(-))(?![^\x00-\x7F])\b/g)){
+        //     correctedWords.push(correctedWord)
+        
+        } else if (word.toCheck.match(/te?s?(?!(-))(?![^\x00-\x7F])\b/g)){
+            // console.log(correctedWord)    
+            if (word.originalWordNumb === 'p'){
+                correctedWord = word.toCheck.replace(/te?s(?!(-))(?![^\x00-\x7F])\b/g, 't‧e‧s')
+            } else {
+                correctedWord = word.toCheck.replace(/te?(?!(-))(?![^\x00-\x7F])\b/g, 't‧e')
+                
+            }
+            correctedWords.push(correctedWord)
             console.log(correctedWord)     
+
+
+        } else if (word.toCheck.match(/ale?(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/al(?!(-))(?![^\x00-\x7F])\b/g, 'al‧le')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)     
+
+        } else if (word.toCheck.match(/(aux|ales)(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/(aux|ales)(?!(-))(?![^\x00-\x7F])\b/g, 'aux‧ales')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)    
+
+
+        } else if (word.toCheck.match(/(eux|euses?)(?!(-))(?![^\x00-\x7F])\b/g)) {
+            if (word.originalWordNumb === 'p'){
+                correctedWord = word.toCheck.replace(/(eux|euses)(?!(-))(?![^\x00-\x7F])\b/g, 'eux‧euses')
+                correctedWords.push(correctedWord)
+                // console.log('plural — ' + correctedWord)
+            } else {
+                correctedWord = word.toCheck.replace(/(eux|euse)(?!(-))(?![^\x00-\x7F])\b/g, 'eux‧euse')
+                correctedWords.push(correctedWord)
+                // console.log('sing — ' + correctedWord)
+            }
+
+
+        } else if (word.toCheck.match(/ell?e?(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/ell?e?(?!(-))(?![^\x00-\x7F])\b/g, 'el‧le')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord) 
+
+        } else if (word.toCheck.match(/ell?e?s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/ell?e?s(?!(-))(?![^\x00-\x7F])\b/g, 'el‧le‧s')
+            correctedWords.push(correctedWord)
+            
+ 
+        } else if (word.toCheck.match(/de?(?!(-))(?![^\x00-\x7F])\b/g)){
+            if (!(word.toCheck.match(/de(?!(-))(?![^\x00-\x7F])\b/g) && word.originalWordGender == "m")){
+                correctedWord = word.toCheck.replace(/de?(?!(-))(?![^\x00-\x7F])\b/g, 'd‧e')
+                correctedWords.push(word.toCheck)
+            }
+
+        } else if (word.toCheck.match(/de?s(?!(-))(?![^\x00-\x7F])\b/g)){
+            correctedWord = word.toCheck.replace(/de?s(?!(-))(?![^\x00-\x7F])\b/g, 'd‧e‧s')
+            correctedWords.push(correctedWord)
+            // console.log(correctedWord)  
+
+        } else if (word.toCheck.match(/que?s(?!(-))(?![^\x00-\x7F])\b/g)){
+            // correctedWord = word.toCheck.replace(/de?s(?!(-))(?![^\x00-\x7F])\b/g, 'd‧e‧s')
+            // correctedWords.push(correctedWord)
+            console.log(word.toCheck)  
 
         } else {
             correctedWords.push(correctedWord)
+            emptyCells += 1;
         }
     })
 
-
- 
+    
     console.log(correctedWords)
+    console.log(correctedWords[24])
+    console.log(correctedWords[25])
+    console.log(correctedWords[26])
+    console.log(emptyCells)
 });
 
-
-// problème avec les terminaisons i, te, l/le/aux/lles,
