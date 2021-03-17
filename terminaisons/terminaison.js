@@ -93,45 +93,42 @@ checkerLoader().then(words => {
             // console.log(correctedWord)     
 
 
-        } else if (word.toCheck.match(/ie?s(?!(-))(?![^\x00-\x7F])\b/g)){
+        } else if (word.toCheck.match(/is?e?s?(?!(-))(?![^\x00-\x7F])\b/g)){
+            if ( (word.originalWordNumb =="p" || word.originalWordNumb === '') && word.toCheck.match(/ise?s(?!(-))(?![^\x00-\x7F])\b/g)){
+                correctedWord = word.toCheck.replace(/ise?s(?!(-))(?![^\x00-\x7F])\b/g, 'is‧e‧s')
+                
+            } else if ((word.originalWordNumb == "s" || word.originalWordNumb === '') && word.toCheck.match(/ise?(?!(-))(?![^\x00-\x7F])\b/g)){
+                correctedWord = word.toCheck.replace(/ise?(?!(-))(?![^\x00-\x7F])\b/g, 'is‧e')
+
+            } else  if (word.originalWordNumb == "p" && word.toCheck.match(/ie?s(?!(-))(?![^\x00-\x7F])\b/g)){
+                correctedWord = word.toCheck.replace(/ie?s(?!(-))(?![^\x00-\x7F])\b/g, 'i‧e‧s')
+            } else {                    
+                correctedWord = word.toCheck.replace(/ie?(?!(-))(?![^\x00-\x7F])\b/g, 'i‧e')
+                if (word.originalWordNumb === '')  {
+                    console.log('youpi')
+                    
+                }
+            }
+            // console.log(correctedWord)                
             correctedWord = word.toCheck.replace(/ie?s(?!(-))(?![^\x00-\x7F])\b/g, 'i‧e‧s')
             correctedWords.push(correctedWord)
-            // console.log(correctedWord)     
 
-        } else if (word.toCheck.match(/ie?(?!(-))(?![^\x00-\x7F])\b/g)){
-            correctedWord = word.toCheck.replace(/ie?(?!(-))(?![^\x00-\x7F])\b/g, 'i‧e')
+        } else if (word.toCheck.match(/(teur|trice)s?(?!(-))(?![^\x00-\x7F])\b/g)){
+
+            if (word.originalWordNumb === 'p'){
+                correctedWord = word.toCheck.replace(/(teur|trice)s(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧trice‧s')
+            } else {
+                correctedWord = word.toCheck.replace(/(teur|trice)(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧trice')                
+            }
             correctedWords.push(correctedWord)
             // console.log(correctedWord)     
-
-
-        } else if (word.toCheck.match(/tante?s(?!(-))(?![^\x00-\x7F])\b/g)){
-            correctedWord = word.toCheck.replace(/tante?s(?!(-))(?![^\x00-\x7F])\b/g, 'tant‧e‧s')
-            correctedWords.push(correctedWord)
-            // console.log(correctedWord)     
-
-        } else if (word.toCheck.match(/tante?(?!(-))(?![^\x00-\x7F])\b/g)){
-            correctedWord = word.toCheck.replace(/tante?(?!(-))(?![^\x00-\x7F])\b/g, 'tant‧e')
-            correctedWords.push(correctedWord)
-            // console.log(correctedWord)     
-
-
-        } else if (word.toCheck.match(/(teur|trice)s(?!(-))(?![^\x00-\x7F])\b/g)){
-            correctedWord = word.toCheck.replace(/(teur|trice)s(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧trice‧s')
-            correctedWords.push(correctedWord)
-            // console.log(correctedWord)     
-
-        } else if (word.toCheck.match(/(teur|trice)(?!(-))(?![^\x00-\x7F])\b/g)){
-            correctedWord = word.toCheck.replace(/(teur|trice)(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧trice')
-            correctedWords.push(correctedWord)
-            // console.log(correctedWord)     
+   
         } else if (word.toCheck.match(/teuse(?!(-))(?![^\x00-\x7F])\b/g)){
             correctedWord = word.toCheck.replace(/teuse(?!(-))(?![^\x00-\x7F])\b/g, 'teur‧teuse')
             correctedWords.push(correctedWord)
             // console.log(correctedWord)     
 
 
-        // } else if (word.toCheck.match(/te?(?!(-))(?![^\x00-\x7F])\b/g)){
-        //     correctedWords.push(correctedWord)
         
         } else if (word.toCheck.match(/te?s?(?!(-))(?![^\x00-\x7F])\b/g)){
             // console.log(correctedWord)    
@@ -142,7 +139,7 @@ checkerLoader().then(words => {
                 
             }
             correctedWords.push(correctedWord)
-            console.log(correctedWord)     
+            // console.log(correctedWord)     
 
 
         } else if (word.toCheck.match(/ale?(?!(-))(?![^\x00-\x7F])\b/g)){
@@ -159,13 +156,11 @@ checkerLoader().then(words => {
         } else if (word.toCheck.match(/(eux|euses?)(?!(-))(?![^\x00-\x7F])\b/g)) {
             if (word.originalWordNumb === 'p'){
                 correctedWord = word.toCheck.replace(/(eux|euses)(?!(-))(?![^\x00-\x7F])\b/g, 'eux‧euses')
-                correctedWords.push(correctedWord)
-                // console.log('plural — ' + correctedWord)
             } else {
                 correctedWord = word.toCheck.replace(/(eux|euse)(?!(-))(?![^\x00-\x7F])\b/g, 'eux‧euse')
-                correctedWords.push(correctedWord)
-                // console.log('sing — ' + correctedWord)
             }
+            // console.log(correctedWord)
+            correctedWords.push(correctedWord)
 
 
         } else if (word.toCheck.match(/ell?e?(?!(-))(?![^\x00-\x7F])\b/g)){
@@ -187,12 +182,7 @@ checkerLoader().then(words => {
         } else if (word.toCheck.match(/de?s(?!(-))(?![^\x00-\x7F])\b/g)){
             correctedWord = word.toCheck.replace(/de?s(?!(-))(?![^\x00-\x7F])\b/g, 'd‧e‧s')
             correctedWords.push(correctedWord)
-            // console.log(correctedWord)  
-
-        } else if (word.toCheck.match(/que?s(?!(-))(?![^\x00-\x7F])\b/g)){
-            // correctedWord = word.toCheck.replace(/de?s(?!(-))(?![^\x00-\x7F])\b/g, 'd‧e‧s')
-            // correctedWords.push(correctedWord)
-            console.log(word.toCheck)  
+            // console.log(correctedWord)   
 
         } else {
             correctedWords.push(correctedWord)
@@ -202,9 +192,6 @@ checkerLoader().then(words => {
 
     
     console.log(correctedWords)
-    console.log(correctedWords[24])
-    console.log(correctedWords[25])
-    console.log(correctedWords[26])
     console.log(emptyCells)
 });
 
