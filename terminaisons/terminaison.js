@@ -212,10 +212,10 @@ checkerLoader().then(words => {
             correctedWords.push(correctedWord)
  
             
-        } else if (word.toCheck.match(/(x)s?(?!(-))(?![^\x00-\x7F])\b/g)){
+        // } else if (word.toCheck.match(/(uë)s?(?!(-))(?![^\x00-\x7F])\b/g)){
 
-            correctedWords.push(word.toCheck)
-            console.log(word.toCheck)   
+        //     correctedWords.push(correctedWord)
+        //     console.log(word.toCheck)   
             
         } else if (word.toCheck.match(/(c|che)s?(?!(-))(?![^\x00-\x7F])\b/g)){
             
