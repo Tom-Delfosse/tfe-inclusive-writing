@@ -123,14 +123,7 @@ checkerLoader().then(words => {
             correctedWords.push(correctedWord)
             // console.log(correctedWord)     
    
-        } else if (word.toCheck.match(/(euse|eur)s?(?!(-))(?![^\x00-\x7F])\b/g)){
-            
-            if (word.originalWordNumb === 'p'){
-                correctedWord = word.toCheck.replace(/(euse|eur)s(?!(-))(?![^\x00-\x7F])\b/g, 'eur‧euse‧s')
-            } else {
-                correctedWord = word.toCheck.replace(/(euse|eur)(?!(-))(?![^\x00-\x7F])\b/g, 'eur‧euse')
-            }
-            correctedWords.push(correctedWord)
+
             // console.log(correctedWord)     
 
         } else if (word.toCheck.match(/(eux|euses?)(?!(-))(?![^\x00-\x7F])\b/g)) {
@@ -140,6 +133,15 @@ checkerLoader().then(words => {
                 correctedWord = word.toCheck.replace(/(eux|euse)(?!(-))(?![^\x00-\x7F])\b/g, 'eux‧euse')
             }
             // console.log(correctedWord)
+            correctedWords.push(correctedWord)
+            
+        } else if (word.toCheck.match(/(euse|eur)s?(?!(-))(?![^\x00-\x7F])\b/g)){
+            
+            if (word.originalWordNumb === 'p'){
+                correctedWord = word.toCheck.replace(/(euse|eur)s(?!(-))(?![^\x00-\x7F])\b/g, 'eur‧euse‧s')
+            } else {
+                correctedWord = word.toCheck.replace(/(euse|eur)(?!(-))(?![^\x00-\x7F])\b/g, 'eur‧euse')
+            }
             correctedWords.push(correctedWord)
 
         
@@ -237,6 +239,7 @@ checkerLoader().then(words => {
     
     console.log(correctedWords)
     console.log(emptyCells)
+    console.log(correctedWords[2167])
 });
 
 
