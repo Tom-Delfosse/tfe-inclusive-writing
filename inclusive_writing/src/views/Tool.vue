@@ -1,5 +1,18 @@
 <template>
-  <div class="tool">
-    <h1 class="title title--big">Page d'outil</h1>
+  <div>
+    <header class="section section--header">
+        <HeaderTop/>
+    </header>
   </div>
 </template>
+
+<script>
+import HeaderTop from '@/components/HeaderTop.vue'
+
+  export default {
+    name: 'Main',
+    components: {
+      HeaderTop,
+    }
+  }
+</script>
