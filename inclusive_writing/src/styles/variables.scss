@@ -5,6 +5,14 @@ $c-white : #ECE9E5;
 
 // _________*FONTS*_________
 
+@font-face{
+    font-family: 'font1';
+    src:url("~@/assets/font/NewYork.woff") format("woff"),
+        url("~@/assets/font/NewYork.woff2") format("woff2"),
+        url("~@/assets/font/NewYork.otf") format("font/otf");
+};
+
+
 // _________*SCALES*_________
 
 // MOBILE — SCALE : 1.20 MINOR THIRD

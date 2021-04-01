@@ -1,31 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+      <teleport to="head">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap" rel="stylesheet">
+      </teleport>
+    <Header/>
+    <Landing/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import Landing from './components/Landing.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    Landing
   }
 }
 </script>
 
 <style lang="scss">
-$c-black : #2c2c2c; 
-// $c-white : #ECE9E5;
-#app {
-
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+body{
+  background-color: $c-white;
+  font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: $c-black;
+}
+
+.title{
+  font-family: 'font1', serif;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#app {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background-color: $c-black;
-  color: $c-white;
 }
 </style>
