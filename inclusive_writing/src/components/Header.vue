@@ -1,13 +1,12 @@
 <template>
+  <header class="section section--header">
+    <img src="@/assets/img/svg/icon.svg" alt="logo">
 
-    <header class="section section--header">
-        <nav class="nav">
-            <li class="nav__link"><a href="#">Accueil</a></li>
-            <li class="nav__link"><a href="#">Corriger mon&nbsp;texte</a></li>
-        </nav>
-    </header>
-
-
+    <nav class="nav">
+      <router-link to="/">Accueil</router-link>
+      <router-link to="/tool">Corriger mon texte</router-link>
+    </nav>
+  </header>
 </template>
 
 <script>
