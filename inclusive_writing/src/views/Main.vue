@@ -1,7 +1,7 @@
 <template>
 <div>
   <section class="section section--hero section--white">
-    <div class="titles-container">
+    <div>
 
     <h1 class="title title--big">Correction inclusive</h1>
     <p class="baseline">Outil de grammaire inclusive à la portée de&nbsp;tous‧tes.</p>
@@ -141,10 +141,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-
-    .titles-container{
-
-    }
 
     input{
       flex-grow: 0;
