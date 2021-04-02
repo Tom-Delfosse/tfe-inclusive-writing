@@ -9,10 +9,13 @@ $c-white : #ECE9E5;
     font-family: 'font1';
     src:
         url("~@/assets/font/NewYork.otf"),
-        // url("~@/assets/font/NewYork.woff") format("woff"),
-        // url("~@/assets/font/NewYork.woff2") format("woff2");
+        url("~@/assets/font/NewYork.woff") format("woff"),
+        url("~@/assets/font/NewYork.woff2") format("woff2");
 };
 
+
+$ls--smaller: 0.05rem;
+$ls--small: 0.085rem;
 
 // _________*SCALES*_________
 
@@ -21,7 +24,8 @@ $s-mob--smallest: 0.833rem; /* 13.33px */
 $s-mob--smaller: 1rem; /* 16px */
 $s-mob--small: 1.2rem; /* 19.20px */
 $s-mob--medium: 1.728rem; /* 27.65px */
-$s-mob--big: 2.448rem; /* 39.81px */
+$s-mob--medium-plus: 2.448rem; /* 39.81px */
+$s-mob--big: 2.986rem; /* 47.78px */
 $s-mob--bigger: 3.583rem; /* 57.33px */
 $s-mob--biggest: 4.3rem; /* 68.80px */
 $s-mob--massive: 6.192rem; /* 99.07px */
@@ -72,3 +76,6 @@ $screen-xxl: 1900px;
 
 
 // _________*TRANSITIONS*_________
+
+$t-fast : .3s cubic-bezier(0.25, 1, 0.5, 1);
+$t-smooth : .5s cubic-bezier(0.25, 1, 0.5, 1);
