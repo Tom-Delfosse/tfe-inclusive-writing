@@ -17,6 +17,8 @@
   align-items: center;
   margin-top: $s-mob--small;
   margin-bottom: $s-mob--big;
+  height: auto;
+  max-height: 10vh;
 
   .nav{
     display: inline-flex;
