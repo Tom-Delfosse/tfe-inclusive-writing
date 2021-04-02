@@ -85,6 +85,13 @@ a {
 .list{
   list-style: none;
   padding: 0;
+}
 
+.no-break{
+  white-space: nowrap;
+}
+
+.hide{
+  display: none;
 }
 </style>

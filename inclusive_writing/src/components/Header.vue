@@ -9,12 +9,6 @@
   </header>
 </template>
 
-<script>
-// export default {
-//   name: 'Header',
-// }
-</script>
-
 <style scoped lang="scss">
 
 .section--header{
@@ -22,6 +16,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: $s-mob--small;
+  margin-bottom: $s-mob--big;
 
   .nav{
     display: inline-flex;
@@ -45,7 +40,7 @@
     }
 
     &--active{
-    font-weight: 700
+    font-weight: $w-bold;
     }
 
     &:nth-child(1){
