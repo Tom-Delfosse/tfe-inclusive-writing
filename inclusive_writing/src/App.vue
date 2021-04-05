@@ -51,7 +51,6 @@ body{
 
 .fade-enter-active, .fade-leave-active{
   transition: $t-smooth;
-  // transition: transform 300ms ease-in-out;
 }
 
 .section{
