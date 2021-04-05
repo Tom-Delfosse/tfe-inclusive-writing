@@ -2,11 +2,13 @@
 <div>
   <section class="section section--hero section--white">
     <div>
-
-    <h1 class="title title--big">Correction inclusive</h1>
-    <p class="baseline">Outil de grammaire inclusive à la portée de&nbsp;tous‧tes.</p>
+      <h1 class="title title--big">Correction inclusive</h1>
+      <p class="baseline">Outil de grammaire inclusive à la portée de&nbsp;tous‧tes.</p>
     </div>
-    <input type="image" src="/assets/img/svg/btn.svg" alt="Bouton permettant de visionner les autres parties du site.">
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" class="btn btn--scroll-down">
+      <circle class="circle circle--full" cx="40" cy="40" r="39.5" stroke="#2C2C2C" fill="#ECE9E5"/>
+      <path  class="path" d="M53.66 35.31L43.18 51.37L45.48 54.65H40C40 54.65 28.36 38.28 26.27 35.31C24.2846 32.558 21.8224 30.1839 19 28.3L19 28H29.69V28.3C28 29.3 28.5 30.63 30.46 33.41L42.9 51L53.1 35.31C55.34 31.88 55.69 30.02 52.68 28.31V28H61V28.3C57.9755 29.9451 55.4424 32.3643 53.66 35.31Z" fill="#2C2C2C"/>
+    </svg>
   </section>
   <main class="section section--main">
 
@@ -122,7 +124,7 @@
 </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .section{
   &--main{
     padding: 0;
@@ -134,17 +136,36 @@
 
   &--hero{
     position: relative;
+    height: auto;
     height: 70vh;
-    // height: auto;
-    // max-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    box-sizing: content-box;
+  }
 
-    input{
-      flex-grow: 0;
-      margin-bottom: $s-mob--medium;
+  .btn{
+    &--scroll-down{ 
+      flex-shrink: 0;
+      cursor: pointer;
+      margin-bottom: $s-mob--small;
+      .circle, .path{
+        transition: $t-smooth;
+      }
+
+      &:hover{
+        .circle, .path{
+        transition: $t-fast;
+      }
+        .circle{
+          fill: $c-black;
+        }
+
+        .path{
+          fill: $c-white;
+        }
+      }
     }
   }
 
@@ -171,11 +192,11 @@
     svg{
       transform: translateX(-50%) scale(1.1) ;
       .circle--stroke{
-      transition: $t-fast;
-      stroke: $c-black;
+        transition: $t-fast;
+        stroke: $c-black;
+      }
     }
   }
-}
 
   svg{
     position: relative;
@@ -217,6 +238,7 @@
     fill: $c-white;
   }
 }
+
 .list--example__el{
   margin-top: $s-mob--smaller;
   margin-bottom: $s-mob--medium-plus;
@@ -262,5 +284,10 @@
   right: 0;
   top: -$s-mob--biggest*2;
   stroke-width: 1px;
+}
+
+.word-corrected {
+  border: 1px solid $c-white;
+  padding: 0 $s-mob--smallest/3;
 }
 </style>

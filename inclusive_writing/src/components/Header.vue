@@ -15,10 +15,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: $s-mob--small;
+  margin-top: $s-mob--medium-plus;
   margin-bottom: $s-mob--big;
+  // height: 20vh;
   height: auto;
-  max-height: 10vh;
+  max-height: 20vh;
+  box-sizing: content-box;
+
 
   .nav{
     display: inline-flex;
@@ -47,10 +50,16 @@
 
     &:nth-child(1){
       margin-bottom: $s-mob--smaller;
+
+      &:hover{
+        padding: 0 $s-mob--smaller;
+      }
     }
 
     &:nth-child(2){
-      outline: 1px solid $c-black;
+      // outline: 1px solid $c-black;
+      white-space: nowrap;
+      border: 1px solid $c-black;
       padding: 5px;
     }
   }

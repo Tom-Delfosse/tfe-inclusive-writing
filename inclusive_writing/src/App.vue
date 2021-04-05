@@ -1,7 +1,11 @@
 <template>
   <div>
       <Header/>
-      <router-view/>
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="in-out">
+          <component :is="Component" />
+        </transition>
+      </router-view>
   </div>
 </template>
 
@@ -26,6 +30,28 @@ body{
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+.fade-enter-from, .fade-leave-to{
+  opacity: 0;
+  transform: translateY(40vh);
+}
+
+// .fade-enter{
+//   &-from, &-to, &-active{
+//     background-color: green;
+//   }
+// }
+
+// .fade-leave{
+//   &-from, &-to, &-active{
+//     background-color: red;
+//   }
+// }
+
+.fade-enter-active, .fade-leave-active{
+  transition: $t-smooth;
+  // transition: transform 300ms ease-in-out;
 }
 
 .section{
