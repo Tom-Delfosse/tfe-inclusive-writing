@@ -139,42 +139,14 @@ export default {
   }
 }
 
-.img--icon{
-  width: 100vw;
-  max-width: $s-mob--bigger;
-  transition: $t-smooth;
-  height: 100%;
-  transition: $t-smooth;
-  path{
-    transition: $t-smooth;
-    stroke-width: 0.1px;
-    fill: $c-black;
-
-  }
-
-
-  &:hover{
-    transform: scale(1.1);
-    transition: $t-fast;
-
-    path{
-      transition: $t-fast;
-      fill: rgba($color: #000000, $alpha: 0);
-      stroke: $c-black;
-    }
-  }
-}
 
 .section--footer{
   .img--icon{
   path{
     fill: $c-white;
-
   }
 
-
   &:hover{
-
     path{
       fill: rgba($color: #000000, $alpha: 0);
       stroke: $c-white;
