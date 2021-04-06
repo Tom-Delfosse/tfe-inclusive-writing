@@ -76,6 +76,18 @@ body{
     background-color : $c-black;
     color: $c-white;
     padding-left: $s-mob--smaller;
+    padding-right: $s-mob--smaller;
+
+    &__content{
+      padding: 0 $s-mob--smaller;
+    padding-top: $s-mob--big;
+    border-left: 1px solid $c-white;
+    border-right: 1px solid $c-white;
+
+    // p{
+    //   margin-left: $s-mob--smaller
+    // }
+  }
 
       p, .title{
         &::selection{

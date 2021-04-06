@@ -13,7 +13,7 @@
   <main class="section section--main">
 
     <section class="section section--about section--dark">
-      <div class="section__content">
+      <div class="section--dark__content">
         <svg  class="deco-ball deco-ball--top" width="171" height="263" viewBox="0 0 171 263" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle r="131" transform="matrix(-1 0 0 1 131.5 131.5)" fill="#ECE9E5" stroke="#2C2C2C"/>
         </svg>
@@ -109,18 +109,10 @@
             <p>L'écriture inclusive est accessible à <span class="word-corrected">tous·te·s</span>, y compris aux personnes non&nbsp;<span class="word-corrected">concerné·e·s</span>.</p>
           </div>
         </div>
-        <div class="CTA-container">
-          <router-link class="CTA-btn" to="/tool" exact>
-            <svg width="192" height="192" viewBox="0 0 192 192" fill="none">
-              <circle  class="cirlce circle--full" cx="96" cy="96" r="82.5" fill="#ECE9E5"/>
-              <circle class="circle circle--stroke" cx="96" cy="96" r="95.5" stroke="#ECE9E5"/>
-            </svg>
-            <p>Corriger mon texte</p>
-          </router-link>
-        </div>
+
+        <CTA/>
       </div>
     </section>
-
     <section class="section section--white section--tem">
       <div class="section--tem__title-wrap">
         <h2 class="title title--medium">Témoignages</h2>
@@ -200,6 +192,8 @@
       </ul>
     </section>
     <section class="section section--dark section--others">
+      <div class="section--dark__content">
+
       <div class="section--others__title-wrap">
         <h2 class="title title--medium">Iels aussi ont adopté l'écriture inclusive.</h2>
 
@@ -278,17 +272,10 @@
       </ul>
 
       <p class="title title--false">Et plein&nbsp;d'autres&nbsp;!</p>
+    </div>
     </section>
     <section class="section section--CTA section--white">
-        <div class="CTA-container">
-          <router-link class="CTA-btn" to="/tool" exact>
-            <svg width="192" height="192" viewBox="0 0 192 192" fill="none">
-              <circle  class="cirlce circle--full" cx="96" cy="96" r="82.5" fill="#2C2C2C"/>
-              <circle class="circle circle--stroke" cx="96" cy="96" r="95.5" stroke="#2C2C2C"/>
-            </svg>
-            <p>Corriger mon texte</p>
-          </router-link>
-        </div>
+      <CTA class="CTA-container--dark"/>
     </section>
     <!-- <Footer/> -->
   </main>
@@ -298,10 +285,12 @@
 <script>
 // import zenscroll from "zenscroll"
 // import Footer from "@/components/Footer.vue"
+import CTA from "@/components/CTA.vue"
 
 export default {
   components:{
-    // Footer
+    CTA
+    // Footer, CTA
   },
   // methods: {
   //   scrollDown : zenscroll.to(document.querySelector(".section--about"))
@@ -326,6 +315,14 @@ export default {
     align-items: flex-start;
     box-sizing: content-box;
   }
+
+  &--about{
+    p{
+      margin-left: $s-mob--smaller
+    }
+  }
+
+
 
   &--tem{        
     padding-bottom: $s-mob--massive*2;
@@ -369,14 +366,15 @@ export default {
 
   &--others{
     position: relative;
-    padding-top: $s-mob--bigger;
+    // padding-top: $s-mob--bigger;
 
 
     &__title-wrap{
       position: absolute;
-      bottom: calc(100% - 5px);
+      bottom: calc(100% - 7px);
       color: $c-black;
       display: block;
+      left: $s-mob--smaller;
 
       .title{
         padding: 0 $s-mob--smaller*2 $s-mob--smaller $s-mob--smaller;
@@ -483,63 +481,7 @@ export default {
   }
 }
 
-  // &__content{
-  //   padding-top: $s-mob--big;
-  //   padding: 0 $s-mob--smaller;
-  //   border-left: 1px solid $c-white;
-  //   border-right: 1px solid $c-white;
 
-  //   p{
-  //     margin-left: $s-mob--smaller
-  //   }
-  // }
-
-.CTA-container{
-  width: calc(100% + (#{$s-mob--smaller} * 4));
-  left: -$s-mob--smaller*2;
-  position: relative;
-  border-top: 1px solid $c-white;
-  border-bottom: 1px solid $c-white;
-
-  .CTA-btn:hover{
-    svg{
-      transform: translateX(-50%) scale(1.1) ;
-      .circle--stroke{
-        transition: $t-fast;
-        stroke: $c-black;
-      }
-    }
-  }
-
-  svg{
-    position: relative;
-    margin: $s-mob--medium auto;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: $t-smooth;
-
-    .circle{
-      transition: $t-smooth;
-      transform-origin: center;
-    }
-  }
-
-  p{
-    position: absolute;
-    top: 50%;
-    text-align: center;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: $c-black;
-    width: 50%;
-    max-width: 120px;
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: $w-bold;
-    font-size: $s-mob--small;
-    
-  }
-}
 
 .btn{
   &--scroll-down{ 
