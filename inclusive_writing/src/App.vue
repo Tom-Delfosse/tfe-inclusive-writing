@@ -2,7 +2,7 @@
   <div>
       <Header/>
       <router-view v-slot="{ Component }">
-        <transition name="fade" mode="in-out">
+        <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -30,6 +30,7 @@ body{
   margin: 0;
   padding: 0;
   border: 0;
+  scroll-behavior: smooth;
 }
 
 .fade-enter-from, .fade-leave-to{
@@ -59,13 +60,29 @@ body{
 
   &--white{
     margin-left: $s-mob--smaller;
+    margin-right: $s-mob--smaller;
     border-left: 1px solid $c-black;
+    border-right: 1px solid $c-black;
+
+    p, .title{
+      &::selection{
+        background-color: #2c2c2ca4;
+        color: $c-white;
+      }
+    }
   }
 
   &--dark{
     background-color : $c-black;
     color: $c-white;
     padding-left: $s-mob--smaller;
+
+      p, .title{
+        &::selection{
+        background-color: #ece9e5c4;
+        color: $c-black; 
+      }
+    }
   }
 }
 
@@ -91,7 +108,7 @@ body{
 
   &--small{
     font-size: $s-mob--small;
-    margin: ($s-mob--medium-plus ) 0 $s-mob--small ;
+    padding: ($s-mob--medium-plus ) 0 $s-mob--small ;
   }
 }
 
@@ -99,7 +116,8 @@ p{
   font-size: $s-mob--smaller;
   line-height: 170%;
   letter-spacing: $ls--smaller;
-  margin: 0 0 $s-mob--smaller 0;
+  padding: 0 0 $s-mob--smaller 0;
+  margin: 0;
 }
 
 a {
