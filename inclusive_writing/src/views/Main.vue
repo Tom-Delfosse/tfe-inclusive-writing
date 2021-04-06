@@ -345,7 +345,6 @@ export default {
     .tem-group{
       border-bottom: 1px solid $c-black;
       margin: $s-mob--bigger 0 $s-mob--smallest;
-      // box-sizing: content-box;
 
       &:nth-last-child(1){
         margin-bottom: 0;
@@ -368,8 +367,6 @@ export default {
 
   &--others{
     position: relative;
-    // padding-top: $s-mob--bigger;
-
 
     &__title-wrap{
       position: absolute;
@@ -482,11 +479,9 @@ export default {
     &-outer{
       max-width: inherit;
       width: calc(100% + #{$s-mob--smaller * 4} + 1px);
-      // background-color: red;
       display: block;
       position: inherit;
       left: 0 ;
-      // left: -$s-mob--smaller * 2;
     }
   }
 
@@ -501,13 +496,13 @@ export default {
   }
 }
 
-
-
 .btn{
   &--scroll-down{ 
     flex-shrink: 0;
     cursor: pointer;
     margin-bottom: $s-mob--small;
+    width: 100%;
+    max-width: $s-mob--bigger;
     .circle, .path{
       transition: $t-smooth;
     }
