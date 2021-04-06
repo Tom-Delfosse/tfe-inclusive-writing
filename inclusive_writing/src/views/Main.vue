@@ -579,6 +579,4 @@ export default {
   border: 1px solid $c-white;
   padding: 0 $s-mob--smallest/3;
 }
-
-
 </style>

@@ -142,17 +142,17 @@ export default {
 
 .section--footer{
   .img--icon{
-  path{
-    fill: $c-white;
-  }
-
-  &:hover{
     path{
-      fill: rgba($color: #000000, $alpha: 0);
-      stroke: $c-white;
+      fill: $c-white;
+    }
+
+    &:hover{
+      path{
+        fill: rgba($color: #000000, $alpha: 0);
+        stroke: $c-white;
+      }
     }
   }
-}
 }
 
 .copyright{
