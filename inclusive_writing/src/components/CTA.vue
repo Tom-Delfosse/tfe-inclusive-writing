@@ -68,6 +68,30 @@
 
 
   &--dark {
+    border-top: 1px solid $c-black;
+    // margin-top: $s-mob--smaller ;
+
+    &::before{
+      content: " ";
+      display: block;
+      // border-right: 1px solid $c-black;
+      // border-left: 1px solid $c-black;
+      border-bottom: 1px solid $c-black;
+      border-top: 1px solid $c-black;
+      margin-top: $s-mob--smaller;
+      width: auto;
+      height: $s-mob--smaller;
+    }
+
+    &::after{
+      content: " ";
+      display: block;
+      // border-bottom: 1px solid $c-black;
+      border-top: 1px solid $c-black;
+      margin-top: $s-mob--smaller;
+      width: auto;
+      height: $s-mob--smaller;
+    }
     &:hover{
       svg{
         transform: translateX(-50%) scale(1.1) ;

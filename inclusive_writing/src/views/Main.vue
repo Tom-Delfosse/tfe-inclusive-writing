@@ -270,7 +270,7 @@
           <p>Entreprise audiovisuelle appartenant au service public suisse qui diffuse des programmes sur deux chaînes de télévision, quatre chaînes de radio, ainsi que sur les réseaux&nbsp;sociaux.</p>
         </li>
       </ul>
-      <div class="section--other__outro">
+      <div class="section--others__outro">
         <p class="title title--false">Et plein&nbsp;d'autres&nbsp;!</p>
         <svg width="288" height="111" viewBox="0 0 288 111" fill="none" class="img img--bg img--bg-outer">
           <path d="M287.307 110.5H0.692943C22.1668 46.2693 78.2461 0.5 144 0.5C209.754 0.5 265.833 46.2693 287.307 110.5Z" stroke="#ECE9E5"/>
@@ -281,20 +281,20 @@
     <section class="section section--CTA section--white">
       <CTA class="CTA-container--dark"/>
     </section>
-    <!-- <Footer/> -->
+    <Footer/>
   </main>
 </div>
 </template>
 
 <script>
 // import zenscroll from "zenscroll"
-// import Footer from "@/components/Footer.vue"
+import Footer from "@/components/Footer.vue"
 import CTA from "@/components/CTA.vue"
 
 export default {
   components:{
-    CTA
-    // Footer, CTA
+    CTA,
+    Footer
   },
   // methods: {
   //   scrollDown : zenscroll.to(document.querySelector(".section--about"))
@@ -390,6 +390,23 @@ export default {
         }
       }
     }
+
+    &__outro{
+      position: relative;
+      bottom: -1px;
+      left: -$s-mob--smaller * 2;
+
+        .title--false{
+          text-align: center;
+          position: absolute;
+          bottom: $s-mob--smaller;
+          left: $s-mob--smaller*2;
+          font-size: $s-mob--medium;
+          width: 100%;
+      }
+    }
+
+    
     .list--other{
       margin: 0;
 
@@ -434,12 +451,6 @@ export default {
           padding-top: $s-mob--smaller;
         }
       }
-    }
-  }
-
-  &--CTA{
-    p{
-      color: $c-white;
     }
   }
 }
@@ -490,23 +501,6 @@ export default {
   }
 }
 
-
-.section--other__outro{
-  position: relative;
-  bottom: -5px;
-  left: -$s-mob--smaller * 2;
-
-    .title--false{
-      text-align: center;
-      position: absolute;
-      bottom: $s-mob--smaller;
-      left: $s-mob--smaller*2;
-      // left: 50%;
-      // transform: translateX(-50%);
-      font-size: $s-mob--medium;
-      width: 100%;
-  }
-}
 
 
 .btn{
