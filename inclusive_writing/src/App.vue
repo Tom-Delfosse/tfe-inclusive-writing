@@ -84,9 +84,7 @@ body{
     border-left: 1px solid $c-white;
     border-right: 1px solid $c-white;
 
-    // p{
-    //   margin-left: $s-mob--smaller
-    // }
+
   }
 
       p, .title{

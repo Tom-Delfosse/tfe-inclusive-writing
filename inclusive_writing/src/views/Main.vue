@@ -270,8 +270,12 @@
           <p>Entreprise audiovisuelle appartenant au service public suisse qui diffuse des programmes sur deux chaînes de télévision, quatre chaînes de radio, ainsi que sur les réseaux&nbsp;sociaux.</p>
         </li>
       </ul>
-
-      <p class="title title--false">Et plein&nbsp;d'autres&nbsp;!</p>
+      <div class="section--other__outro">
+        <p class="title title--false">Et plein&nbsp;d'autres&nbsp;!</p>
+        <svg width="288" height="111" viewBox="0 0 288 111" fill="none" class="img img--bg img--bg-outer">
+          <path d="M287.307 110.5H0.692943C22.1668 46.2693 78.2461 0.5 144 0.5C209.754 0.5 265.833 46.2693 287.307 110.5Z" stroke="#ECE9E5"/>
+        </svg>
+      </div>
     </div>
     </section>
     <section class="section section--CTA section--white">
@@ -321,8 +325,6 @@ export default {
       margin-left: $s-mob--smaller
     }
   }
-
-
 
   &--tem{        
     padding-bottom: $s-mob--massive*2;
@@ -397,10 +399,7 @@ export default {
         &:nth-of-type(1){
           margin-top: 0;
         }
-        &:nth-last-child(1){
-          padding-bottom: $s-mob--massive;
-          border-bottom: 1px solid $c-white;
-        }
+
         a{
           display: flex; 
           justify-content: space-between;
@@ -460,13 +459,23 @@ export default {
   }
 
   &--bg{
-    width: 100vw;
+    width: 100%;
     max-width:  calc(100% - #{$s-mob--smaller}) ;
     height: 100%;
     stroke-width: 1px;
   
     @include lg{
       stroke-width: 0.5px;
+    }
+
+    &-outer{
+      max-width: inherit;
+      width: calc(100% + #{$s-mob--smaller * 4} + 1px);
+      // background-color: red;
+      display: block;
+      position: inherit;
+      left: 0 ;
+      // left: -$s-mob--smaller * 2;
     }
   }
 
@@ -481,6 +490,23 @@ export default {
   }
 }
 
+
+.section--other__outro{
+  position: relative;
+  bottom: -5px;
+  left: -$s-mob--smaller * 2;
+
+    .title--false{
+      text-align: center;
+      position: absolute;
+      bottom: $s-mob--smaller;
+      left: $s-mob--smaller*2;
+      // left: 50%;
+      // transform: translateX(-50%);
+      font-size: $s-mob--medium;
+      width: 100%;
+  }
+}
 
 
 .btn{
@@ -564,7 +590,6 @@ export default {
   border: 1px solid $c-white;
   padding: 0 $s-mob--smallest/3;
 }
-
 
 
 </style>
