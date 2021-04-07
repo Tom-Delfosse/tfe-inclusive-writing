@@ -41,6 +41,10 @@
 
       <small>©&nbsp;Tom&nbsp;Delfosse — DWM HEAJ&nbsp;2021</small>
     </div>
+
+    <svg class="img img--deco" width="173" height="132" viewBox="0 0 173 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M173 6.56021V131H1.5C1.76948 58.8807 60.3165 0.5 132 0.5C146.265 0.5 159.535 2.62328 173 6.56021Z"/>
+    </svg>
   </footer>    
 </template>
 
@@ -58,12 +62,16 @@ export default {
 <style lang="scss">
 
 .section--footer{
+    padding-bottom: $s-mob--smaller;
+    margin-bottom: $s-mob--small;
+    position: relative;
+
   .footer-nav{
     padding: $s-mob--medium-plus 0 $s-mob--medium;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 
   .btn--scroll-down{
     flex-grow: 1;
@@ -95,41 +103,49 @@ export default {
   padding: 0 0 0 $s-mob--smaller;
   margin-bottom: $s-mob--medium-plus;
 
-  &:nth-last-child(1){
-    margin-bottom: $s-mob--massive;
-  }
-
-  &__el{
-    margin-bottom: $s-mob--smaller;
-    cursor: pointer;
-    
-    a {
-    box-shadow: inset 0 0 0 0.01px $c-white;
-    transition: $t-smooth;
-    -webkit-backface-visibility: hidden;
-
-    &:hover{
-      transition: $t-fast;
-      color: $c-black;
-      box-shadow: inset 220px 0 0 0 $c-white;
-    }
-    }
-
-
-    &:nth-child(1){
-      font-weight: 700;
-      display: block;
-      letter-spacing: $ls--smaller;
-      text-transform: uppercase;
-      margin-bottom: $s-mob--small;
-      cursor: inherit;
-    }
-
     &:nth-last-child(1){
-      margin-bottom: inherit;
+      margin-bottom: $s-mob--massive;
+    }
+
+    &__el{
+      margin-bottom: $s-mob--smaller;
+      cursor: pointer;
+      
+      a {
+      box-shadow: inset 0 0 0 0.01px $c-white;
+      transition: $t-smooth;
+      -webkit-backface-visibility: hidden;
+
+      &:hover{
+        transition: $t-fast;
+        color: $c-black;
+        box-shadow: inset 220px 0 0 0 $c-white;
+        }
+      }
+
+      &:nth-child(1){
+        font-weight: 700;
+        display: block;
+        letter-spacing: $ls--smaller;
+        text-transform: uppercase;
+        margin-bottom: $s-mob--small;
+        cursor: inherit;
+      }
+
+      &:nth-last-child(1){
+        margin-bottom: inherit;
+      }
     }
   }
-}
+
+  .img--deco{
+    position: absolute;
+    right: 0;
+    stroke-width: 0;
+    top:inherit;
+    bottom: -1px;
+    transform: inherit;
+  }
 
   .title{
     border-bottom: 1px solid $c-white;
@@ -137,10 +153,7 @@ export default {
     padding-top: 0;
     margin-bottom: $s-mob--medium-plus;
   }
-}
 
-
-.section--footer{
   .img--icon{
     path{
       fill: $c-white;
@@ -159,6 +172,10 @@ export default {
   display: flex;
   border-top: 1px solid $c-white;
   padding-top: $s-mob--small;
+  // max-width: 60%;
+  small{
+    max-width: 40%;
+  }
 
   .img--copy{
     border: 1px solid $c-white;

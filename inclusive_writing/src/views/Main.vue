@@ -14,7 +14,7 @@
 
     <section class="section section--about section--dark">
       <div class="section--dark__content">
-        <svg  class="deco-ball deco-ball--top" width="171" height="263" viewBox="0 0 171 263" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg  class="img img--deco" width="171" height="262" viewBox="0 0 171 263" fill="none" >
             <circle r="131" transform="matrix(-1 0 0 1 131.5 131.5)" fill="#ECE9E5" stroke="#2C2C2C"/>
         </svg>
 
@@ -306,6 +306,7 @@ export default {
 .section{
   &--main{
     padding: 0;
+    // background-color: $c-black;
   }
 
   &--hero{
@@ -321,6 +322,7 @@ export default {
   }
 
   &--about{
+    position: relative;
     p{
       margin-left: $s-mob--smaller
     }
@@ -494,6 +496,20 @@ export default {
     position: relative;
     left: -$s-mob--small;
   }
+
+    &--deco{
+    position: absolute;
+    right: 0;
+    stroke-width: 0.5px;
+    top: 0;
+    transform: translateY(-50%);
+    width: auto;
+    path{
+      fill: $c-white;
+      width: 100%;
+      max-width: $s-mob--biggest*3;
+    }
+  }
 }
 
 .btn{
@@ -545,6 +561,7 @@ export default {
   p{
     font-size: $s-mob--smallest;
     margin: 0;
+    padding: 0;
   }
 
   svg{
@@ -567,13 +584,6 @@ export default {
   }
 }
 
-.deco-ball{
-  position: absolute;
-  display: none;
-  right: 0;
-  top: -$s-mob--biggest*2;
-  stroke-width: 1px;
-}
 
 .word-corrected {
   border: 1px solid $c-white;

@@ -63,6 +63,7 @@ body{
     margin-right: $s-mob--smaller;
     border-left: 1px solid $c-black;
     border-right: 1px solid $c-black;
+    background-color: $c-white;
 
     p, .title{
       &::selection{
