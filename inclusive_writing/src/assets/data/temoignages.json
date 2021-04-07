@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Jess",
+        "explanation": "Je m’identifie plus facilement avec [l’écriture inclusive] que&nbsp;sans.",
+        "img": "@/assets/img/svg/avatar-1.svg",
+        "author" : "Jess, personne non-binaire et partisan‧ne de l'écriture&nbsp;inclusive.",
+        "trans" : false
+    },
+    {
+        "name": "Julie",
+        "explanation": "Je me suis habituée à sa présence, et je remplace automatiquement les points médians de l'écrit par des doubles flexions à&nbsp;l'oral.",
+        "img": "@/assets/img/svg/avatar-2.svg",
+        "author" : "Jess, personne trans et partisan‧ne de l'écriture&nbsp;inclusive.",
+        "trans" : false
+    },
+    {
+        "name": "Maxime",
+        "explanation": "Quand on s'adresse à moi au neutre, on ne me mégenre&nbsp;pas.",
+        "img": "@/assets/img/svg/avatar-3.svg",
+        "author" : "Maxime, personne non-binaire et partisan‧ne de l'écriture&nbsp;inclusive.",
+        "trans" : false
+    },
+    {
+        "name": "Nicolas",
+        "explanation": "L'écriture inclusive m'a offert un sentiment d'appartenance que je ne parvenais pas à ressentir lorsqu'on m'adressait au féminin ou au&nbsp;masculin.",
+        "img": "@/assets/img/svg/avatar-4.svg",
+        "author" : "Nicolas, personne non-binaire et partisan‧ne de l'écriture&nbsp;inclusive.",
+        "trans" : false
+    },
+    {
+        "name": "Flo",
+        "explanation": "L'idéal n'est pas que l'écriture inclusive soit améliorée, mais qu'elle soit&nbsp;acceptée.",
+        "img": "@/assets/img/svg/avatar-5.svg",
+        "author" : "Flo, personne non-binaire et partisan‧ne de l'écriture&nbsp;inclusive.",
+        "trans" : false
+    },
+    {
+        "name": "Ellie",
+        "explanation": "Si c'est possible dans d'autres langues comme l'anglais, alors pourquoi pas le&nbsp;français&nbsp;?",
+        "img": "@/assets/img/svg/avatar-6.svg",
+        "author" : "Ellie, personne trans et partisan‧ne de l'écriture&nbsp;inclusive.",
+        "trans" : true
+    }
+]

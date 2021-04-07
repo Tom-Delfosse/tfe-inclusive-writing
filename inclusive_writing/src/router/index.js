@@ -1,5 +1,6 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Main from '@/views/Main.vue'
+
 
 const routes = [
   {
@@ -18,7 +19,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   linkActiveClass: "nav__link--active",
   linkExactActiveClass: "nav__link--active-exact",
