@@ -1,34 +1,15 @@
 <template>
-  <li v-for="example in examples" :key="example" class="list--example__el">
-    <p>{{ example.explanation }}</p>
-    <div class="correction-example">
-      <div class="correction-example__bef">
-        <p v-for="word in example.before" :key="word" v-html="word" />
-      </div>
-      <img
-        :src="require(`@/assets/img/svg/${example.img}`)"
-        alt="flèche directionnelle"
-        class="img img--arrow"
-      >
-      <div class="correction-example__aft">
-        <p v-for="word in example.after" :key="word" v-html="word" />
-      </div>
+  <div class="correction-example correction-example--big">
+    <div class="correction-example__bef">
+      <p>L’écriture inclusive est accesible à tous, y compris aux personnes non&nbsp;concernées.</p>
     </div>
-  </li>
+    <img src="@/assets/img/svg/Arrow-long-curly_5.svg" class="img img--arrow" alt="flèche directionnelle">
+    <div class="correction-example__aft">
+      <p>L'écriture inclusive est accessible à <span class="word-corrected">tous·te·s</span>, y compris aux personnes non&nbsp;<span class="word-corrected">concerné·e·s</span>.</p>
+    </div>
+  </div>
 </template>
-<script>
-import examples from '@/assets/data/examples.json'
 
-export default {
-  setup () {
-  },
-  data () {
-    return {
-      examples: examples
-    }
-  }
-}
-</script>
 <style lang="scss">
 
 .list--example__el{
