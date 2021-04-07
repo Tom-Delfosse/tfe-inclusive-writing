@@ -114,6 +114,7 @@
       </div>
     </section>
     <section class="section section--white section--tem">
+      
       <div class="section--tem__title-wrap">
         <h2 class="title title--medium">Témoignages</h2>
         <p>de personnes concerné‧e‧s par l'écriture&nbsp;inclusive.</p>
@@ -129,9 +130,7 @@
             </figcaption>
           </figure>
         </li>
-        <li class="list--tem__el">
 
-        </li>
         <li class="list--tem__el">
           <figure class="tem-group">
             <img src="@/assets/img/svg/avatar-2.svg" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
@@ -141,9 +140,7 @@
             </figcaption>
           </figure>
         </li>
-        <li class="list--tem__el">
 
-        </li>
         <li class="list--tem__el">
           <figure class="tem-group">
             <img src="@/assets/img/svg/avatar-3.svg" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
@@ -330,6 +327,7 @@ export default {
 
   &--tem{        
     padding-bottom: $s-mob--massive*2;
+    background-color: inherit;
 
     &__title-wrap{
       text-align: center;
@@ -337,6 +335,7 @@ export default {
       margin-left: auto;
       margin-right: auto;
       padding: $s-mob--bigger 0 0;
+      border-bottom: 1px solid $c-black;
 
       .title{
         margin: 0;
@@ -344,6 +343,9 @@ export default {
       }
     }
 
+    .list--tem{
+      // background-color: green;
+    }
     .tem-group{
       border-bottom: 1px solid $c-black;
       margin: $s-mob--bigger 0 $s-mob--smallest;
@@ -379,8 +381,6 @@ export default {
 
       .title{
         padding: 0 $s-mob--smaller*2 $s-mob--smaller $s-mob--smaller;
-        // margin-right: $s;
-        // padding: $s-mob--massive*2  $s-mob--smaller 0;
         position: absolute;
         bottom: 5px;
         &::selection{

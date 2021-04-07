@@ -57,6 +57,7 @@ body{
 .section{
   padding: 0 $s-mob--smaller;
   box-sizing: content-box;
+  // background-color: red;
 
   &--white{
     margin-left: $s-mob--smaller;
@@ -65,10 +66,14 @@ body{
     border-right: 1px solid $c-black;
     background-color: $c-white;
 
-    p, .title{
-      &::selection{
-        background-color: #2c2c2ca4;
-        color: $c-white;
+    &__content{
+
+      
+        p, .title{
+          &::selection{
+            background-color: #2c2c2ca4;
+          color: $c-white;
+        }
       }
     }
   }
