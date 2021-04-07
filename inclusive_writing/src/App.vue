@@ -1,23 +1,23 @@
 <template>
   <div>
-      <vHeader/>
-      <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+    <vHeader />
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
 import vHeader from '@/components/vHeader.vue'
 
-  export default {
-    name: 'Main',
-    components: {
-      vHeader
-    }
+export default {
+  name: 'Main',
+  components: {
+    vHeader
   }
+}
 </script>
 
 <style lang="scss">
@@ -169,7 +169,6 @@ body{
     // padding: $s-mob--bigger 0 $s-mob--medium ;
     padding: 0;
 
-
     @include sm{
       font-size: $s-mob--medium;
     }
@@ -204,7 +203,6 @@ body{
       font-size: $s-desk--medium-small;
     }
 
-    
     @include xl{
       font-size: $s-desk--small;
     }
@@ -268,19 +266,16 @@ p{
 //     border-left: 1px solid $c-white;
 //     border-right: 1px solid $c-white;
 
-
 //   }
 
 //       p, .title{
 //         &::selection{
 //         background-color: #ece9e5c4;
-//         color: $c-black; 
+//         color: $c-black;
 //       }
 //     }
 //   }
 // }
-
-
 
 // p{
 //   font-size: $s-mob--smaller;

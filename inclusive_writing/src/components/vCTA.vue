@@ -1,15 +1,31 @@
 <template>
-    <div class="CTA-container">
-        <svg width="192" height="192" viewBox="0 0 192 192" fill="none">
-            <router-link class="CTA-btn" to="/tool" exact>
-                <circle  class="circle circle--full" cx="96" cy="96" r="82.5" fill="currentColor"/>
-                <circle class="circle circle--stroke" cx="96" cy="96" r="95.5" stroke="currentColor"/>
-            </router-link>
-        </svg>
-        <p>Corriger mon texte</p>
-    </div>
+  <div class="CTA-container">
+    <svg
+      width="192"
+      height="192"
+      viewBox="0 0 192 192"
+      fill="none"
+    >
+      <router-link class="CTA-btn" to="/tool" exact>
+        <circle
+          class="circle circle--full"
+          cx="96"
+          cy="96"
+          r="82.5"
+          fill="currentColor"
+        />
+        <circle
+          class="circle circle--stroke"
+          cx="96"
+          cy="96"
+          r="95.5"
+          stroke="currentColor"
+        />
+      </router-link>
+    </svg>
+    <p>Corriger mon texte</p>
+  </div>
 </template>
-
 
 <style lang="scss" scoped>
 
@@ -65,7 +81,6 @@
 //     font-size: $s-mob--small;
 //     pointer-events: none;
 //   }
-
 
 //   &--dark {
 //     border-top: 1px solid $c-black;

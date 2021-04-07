@@ -1,10 +1,13 @@
 <template>
   <header class="section section--header">
-
-    <vIcon/>
+    <vIcon />
     <nav class="nav">
-      <router-link class="nav__link" to="/" exact>Accueil</router-link>
-      <router-link class="nav__link" to="/tool" exact>Corriger mon texte</router-link>
+      <router-link class="nav__link" to="/" exact>
+        Accueil
+      </router-link>
+      <router-link class="nav__link" to="/tool" exact>
+        Corriger mon texte
+      </router-link>
     </nav>
   </header>
 </template>
@@ -12,7 +15,7 @@
 <script>
 import vIcon from '@/components/vIcon.vue'
 export default {
-  components:{
+  components: {
     vIcon
   }
 }
@@ -65,7 +68,7 @@ export default {
 
     @include lg{
       font-size: $s-desk--smallest;
-      
+
     }
 
     &__link{
@@ -123,7 +126,7 @@ export default {
         &:hover{
           padding-left:  $s-mob--smallest;
           padding-right:  $s-mob--smallest;
-          
+
           @include tb{
             padding-left:  $s-tab--tiny;
             padding-right:  $s-tab--tiny;
@@ -133,7 +136,7 @@ export default {
             padding-left:  $s-desk--tiny;
             padding-right:  $s-desk--tiny;
           }
-        
+
         }
       }
 

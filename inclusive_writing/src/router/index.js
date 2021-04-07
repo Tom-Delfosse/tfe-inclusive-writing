@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Main from '@/views/Main.vue'
 
-
 const routes = [
   {
     path: '/',
@@ -21,8 +20,8 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  linkActiveClass: "nav__link--active",
-  linkExactActiveClass: "nav__link--active-exact",
+  linkActiveClass: 'nav__link--active',
+  linkExactActiveClass: 'nav__link--active-exact'
 })
 
 export default router
