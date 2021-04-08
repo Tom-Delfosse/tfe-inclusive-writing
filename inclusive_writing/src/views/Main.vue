@@ -71,13 +71,30 @@
       <section class="section section--white section--tem">
         <div class="section__content">
           <div class="title-wrap">
+            <svg
+              class="img img--bg"
+              width="263"
+              height="132"
+              viewBox="0 0 263 132"
+              fill="none"
+            >
+              <path d="M132 0C59.2 0 0 59.2 0 132H263C263 59.2 203.8 0.5 132 0Z" fill="#ECE9E5" stroke="#2C2C2C" />
+            </svg>
             <div class="title-wrap__text">
               <h2 class="title title--medium">
                 Témoignages
               </h2>
               <p>de personnes concerné‧e‧s par l'écriture&nbsp;inclusive.</p>
             </div>
-            <svg
+          </div>
+          <!-- <div class="title-wrap">
+            <div class="title-wrap__text">
+              <h2 class="title title--medium">
+                Témoignages
+              </h2>
+              <p>de personnes concerné‧e‧s par l'écriture&nbsp;inclusive.</p>
+            </div> -->
+          <!-- <svg
               class="img img--bg"
               width="263"
               height="132"
@@ -85,21 +102,11 @@
               fill="none"
             >
               <path d="M132 0C59.2 0 0 59.2 0 132H262.5C262.5 59.2 203.8 0.5 132 0Z" fill="#ECE9E5" stroke="#2C2C2C" />
-            </svg>
-          </div>
+            </svg> -->
+          <!-- </div> -->
 
           <ul class="list list--tem">
-            <li class="list--tem__el">
-              <figure class="tem-group">
-                <img src="@/assets/img/svg/avatar-1.svg" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
-                <figcaption>
-                  <p class="tem-group__quote">
-                    «&#8239;Je m’identifie plus facilement avec [l’écriture inclusive] que&nbsp;sans.&#8239;»
-                  </p>
-                  <p>Jess, personne non-binaire et partisan‧ne de l'écriture&nbsp;inclusive.</p>
-                </figcaption>
-              </figure>
-            </li>
+            <vTem />
           </ul>
         </div>
       </section>
@@ -166,6 +173,7 @@ import vScrollBtn from '@/components/vScrollBtn.vue'
 import vCTA from '@/components/vCTA.vue'
 import vExample from '@/components/vExample.vue'
 import vExampleBig from '@/components/vExampleBig.vue'
+import vTem from '@/components/vTem.vue'
 import { ref } from 'vue'
 
 export default {
@@ -174,6 +182,7 @@ export default {
     vFooter,
     vExample,
     vExampleBig,
+    vTem,
     vScrollBtn
   },
 
@@ -243,6 +252,11 @@ export default {
   &--about{
     .section__content{
       padding-top: $s-mob--massive;
+      padding-bottom: 49.1vw;
+
+      @include tb{
+        padding-bottom: 49.7vw;
+      }
 
       @include sm{
         padding-top: $s-mob--bigger;
@@ -296,6 +310,82 @@ export default {
           max-width: 65%;
         }
       }
+    }
+  }
+
+  &--tem{
+
+    position: relative;
+
+    .title-wrap{
+      // position: relative;
+
+      .img--bg{
+        display: block;
+        position: absolute;
+        stroke-width: 0px;
+        width: 100%;
+        height: auto;
+        bottom: 100%;
+        z-index: 0;
+        left: 0;
+        max-height: 100vw;
+
+        path{
+          width: 100vw;
+          height: 100vh;
+        }
+      }
+
+      &__text{
+        position: absolute;
+        bottom: 100%;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        // border-left: 1px solid $c-black;
+        // border-right: 1px solid $c-black;
+        // margin:  0 $s-mob--smaller;
+        // padding: $s-mob--big $s-mob--smaller;
+        // width: calc(100% - (#{$s-mob--smaller} * 4));
+
+        //   @include sm{
+        //     margin: 0 $s-mob--medium;
+        //     padding: $s-mob--medium*2 $s-mob--small $s-mob--big;
+        //     width: calc(100% - (#{$s-mob--medium} * 2 + #{$s-mob--small} *2));
+        //   }
+
+        //   @include tb{
+        //     margin: 0 10%;
+        //     padding: $s-tab--big*2 $s-tab--smaller $s-tab--big;
+        //     width: calc(100% - 20vw - (#{$s-tab--smaller} * 2));
+        //   }
+
+        //   @include lg{
+        //     margin: 0 15%;
+        //     padding: $s-desk--big*2 $s-desk--smaller $s-desk--big;
+        //     width: calc(100% - 30vw - (#{$s-desk--smaller} * 2));
+        //   }
+
+        //   @include xl{
+        //     padding: $s-desk--big*2 $s-desk--medium $s-desk--big;
+        //     width: calc(100% - 30vw - (#{$s-desk--medium} * 2));
+        //   }
+
+        //   @include xxl{
+        //     padding: $s-desk--big*2 $s-desk--medium-plus $s-desk--big;
+        //     width: calc(100% - 30vw - (#{$s-desk--medium-plus} * 2));
+        //   }
+
+        .title, p{
+          margin: 0;
+          margin: 0 auto;
+          padding: 0;
+          text-align: center;
+        }
+      }
+
     }
   }
 }
@@ -407,37 +497,6 @@ export default {
 
 //       }
 //     }
-
-//     .list--tem{
-//       margin-top: 0 ;
-//     }
-//     .tem-group{
-//       border-bottom: 1px solid $c-black;
-//       margin: $s-mob--bigger 0 $s-mob--smallest;
-
-//       &:nth-child(1){
-//         margin-top: 0;
-//         padding-top: $s-mob--bigger;
-
-//       }
-//       &:nth-last-child(1){
-//         margin-bottom: 0;
-
-//       }
-
-//       &__quote{
-//         font-weight: 700;
-//         font-size: $s-mob--small;
-//         margin: $s-mob--medium 0 $s-mob--small ;
-//       }
-
-//       .img--avatar{
-//         display: block;
-//         margin-left: auto;
-//         margin-right: auto;
-//       }
-//     }
-//   }
 
 //   &--others{
 //     position: relative;

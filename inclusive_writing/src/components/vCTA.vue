@@ -84,6 +84,10 @@
     }
 
     @include xl{
+      max-width: 350px;
+    }
+
+    @include xxl{
       max-width: 400px;
     }
 
@@ -135,10 +139,14 @@
       font-size: $s-tab--small;
     }
     @include lg{
-      font-size: $s-desk--small;
+      font-size: $s-desk--smaller;
     }
 
     @include xl{
+      font-size: $s-desk--small;
+    }
+
+    @include xxl{
       font-size: $s-desk--medium-small;
     }
   }
