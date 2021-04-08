@@ -7,7 +7,7 @@
             Correction inclusive
           </h1>
           <p class="baseline">
-            Outil de grammaire inclusive à la portée de&nbsp;tous‧tes.
+            Outil de grammaire inclusive à la portée de&nbsp;<span class="no-break">tous‧tes</span>.
           </p>
         </div>
         <vScrollBtn v-if="sectionAboutRef" :scroll-to-ref="sectionAboutRef" />
@@ -59,7 +59,7 @@
           </ul>
 
           <h2 class="title title--medium">
-            Pourquoi existe-iel&nbsp;?
+            Pourquoi <span class="no-break">existe-iel&nbsp;</span>?
           </h2>
           <p>Correction inclusive a pour objectif de faciliter l’emploi de l’écriture inclusive sur Internet et de favoriser son usage auprès des personnes non concerné‧e‧s par son&nbsp;utilisation.</p>
           <p>Avec une base de données d’approximativement 20 000 mots, ce correcteur peut convertir toute une large panoplie de sujets différents, tout en laissant la possibilité aux utilisateur‧trices de modifier le texte final à&nbsp;leur&nbsp;guise.</p>
@@ -222,6 +222,7 @@ export default {
       .baseline{
         text-transform: uppercase;
         letter-spacing: 0.085rem;
+        margin: 0;
 
         @include sm{
           font-size: $s-mob--small
@@ -261,6 +262,8 @@ export default {
 
       .text-short{
         .title{
+          margin-top: inherit;
+          padding-top: inherit;
           max-width: 50%;
         }
 
@@ -276,7 +279,7 @@ export default {
         }
         @include xl{
           p{
-            max-width: inherit;
+            max-width: 70%;
           }
 
           .title{
@@ -286,19 +289,11 @@ export default {
           max-width: 80%;
         }
         @include xxl{
+          p{
+            max-width: inherit;
+          }
+
           max-width: 65%;
-        }
-      }
-
-      p{
-        max-width: 450px;
-
-        @include tb{
-          max-width: 600px;
-        }
-
-        @include lg{
-          max-width: 650px;
         }
       }
     }

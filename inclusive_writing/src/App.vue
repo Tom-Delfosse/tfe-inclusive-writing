@@ -57,6 +57,7 @@ body{
 .list{
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .img{
@@ -166,8 +167,7 @@ body{
     font-size: $s-mob--medium;
     -webkit-text-stroke: 0.8px;
     text-transform: uppercase;
-    // padding: $s-mob--bigger 0 $s-mob--medium ;
-    padding: 0;
+    padding: $s-mob--bigger 0 $s-mob--medium ;
 
     @include sm{
       font-size: $s-mob--medium;
@@ -175,14 +175,18 @@ body{
 
     @include tb{
       font-size: $s-tab--big;
+      padding: $s-tab--bigger 0 $s-tab--medium ;
     }
 
     @include lg{
       font-size: $s-desk--medium-small;
+      padding: $s-desk--medium-big 0 $s-desk--medium-small ;
+
     }
 
     @include xl{
       font-size: $s-desk--medium;
+      padding: $s-desk--big 0 $s-desk--medium-small ;
     }
 
     @include xxl{
@@ -192,23 +196,30 @@ body{
 
   &--small{
     font-size: $s-mob--small;
-    // padding: ($s-mob--medium-plus ) 0 $s-mob--small ;
-    padding: 0;
+    padding: calc(#{$s-mob--medium} - #{$s-mob--smaller})0 $s-mob--small ;
 
     @include tb{
       font-size: $s-tab--small;
+      padding: calc(#{$s-tab--big} - #{$s-tab--smaller}) 0 $s-tab--smaller ;
+      margin-left: $s-tab--small;
     }
 
     @include lg{
-      font-size: $s-desk--medium-small;
+      font-size: $s-desk--small;
+      padding: calc(#{$s-desk--medium-small} - #{$s-desk--smaller}) 0 $s-desk--smaller ;
+      margin-left: $s-desk--medium-small;
     }
 
     @include xl{
-      font-size: $s-desk--small;
+      font-size: $s-desk--medium-small;
+      padding: calc(#{$s-desk--medium-plus} - #{$s-desk--smaller}) 0 $s-desk--smaller ;
+      margin-left: $s-desk--medium-plus;
     }
 
     @include xxl{
       font-size: $s-desk--medium;
+      padding: calc(#{$s-desk--medium-plus} - #{$s-desk--small}) 0 $s-desk--small ;
+      margin-left: $s-desk--big;
     }
   }
 }
@@ -217,21 +228,47 @@ p{
     font-size: $s-mob--smaller;
     letter-spacing: $ls-smaller;
     line-height: 160%;
+    margin: 0;
+    padding-bottom: $s-mob--smallest;
+    margin-left: $s-tab--small;
+    max-width: 450px;
 
     @include tb{
       font-size: $s-tab--smaller;
       font-weight: 300;
+      padding-bottom: $s-tab--smaller;
+      margin-left: $s-tab--small;
+      max-width: 600px;
     }
+
     @include lg{
       font-size: $s-desk--smallest;
+      padding-bottom: $s-desk--smaller;
+      margin-left: $s-desk--medium-small;
+
     }
     @include xl{
       font-size: $s-desk--smaller;
+      padding-bottom: $s-desk--small;
+      margin-left: $s-desk--medium-plus;
+      max-width: 650px;
+    }
+
+    @include xxl{
+      margin-left: $s-desk--big;
+
     }
 }
 
 .no-break{
   white-space: nowrap;
+}
+
+.hide{
+  display: none;
+  @include tb{
+    display: inline;
+  }
 }
 
 // .section{

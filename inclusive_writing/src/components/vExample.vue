@@ -1,6 +1,6 @@
 <template>
   <li v-for="example in examples" :key="example" class="list--example__el">
-    <p>{{ example.explanation }}</p>
+    <p v-html="example.explanation" />
     <div class="correction-example">
       <div class="correction-example__bef">
         <p v-for="word in example.before" :key="word" v-html="word" />
@@ -20,8 +20,6 @@
 import examples from '@/assets/data/examples.json'
 
 export default {
-  setup () {
-  },
   data () {
     return {
       examples: examples
@@ -29,11 +27,18 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" >
 
 .list--example__el{
-  margin-top: $s-mob--smaller;
   margin-bottom: $s-mob--medium-plus;
+
+  @include tb{
+    margin-bottom: $s-tab--medium;
+  }
+
+  @include lg{
+    margin-bottom: $s-desk--medium-small;
+  }
 
   &:nth-last-child(1){
       margin-bottom: 0;
@@ -44,33 +49,85 @@ export default {
   outline: 1px solid $c-white;
   display: flex;
   justify-content: center;
+  padding: $s-mob--smallest $s-mob--smallest/2;
   align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+
+  @include sm{
+    display: inline-flex;
+    padding: $s-mob--smallest $s-mob--smallest;
+    margin-left: $s-mob--smaller;
+
+  }
+  @include tb{
+    margin-left: $s-tab--small + $s-tab--small;
+    max-width: inherit;
+    padding: $s-tab--small;
+  }
+
+  @include lg{
+    margin-left: $s-desk--medium-small + $s-desk--smaller;
+    padding: $s-desk--smallest;
+  }
+
+  @include xl{
+    margin-left: $s-desk--big + $s-desk--medium;
+  }
+  @include xxl{
+    margin-left: $s-desk--big + $s-desk--medium-plus;
+  }
 
   p{
     font-size: $s-mob--smallest;
     margin: 0;
     padding: 0;
+
+    @include tb{
+      font-size: $s-tab--smallest;
+    }
+
+    @include lg{
+      font-size: $s-desk--smallest;
+    }
+
+    @include xxl{
+      font-size: $s-desk--smaller;
+    }
   }
 
   .img{
-    // flex-shrink: 1;
     width: 100%;
     height: 100%;
-    max-width: $s-mob--smaller;
+    transition: $t-smooth;
+    max-width: $s-mob--big;
+    flex-grow: 1;
+    padding: 0 $s-mob--smallest/2;
+
+    @include sm{
+    padding: 0 $s-mob--smallest;
+    }
+    @include tb{
+        padding: 0 $s-tab--small;
+        max-width: $s-tab--big;
+    }
+    @include lg{
+      max-width: $s-desk--medium-plus;
+      padding: 0 $s-desk--smallest;
+    }
+    @include xl{
+      max-width: $s-desk--medium-plus;
+      padding: 0 $s-desk--small;
+
+    }
   }
 
   &__bef, &__aft{
-    padding: $s-mob--smaller/2;
-  }
+    width: min-content;
 
-  &--big{
-    flex-direction: column;
-    padding: $s-mob--small;
-    margin-bottom: $s-mob--biggest;
-
-    .img{
-      transform: rotate(90deg);
-      margin: $s-mob--smaller 0 ;
+    @include tb{
+      width: auto;
     }
   }
 }

@@ -1,8 +1,8 @@
 [
   {
     "explanation": "Les doubles flexions (également appelés doublets), qui consistent simplement d’associer les formes masculines et féminines d’un même&nbsp;mot&#8239;;",
-    "before" : ["Les&nbsp;acteurs"],
-    "after" : ["Les&nbsp;acteurs et les&nbsp;actrices"],
+    "before" : ["Les&nbsp;acteurs."],
+    "after" : ["Les&nbsp;acteurs&nbsp;et les&nbsp;actrices."],
     "img": "Arrow-long-curly_1.svg"
   },
   {
@@ -13,14 +13,14 @@
   },
   {
     "explanation": "l’utilisation de termes dits épicènes, c’est-à-dire des mots neutres auxquels aucun genre n’est explicitement&nbsp;attribué&#8239;;",
-    "before" : ["Les&nbsp;parisiens,","les profs<span class='hide'>esseurs</span>,"],
-    "after" : ["Paris,","le corps&nbsp;professoral."],
+    "before" : ["Les&nbsp;parisiens,","les prof<span class='hide'>esseur</span>s."],
+    "after" : ["Paris,","le&nbsp;corps professoral."],
     "img": "Arrow-long-curly_3.svg"
   },
   {
-    "explanation": "l’emploi des suffixes masculins et féminins à la fin de chaque mot dont le genre est à la fois masculin et féminin, quand le genre n’est pas explicitement déterminé ou encore tout simplement lorsqu’il est&nbsp;neutre.;",
+    "explanation": "l’emploi des suffixes masculins et féminins à la fin de chaque mot dont le genre est à la fois masculin et féminin, quand le genre n’est pas explicitement déterminé ou encore tout simplement lorsqu’il est&nbsp;neutre.",
     "before" : ["Connecté,","connectées,"],
-    "after" : ["Connecté‧e,","connecté‧e‧s."],
+    "after" : ["<span class='no-break'>Connecté‧e,</span>","<span class='no-break'>connecté‧e‧s.</span>"],
     "img": "Arrow-long-curly_4.svg"
   }
 ]
