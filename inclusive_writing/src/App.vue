@@ -98,12 +98,10 @@ body{
 
     @include tb{
       padding: 0 $s-tab--smaller;
-
     }
 
     @include lg{
       padding: 0 $s-desk--smaller;
-
     }
 
     @include xl{

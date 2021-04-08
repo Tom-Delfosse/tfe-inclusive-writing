@@ -58,7 +58,7 @@ export default {
   @include sm{
     display: inline-flex;
     padding: $s-mob--smallest $s-mob--smallest;
-    margin-left: $s-mob--smaller;
+    margin-left: $s-mob--smaller + $s-mob--medium;
 
   }
   @include tb{
