@@ -74,27 +74,27 @@ export default {
   .footer-nav{
     display: flex;
     justify-content: space-between;
-    padding-top: $s-mob--medium-plus;
+    padding: $s-mob--medium-plus 0 $s-mob--medium;
     @include sm{
-      padding-top: $s-mob--big;
+      padding: $s-mob--big 0 auto ;
     }
 
     @include tb{
-      padding-top: $s-tab--bigger;
+      padding: $s-tab--big 0 $s-tab--small;
       width: calc(100% + #{$s-tab--big});
     }
 
     @include lg{
-      padding-top: $s-mob--medium-plus;
+      padding: $s-mob--medium-plus 0 $s-desk--smaller;
       width: calc(100% + #{$s-desk--medium});
     }
 
     @include xl{
-      padding-top: $s-desk--medium-big;
+      padding: $s-desk--medium-avg 0 $s-desk--smaller;
     }
 
     @include xxl{
-      padding-top: $s-desk--big;
+      padding: $s-desk--big;
     }
 
     .btn-scroll{
