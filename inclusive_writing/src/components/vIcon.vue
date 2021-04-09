@@ -16,7 +16,7 @@
 <style lang="scss" scoped>
 
 .img--icon{
-    width: 100vw;
+    width: 100%;
     max-width: $s-mob--big;
     fill: $c-black;
     height: auto;
@@ -39,20 +39,35 @@
         }
     }
 
-    @include sm{
+    &-dark{
+      fill: $c-white;
 
+      path{
+        fill: $c-white;
+      }
+
+      &:hover{
+        path{
+          stroke: $c-white;
+        }
+      }
     }
 
     @include tb{
-        max-width: $s-tab--big;
-        position: relative;
-        left: -$s-tab--big;
+      max-width: $s-tab--big;
+      position: relative;
+      left: -$s-tab--big;
     }
 
     @include lg{
         max-width: $s-desk--medium;
         left: -$s-desk--medium;
     }
+
+    @include xl{
+      max-width: $s-desk--medium-avg;
+    }
+
 }
 
 </style>

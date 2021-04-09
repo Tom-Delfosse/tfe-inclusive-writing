@@ -4,14 +4,14 @@
     height="80"
     viewBox="0 0 80 80"
     fill="none"
-    class="btn-scroll btn-scroll--footer"
-    @click="scrollDown"
+    class="btn-scroll"
+    @click="scrollToSection"
   >
     <circle
       class="circle circle--full"
       cx="40"
       cy="40"
-      r="39.5"
+      r="39"
       stroke="#2C2C2C"
       fill="#ECE9E5"
     />
@@ -30,12 +30,12 @@ export default {
     }
   },
   setup (props) {
-    const scrollDown = () => {
+    const scrollToSection = () => {
       zenscroll.to(props.scrollToRef, 800)
     }
 
     return {
-      scrollDown
+      scrollToSection
     }
   }
 }
@@ -79,7 +79,16 @@ export default {
     }
   }
 
-  &--up{
+  &--dark{
+    margin-bottom: 0;
+    .circle{
+      fill: $c-black;
+      stroke: $c-white;
+    }
+
+    .path{
+      fill: $c-white;
+    }
     &:hover{
       .circle{
         fill: $c-white;

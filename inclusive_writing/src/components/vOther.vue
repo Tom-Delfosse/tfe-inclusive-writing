@@ -24,7 +24,9 @@ export default {
 <style lang="scss" scoped>
 .list--other{
   padding: $s-mob--big 0 ($s-mob--bigger*3);
-
+  @include sm{
+    padding: $s-mob--big 0 ($s-mob--biggest*4);
+  }
   @include tb{
     padding: $s-tab--big 0 ($s-tab--bigger*3.5);
   }
@@ -75,7 +77,9 @@ export default {
 
       @include tb{
         margin-bottom: $s-tab--smallest;
+        display: -webkit-inline-flex;
         display: inline-flex;
+        display: -ms-inline-flexbox;
         justify-content: flex-start;
       }
 
@@ -86,20 +90,19 @@ export default {
       .img, .title{
         transition: $t-smooth;
         margin-bottom: $s-mob--small;
+        // flex-shrink: 0;
 
         @include tb{
           margin-bottom: $s-tab--small;
         }
         @include lg{
           margin-bottom: $s-desk--smaller;
-          display: inline-flex;
         }
       }
 
       &:hover{
         .title{
           -webkit-text-stroke: 1.5px;
-          // color: $c-black;
           -webkit-text-stroke-color: $c-white;
 
           @include xl{
@@ -127,10 +130,12 @@ export default {
     }
 
     .img{
-      width: 100%;
+      width: 100vw;
       height: 100%;
       max-width: $s-mob--big;
       padding: 0;
+      flex-shrink: 0;
+      min-width: 0;
 
       @include tb{
         max-width: $s-tab--big;

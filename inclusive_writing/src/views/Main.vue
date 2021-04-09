@@ -471,7 +471,6 @@ export default {
         position: relative;
         bottom: -5px;
         height: auto;
-        stroke-width: 0.5px;
         pointer-events: none;
         max-height: $s-desk--bigger*3;
       }
@@ -496,7 +495,6 @@ export default {
         @include sm{
           margin: 0 $s-mob--medium;
           max-width: calc(100% - #{$s-mob--medium * 2});
-          stroke-width: 0.5px;
         }
 
         @include tb{
@@ -508,7 +506,6 @@ export default {
         @include lg{
           margin: 0 15%;
           max-width: calc(100% - 30%);
-          stroke-width: 0.3px;
         }
 
         @include xxl{
@@ -553,7 +550,6 @@ export default {
     position: absolute;
     transform: translateY( calc(-50% - #{$s-mob--massive}));
     right: 0;
-    stroke-width: 0.5px;
     height: auto;
     width: 100%;
     max-width: $s-mob--bigger * 3;

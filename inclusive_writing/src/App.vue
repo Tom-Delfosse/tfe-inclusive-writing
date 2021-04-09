@@ -61,10 +61,16 @@ body{
 }
 
 .img{
-  // width: 100%;
-
-  &--bg{
+  &--bg, &--deco{
     width: 100%;
+
+      @include sm{
+        stroke-width: 0.5px;
+      }
+
+      @include lg{
+        stroke-width: 0.3px;
+      }
   }
 }
 
@@ -81,14 +87,6 @@ body{
 
   @include lg{
     padding: 0 15%;
-  }
-
-  @include xxl{
-    // padding: 0 15%;
-  }
-
-  @include xxxl{
-    // padding: 0 $s-desk--massive*2;
   }
 
   &__content{
@@ -281,7 +279,6 @@ p{
 
     @include xxl{
       margin-left: $s-desk--big;
-
     }
 }
 
@@ -294,6 +291,11 @@ p{
   @include tb{
     display: inline;
   }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 // .section{
@@ -347,21 +349,4 @@ p{
 //   margin: 0;
 // }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-// .list{
-//   list-style: none;
-//   padding: 0;
-// }
-
-// .no-break{
-//   white-space: nowrap;
-// }
-
-// .hide{
-//   display: none;
-// }
 </style>

@@ -11,27 +11,3 @@ First of all, this tool is supposed to help everyone have an easier and more pra
 - Pallier, Christophe & New, Boris (2019** Openlexicon, GitHub repository, https://github.com/chrplr/openlexicon
 ## License
 This repository is distributed under a CC BY-SA 4.0 LICENSE (see more at https://creativecommons.org/licenses/by-sa/4.0/).
-
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

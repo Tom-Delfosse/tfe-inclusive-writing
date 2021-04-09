@@ -58,7 +58,9 @@ export default {
   max-width: 300px;
 
   @include sm{
+    display: -webkit-inline-flex;
     display: inline-flex;
+    display: -ms-inline-flexbox;
     padding: $s-mob--smallest $s-mob--smallest;
     margin-left: $s-mob--smaller + $s-mob--medium;
 
