@@ -3,7 +3,7 @@
     <div class="correction-example__bef">
       <p>L’écriture inclusive est accesible à tous, y compris aux personnes non&nbsp;concernées.</p>
     </div>
-    <img src="@/assets/img/svg/Arrow-long-curly_5.svg" class="img img--arrow" alt="flèche directionnelle">
+    <img src="@/assets/img/svg/arrow-long-curly_5.svg" class="img img--arrow" alt="flèche directionnelle">
     <div class="correction-example__aft">
       <p>L'écriture inclusive est accessible à <span class="word-corrected no-break">tous·te·s</span>, y compris aux personnes non&nbsp;<span class="word-corrected no-break">concerné·e·s</span>.</p>
     </div>
