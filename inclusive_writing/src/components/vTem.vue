@@ -1,13 +1,15 @@
 <template>
-  <li v-for="tem in tems" :key="tem" class="list--tem__el">
-    <figure class="tem-group">
-      <img :src="require(`@/assets/img/svg/${tem.img}`)" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
-      <figcaption>
-        <p class="tem-group__quote" v-html="tem.explanation" />
-        <p v-html="tem.author" />
-      </figcaption>
-    </figure>
-  </li>
+  <ul class="list list--example">
+    <li v-for="tem in tems" :key="tem" class="list--tem__el">
+      <figure class="tem-group">
+        <img :src="require(`@/assets/img/svg/${tem.img}`)" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
+        <figcaption>
+          <p class="tem-group__quote" v-html="tem.explanation" />
+          <p v-html="tem.author" />
+        </figcaption>
+      </figure>
+    </li>
+  </ul>
 </template>
 <script>
 import tems from '@/assets/data/temoignages.json'

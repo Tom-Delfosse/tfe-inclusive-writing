@@ -3,7 +3,7 @@
     <section class="section section--hero section--white">
       <div class="section__content">
         <div class="title-wrap">
-          <h1 class="title title--big">
+          <h1 class="title title--bigger">
             Correction inclusive
           </h1>
           <p class="baseline">
@@ -54,9 +54,7 @@
           </h3>
           <p>L’écriture neutre se base sur quelques formulations précises afin de mettre d’éviter dans la mesure du possible de mentionner le genre du groupe&nbsp;sujet&#8239;:</p>
 
-          <ul class="list list--example">
-            <vExample />
-          </ul>
+          <vExample />
 
           <h2 class="title title--medium">
             Pourquoi <span class="no-break">existe-iel&nbsp;</span>?
@@ -69,51 +67,34 @@
         </div>
       </section>
       <section class="section section--white section--tem">
+        <!-- <svg
+          class="img img--bg"
+          width="263"
+          height="132"
+          viewBox="0 0 263 132"
+          fill="none"
+        >
+          <path d="M132 0C59.2 0 0 59.2 0 132H263C263 59.2 203.8 0.5 132 0Z" fill="#ECE9E5" stroke="#2C2C2C" /> -->
+        <!-- </svg> -->
         <div class="section__content">
           <div class="title-wrap">
-            <svg
-              class="img img--bg"
-              width="263"
-              height="132"
-              viewBox="0 0 263 132"
-              fill="none"
-            >
-              <path d="M132 0C59.2 0 0 59.2 0 132H263C263 59.2 203.8 0.5 132 0Z" fill="#ECE9E5" stroke="#2C2C2C" />
-            </svg>
             <div class="title-wrap__text">
-              <h2 class="title title--medium">
+              <h2 class="title title--big">
                 Témoignages
               </h2>
               <p>de personnes concerné‧e‧s par l'écriture&nbsp;inclusive.</p>
             </div>
           </div>
-          <!-- <div class="title-wrap">
-            <div class="title-wrap__text">
-              <h2 class="title title--medium">
-                Témoignages
-              </h2>
-              <p>de personnes concerné‧e‧s par l'écriture&nbsp;inclusive.</p>
-            </div> -->
-          <!-- <svg
-              class="img img--bg"
-              width="263"
-              height="132"
-              viewBox="0 0 263 263"
-              fill="none"
-            >
-              <path d="M132 0C59.2 0 0 59.2 0 132H262.5C262.5 59.2 203.8 0.5 132 0Z" fill="#ECE9E5" stroke="#2C2C2C" />
-            </svg> -->
-          <!-- </div> -->
 
           <ul class="list list--tem">
             <vTem />
           </ul>
         </div>
       </section>
-      <section class="section section--dark section--others">
+      <section class="section section--dark section--other">
         <div class="section__content">
           <div class="title-wrap">
-            <h2 class="title title--medium">
+            <h2 class="title title--big">
               Iels aussi ont adopté l'écriture inclusive.
             </h2>
 
@@ -124,37 +105,25 @@
               fill="none"
               class="img img--bg"
             >
-              <path d="M287.307 110.5H0.692943C22.1668 46.2693 78.2461 0.5 144 0.5C209.754 0.5 265.833 46.2693 287.307 110.5Z" stroke="#2C2C2C" />
-              <path d="M194.5 55C194.5 85.1357 171.855 109.5 144 109.5C116.145 109.5 93.5 85.1357 93.5 55C93.5 24.8643 116.145 0.5 144 0.5C171.855 0.5 194.5 24.8643 194.5 55Z" stroke="#2C2C2C" />
+              <path d="M288 111H0.692943C22.1668 46.2693 78.2461 0 144 0.5C209.754 0 265.833 46.2693 288 111Z" stroke="#2C2C2C" />
+              <path d="M194.5 55C194.5 85.1357 171.855 111 144 111C116.145 111 93.5 85.1357 93.5 55C93.5 24.8643 116.145 0.5 144 0.5C171.855 0.5 194.5 24.8643 194.5 55Z" stroke="#2C2C2C" />
             </svg>
           </div>
-          <ul class="list list--other">
-            <li class="list--other__el">
-              <div class="link">
-                <a href="https://www.instagram.com/bye.byebinary/?hl=fr">
-                  <h3 class="title title--small">Bye Bye&nbsp;Binary</h3>
-                  <svg viewBox="0 0 20.52 8.21" class="img img--link">
-                    <path d="M20.52,4.11v-1l-1,.4L10.54,0l0,.09a4.1,4.1,0,0,1,1.58,3.14v.32H.9c-.48,0-.68-.12-.8-.33H0V5H.1c.12-.22.32-.33.8-.33H12.08V5A4.12,4.12,0,0,1,10.5,8.13l0,.08ZM12.24,5.92a1.66,1.66,0,0,1,.44-.49l1.55-1.18.3.24c.36.28.62.48.82.67l-1.54.6C13,6.09,12.55,6.18,12.24,5.92Zm3.55-2.47h0V4.81h0c-.15.31-.58.14-1.29-.41l-.24-.18,1.08-.81C15.6,3.21,15.74,3.33,15.79,3.45Zm3.58.15L15.91,4.94V2.36Zm-5-1.78,1.29.47a1.66,1.66,0,0,1-.44.49L14,3.74l-.59-.45a3.7,3.7,0,0,1-1.22-1.2V1.9h0C12.74,1.37,13.33,1.44,14.41,1.82ZM12.19,2.93c.19-.23.59-.06,1.25.44l.52.4L12.59,4.82c-.2.14-.32.1-.4,0Z" />
-                  </svg>
-                </a>
-              </div>
-              <p>Collective qui réalise des créations typographiques autour de l'écriture&nbsp;inclusive.</p>
-            </li>
-          </ul>
-          <div class="section--others__outro">
-            <p class="title title--false">
-              Et plein&nbsp;d'autres&nbsp;!
-            </p>
-            <svg
-              width="288"
-              height="111"
-              viewBox="0 0 288 111"
-              fill="none"
-              class="img img--bg img--bg-outer"
-            >
-              <path d="M287.307 110.5H0.692943C22.1668 46.2693 78.2461 0.5 144 0.5C209.754 0.5 265.833 46.2693 287.307 110.5Z" stroke="#ECE9E5" />
-            </svg>
-          </div>
+          <vOther />
+        </div>
+        <div class="section--other__outro">
+          <p class="title title--false">
+            Et plein&nbsp;d'autres&nbsp;!
+          </p>
+          <svg
+            width="288"
+            height="111"
+            viewBox="0 0 288 111"
+            fill="none"
+            class="img img--bg img--bg-outer"
+          >
+            <path d="M288 111H0C22.1668 46.2693 78.2461 0 144 0C209.754 0 265.833 46.2693 288 111Z" stroke="#ECE9E5" />
+          </svg>
         </div>
       </section>
       <section class="section section--CTA section--white">
@@ -174,6 +143,7 @@ import vCTA from '@/components/vCTA.vue'
 import vExample from '@/components/vExample.vue'
 import vExampleBig from '@/components/vExampleBig.vue'
 import vTem from '@/components/vTem.vue'
+import vOther from '@/components/vOther.vue'
 import { ref } from 'vue'
 
 export default {
@@ -183,6 +153,7 @@ export default {
     vExample,
     vExampleBig,
     vTem,
+    vOther,
     vScrollBtn
   },
 
@@ -252,11 +223,11 @@ export default {
   &--about{
     .section__content{
       padding-top: $s-mob--massive;
-      padding-bottom: 49.1vw;
+      // padding-bottom: 49.1vw;
 
-      @include tb{
-        padding-bottom: 49.7vw;
-      }
+      // @include tb{
+      //   padding-bottom: 49.7vw;
+      // }
 
       @include sm{
         padding-top: $s-mob--bigger;
@@ -315,12 +286,32 @@ export default {
 
   &--tem{
 
-    position: relative;
-
-    .title-wrap{
+    .section__content{
       // position: relative;
+      // top: -100px;
+      padding-bottom: $s-mob--massive*3;
 
-      .img--bg{
+      @include sm{
+        // padding-bottom: $s-mob--massive*4;
+      }
+      @include tb{
+      padding-bottom: $s-tab--biggest*3;
+
+      }
+      @include lg{
+        padding-bottom: $s-desk--big*3;
+
+      }
+      @include xl{
+        padding-bottom: $s-desk--big*4;
+
+      }
+      @include xxl{
+        padding-bottom: $s-desk--big*5;
+      }
+    }
+    position: relative;
+    .img--bg{
         display: block;
         position: absolute;
         stroke-width: 0px;
@@ -337,13 +328,29 @@ export default {
         }
       }
 
+    .title-wrap{
       &__text{
-        position: absolute;
-        bottom: 100%;
-        text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
+        // position: absolute;
+        // bottom: 100%;
+        // text-align: center;
+        // left: 50%;
+        // transform: translateX(-50%);
+        padding: $s-mob--bigger 0;
+        // width: 100%;
+
+        @include tb{
+          padding: $s-tab--big*2 $s-tab--big;
+        }
+        @include lg{
+          padding: $s-desk--small*2 $s-desk--small;
+        }
+        @include xl{
+          padding: $s-desk--medium*2 $s-desk--medium;
+
+        }
+        @include xxl{
+          padding: $s-desk--big*2 $s-desk--big;
+        }
         // border-left: 1px solid $c-black;
         // border-right: 1px solid $c-black;
         // margin:  0 $s-mob--smaller;
@@ -386,6 +393,157 @@ export default {
         }
       }
 
+    }
+  }
+
+  &--other{
+    position: relative;
+
+    .section__content{
+      position: relative;
+      // padding-bottom: $s-mob--bigger*3;
+
+      // @include sm{
+      //   padding-bottom: $s-mob--biggest * 4;
+      // }
+      // @include tb{
+      //   padding-bottom: $s-tab--bigger * 3.5;
+      // }
+      // @include lg{
+      //   padding-bottom: $s-desk--big * 3;
+      // }
+      // @include xl{
+      //   padding-bottom: $s-desk--big * 3.5;
+      // }
+      // @include xxl{
+      //   padding-bottom: $s-desk--big * 4;
+      // }
+      // @include xxxl{
+      //   padding-bottom: $s-desk--big * 5;
+      // }
+    }
+
+    .title-wrap{
+      position: absolute;
+      width: 100%;
+      color: $c-black;
+      bottom: 100%;
+      left: 0;
+
+      .title{
+        position: absolute;
+        bottom: $s-mob--small;
+        padding: 0;
+        margin: 0 $s-mob--smaller;
+        width: 100%;
+
+        @include sm{
+          margin: 0 $s-mob--small;
+          bottom: $s-mob--medium;
+        }
+
+        @include tb{
+          margin: 0 $s-tab--smaller;
+          bottom: $s-tab--smaller;
+        }
+
+        @include lg{
+          margin: 0 $s-desk--smaller;
+          bottom: 50%;
+          transform: translateY(50%);
+        }
+
+        @include xl{
+          margin: 0 $s-desk--medium;
+        }
+
+        @include xxl{
+          margin: 0 $s-desk--medium-plus;
+        }
+
+        @include xxxl{
+          margin: 0 auto;
+          text-align: center;
+        }
+      }
+
+      .img--bg{
+        position: relative;
+        bottom: -5px;
+        height: auto;
+        stroke-width: 0.5px;
+        pointer-events: none;
+        max-height: $s-desk--bigger*3;
+      }
+
+    }
+
+    &__outro{
+      position: absolute;
+      border-top: 1px solid $c-white;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      bottom: -5px;
+
+      .img--bg{
+        position: relative;
+        height: auto;
+        pointer-events: none;
+        margin: 0 $s-mob--smaller;
+        max-width: calc(100% - #{$s-mob--smaller * 2});
+
+        @include sm{
+          margin: 0 $s-mob--medium;
+          max-width: calc(100% - #{$s-mob--medium * 2});
+          stroke-width: 0.5px;
+        }
+
+        @include tb{
+          margin: 0 10%;
+          max-width: calc(100% - 20%);
+
+        }
+
+        @include lg{
+          margin: 0 15%;
+          max-width: calc(100% - 30%);
+          stroke-width: 0.3px;
+        }
+
+        @include xxl{
+          margin: 0 15%;
+          max-height: $s-desk--big * 4;
+        }
+
+      }
+
+      .title{
+        position: absolute;
+        display: inline;
+        padding: 0;
+        white-space: nowrap;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        font-size: $s-mob--small;
+
+        @include sm{
+          font-size: $s-mob--medium;
+        }
+        @include tb{
+          font-size: $s-tab--medium;
+        }
+        @include lg{
+          font-size: $s-desk--medium;
+        }
+        @include xl{
+          font-size: $s-desk--medium-avg;
+        }
+        @include xxl{
+          font-size: $s-desk--medium-plus;
+        }
+      }
     }
   }
 }
@@ -500,24 +658,6 @@ export default {
 
 //   &--others{
 //     position: relative;
-
-//     .title-wrap{
-//       position: absolute;
-//       bottom: calc(100% - 7px);
-//       color: $c-black;
-//       display: block;
-//       left: $s-mob--smaller;
-
-//       .title{
-//         padding: 0 $s-mob--smaller*2 $s-mob--smaller $s-mob--smaller;
-//         position: absolute;
-//         bottom: 5px;
-//         &::selection{
-//           background-color: #ece9e5c4;
-//           color: $c-black;
-//         }
-//       }
-//     }
 
 //     &__outro{
 //       position: relative;

@@ -1,20 +1,22 @@
 <template>
-  <li v-for="example in examples" :key="example" class="list--example__el">
-    <p v-html="example.explanation" />
-    <div class="correction-example">
-      <div class="correction-example__bef">
-        <p v-for="word in example.before" :key="word" v-html="word" />
+  <ul class="list list--example">
+    <li v-for="example in examples" :key="example" class="list--example__el">
+      <p v-html="example.explanation" />
+      <div class="correction-example">
+        <div class="correction-example__bef">
+          <p v-for="word in example.before" :key="word" v-html="word" />
+        </div>
+        <img
+          :src="require(`@/assets/img/svg/${example.img}`)"
+          alt="flèche directionnelle"
+          class="img img--arrow"
+        >
+        <div class="correction-example__aft">
+          <p v-for="word in example.after" :key="word" v-html="word" />
+        </div>
       </div>
-      <img
-        :src="require(`@/assets/img/svg/${example.img}`)"
-        alt="flèche directionnelle"
-        class="img img--arrow"
-      >
-      <div class="correction-example__aft">
-        <p v-for="word in example.after" :key="word" v-html="word" />
-      </div>
-    </div>
-  </li>
+    </li>
+  </ul>
 </template>
 <script>
 import examples from '@/assets/data/examples.json'
@@ -100,7 +102,6 @@ export default {
   .img{
     width: 100%;
     height: 100%;
-    transition: $t-smooth;
     max-width: $s-mob--big;
     flex-grow: 1;
     padding: 0 $s-mob--smallest/2;
@@ -119,7 +120,11 @@ export default {
     @include xl{
       max-width: $s-desk--medium-plus;
       padding: 0 $s-desk--small;
+    }
 
+    @include xxl{
+      max-width: $s-desk--medium-big;
+      padding: 0 $s-desk--medium-small;
     }
   }
 

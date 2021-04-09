@@ -27,3 +27,9 @@
         @content;
     }
 }
+
+@mixin xxxl{
+    @media (min-width: #{$screen-xxxl}){
+        @content;
+    }
+}

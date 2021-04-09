@@ -84,7 +84,11 @@ body{
   }
 
   @include xxl{
-    padding: 0 15%;
+    // padding: 0 15%;
+  }
+
+  @include xxxl{
+    // padding: 0 $s-desk--massive*2;
   }
 
   &__content{
@@ -136,12 +140,13 @@ body{
 .title{
   font-family: 'font1', serif;
   font-weight: inherit;
-  line-height: 90%;
+  line-height: 95%;
   margin: 0;
   letter-spacing: $ls-small;
   -webkit-text-stroke: 0.25px;
 
-  &--big{
+  &--bigger{
+    line-height: 90%;
     font-size: $s-mob--big;
 
     @include sm{
@@ -161,6 +166,28 @@ body{
     }
   }
 
+  &--big{
+    -webkit-text-stroke: 0.8px;
+    text-transform: uppercase;
+    font-size: $s-mob--medium;
+
+    @include sm{
+      font-size: $s-mob--medium-plus;
+    }
+    @include tb{
+      font-size: $s-tab--big;
+    }
+    @include lg{
+      font-size: $s-desk--medium;
+    }
+    @include xl{
+      font-size: $s-desk--medium-avg;
+    }
+    @include xxl{
+      font-size: $s-desk--medium-plus;
+    }
+  }
+
   &--medium{
     font-size: $s-mob--medium;
     -webkit-text-stroke: 0.8px;
@@ -172,7 +199,7 @@ body{
     }
 
     @include tb{
-      font-size: $s-tab--big;
+      font-size: $s-tab--medium;
       padding: $s-tab--bigger 0 $s-tab--medium ;
     }
 

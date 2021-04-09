@@ -3,36 +3,36 @@
         "name" : "Bye Bye&nbsp;Binary",
         "explanation" : "Collective qui réalise des créations typographiques autour de l'écriture&nbsp;inclusive.",
         "link": "https://www.instagram.com/bye.byebinary/?hl=fr",
-        "img": "@/components/img/svg/arrow-long_1.svg"
+        "img": "arrow-long_1.svg"
     },
     {
         "name" : "«&#8239;Guide des jeunes&nbsp;LGBTQIA+&#8239;»",
         "explanation" : "Ouvrage rédigé et publié par lesCHEFF qui regroupe et explique tout ce qui se rapporte de loin ou de près aux personnes&nbsp;LGBTQIA+.",
         "link": "http://www.clps-mons-soignies.be/media/files/guide-des-jeunes-lgbtqia-2019-2020---web.pdf",
-        "img": "@/components/img/svg/arrow-long_2.svg"
+        "img": "arrow-long_2.svg"
     },
     {
         "name" : "Typo-inclusive.net",
         "explanation" : "Site servant de référence pour tous les travaux typographiques reliés à l’inclusivité dans la langue&nbsp;française.",
         "link": "https://typo-inclusive.net/",
-        "img": "@/components/img/svg/arrow-long_3.svg"
+        "img": "arrow-long_3.svg"
     },
     {
         "name" : "Inqlusion",
         "explanation" : "Coupole francophone des associations LGBTQIA+&nbsp;bruxelloises.",
         "link": "https://inqlusion.be/",
-        "img": "@/components/img/svg/arrow-long_4.svg"
+        "img": "arrow-long_4.svg"
     },
     {
         "name" : "DécadréE",
         "explanation" : "Institut de recherches sur l’égalité dans les&nbsp;médias.",
         "link": "https://decadree.com/",
-        "img": "@/components/img/svg/arrow-long_5.svg"
+        "img": "arrow-long_5.svg"
     },
     {
         "name" : "Radio Télévision&nbsp;Suisse",
         "explanation" : "Collective qui réalise des créations typographiques autour de l'écriture&nbsp;inclusive.",
         "link": "https://www.rts.ch/entreprise/a-propos/11833737-mesures-antisexistes-et-inclusives.html#timeline-anchor-1612865684322",
-        "img": "@/components/img/svg/arrow-long_6.svg"
+        "img": "arrow-long_6.svg"
     }
 ]
