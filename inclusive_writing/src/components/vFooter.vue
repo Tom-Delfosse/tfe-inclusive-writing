@@ -93,10 +93,6 @@ export default {
       padding: $s-desk--medium-avg 0 $s-desk--smaller;
     }
 
-    @include xxl{
-      padding: $s-desk--big;
-    }
-
     .btn-scroll{
       max-width: $s-mob--big;
       transform: rotate(180deg);
