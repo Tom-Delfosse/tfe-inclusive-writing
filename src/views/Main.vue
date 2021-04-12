@@ -67,25 +67,8 @@
         </div>
       </section>
       <section class="section section--white section--tem">
-        <!-- <svg
-          class="img img--bg"
-          width="263"
-          height="132"
-          viewBox="0 0 263 132"
-          fill="none"
-        >
-          <path d="M132 0C59.2 0 0 59.2 0 132H263C263 59.2 203.8 0.5 132 0Z" fill="#ECE9E5" stroke="#2C2C2C" /> -->
-        <!-- </svg> -->
         <div class="section__content">
-          <div class="title-wrap">
-            <div class="title-wrap__text">
-              <h2 class="title title--big">
-                Témoignages
-              </h2>
-              <p>de personnes concerné‧e‧s par l'écriture&nbsp;inclusive.</p>
-            </div>
-          </div>
-
+          <vTemHeader />
           <ul class="list list--tem">
             <vTem />
           </ul>
@@ -93,38 +76,10 @@
       </section>
       <section class="section section--dark section--other">
         <div class="section__content">
-          <div class="title-wrap">
-            <h2 class="title title--big">
-              Iels aussi ont adopté l'écriture inclusive.
-            </h2>
-
-            <svg
-              width="288"
-              height="111"
-              viewBox="0 0 288 111"
-              fill="none"
-              class="img img--bg"
-            >
-              <path d="M288 111H0.692943C22.1668 46.2693 78.2461 0 144 0.5C209.754 0 265.833 46.2693 288 111Z" stroke="#2C2C2C" />
-              <path d="M194.5 55C194.5 85.1357 171.855 111 144 111C116.145 111 93.5 85.1357 93.5 55C93.5 24.8643 116.145 0.5 144 0.5C171.855 0.5 194.5 24.8643 194.5 55Z" stroke="#2C2C2C" />
-            </svg>
-          </div>
+          <vOtherHeader />
           <vOther />
         </div>
-        <div class="section--other__outro">
-          <p class="title title--false">
-            Et plein&nbsp;d'autres&nbsp;!
-          </p>
-          <svg
-            width="288"
-            height="111"
-            viewBox="0 0 288 111"
-            fill="none"
-            class="img img--bg img--bg-outer"
-          >
-            <path d="M288 111H0C22.1668 46.2693 78.2461 0 144 0C209.754 0 265.833 46.2693 288 111Z" stroke="#ECE9E5" />
-          </svg>
-        </div>
+        <vOtherOutro />
       </section>
       <section class="section section--CTA section--white">
         <div class="section__content">
@@ -139,11 +94,14 @@
 <script>
 import vFooter from '@/components/vFooter.vue'
 import vScrollBtn from '@/components/vScrollBtn.vue'
-import vCTA from '@/components/vCTA.vue'
-import vExample from '@/components/vExample.vue'
-import vExampleBig from '@/components/vExampleBig.vue'
-import vTem from '@/components/vTem.vue'
-import vOther from '@/components/vOther.vue'
+import vCTA from '@/components/Main/Btn/vCTA.vue'
+import vExample from '@/components/Main/Example/vExample.vue'
+import vExampleBig from '@/components/Main/Example/vExampleBig.vue'
+import vTem from '@/components/Main/Tem/vTem.vue'
+import vOther from '@/components/Main/Other/vOther.vue'
+import vOtherHeader from '@/components/Main/Other/vOtherHeader.vue'
+import vOtherOutro from '@/components/Main/Other/vOtherOutro.vue'
+import vTemHeader from '@/components/Main/Tem/vTemHeader.vue'
 import { ref } from 'vue'
 
 export default {
@@ -153,7 +111,10 @@ export default {
     vExample,
     vExampleBig,
     vTem,
+    vTemHeader,
     vOther,
+    vOtherHeader,
+    vOtherOutro,
     vScrollBtn
   },
 
@@ -327,73 +288,6 @@ export default {
           height: 100vh;
         }
       }
-
-    .title-wrap{
-      &__text{
-        // position: absolute;
-        // bottom: 100%;
-        // text-align: center;
-        // left: 50%;
-        // transform: translateX(-50%);
-        padding: $s-mob--bigger 0;
-        // width: 100%;
-
-        @include tb{
-          padding: $s-tab--big*2 $s-tab--big;
-        }
-        @include lg{
-          padding: $s-desk--small*2 $s-desk--small;
-        }
-        @include xl{
-          padding: $s-desk--medium*2 $s-desk--medium;
-
-        }
-        @include xxl{
-          padding: $s-desk--big*2 $s-desk--big;
-        }
-        // border-left: 1px solid $c-black;
-        // border-right: 1px solid $c-black;
-        // margin:  0 $s-mob--smaller;
-        // padding: $s-mob--big $s-mob--smaller;
-        // width: calc(100% - (#{$s-mob--smaller} * 4));
-
-        //   @include sm{
-        //     margin: 0 $s-mob--medium;
-        //     padding: $s-mob--medium*2 $s-mob--small $s-mob--big;
-        //     width: calc(100% - (#{$s-mob--medium} * 2 + #{$s-mob--small} *2));
-        //   }
-
-        //   @include tb{
-        //     margin: 0 10%;
-        //     padding: $s-tab--big*2 $s-tab--smaller $s-tab--big;
-        //     width: calc(100% - 20vw - (#{$s-tab--smaller} * 2));
-        //   }
-
-        //   @include lg{
-        //     margin: 0 15%;
-        //     padding: $s-desk--big*2 $s-desk--smaller $s-desk--big;
-        //     width: calc(100% - 30vw - (#{$s-desk--smaller} * 2));
-        //   }
-
-        //   @include xl{
-        //     padding: $s-desk--big*2 $s-desk--medium $s-desk--big;
-        //     width: calc(100% - 30vw - (#{$s-desk--medium} * 2));
-        //   }
-
-        //   @include xxl{
-        //     padding: $s-desk--big*2 $s-desk--medium-plus $s-desk--big;
-        //     width: calc(100% - 30vw - (#{$s-desk--medium-plus} * 2));
-        //   }
-
-        .title, p{
-          margin: 0;
-          margin: 0 auto;
-          padding: 0;
-          text-align: center;
-        }
-      }
-
-    }
   }
 
   &--other{
@@ -423,125 +317,6 @@ export default {
       // }
     }
 
-    .title-wrap{
-      position: absolute;
-      width: 100%;
-      color: $c-black;
-      bottom: 100%;
-      left: 0;
-
-      .title{
-        position: absolute;
-        bottom: $s-mob--small;
-        padding: 0;
-        margin: 0 $s-mob--smaller;
-        width: 100%;
-
-        @include sm{
-          margin: 0 $s-mob--small;
-          bottom: $s-mob--medium;
-        }
-
-        @include tb{
-          margin: 0 $s-tab--smaller;
-          bottom: $s-tab--smaller;
-        }
-
-        @include lg{
-          margin: 0 $s-desk--smaller;
-          bottom: 50%;
-          transform: translateY(50%);
-        }
-
-        @include xl{
-          margin: 0 $s-desk--medium;
-        }
-
-        @include xxl{
-          margin: 0 $s-desk--medium-plus;
-        }
-
-        @include xxxl{
-          margin: 0 auto;
-          text-align: center;
-        }
-      }
-
-      .img--bg{
-        position: relative;
-        bottom: -5px;
-        height: auto;
-        pointer-events: none;
-        max-height: $s-desk--bigger*3;
-      }
-
-    }
-
-    &__outro{
-      position: absolute;
-      border-top: 1px solid $c-white;
-      width: 100%;
-      bottom: 0;
-      left: 0;
-      bottom: -5px;
-
-      .img--bg{
-        position: relative;
-        height: auto;
-        pointer-events: none;
-        margin: 0 $s-mob--smaller;
-        max-width: calc(100% - #{$s-mob--smaller * 2});
-
-        @include sm{
-          margin: 0 $s-mob--medium;
-          max-width: calc(100% - #{$s-mob--medium * 2});
-        }
-
-        @include tb{
-          margin: 0 10%;
-          max-width: calc(100% - 20%);
-
-        }
-
-        @include lg{
-          margin: 0 15%;
-          max-width: calc(100% - 30%);
-        }
-
-        @include xxl{
-          margin: 0 15%;
-          max-height: $s-desk--big * 4;
-        }
-
-      }
-
-      .title{
-        position: absolute;
-        display: inline;
-        padding: 0;
-        white-space: nowrap;
-        left: 50%;
-        top: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        font-size: $s-mob--small;
-
-        @include sm{
-          font-size: $s-mob--medium;
-        }
-        @include tb{
-          font-size: $s-tab--medium;
-        }
-        @include lg{
-          font-size: $s-desk--medium;
-        }
-        @include xl{
-          font-size: $s-desk--medium-avg;
-        }
-        @include xxl{
-          font-size: $s-desk--medium-plus;
-        }
-      }
-    }
   }
 }
 
@@ -575,250 +350,4 @@ export default {
     }
   }
 }
-
-// .section{
-//   &--main{
-//     padding: 0;
-//     background-color: $c-white;
-//   }
-
-//   &--hero{
-//     position: relative;
-//     border-right: inherit;
-//     height: auto;
-//     height: 70vh;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     align-items: flex-start;
-//     box-sizing: content-box;
-//   }
-
-//   &--about{
-//     position: relative;
-//     padding-bottom: $s-mob--bigger*5;
-//     p{
-//       margin-left: $s-mob--smaller
-//     }
-//   }
-
-//   &--tem{
-//     padding-bottom: $s-mob--massive*2;
-//     background-color: inherit;
-//     position: relative;
-
-//     .title-wrap{
-//       position: absolute;
-//       display: block;
-//       bottom: calc(100%);
-//       display: none;
-
-//       &__text{
-//         bottom: 0;
-//         padding: 0 $s-mob--smaller;
-//         display: block;
-//         position: absolute;
-//         z-index: 1;
-//         text-align: center;
-//         // left: calc(-#{$s-mob--smaller} - 1px);
-//         // border-right: 1px solid $c-black;
-//         // border-left: 1px solid $c-black;
-//         // left: 50%;
-//         // transform: translateX(-50%);
-//         // margin:0 $s-mob--smaller;
-//         // height: $s-mob--bigger;
-//         // max-width: calc(100% + #{$s-mob--smaller *3 });
-//         // padding: $s-mob--bigger $s-mob--smaller;
-//         // left: calc((-#{$s-mob--smaller} * 2) - 1px) ;
-//         // right: 1px
-
-//         .title, p {
-//           padding: 0;
-//           margin: 0;
-//         }
-//       }
-
-//       svg{
-//         // display: block;
-//         // position: relative;
-//         // height: auto;
-//         // max-height:  $s-mob--bigger *3;
-//         // width: 100vw;
-//         // max-width: calc(100% + #{$s-mob--smaller *3 } + 1px);
-//         // left: calc((-#{$s-mob--smaller} * 2)) ;
-//         // stroke-width: 1px;
-//         // bottom: -1px;
-
-//       }
-//     }
-
-//   &--others{
-//     position: relative;
-
-//     &__outro{
-//       position: relative;
-//       bottom: -1px;
-//       left: -$s-mob--smaller * 2;
-
-//         .title--false{
-//           text-align: center;
-//           position: absolute;
-//           bottom: $s-mob--smaller;
-//           left: $s-mob--smaller*2;
-//           font-size: $s-mob--medium;
-//           width: 100%;
-//       }
-//     }
-
-//     .list--other{
-//       margin: 0;
-
-//       .list--other__el{
-//         margin-top: $s-mob--bigger;
-
-//         &:nth-of-type(1){
-//           margin-top: 0;
-//         }
-
-//         a{
-//           display: flex;
-//           justify-content: space-between;
-//           align-items: bottom;
-//           margin-bottom: $s-mob--small;
-//           transition: $t-smooth;
-
-//           &:hover{
-//             color: $c-black;
-//             svg{
-//               left: 0;
-//             }
-//             .title{
-//               box-shadow: inset 150px 0 0 0 $c-white;
-//             }
-//           }
-//         }
-
-//         .title{
-//           padding: 0;
-//           margin: 0 $s-mob--small 0 0;
-//           transition: $t-smooth;
-//           display: block;
-//           flex: initial;
-//           box-shadow: inset 0 0 0 0.01px $c-white;
-//           -webkit-backface-visibility: hidden;
-//         }
-
-//         p{
-//           border-top: 1px solid $c-white;
-//           font-weight: 300;
-//           padding-top: $s-mob--smaller;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// .img{
-//   &--arrow{
-//     max-width: 50px;
-//     fill: $c-white;
-//   }
-
-//   &--avatar{
-//     display: block;
-//     margin-left: auto;
-//     margin-right: auto;
-//     width: 100%;
-//     max-width: $s-mob--medium-plus * 4;
-//   }
-
-//   &--bg{
-//     width: 100%;
-//     max-width:  calc(100% - #{$s-mob--smaller}) ;
-//     height: 100%;
-//     stroke-width: 1px;
-
-//     @include lg{
-//       stroke-width: 0.5px;
-//     }
-
-//     &-outer{
-//       max-width: inherit;
-//       width: calc(100% + #{$s-mob--smaller * 4} + 1px);
-//       display: block;
-//       position: inherit;
-//       left: 0 ;
-//     }
-//   }
-
-//   &--link{
-//     max-height: $s-mob--medium;
-//     max-height: auto;
-//     transition: $t-smooth;
-//     cursor: pointer;
-//     fill: $c-white;
-//     position: relative;
-//     left: -$s-mob--small;
-//   }
-
-//     &--deco{
-//     position: absolute;
-//     right: 0;
-//     stroke-width: 0.5px;
-//     top: 0;
-//     transform: translateY(-50%);
-//     width: auto;
-//     path{
-//       fill: $c-white;
-//       width: 100%;
-//       max-width: $s-mob--biggest*3;
-//     }
-//   }
-// }
-
-// .list--example__el{
-//   margin-top: $s-mob--smaller;
-//   margin-bottom: $s-mob--medium-plus;
-
-//   &:nth-last-child(1){
-//       margin-bottom: 0;
-//   }
-// }
-
-// .correction-example{
-//   outline: 1px solid $c-white;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-
-//   p{
-//     font-size: $s-mob--smallest;
-//     margin: 0;
-//     padding: 0;
-//   }
-
-//   svg{
-//     flex-shrink: 1;
-//   }
-
-//   &__bef, &__aft{
-//     padding: $s-mob--smaller/2;
-//   }
-
-//   &--big{
-//     flex-direction: column;
-//     padding: $s-mob--small;
-//     margin-bottom: $s-mob--biggest;
-
-//     svg{
-//       transform: rotate(90deg);
-//       margin: $s-mob--smaller 0 ;
-//     }
-//   }
-// }
-
-// .word-corrected {
-//   border: 1px solid $c-white;
-//   padding: 0 $s-mob--smallest/3;
-// }
 </style>
