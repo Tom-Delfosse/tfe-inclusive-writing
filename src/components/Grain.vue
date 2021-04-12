@@ -21,17 +21,23 @@ export default {
 
     &::before{
       content: '';
-      background-image: url('../assets/img/grain-tile.png');
+      background-image: url("~@/assets/img/grain-tile.png");
       opacity: 30%;
       position: absolute;
       width: 100%;
       height: 100%;
-      animation: grainMove 0.25s steps(2) infinite;
+      animation: grainMove 4s steps(4) infinite;
     }
   }
 
   @keyframes grainMove {
-    0% { transform: rotate(360deg);}
-    100% {transform: rotate(0deg);}
+    // 0% { transform: rotate(180deg);}
+    0% {
+      transform: rotate(360deg);
+      }
+    // 75% {transform: rotate(90deg);}
+    100% {
+      transform: rotate(0deg);
+      }
   }
 </style>
