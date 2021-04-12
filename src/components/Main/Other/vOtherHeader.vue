@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="title-wrap">
     <h2 class="title title--big">
       Iels aussi ont adopté l'écriture inclusive.

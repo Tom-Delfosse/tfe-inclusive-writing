@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="section--other__outro">
     <p class="title title--false">
       Et plein&nbsp;d'autres&nbsp;!

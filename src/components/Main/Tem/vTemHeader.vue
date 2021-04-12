@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="title-wrap">
     <div class="title-wrap__text">
       <h2 class="title title--big">

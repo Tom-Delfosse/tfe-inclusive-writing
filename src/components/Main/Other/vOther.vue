@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <ul class="list list--other">
     <li v-for="other in others" :key="other" class="list--other__el">
       <a :href="other.link" class="link">

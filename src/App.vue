@@ -6,16 +6,18 @@
         <component :is="Component" />
       </transition>
     </router-view>
+    <Grain />
   </div>
 </template>
 
 <script>
 import vHeader from '@/components/vHeader.vue'
+import Grain from '@/components/Grain.vue'
 
 export default {
-  name: 'Main',
   components: {
-    vHeader
+    vHeader,
+    Grain
   }
 }
 </script>
@@ -298,55 +300,8 @@ a {
   text-decoration: none;
 }
 
-// .section{
-//   // padding: 0 $s-mob--smaller;
-//   // box-sizing: content-box;
-//   background-color: red;
+.grain{
 
-//   &--white{
-//     margin-left: $s-mob--smaller;
-//     margin-right: $s-mob--smaller;
-//     border-left: 1px solid $c-black;
-//     border-right: 1px solid $c-black;
-//     background-color: $c-white;
-
-//     p, .title{
-//       &::selection{
-//         background-color: #2c2c2ca4;
-//         color: $c-white;
-//       }
-//     }
-//   }
-
-//   &--dark{
-//     background-color : $c-black;
-//     color: $c-white;
-//     padding-left: $s-mob--smaller;
-//     padding-right: $s-mob--smaller;
-
-//     &__content{
-//       padding: 0 $s-mob--smaller;
-//     padding-top: $s-mob--big;
-//     border-left: 1px solid $c-white;
-//     border-right: 1px solid $c-white;
-
-//   }
-
-//       p, .title{
-//         &::selection{
-//         background-color: #ece9e5c4;
-//         color: $c-black;
-//       }
-//     }
-//   }
-// }
-
-// p{
-//   font-size: $s-mob--smaller;
-//   line-height: 170%;
-//   letter-spacing: $ls-smaller;
-//   padding: 0 0 $s-mob--smaller 0;
-//   margin: 0;
-// }
+}
 
 </style>
