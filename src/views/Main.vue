@@ -92,7 +92,8 @@
 </template>
 
 <script>
-import vFooter from '@/components/vFooter.vue'
+import vFooter from '@/components/Footer/vFooter.vue'
+import vFooterNav from '@/components/Footer/vFooterNav.vue'
 import vScrollBtn from '@/components/vScrollBtn.vue'
 import vCTA from '@/components/Main/Btn/vCTA.vue'
 import vExample from '@/components/Main/Example/vExample.vue'
@@ -115,6 +116,7 @@ export default {
     vOther,
     vOtherHeader,
     vOtherOutro,
+    vFooterNav,
     vScrollBtn
   },
 
