@@ -78,19 +78,4 @@ $screen-xxxl: 2100px;
 $t-fast : .3s cubic-bezier(0.25, 1, 0.5, 1);
 $t-smooth : .5s cubic-bezier(0.25, 1, 0.5, 1);
 
-
-// @include sm{
-
-//   }
-
-//   @include tb{
-
-//   }
-
-//   @include lg{
-
-//   }
-
-//   @include xxl{
-
-//   }
+$random : random(20)

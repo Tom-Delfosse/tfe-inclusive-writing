@@ -33,7 +33,7 @@ export default {
   transform: translateX(-50%);
   z-index: 1;
 
-  margin-top: $s-mob--bigger;
+  margin-top: $s-mob--medium-plus;
 
   @include sm{
     max-width: calc(100% - #{$s-mob--medium} * 2);

@@ -73,7 +73,6 @@ export default {
         pointer-events: none;
         max-height: $s-desk--bigger*3;
       }
-
     }
 
 </style>

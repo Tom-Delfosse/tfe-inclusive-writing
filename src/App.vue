@@ -299,9 +299,4 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-.grain{
-
-}
-
 </style>
