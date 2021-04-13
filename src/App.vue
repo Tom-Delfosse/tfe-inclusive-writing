@@ -96,7 +96,7 @@ body{
     border-right: 1px solid $c-black;
     padding: 0 $s-mob--smaller;
 
-      @include sm{
+    @include sm{
       padding: 0 $s-mob--small;
     }
 

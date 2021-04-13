@@ -146,34 +146,4 @@ export default {
   }
 }
 
-    // .list--tem{
-    //   margin-top: 0 ;
-    // }
-    // .tem-group{
-    //   border-bottom: 1px solid $c-black;
-    //   margin: $s-mob--bigger 0 $s-mob--smallest;
-
-    //   &:nth-child(1){
-    //     margin-top: 0;
-    //     padding-top: $s-mob--bigger;
-
-    //   }
-    //   &:nth-last-child(1){
-    //     margin-bottom: 0;
-
-    //   }
-
-    //   &__quote{
-    //     font-weight: 700;
-    //     font-size: $s-mob--small;
-    //     margin: $s-mob--medium 0 $s-mob--small ;
-    //   }
-
-    //   .img--avatar{
-    //     display: block;
-    //     margin-left: auto;
-    //     margin-right: auto;
-    //   }
-    // }
-
 </style>

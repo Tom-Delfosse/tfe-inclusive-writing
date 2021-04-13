@@ -93,7 +93,6 @@
 
 <script>
 import vFooter from '@/components/Footer/vFooter.vue'
-import vFooterNav from '@/components/Footer/vFooterNav.vue'
 import vScrollBtn from '@/components/vScrollBtn.vue'
 import vCTA from '@/components/Main/Btn/vCTA.vue'
 import vExample from '@/components/Main/Example/vExample.vue'
@@ -116,7 +115,6 @@ export default {
     vOther,
     vOtherHeader,
     vOtherOutro,
-    vFooterNav,
     vScrollBtn
   },
 
@@ -274,22 +272,6 @@ export default {
       }
     }
     position: relative;
-    .img--bg{
-        display: block;
-        position: absolute;
-        stroke-width: 0px;
-        width: 100%;
-        height: auto;
-        bottom: 100%;
-        z-index: 0;
-        left: 0;
-        max-height: 100vw;
-
-        path{
-          width: 100vw;
-          height: 100vh;
-        }
-      }
   }
 
   &--other{
@@ -297,28 +279,7 @@ export default {
 
     .section__content{
       position: relative;
-      // padding-bottom: $s-mob--bigger*3;
-
-      // @include sm{
-      //   padding-bottom: $s-mob--biggest * 4;
-      // }
-      // @include tb{
-      //   padding-bottom: $s-tab--bigger * 3.5;
-      // }
-      // @include lg{
-      //   padding-bottom: $s-desk--big * 3;
-      // }
-      // @include xl{
-      //   padding-bottom: $s-desk--big * 3.5;
-      // }
-      // @include xxl{
-      //   padding-bottom: $s-desk--big * 4;
-      // }
-      // @include xxxl{
-      //   padding-bottom: $s-desk--big * 5;
-      // }
     }
-
   }
 }
 
