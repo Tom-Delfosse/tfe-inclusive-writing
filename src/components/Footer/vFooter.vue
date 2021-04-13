@@ -17,7 +17,7 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path d="M173 6.56021V132H0C1.76948 58.8807 60.3165 00 132 0C146.265 0 159.535 2.62328 173 6.56021Z" fill="#ECE9E5" />
+        <path d="M173 6.56021V132H0C0 58.8807 60.3165 0 132 0C146.265 0 159.535 2.62328 173 6.56021Z" fill="#ECE9E5" />
       </svg>
     </div>
   </footer>
@@ -101,7 +101,7 @@ export default {
 .img--deco{
   stroke-width: 0;
   top:inherit;
-  bottom: -1px;
+  bottom: 0px;
   transform: inherit;
 }
 

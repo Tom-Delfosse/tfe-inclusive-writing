@@ -25,11 +25,6 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-
-}
-</script>
 <style lang="scss" scoped>
 .title-wrap{
   &__text{
@@ -90,7 +85,6 @@ export default {
         margin:  0 10%;
         max-width: 80%;
         max-height: 39.5%;
-
       }
 
       @include lg{
