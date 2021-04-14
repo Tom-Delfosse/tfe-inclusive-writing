@@ -134,6 +134,7 @@
     font-size: $s-mob--small;
     pointer-events: none;
     padding: 0;
+    // user-select: none;
 
     @include tb{
       font-size: $s-tab--small;

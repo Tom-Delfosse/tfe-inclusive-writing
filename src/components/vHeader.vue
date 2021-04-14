@@ -76,6 +76,7 @@ export default {
       letter-spacing: $ls-small;
       transition: $t-smooth;
       box-shadow: 0 0 0 0.0001px inset $c-black ;
+      user-select: none;
 
       &--active{
         font-weight: 700;
@@ -142,7 +143,7 @@ export default {
 
       &:hover{
         transition: $t-fast;
-        box-shadow: 250px 0 0 0px inset $c-black ;
+        box-shadow: 300px 0 0 0px inset $c-black ;
         color: $c-white;
       }
     }

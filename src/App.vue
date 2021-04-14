@@ -119,11 +119,25 @@ body{
 
   &--white{
     background-color: $c-white;
+
+    .title, p, a, span{
+      &::selection{
+        background-color: $c-black;
+        color: $c-white;
+      }
+    }
   }
 
   &--dark{
     background-color: $c-black;
     color: $c-white;
+
+      .title, p, a, span{
+      &::selection{
+        background-color: $c-white;
+        color: $c-black;
+        }
+      }
 
     .section__content{
       border-left: 1px solid $c-white;

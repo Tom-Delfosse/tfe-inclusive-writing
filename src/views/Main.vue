@@ -10,7 +10,7 @@
             Outil de grammaire inclusive à la portée de&nbsp;<span class="no-break">tous‧tes</span>.
           </p>
         </div>
-        <vScrollBtn v-if="sectionAboutRef" :scroll-to-ref="sectionAboutRef" />
+        <vScrollBtn v-if="sectionAboutRef" :scrolled-to="sectionAboutRef" />
       </div>
     </section>
 
@@ -131,22 +131,15 @@ export default {
 
 .section{
   &--hero{
-    padding-top: 30vh;
-    height: 70vh;
+    padding-top: 20vh;
+    height: 80vh;
 
     @include sm{
-      font-size: $s-mob--small
+      padding-top: 15vh;
+      height: 85vh;
     }
 
     @include tb{
-      font-size: $s-tab--smaller;
-      font-weight: 300;
-      padding-top: 20vh;
-      height: 80vh;
-    }
-
-    @include lg{
-      font-size: $s-desk--smaller;
       padding-top: 20vh;
       height: 80vh;
     }
@@ -183,12 +176,6 @@ export default {
 
   &--about{
     .section__content{
-      padding-top: $s-mob--massive;
-      // padding-bottom: 49.1vw;
-
-      // @include tb{
-      //   padding-bottom: 49.7vw;
-      // }
 
       @include sm{
         padding-top: $s-mob--bigger;
@@ -248,13 +235,8 @@ export default {
   &--tem{
 
     .section__content{
-      // position: relative;
-      // top: -100px;
       padding-bottom: $s-mob--massive*3;
 
-      @include sm{
-        // padding-bottom: $s-mob--massive*4;
-      }
       @include tb{
       padding-bottom: $s-tab--biggest*3;
 

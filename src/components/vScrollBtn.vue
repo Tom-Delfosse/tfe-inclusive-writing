@@ -24,14 +24,14 @@ import zenscroll from 'zenscroll'
 
 export default {
   props: {
-    scrollToRef: {
+    scrolledTo: {
       type: Object,
       required: true
     }
   },
   setup (props) {
     const scrollToSection = () => {
-      zenscroll.to(props.scrollToRef, 800)
+      zenscroll.to(props.scrolledTo, 800)
     }
 
     return {

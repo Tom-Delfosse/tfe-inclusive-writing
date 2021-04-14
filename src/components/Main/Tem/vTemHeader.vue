@@ -38,10 +38,10 @@
       padding: $s-tab--big*2 0 $s-tab--big;
     }
     @include lg{
-      padding: $s-desk--small*2 0 $s-desk--small;
+      padding: $s-desk--medium*3 0 $s-desk--medium*2;
     }
     @include xl{
-      padding: $s-desk--medium*4 0 $s-desk--medium*2;
+      padding: $s-desk--medium*4 0 $s-desk--big;
     }
 
     @include xxl{
@@ -62,6 +62,7 @@
     width: 100%;
     height: auto;
     top: 0;
+    pointer-events: none;
 
     &::before{
       content: "";
@@ -70,7 +71,6 @@
       border-left: 1px solid $c-white;
       border-right: 1px solid $c-white;
       width: 100%;
-      // clip-path: url(#clip);
       box-sizing: border-box;
       margin:  0 $s-mob--smaller;
       max-width: calc(100% - #{$s-mob--smaller} * 2);
@@ -97,6 +97,8 @@
     svg{
       width: 100%;
       height: 100%;
+      user-select: none;
+      pointer-events: none;
     }
   }
 }

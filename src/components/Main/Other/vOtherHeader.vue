@@ -36,6 +36,11 @@ export default {
         margin: 0 $s-mob--smaller;
         width: 100%;
 
+        &::selection{
+          background-color: $c-black;
+          color: $c-white;
+        }
+
         @include sm{
           margin: 0 $s-mob--small;
           bottom: $s-mob--medium;
