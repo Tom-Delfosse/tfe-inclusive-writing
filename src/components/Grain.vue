@@ -4,6 +4,7 @@
 <style lang="scss">
   .grain{
     position: fixed;
+    z-index: 4;
     pointer-events: none;
     width: 250%;
     top: -25%;
@@ -14,7 +15,7 @@
     &::before{
       content: '';
       background-image: url('/assets/img/grain-tile.png');
-      opacity: 0.3;
+      opacity: 0.4;
       filter: brightness(1.1);
       position: absolute;
       width: 100%;
@@ -23,7 +24,7 @@
 
       @include retina{
         background-image: url('/assets/img/grain-tile@2x.png');
-        opacity: 0.25;
+        opacity: 0.15;
         filter: brightness(1.1);
       }
     }

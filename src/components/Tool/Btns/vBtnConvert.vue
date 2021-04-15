@@ -20,7 +20,7 @@ export default {
       if (!props.toCheck.textContent) {
         console.log('pas de contenu !')
       } else {
-        const userText = (props.toCheck.textContent).replace(/\n\w?/g, '$1|').split('$1|')
+        const userText = (props.toCheck.textContent).replace(/\n?\n/g, '$1|').split('$1|')
         userText.forEach((e, index) => {
           userText[index] = e.replace(/([.?!])\s*(?=[A-Z])/g, '$1|').split('|')
           userText[index].forEach((subElement, subIndex) => {

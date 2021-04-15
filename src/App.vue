@@ -6,8 +6,8 @@
         <component :is="Component" />
       </transition>
     </router-view>
-    <Grain />
   </div>
+  <Grain />
 </template>
 
 <script>
