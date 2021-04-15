@@ -8,9 +8,9 @@ $c-white : #ECE9E5;
 @font-face{
     font-family: 'font1';
     src:
-        url("~@/assets/font/NewYork.otf"),
-        url("~@/assets/font/NewYork.woff") format("woff"),
-        url("~@/assets/font/NewYork.woff2") format("woff2");
+        url("/assets/font/NewYork.otf"),
+        url("/assets/font/NewYork.woff") format("woff"),
+        url("/assets/font/NewYork.woff2") format("woff2");
 };
 
 $ls-smaller: 0.05rem;

@@ -10,7 +10,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .btn--cancel{
-  background-image: url('~@/assets/img/svg/cross.svg');
+  background-image: url('/assets/img/svg/cross.svg');
 
   @include tb{
     background-image: inherit;
@@ -18,6 +18,6 @@ export default {
 }
 
   .btn--cancel::before{
-    background-image: url('~@/assets/img/svg/cross.svg');
+    background-image: url('/assets/img/svg/cross.svg');
   }
 </style>

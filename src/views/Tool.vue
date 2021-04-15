@@ -178,7 +178,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     background-repeat: no-repeat;
-    background-image: url('~@/assets/img/svg/copy.svg');
+    background-image: url('/assets/img/svg/copy.svg');
     width: $s-mob--medium;
     height: $s-mob--medium;
 
@@ -238,7 +238,7 @@ export default {
         content: '';
         display: inline-block;
         vertical-align: middle;
-        background-image: url('~@/assets/img/svg/copy.svg');
+        background-image: url('/assets/img/svg/copy.svg');
         background-repeat: no-repeat;
         margin-right: $s-tab--smallest/4;
       }

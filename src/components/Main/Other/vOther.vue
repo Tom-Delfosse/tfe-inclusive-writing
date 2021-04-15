@@ -3,7 +3,9 @@
     <li v-for="other in others" :key="other" class="list--other__el">
       <a :href="other.link" class="link">
         <h3 class="title title--small" v-html="other.name" />
-        <img class="img img--arrow" :src="require(`@/assets/img/svg/${other.img}`)" alt="flèche directionnelle">
+
+        <img class="img img--arrow" :src="(`/assets/img/svg/${other.img}`)" alt="flèche directionnelle">
+        <!-- <img class="img img--arrow" :src="require(`/assets/img/svg/${other.img}`)" alt="flèche directionnelle"> -->
       </a>
       <p v-html="other.explanation" />
     </li>
@@ -18,7 +20,6 @@ export default {
       others: others
     }
   }
-
 }
 </script>
 <style lang="scss" scoped>
@@ -105,12 +106,12 @@ export default {
           // -webkit-text-stroke: 1.5px;
           // -webkit-text-stroke-color: $c-white;
 
-          @include xl{
+          // @include xl{
             // -webkit-text-stroke: 2px;
-          }
-          @include xxl{
+          // }
+          // @include xxl{
             // -webkit-text-stroke: 2.5px;
-          }
+          // }
         }
 
         .img{

@@ -7,7 +7,7 @@
           <p v-for="word in example.before" :key="word" v-html="word" />
         </div>
         <img
-          :src="require(`@/assets/img/svg/${example.img}`)"
+          :src="(`/assets/img/svg/${example.img}`)"
           alt="flèche directionnelle"
           class="img img--arrow"
         >

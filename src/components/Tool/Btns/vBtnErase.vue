@@ -11,13 +11,13 @@ export default {
 <style lang="scss" scoped>
 
 .btn--erase{
-  background-image: url('~@/assets/img/svg/dustbin.svg');
+  background-image: url('/assets/img/svg/dustbin.svg');
 
   @include tb{
     background-image: inherit;
   }
 }
 .btn--erase::before{
-  background-image: url('~@/assets/img/svg/dustbin.svg');
+  background-image: url('/assets/img/svg/dustbin.svg');
 }
 </style>

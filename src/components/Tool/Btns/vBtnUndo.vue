@@ -10,13 +10,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .btn--undo{
-  background-image: url('~@/assets/img/svg/arrow-rewind.svg');
+  background-image: url('/assets/img/svg/arrow-rewind.svg');
 
   @include tb{
     background-image: inherit;
   }
 }
   .btn--undo::before{
-    background-image: url('~@/assets/img/svg/arrow-rewind.svg');
+    background-image: url('/assets/img/svg/arrow-rewind.svg');
   }
 </style>
