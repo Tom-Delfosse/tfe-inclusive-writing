@@ -77,7 +77,6 @@ export default {
       stroke-width: 0.7px;
     }
 
-
     .circle, .path{
       transition: $t-smooth;
     }
@@ -96,7 +95,7 @@ export default {
     }
   }
 
-  &--dark{ 
+  &--dark{
     max-width: $s-mob--big;
 
     @include tb{

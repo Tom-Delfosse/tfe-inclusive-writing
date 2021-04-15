@@ -1,5 +1,5 @@
 <template>
-  <header class="section section--header">
+  <header id="section--header" class="section section--header">
     <vIcon />
     <nav class="nav">
       <router-link class="nav__link" to="/" exact>

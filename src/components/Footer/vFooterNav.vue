@@ -3,9 +3,9 @@
     <vIcon class="img--icon-dark" />
 
     <vScrollBtn
-      scroll-to="#section--hero"
+      scroll-to="#section--header"
       class="btn-scroll btn-scroll--dark"
-      :time-to-scroll="2400"
+      :time-to-scroll="2000"
     />
   </div>
 </template>

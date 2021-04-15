@@ -42,6 +42,7 @@ body{
 
 .fade-enter-active, .fade-leave-active{
   transition: $t-smooth;
+
 }
 
 // .fade-enter{

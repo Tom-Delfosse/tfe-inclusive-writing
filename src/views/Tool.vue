@@ -36,14 +36,17 @@
       </div>
       <p>{{ inputFeedback }} </p>
     </section>
+    <vFooter />
   </div>
 </template>
 <script>
 import vBtn from '@/components/Tool/vBtn.vue'
+import vFooter from '@/components/Footer/vFooter.vue'
 import { ref, onMounted } from 'vue'
 export default {
   components: {
-    vBtn
+    vBtn,
+    vFooter
   },
 
   setup () {

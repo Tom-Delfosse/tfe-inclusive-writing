@@ -16,7 +16,7 @@
       content: '';
       background-image: url('/assets/img/grain-tile.png');
       opacity: 0.4;
-      filter: brightness(1.1);
+      filter: brightness(0.9);
       position: absolute;
       width: 100%;
       height: 100%;
@@ -25,7 +25,7 @@
       @include retina{
         background-image: url('/assets/img/grain-tile@2x.png');
         opacity: 0.15;
-        filter: brightness(1.1);
+        filter: brightness(1);
       }
     }
   }
