@@ -1,5 +1,5 @@
 <template>
-  <div class="grain" />
+  <div class="grain" aria-hidden="true" />
 </template>
 <style lang="scss">
   .grain{
@@ -10,12 +10,11 @@
     left: -50%;
     background-repeat: repeat;
     height: 150vh;
-    animation: grainMove 1s steps(5);
 
     &::before{
       content: '';
       background-image: url('/assets/img/grain-tile.png');
-      opacity: 40%;
+      opacity: 0.3;
       filter: brightness(1.1);
       position: absolute;
       width: 100%;

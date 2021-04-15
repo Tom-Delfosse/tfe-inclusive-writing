@@ -7,40 +7,90 @@
             Bonjour voyageur!
           </div>
           <p>1000 mots</p>
-          <vBtnConvert v-if="txt" :to-check="txt" />
+
+          <vBtn v-for="btn in btnArray.slice(0, 1)" :key="btn"
+            :class="`btn btn--${btn.class}`"
+            v-html="btn.text" @click="btn.action"/>
         </div>
 
         <div class="options">
-          <vBtnCopy />
-          <vBtnUndo />
-          <vBtnCancel />
-          <vBtnErase />
+          <vBtn
+            v-for="btn in btnArray.slice(1)"
+            :key="btn"
+            :class="`btn btn--${btn.class}`"
+            v-html="btn.text" @click="btn.action"
+          />
         </div>
       </div>
     </section>
   </div>
 </template>
 <script>
-import vBtnConvert from '@/components/Tool/Btns/vBtnConvert.vue'
-import vBtnCopy from '@/components/Tool/Btns/vBtnCopy.vue'
-import vBtnCancel from '@/components/Tool/Btns/vBtnCancel.vue'
-import vBtnUndo from '@/components/Tool/Btns/vBtnUndo.vue'
-import vBtnErase from '@/components/Tool/Btns/vBtnErase.vue'
-import { ref } from 'vue'
+import vBtn from '@/components/Tool/vBtn.vue'
 
 export default {
   components: {
-    vBtnConvert,
-    vBtnCopy,
-    vBtnUndo,
-    vBtnErase,
-    vBtnCancel
+    vBtn
   },
   setup () {
-    const txt = ref(null)
+    // const txt = ref(null)
+    const convertText = () => {
+      // console.log("hi")
+    }
+
+    const undoChange = () => {
+      // console.log("hey")
+    }
+
+    const cancelChange = () => {
+      // console.log("haii")
+    }
+
+    const eraseText = () => {
+      // console.log("heoi")
+    }
+
+    const copyText = () => {
+      // console.log("ougiboui")
+    }
+
+    const btnArray = [
+      {
+        class: 'convert',
+        text: 'Convertir&nbsp;!',
+        action : convertText
+      },
+      {
+        class: 'undo',
+        text: 'Retour <span class="hide">en&nbsp;arrière</span>',
+        action : undoChange
+      },
+      {
+        class: 'cancel',
+        text: 'Annuler <span class="hide">les&nbsp;modifications</span>',
+        action : cancelChange
+      },
+      {
+        class: 'erase',
+        text: 'Supprimer <span class="hide">le&nbsp;texte</span>',
+        action : eraseText
+      },
+      {
+        class: 'copy',
+        text: 'Copier <span class="hide">le&nbsp;texte</span>',
+        action : copyText
+      }
+    ]
+
 
     return {
-      txt
+      convertText,
+      convertText,
+      undoChange,
+      cancelChange,
+      eraseText,
+      copyText,
+      btnArray
     }
   }
 }
@@ -63,7 +113,7 @@ export default {
 
     .section__content{
       border-right: inherit;
-      max-width: 600px;
+      // max-width: 600px;
 
       @include lg{
         display: flex;
@@ -81,11 +131,12 @@ export default {
 
         @include lg{
           max-width: inherit;
+          flex-grow: 1;
+          flex-shrink: 0;
         }
 
         @include xl{
-          flex-grow: 1;
-          flex-shrink: 0;
+          max-width: 650px;
         }
 
         .textarea{
@@ -105,12 +156,10 @@ export default {
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
           line-height: 160%;
-          // max-width: 450px;
 
           @include tb{
             font-size: $s-tab--smaller;
             font-weight: 300;
-            max-width: 600px;
           }
 
           @include lg{
@@ -118,7 +167,6 @@ export default {
           }
           @include xl{
             font-size: $s-desk--smaller;
-            max-width: 650px;
           }
         }
 
@@ -162,99 +210,11 @@ export default {
   }
 }
 
-  .btn {
-    display: block;
-    background-color: inherit;
-    font-family: 'Source Sans Pro', sans-serif;
-    outline: 0;
-    cursor: pointer;
-    border: 0;
-    font-size: $s-mob--smaller;
-    letter-spacing: $ls-smaller;
-    line-height: 160%;
-    font-weight: $w-light;
-    transition: $t-smooth;
-    text-indent: 150%;
-    white-space: nowrap;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-image: url('/assets/img/svg/copy.svg');
-    width: $s-mob--medium;
-    height: $s-mob--medium;
+.hide{
+  display: none;
 
-    .hide{
-      display: none;
-    }
-
-    &:hover{
-      transform: scale(1.1);
-      transition: $t-fast;
-
-      @include lg{
-        transform: inherit;
-        outline: 1px solid $c-black;
-      }
-    }
-
-    @include tb{
-      font-size: $s-tab--smaller;
-      width: inherit;
-      height: inherit;
-      background-image: inherit;
-      overflow: inherit;
-      text-indent: inherit;
-    }
-
-    @include lg{
-      font-size: $s-desk--smallest;
-      margin-top: $s-desk--smallest;
-
-      &:nth-child(1){
-        margin-top: 0;
-      }
-
-    }
-
-    @include xl{
-      font-size: $s-desk--smaller;
-      margin-top: $s-desk--smaller;
-
-      .hide{
-        display: inline-block;
-      }
-
-    }
-
-    &--disable{
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    &::before{
-      content: none;
-      @include tb{
-        width: $s-tab--smaller;
-        height: $s-tab--smaller;
-        content: '';
-        display: inline-block;
-        vertical-align: middle;
-        background-image: url('/assets/img/svg/copy.svg');
-        background-repeat: no-repeat;
-        margin-right: $s-tab--smallest/4;
-      }
-
-      @include lg{
-        width: $s-desk--smaller;
-        height: $s-desk--smaller;
-        margin-right: $s-desk--smallest/2;
-      }
-
-      @include xl{
-        width: $s-desk--small;
-        height: $s-desk--small;
-        margin-right: $s-desk--smallest/2;
-
-      }
+  @include xl{
+    display: inline-block;
   }
 }
 </style>

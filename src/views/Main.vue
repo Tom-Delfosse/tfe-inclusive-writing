@@ -10,11 +10,14 @@
             Outil de grammaire inclusive à la portée de&nbsp;<span class="no-break">tous‧tes</span>.
           </p>
         </div>
-        <vScrollBtn v-if="sectionAboutRef" scrolled-to="#section--about" />
+        <vScrollBtn scroll-to="#section--about" :time-to-scroll="1000" />
       </div>
     </section>
 
-    <main class="section section--main">
+    <main
+      class="
+          section--main"
+    >
       <section id="section--about" ref="sectionAboutRef" class="section section--about section--dark">
         <div class="section__content">
           <svg
@@ -115,13 +118,6 @@ export default {
     vOtherHeader,
     vOtherOutro,
     vScrollBtn
-  },
-
-  setup () {
-    const sectionAboutRef = '#section--about'
-    return {
-      sectionAboutRef
-    }
   }
 }
 </script>

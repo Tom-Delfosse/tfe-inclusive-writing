@@ -34,12 +34,6 @@ export default {
     vFooterNav,
     vCopyright
   },
-  setup () {
-    const sectionAboutRef = '#section--about'
-    return {
-      sectionAboutRef
-    }
-  },
 
   data () {
     return {

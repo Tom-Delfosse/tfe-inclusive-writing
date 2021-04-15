@@ -1,5 +1,5 @@
 <template>
-  <a :href="scrolledTo" class="btn-scroll" @click.prevent="scrollToSection">
+  <a :href="scrollTo" class="btn-scroll" @click.prevent="scrollToSection">
     <svg
       width="80"
       height="80"
@@ -24,15 +24,19 @@ import zenscroll from 'zenscroll'
 
 export default {
   props: {
-    scrolledTo: {
+    scrollTo: {
       type: String,
+      required: true
+    },
+    timeToScroll: {
+      type: Number,
       required: true
     }
   },
   setup (props) {
     const scrollToSection = () => {
-      const el = document.querySelector(props.scrolledTo)
-      zenscroll.to(el, 1000)
+      const el = document.querySelector(props.scrollTo)
+      zenscroll.to(el, props.timeToScroll)
     }
 
     return {

@@ -3,24 +3,20 @@
     <vIcon class="img--icon-dark" />
 
     <vScrollBtn
-      scrolled-to="#section--hero"
+      scroll-to="#section--hero"
       class="btn-scroll btn-scroll--dark"
+      :time-to-scroll="2400"
     />
   </div>
 </template>
 <script>
 import vScrollBtn from '@/components/vScrollBtn.vue'
 import vIcon from '@/components/vIcon.vue'
+
 export default {
   components: {
     vScrollBtn,
     vIcon
-  },
-  setup () {
-    // const sectionAboutRef = ref(null)
-    // return {
-    // sectionAboutRef
-    // }
   }
 }
 </script>
