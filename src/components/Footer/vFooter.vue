@@ -27,7 +27,6 @@ import vFooterList from '@/components/Footer/vFooterList.vue'
 import Links from '@/assets/data/links.json'
 import vCopyright from '@/components/Footer/vFooterCopyright.vue'
 import vFooterNav from '@/components/Footer/vFooterNav.vue'
-import { ref } from 'vue'
 
 export default {
   components: {
@@ -36,7 +35,7 @@ export default {
     vCopyright
   },
   setup () {
-    const sectionAboutRef = ref(null)
+    const sectionAboutRef = '#section--about'
     return {
       sectionAboutRef
     }

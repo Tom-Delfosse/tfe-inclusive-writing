@@ -65,33 +65,22 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .btn--convert{
-  display: block;
-  background-color: $c-black;
-  color: $c-white;
-  font-family: 'Source Sans Pro', sans-serif;
-  color: $c-white;
-  font-weight: $w-bold;
-  outline: 0;
-  border: 0;
-  cursor: pointer;
+    background-color: $c-black;
+    color: $c-white;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: $c-white;
+    font-weight: $w-bold;
+    text-indent: inherit;
+    overflow: inherit;
+    width: auto;
+    background-image: inherit;
+    height: inherit;
+    margin-top: $s-mob--smaller;
 
-  font-size: $s-mob--smaller;
-  letter-spacing: $ls-smaller;
-  line-height: 160%;
-  outline: none;
-
-  @include tb{
-    font-size: $s-tab--smaller;
-
+    &::before{
+      content: none;
+    }
   }
-
-  @include lg{
-    font-size: $s-desk--smallest;
-  }
-  @include xl{
-    font-size: $s-desk--smaller;
-  }
-}
 </style>

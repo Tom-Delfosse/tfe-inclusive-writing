@@ -1,28 +1,26 @@
-<template lang="">
+<template>
   <div class="footer-nav">
     <vIcon class="img--icon-dark" />
 
     <vScrollBtn
-      :scroll-to-ref="sectionAboutRef"
-      class="btn-scroll--dark"
+      scrolled-to="#section--hero"
+      class="btn-scroll btn-scroll--dark"
     />
   </div>
 </template>
 <script>
 import vScrollBtn from '@/components/vScrollBtn.vue'
 import vIcon from '@/components/vIcon.vue'
-import { ref } from 'vue'
-
 export default {
   components: {
     vScrollBtn,
     vIcon
   },
   setup () {
-    const sectionAboutRef = ref(null)
-    return {
-      sectionAboutRef
-    }
+    // const sectionAboutRef = ref(null)
+    // return {
+    // sectionAboutRef
+    // }
   }
 }
 </script>

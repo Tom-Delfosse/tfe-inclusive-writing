@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="section section--hero section--white">
+    <section id="section--hero" class="section section--hero section--white">
       <div class="section__content">
         <div class="title-wrap">
           <h1 class="title title--bigger">
@@ -10,12 +10,12 @@
             Outil de grammaire inclusive à la portée de&nbsp;<span class="no-break">tous‧tes</span>.
           </p>
         </div>
-        <vScrollBtn v-if="sectionAboutRef" :scrolled-to="sectionAboutRef" />
+        <vScrollBtn v-if="sectionAboutRef" scrolled-to="#section--about" />
       </div>
     </section>
 
     <main class="section section--main">
-      <section ref="sectionAboutRef" class="section section--about section--dark">
+      <section id="section--about" ref="sectionAboutRef" class="section section--about section--dark">
         <div class="section__content">
           <svg
             class="img img--deco"
@@ -102,7 +102,6 @@ import vOther from '@/components/Main/Other/vOther.vue'
 import vOtherHeader from '@/components/Main/Other/vOtherHeader.vue'
 import vOtherOutro from '@/components/Main/Other/vOtherOutro.vue'
 import vTemHeader from '@/components/Main/Tem/vTemHeader.vue'
-import { ref } from 'vue'
 
 export default {
   components: {
@@ -119,7 +118,7 @@ export default {
   },
 
   setup () {
-    const sectionAboutRef = ref(null)
+    const sectionAboutRef = '#section--about'
     return {
       sectionAboutRef
     }

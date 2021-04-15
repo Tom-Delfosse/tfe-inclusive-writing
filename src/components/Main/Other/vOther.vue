@@ -102,14 +102,14 @@ export default {
 
       &:hover{
         .title{
-          -webkit-text-stroke: 1.5px;
-          -webkit-text-stroke-color: $c-white;
+          // -webkit-text-stroke: 1.5px;
+          // -webkit-text-stroke-color: $c-white;
 
           @include xl{
-            -webkit-text-stroke: 2px;
+            // -webkit-text-stroke: 2px;
           }
           @include xxl{
-            -webkit-text-stroke: 2.5px;
+            // -webkit-text-stroke: 2.5px;
           }
         }
 
