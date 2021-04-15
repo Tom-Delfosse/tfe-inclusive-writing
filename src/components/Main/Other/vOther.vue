@@ -69,6 +69,10 @@ export default {
       padding: 0;
     }
 
+    .title{
+      max-width: min-content;
+    }
+
     .link{
       display: flex;
       align-items: center;

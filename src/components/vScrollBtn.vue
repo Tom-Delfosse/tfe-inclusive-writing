@@ -49,8 +49,6 @@ export default {
 <style lang="scss">
 .btn-scroll{
   width: 100%;
-  height: auto;
-  cursor: pointer;
   max-width: $s-mob--bigger;
   margin-bottom: $s-mob--smaller;
 
@@ -63,12 +61,26 @@ export default {
     max-width: $s-tab--big;
   }
   @include lg{
-    max-width: $s-desk--medium-plus;
+    max-width: $s-desk--medium*2;
+    max-height: $s-desk--medium*2;
     margin-bottom: $s-desk--medium-small;
   }
 
-  .circle, .path{
-    transition: $t-smooth;
+  svg{
+    display: block;
+    margin-right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    @include lg{
+      stroke-width: 0.7px;
+    }
+
+
+    .circle, .path{
+      transition: $t-smooth;
+    }
   }
 
   &:hover{
@@ -84,24 +96,45 @@ export default {
     }
   }
 
-  &--dark{
-    margin-bottom: 0;
-    margin-top: 0;
-    .circle{
-      fill: $c-black;
-      stroke: $c-white;
+  &--dark{ 
+    max-width: $s-mob--big;
+
+    @include tb{
+      max-width: $s-tab--big;
+      position: relative;
+      left: -$s-tab--big;
     }
 
-    .path{
-      fill: $c-white;
+    @include lg{
+      max-width: $s-desk--medium;
+      left: -$s-desk--medium;
+
     }
-    &:hover{
+
+    @include xl{
+      max-width: $s-desk--medium-avg;
+    }
+
+    svg{
+      margin-bottom: 0;
+      margin-top: 0;
+      transform: rotate(180deg);
       .circle{
-        fill: $c-white;
+        fill: $c-black;
+        stroke: $c-white;
       }
 
       .path{
-        fill: $c-black;
+        fill: $c-white;
+      }
+      &:hover{
+        .circle{
+          fill: $c-white;
+        }
+
+        .path{
+          fill: $c-black;
+        }
       }
     }
   }

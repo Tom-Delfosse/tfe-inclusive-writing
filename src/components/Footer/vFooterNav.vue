@@ -25,6 +25,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: $s-mob--medium-plus 0 $s-mob--medium;
+
     @include sm{
       padding: $s-mob--big 0 auto ;
     }
@@ -41,25 +42,6 @@ export default {
 
     @include xl{
       padding: $s-desk--medium-avg 0 $s-desk--smaller;
-    }
-
-    .btn-scroll{
-      max-width: $s-mob--big;
-      transform: rotate(180deg);
-      @include tb{
-        max-width: $s-tab--big;
-        position: relative;
-        left: -$s-tab--big;
-      }
-
-      @include lg{
-        max-width: $s-desk--medium;
-        left: -$s-desk--medium;
-      }
-
-      @include xl{
-        max-width: $s-desk--medium-avg;
-      }
     }
   }
 </style>

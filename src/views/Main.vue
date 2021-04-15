@@ -145,6 +145,7 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
+      align-items: flex-start;
     }
 
     .title-wrap{
@@ -171,6 +172,7 @@ export default {
 
   &--about{
     .section__content{
+      padding-top: $s-mob--medium-plus;
 
       @include sm{
         padding-top: $s-mob--bigger;

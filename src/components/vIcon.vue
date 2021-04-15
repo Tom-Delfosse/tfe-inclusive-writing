@@ -19,8 +19,9 @@
     width: 100%;
     max-width: $s-mob--big;
     fill: $c-black;
-    height: auto;
+    height: 100%;
     cursor: pointer;
+    // height: 100%;
 
     path{
         transition: $t-smooth;

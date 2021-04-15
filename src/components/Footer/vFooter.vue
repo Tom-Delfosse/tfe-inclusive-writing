@@ -10,7 +10,7 @@
       </div>
       <vCopyright />
       <svg
-        class="img img--deco"
+        class="img img--deco img--deco-dark"
         width="173"
         height="132"
         viewBox="0 0 173 132"
@@ -91,13 +91,31 @@ export default {
   }
 }
 
-.img--deco{
+.img--deco-dark{
   stroke-width: 0;
   top:inherit;
   bottom: 0px;
   transform: inherit;
+  max-width: $s-mob--big*3;
+
+    @include sm{
+      max-width: $s-mob--bigger*3;
+    }
+
+    @include tb{
+      max-width: $s-tab--bigger * 3;
+    }
+    @include lg{
+      max-width: $s-desk--big * 3;
+    }
+
+    @include xl{
+      max-width: $s-desk--big * 4;
+      
+    }
+    @include xxl{
+      max-width: $s-desk--bigger * 5;
+    }
 }
 
 </style>
-
-          <!-- v-if="sectionAboutRef" -->

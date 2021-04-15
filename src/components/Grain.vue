@@ -20,6 +20,11 @@
       width: 100%;
       height: 100%;
       animation: grainMove 0.0024s steps(8) infinite;
+
+      @include retina{
+        background-image: url('/assets/img/grain-tile2x.png');
+        opacity: 0.2;
+      }
     }
   }
 
