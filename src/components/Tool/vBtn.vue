@@ -15,33 +15,21 @@
     line-height: 160%;
     font-weight: $w-light;
     transition: $t-smooth;
-    text-indent: 190%;
+    text-indent: 2000%;
     white-space: nowrap;
     overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
     background-repeat: no-repeat;
     background-image: url('/assets/img/svg/copy.svg');
     width: $s-mob--medium;
     height: $s-mob--medium;
 
-    &:hover{
-      transform: scale(1.1);
-      transition: $t-fast;
-
-      @include lg{
-        transform: inherit;
-        // border-bottom: 1px solid $c-black;
-        &::before{
-          padding-right: $s-desk--smaller;
-          
-        }
-      }
-    }
-
     @include tb{
       font-size: $s-tab--smaller;
       width: inherit;
       height: inherit;
-      // background-image: inherit;
       overflow: inherit;
       text-indent: inherit;
     }
@@ -53,12 +41,26 @@
       &:nth-child(1){
         margin-top: 0;
       }
-
     }
 
     @include xl{
       font-size: $s-desk--smaller;
       margin-top: $s-desk--smaller;
+    }
+
+    &:hover{
+      transform: scale(1.1);
+      transition: $t-fast;
+
+      @include lg{
+        transform: inherit;
+
+        &::before{
+          // padding-right: $s-desk--smaller;
+          transition: $t-fast;
+
+        }
+      }
     }
 
     &--disable{
@@ -71,12 +73,13 @@
       @include tb{
         width: $s-tab--smaller;
         height: $s-tab--smaller;
+        transition: $t-smooth;
         content: '';
         display: inline-block;
         vertical-align: middle;
         background-image: url('/assets/img/svg/copy.svg');
         background-repeat: no-repeat;
-        margin-right: $s-tab--smallest/4;
+        margin-right: $s-tab--smallest/2;
       }
 
       @include lg{
@@ -89,7 +92,10 @@
         width: $s-desk--small;
         height: $s-desk--small;
         margin-right: $s-desk--smallest/2;
+      }
 
+      @include xxl{
+        margin-right: $s-desk--smallest;
       }
   }
 
@@ -131,6 +137,11 @@
     &--copy{
       background-image: url('/assets/img/svg/copy.svg');
 
+      @include lg{
+        padding-top: $s-desk--smallest;
+        border-top: 1px solid $c-black;
+      }
+
     &::before{
       background-image: url('/assets/img/svg/copy.svg');
     }
@@ -151,7 +162,21 @@
     width: auto;
     background-image: inherit;
     height: inherit;
-    margin-top: $s-mob--smaller;
+    margin-top: $s-mob--smallest;
+    padding-left:  $s-mob--smallest/2;
+    padding-right:  $s-mob--smallest/2;
+
+    @include tb{
+      margin-top: $s-tab--smaller;
+      padding-left:  $s-tab--smallest/2;
+      padding-right:  $s-tab--smallest/2;
+    }
+
+    @include lg{
+      margin-top: $s-desk--smallest;
+      padding-left:  $s-desk--smallest/2;
+      padding-right:  $s-desk--smallest/2;
+    }
 
     &::before{
       content: none;
