@@ -22,8 +22,9 @@
       animation: grainMove 0.0024s steps(8) infinite;
 
       @include retina{
-        background-image: url('/assets/img/grain-tile2x.png');
-        opacity: 0.2;
+        background-image: url('/assets/img/grain-tile@2x.png');
+        opacity: 0.25;
+        filter: brightness(1.1);
       }
     }
   }
