@@ -6,11 +6,10 @@
           <textarea
             v-model="textInput"
             class="text-editor"
-            cols="100"
-            rows="25"
-            @input="change"
+            placeholder="Inscrivez votre texte&nbsp;ci-dessous&nbsp;!"
+            @input="isWriting"
           />
-
+          <p v-if="inputFeedback" class="input-feedback" v-html="inputFeedback" />
           <p class="word-counter">
             {{ wordCounter }}&nbsp;mot<span v-if="wordCounter > 1">s</span>
           </p>
@@ -34,7 +33,6 @@
           />
         </div>
       </div>
-      <p>{{ inputFeedback }} </p>
     </section>
     <vFooter />
   </div>
@@ -53,34 +51,64 @@ export default {
     const wordCounter = ref(0)
     const textInput = ref(null)
     let userText = ''
-    let userTextDestruct = ''
+    let userTextMod = ''
     let inputFeedback = ref('')
     inputFeedback = ref('')
 
     const convertText = () => {
-      if (textInput.value === '') {
+      console.log(textInput.value)
+      if (textInput.value === null || textInput.value === '') {
         console.log('vide !')
-        inputFeedback = ref('Pas de contenu !')
+        inputFeedback.value = 'Pas de&nbsp;contenu&nbsp;!'
       } else {
         userText = textInput.value
-        console.log(userText)
         textInArray()
       }
-
-      console.log(textInput.value)
-      // console.log(textInput.value.innerHTML)
-      // console.log(textInput.value.innerText)
-      // console.log(textInput.value.textContent)
-      // console.log('___________')
     }
 
     const textInArray = () => {
-      userTextDestruct = userText.replace(/\n?\n/g, '|').split('|')
-      console.log(userTextDestruct)
+      console.log('________1________')
+      userTextMod = userText.replace(/\n?\n/g, '|').split('|')
+      userTextMod = userTextMod.filter(function (el) {
+        return el !== ''
+      })
+      userTextMod.forEach((el, index) => {
+        userTextMod[index] = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+        userTextMod[index] = userTextMod[index].filter(function (el) {
+          return el !== ''
+        })
+        // console.log(userTextMod[index])
+      })
+      // console.log(userTextMod)
+
+      textCheck()
     }
 
-    const change = (e) => {
-      wordCounter.value = textInput.value.split(' ').length
+    const textCheck = () => {
+      console.log('________2________')
+
+      // console.log('hello')
+      textOutArray()
+    }
+
+    const textOutArray = () => {
+      console.log('________3________')
+
+      userTextMod.forEach((index) => {
+        userTextMod[index] = userTextMod[index].join(' ')
+      })
+
+      userTextMod = userTextMod.join('\n\n')
+      textInput.value = userTextMod
+      // console.log(userTextMod)
+    }
+
+    const isWriting = () => {
+      if (textInput.value === null || textInput.value === '') {
+        wordCounter.value = 0
+      } else {
+        wordCounter.value = textInput.value.match(/([^\s]+)/g).length
+      }
     }
 
     const undoChange = () => {
@@ -127,7 +155,7 @@ export default {
     ]
 
     onMounted(() => {
-      console.log('Mounted !')
+      // console.log('Mounted !')s
     })
 
     return {
@@ -139,12 +167,12 @@ export default {
       btnArray,
       wordCounter,
       userText,
-      change,
+      isWriting,
       inputFeedback,
-      textInArray,
-      userTextDestruct,
+      userTextMod,
+      textOutArray,
+      textCheck,
       textInput
-      // newUserText
     }
   }
 }
@@ -208,7 +236,7 @@ export default {
           margin: 0;
           width: 100%;
           max-height: 1000px;
-          height: 60vh;
+          height: 55vh;
           border-bottom: 1px solid $c-black;
           white-space: pre-line;
 
@@ -241,6 +269,16 @@ export default {
           @include lg{
             margin-top: $s-desk--smallest;
           }
+        }
+
+        .input-feedback{
+          width: 100%;
+          position: relative;
+          background-color: $c-black;
+          display: block;
+          color: $c-white;
+          margin: 0;
+          padding: $s-mob--smallest/2 $s-mob--smaller*2;
         }
     }
 
