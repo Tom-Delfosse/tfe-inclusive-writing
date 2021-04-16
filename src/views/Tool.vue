@@ -27,6 +27,7 @@
           <vBtn
             v-for="btn in btnArray.slice(1)"
             :key="btn"
+            ref="btn.ref"
             :class="`btn btn--${btn.class}`"
             @click="btn.action"
             v-html="btn.text"
@@ -52,11 +53,13 @@ export default {
     const textInput = ref(null)
     let userText = ''
     let userTextMod = ''
-    let inputFeedback = ref('')
-    inputFeedback = ref('')
+    const inputFeedback = ref('')
 
-    const convertText = () => {
+    const convertText = (e) => {
       console.log(textInput.value)
+
+      // À remplacer avec une balise VUE
+      e.currentTarget.innerHTML = 'Converti&nbsp;!'
       if (textInput.value === null || textInput.value === '') {
         console.log('vide !')
         inputFeedback.value = 'Pas de&nbsp;contenu&nbsp;!'
@@ -64,6 +67,9 @@ export default {
         userText = textInput.value
         textInArray()
       }
+
+      e.target.classList.add('btn--convert-disabled')
+      e.target.setAttribute('disabled', 'disabled')
     }
 
     const textInArray = () => {
@@ -86,14 +92,12 @@ export default {
 
     const textCheck = () => {
       console.log('________2________')
-
-      // console.log('hello')
+      // ici tout le code pour convertir le bazar une fois que l'array est chargé
       textOutArray()
     }
 
     const textOutArray = () => {
       console.log('________3________')
-
       userTextMod.forEach((index) => {
         userTextMod[index] = userTextMod[index].join(' ')
       })
@@ -111,45 +115,53 @@ export default {
       }
     }
 
-    const undoChange = () => {
+    const undoChange = (e) => {
       // console.log("hey")
     }
 
-    const cancelChange = () => {
+    const cancelChange = (e) => {
       // console.log("haii")
     }
 
-    const eraseText = () => {
+    const eraseText = (e) => {
       // console.log("heoi")
     }
 
-    const copyText = () => {
+    const copyText = (e) => {
     }
 
     const btnArray = [
       {
         class: 'convert',
         text: 'Convertir&nbsp;!',
+        textTrig: 'Converti&nbsp;!',
+        ref: 'BtnConvert',
         action: convertText
       },
       {
         class: 'undo',
         text: 'Retour <span class="hide">en&nbsp;arrière</span>',
+        ref: 'BtnUndo',
         action: undoChange
       },
       {
         class: 'cancel',
         text: 'Annuler <span class="hide">les&nbsp;modifications</span>',
+        textTrig: 'Annulé&nbsp;!',
+        ref: 'BtnCancel',
         action: cancelChange
       },
       {
         class: 'erase',
         text: 'Supprimer <span class="hide">le&nbsp;texte</span>',
+        ref: 'BtnErase',
         action: eraseText
       },
       {
         class: 'copy',
         text: 'Copier <span class="hide">le&nbsp;texte</span>',
+        textTrig: 'Copié&nbsp;!',
+        ref: 'BtnCopy',
         action: copyText
       }
     ]
@@ -273,9 +285,10 @@ export default {
 
         .input-feedback{
           width: 100%;
-          position: relative;
+          position: absolute;
           background-color: $c-black;
           display: block;
+          // top: -100%;
           color: $c-white;
           margin: 0;
           padding: $s-mob--smallest/2 $s-mob--smaller*2;
@@ -284,7 +297,6 @@ export default {
 
     .options{
       display: flex;
-      // display: none;
       justify-content: space-between;
       margin-left: auto;
       margin-right: auto;

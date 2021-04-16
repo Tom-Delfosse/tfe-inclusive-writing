@@ -85,11 +85,6 @@
       }
     }
 
-    &--disable{
-      opacity: 0;
-      pointer-events: none;
-    }
-
     &::before{
       content: none;
       @include tb{
@@ -202,7 +197,21 @@
     &::before{
       content: none;
     }
+
+    &:hover{
+      transform: inherit;
+
+      @include tb{
+        margin-left: inherit;
+      }
+    }
   }
+
+  &--convert-disabled{
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
 }
 
 </style>
