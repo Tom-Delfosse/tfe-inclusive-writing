@@ -57,10 +57,7 @@
     font-size: $s-mob--smallest;
     transition: $t-smooth;
     vertical-align: middle;
-    max-width: 40%;
-
-    @include sm{
-    }
+    max-width: 50%;
 
     @include tb{
       max-width: inherit;

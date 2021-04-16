@@ -1,5 +1,10 @@
 <template>
-  <a :href="scrollTo" class="btn-scroll" @click.prevent="scrollToSection">
+  <a
+    v-if="isVisible"
+    :href="scrollTo"
+    class="btn-scroll"
+    @click.prevent="scrollToSection"
+  >
     <svg
       width="80"
       height="80"
@@ -21,6 +26,7 @@
 
 <script>
 import zenscroll from 'zenscroll'
+import { onMounted, ref } from 'vue'
 
 export default {
   props: {
@@ -34,15 +40,26 @@ export default {
     }
   },
   setup (props) {
+    const isVisible = ref(true)
+
     const scrollToSection = () => {
       const el = document.querySelector(props.scrollTo)
       zenscroll.to(el, props.timeToScroll)
     }
 
+    onMounted(() => {
+      if (document.querySelector('.section--tool')) {
+        isVisible.value = !isVisible.value
+      }
+    })
+
     return {
-      scrollToSection
+      scrollToSection,
+      ref,
+      isVisible
     }
   }
+
 }
 </script>
 
@@ -107,7 +124,6 @@ export default {
     @include lg{
       max-width: $s-desk--medium;
       left: -$s-desk--medium;
-
     }
 
     @include xl{

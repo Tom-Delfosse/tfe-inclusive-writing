@@ -29,7 +29,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   linkActiveClass: 'nav__link--active',
-  linkExactActiveClass: 'nav__link--active-exact'
+  linkExactActiveClass: 'nav__link--active-exact',
+  scrollBehavior (to, from, savedPosition) {
+    return { left: 0, top: 0, behavior: 'smooth' }
+  }
 })
 
 export default router

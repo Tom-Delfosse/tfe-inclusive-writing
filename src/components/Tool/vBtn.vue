@@ -15,7 +15,7 @@
     line-height: 160%;
     font-weight: $w-light;
     transition: $t-smooth;
-    text-indent: 2000%;
+    text-indent: 400px;
     white-space: nowrap;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);

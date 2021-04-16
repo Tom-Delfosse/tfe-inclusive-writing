@@ -24,6 +24,7 @@ export default {
     .footer-nav{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     padding: $s-mob--medium-plus 0 $s-mob--medium;
 
     @include sm{
