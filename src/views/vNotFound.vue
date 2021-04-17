@@ -7,8 +7,17 @@
         </h1>
       </div>
     </section>
+    <vFooter />
   </div>
 </template>
+<script>
+import vFooter from '@/components/Footer/vFooter.vue'
+export default {
+  components: {
+    vFooter
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .section--404{

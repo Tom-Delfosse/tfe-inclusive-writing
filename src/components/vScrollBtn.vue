@@ -48,7 +48,7 @@ export default {
     }
 
     onMounted(() => {
-      if (document.querySelector('.section--tool')) {
+      if (!document.querySelector('.section--hero')) {
         isVisible.value = !isVisible.value
       }
     })
