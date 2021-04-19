@@ -3,13 +3,20 @@
     <section class="section section--white section--tool">
       <div class="section__content">
         <div class="main">
-          <textarea
-            v-model="textInput"
-            class="text-editor"
-            placeholder="Inscrivez votre texte&nbsp;ci-dessous&nbsp;!"
-            @input="isWriting"
-          />
-          <p v-if="inputFeedback" class="input-feedback" v-html="inputFeedback" />
+          <div class="input-container">
+            <textarea
+              v-model="textInput"
+              class="text-editor"
+              placeholder="Inscrivez votre texte&nbsp;ci-dessous&nbsp;!"
+              @input="isWriting"
+            />
+            <p
+              class="input-feedback"
+              :class="{'input-feedback--active' : feedbackActive}"
+              v-html="inputFeedback"
+            />
+          </div>
+
           <p class="word-counter">
             {{ wordCounter }}&nbsp;mot<span v-if="wordCounter > 1">s</span>
           </p>
@@ -28,7 +35,8 @@
             v-for="btn in btnArray.slice(1)"
             :key="btn"
             ref="btn.ref"
-            :class="`btn btn--${btn.class}`"
+            class="btn"
+            :class="`btn--${btn.class}`"
             @click="btn.action"
             v-html="btn.text"
           />
@@ -51,12 +59,14 @@ export default {
   setup () {
     const wordCounter = ref(0)
     const textInput = ref(null)
-    let userText = ''
-    let userTextMod = ''
     const inputFeedback = ref('')
+    let userText = null
+    let userTextMod = null
+    let CorrectorArray = null
+    const feedbackActive = ref(false)
 
     const convertText = (e) => {
-      console.log(textInput.value)
+      // console.log(textInput.value)
 
       // À remplacer avec une balise VUE
       e.currentTarget.innerHTML = 'Converti&nbsp;!'
@@ -93,18 +103,38 @@ export default {
     const textCheck = () => {
       console.log('________2________')
       // ici tout le code pour convertir le bazar une fois que l'array est chargé
+      // console.log(CorrectorArray)
+      userTextMod.forEach((el, index) => {
+        el.forEach((subEl, subIndex) => {
+          // console.log(subEl)
+          CorrectorArray.forEach((word, index) => {
+            const regex = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
+
+            if (subEl.match(regex)) {
+              console.log('ping !')
+              console.log(word.wordID + ' ' + word.toCheck)
+              subEl = subEl.replace(regex, word.checked)
+              // console.log(subEl)
+            }
+          })
+          userTextMod[index][subIndex] = subEl
+        })
+      })
+      console.log(userTextMod)
       textOutArray()
     }
 
     const textOutArray = () => {
       console.log('________3________')
-      userTextMod.forEach((index) => {
-        userTextMod[index] = userTextMod[index].join(' ')
-      })
+      console.log(userTextMod.length)
+      console.log(userTextMod)
 
+      userTextMod.forEach((el, index) => {
+        userTextMod[index] = userTextMod[index].join(' ')
+        // console.log(userTextMod[index])
+      })
       userTextMod = userTextMod.join('\n\n')
       textInput.value = userTextMod
-      // console.log(userTextMod)
     }
 
     const isWriting = () => {
@@ -120,14 +150,24 @@ export default {
     }
 
     const cancelChange = (e) => {
-      // console.log("haii")
+      textInput.value = userText
     }
 
     const eraseText = (e) => {
-      // console.log("heoi")
+      textInput.value = ''
     }
 
     const copyText = (e) => {
+      navigator.clipboard.writeText(textInput.value).then(function () {
+        inputFeedback.value = 'Copié avec succès !'
+      }, function () {
+        inputFeedback.value = 'Une erreur est survenue, impossible de copier dans le presse-papier :(.'
+      })
+
+      if (feedbackActive.value === false) {
+        feedbackActive.value = !feedbackActive.value
+        setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      }
     }
 
     const btnArray = [
@@ -166,8 +206,14 @@ export default {
       }
     ]
 
-    onMounted(() => {
-      // console.log('Mounted !')s
+    onMounted(async () => {
+      await fetch('./assets/data/newChecker.json')
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+          CorrectorArray = data
+        }).catch(function (error) {
+          console.error(error)
+        })
     })
 
     return {
@@ -184,7 +230,9 @@ export default {
       userTextMod,
       textOutArray,
       textCheck,
-      textInput
+      textInput,
+      CorrectorArray,
+      feedbackActive
     }
   }
 }
@@ -237,6 +285,16 @@ export default {
           max-width: 650px;
         }
 
+        .input-container{
+          // display: block;
+          width: 100%;
+          position: relative;
+          border-bottom: 1px solid $c-black;
+          height: 55vh;
+          max-height: 1000px;
+
+        }
+
         .text-editor{
           background-color: inherit;
           border: none;
@@ -247,9 +305,7 @@ export default {
           padding: 0;
           margin: 0;
           width: 100%;
-          max-height: 1000px;
-          height: 55vh;
-          border-bottom: 1px solid $c-black;
+          height: 100%;
           white-space: pre-line;
 
           font-size: $s-mob--smaller;
@@ -284,14 +340,30 @@ export default {
         }
 
         .input-feedback{
-          width: 100%;
+          width: inherit;
+          max-width: 100%;
           position: absolute;
           background-color: $c-black;
-          display: block;
-          // top: -100%;
+          bottom: 0;
           color: $c-white;
           margin: 0;
           padding: $s-mob--smallest/2 $s-mob--smaller*2;
+          transition: $t-smooth;
+          box-sizing: border-box;
+
+          @include tb{
+            padding: $s-tab--smallest/3 $s-tab--smaller;
+          }
+          @include lg{
+            padding: $s-desk--smaller/4 $s-desk--smaller;
+          }
+
+            opacity: 0;
+            pointer-events: none;
+          &--active{
+            opacity: 1;
+            pointer-events: inherit;
+          }
         }
     }
 
