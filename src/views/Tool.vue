@@ -24,7 +24,9 @@
           <vBtn
             v-for="btn in btnArray.slice(0, 1)"
             :key="btn"
-            :class="`btn btn--${btn.class}`"
+            :ref="btn.ref"
+            class="btn"
+            :class="[`btn--${btn.class}`, {'btn--convert-enabled' : canConvert}]"
             @click="btn.action"
             v-html="btn.text"
           />
@@ -34,7 +36,7 @@
           <vBtn
             v-for="btn in btnArray.slice(1)"
             :key="btn"
-            ref="btn.ref"
+            :ref="btn.ref"
             class="btn"
             :class="`btn--${btn.class}`"
             @click="btn.action"
@@ -58,103 +60,143 @@ export default {
 
   setup () {
     const wordCounter = ref(0)
-    const textInput = ref(null)
     const inputFeedback = ref('')
+    const textInput = ref(null)
+    const btnConvert = ref(null)
+    const canConvert = ref(true)
+    const feedbackActive = ref(false)
+    const BtnCopyActive = ref(false)
+    const BtnEraseActive = ref(false)
+    const BtnCancelActive = ref(false)
+    const BtnUndoActive = ref(false)
     let userText = null
     let userTextMod = null
-    let CorrectorArray = null
-    const feedbackActive = ref(false)
+    let correctorArray = null
 
-    const convertText = (e) => {
-      // console.log(textInput.value)
-
-      // À remplacer avec une balise VUE
-      e.currentTarget.innerHTML = 'Converti&nbsp;!'
-      if (textInput.value === null || textInput.value === '') {
-        console.log('vide !')
-        inputFeedback.value = 'Pas de&nbsp;contenu&nbsp;!'
-      } else {
-        userText = textInput.value
-        textInArray()
+    const convertTextPrimer = () => {
+      // console.clear()
+      if (canConvert.value === true) {
+        canConvert.value = !canConvert.value
       }
 
-      e.target.classList.add('btn--convert-disabled')
-      e.target.setAttribute('disabled', 'disabled')
+      console.log('it works.')
+      if (textInput.value === null || textInput.value === '') {
+        if (feedbackActive.value === false) {
+          inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
+          feedbackActive.value = !feedbackActive.value
+          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+        }
+
+        if (canConvert.value === false) {
+          setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
+        }
+      } else {
+        convertText()
+      }
     }
 
-    const textInArray = () => {
-      console.log('________1________')
-      userTextMod = userText.replace(/\n?\n/g, '|').split('|')
-      userTextMod = userTextMod.filter(function (el) {
+    const convertText = () => {
+      // if (textInput.value === null || textInput.value === '') {
+      //   if (feedbackActive.value === false) {
+      //     inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
+      //     feedbackActive.value = !feedbackActive.value
+      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      //   }
+
+      //   if (canConvert.value === false) {
+      //     setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
+      //   }
+      // } else {
+      // const isModified = false
+
+      if (feedbackActive.value === false) {
+        inputFeedback.value = 'Modifications en cours&nbsp;!'
+        feedbackActive.value = !feedbackActive.value
+      }
+      userText = textInput.value
+      userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
         return el !== ''
       })
       userTextMod.forEach((el, index) => {
-        userTextMod[index] = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
-        userTextMod[index] = userTextMod[index].filter(function (el) {
-          return el !== ''
-        })
-        // console.log(userTextMod[index])
+        el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+        el = el.filter(subEl => subEl.trim() || subEl === null)
+        userTextMod[index] = el
       })
-      // console.log(userTextMod)
 
-      textCheck()
-    }
-
-    const textCheck = () => {
-      console.log('________2________')
-      // ici tout le code pour convertir le bazar une fois que l'array est chargé
-      // console.log(CorrectorArray)
       userTextMod.forEach((el, index) => {
         el.forEach((subEl, subIndex) => {
           // console.log(subEl)
-          CorrectorArray.forEach((word, index) => {
-            const regex = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
 
-            if (subEl.match(regex)) {
+          // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
+          // console.log('singulier')
+          // } else {
+          // console.log('masculin')
+          // }
+
+          correctorArray.forEach((word) => {
+            const regexChecked = new RegExp('\\b(' + word.checked + ')(?![A-zÀ-ú])', 'gi')
+            const regexToCheck = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
+
+            if (subEl.match(regexChecked)) {
+              console.log('déjà inclusif !')
+              //   // console.log(word.checked)
+            } else if (subEl.match(regexToCheck)) {
               console.log('ping !')
               console.log(word.wordID + ' ' + word.toCheck)
-              subEl = subEl.replace(regex, word.checked)
-              // console.log(subEl)
+              subEl = subEl.replace(regexToCheck, word.checked)
+              const firstLetter = subEl.charAt(0).toUpperCase()
+              subEl = firstLetter + subEl.substring(1)
+              // isModified = true
             }
           })
           userTextMod[index][subIndex] = subEl
         })
-      })
-      console.log(userTextMod)
-      textOutArray()
-    }
-
-    const textOutArray = () => {
-      console.log('________3________')
-      console.log(userTextMod.length)
-      console.log(userTextMod)
-
-      userTextMod.forEach((el, index) => {
+        // console.log(userTextMod)
         userTextMod[index] = userTextMod[index].join(' ')
-        // console.log(userTextMod[index])
       })
+
       userTextMod = userTextMod.join('\n\n')
       textInput.value = userTextMod
+
+      console.log(feedbackActive.value)
+
+      // if (isModified === true) {
+      //   inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
+      //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      // } else {
+      //   inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
+      //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      // }
+      // }
+      // feedbackActive.value = !feedbackActive.value
     }
 
     const isWriting = () => {
-      if (textInput.value === null || textInput.value === '') {
-        wordCounter.value = 0
-      } else {
+      if (textInput.value.match(/([^\s]+)/g)) {
         wordCounter.value = textInput.value.match(/([^\s]+)/g).length
+      } else {
+        wordCounter.value = 0
+      }
+
+      if (canConvert.value === false) {
+        canConvert.value = !canConvert.value
       }
     }
 
-    const undoChange = (e) => {
-      // console.log("hey")
+    const undoConvert = (e) => {
+      console.log(canConvert.value)
     }
 
     const cancelChange = (e) => {
       textInput.value = userText
+      if (canConvert.value === false) {
+        canConvert.value = !canConvert.value
+      }
     }
 
     const eraseText = (e) => {
       textInput.value = ''
+      wordCounter.value = 0
     }
 
     const copyText = (e) => {
@@ -170,19 +212,40 @@ export default {
       }
     }
 
+    // for (let i = 0; i < correctorArray.length; i++) {
+    //   const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
+    //   const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
+    // console.log(regexChecked)
+    // console.log(correctorArray[i].toCheck)
+
+    // if (subEl.match(regexChecked)) {
+    //   console.log('déjà inclusif !')
+    //   console.log(regexChecked + ' ' + correctorArray[i].toCheck)
+    //   // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
+    // if (subEl.match(regexToCheck)) {
+    //   console.log('ping !')
+    //   console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
+    //   subEl = subEl.replace(regexChecked, correctorArray[i].checked)
+    //   console.log(subEl)
+    // }
+    // if (i === 24) {
+    //   return console.log('ping')
+    // }
+    // }
+
     const btnArray = [
       {
         class: 'convert',
         text: 'Convertir&nbsp;!',
         textTrig: 'Converti&nbsp;!',
         ref: 'BtnConvert',
-        action: convertText
+        action: convertTextPrimer
       },
       {
         class: 'undo',
         text: 'Retour <span class="hide">en&nbsp;arrière</span>',
         ref: 'BtnUndo',
-        action: undoChange
+        action: undoConvert
       },
       {
         class: 'cancel',
@@ -207,32 +270,39 @@ export default {
     ]
 
     onMounted(async () => {
-      await fetch('./assets/data/newChecker.json')
+      console.clear()
+
+      await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
         .then(function (data) {
-          CorrectorArray = data
+          correctorArray = data
         }).catch(function (error) {
           console.error(error)
         })
     })
 
     return {
+      convertTextPrimer,
       convertText,
-      undoChange,
+      undoConvert,
       cancelChange,
+      BtnCancelActive,
       eraseText,
+      BtnEraseActive,
+      BtnUndoActive,
       copyText,
+      BtnCopyActive,
       btnArray,
       wordCounter,
+      textInput,
       userText,
+      userTextMod,
+      correctorArray,
       isWriting,
       inputFeedback,
-      userTextMod,
-      textOutArray,
-      textCheck,
-      textInput,
-      CorrectorArray,
-      feedbackActive
+      feedbackActive,
+      canConvert,
+      btnConvert
     }
   }
 }
@@ -331,7 +401,7 @@ export default {
           margin-top: $s-mob--smallest;
 
           @include tb{
-            margin-top: $s-tab--smaller;
+            margin-top: $s-tab--smallest;
           }
 
           @include lg{

@@ -3,7 +3,7 @@
     <section class="section section--white section--404">
       <div class="section__content">
         <h1 class="title title--bigger">
-          <span class="full">404</span> page non trouvée.
+          <span class="full">404</span>Page non trouvée.
         </h1>
       </div>
     </section>

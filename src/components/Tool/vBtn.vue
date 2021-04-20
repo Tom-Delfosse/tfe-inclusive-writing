@@ -25,6 +25,7 @@
     background-image: url('/assets/img/svg/copy.svg');
     width: $s-mob--medium;
     height: $s-mob--medium;
+    padding: 0;
 
     @include tb{
       font-size: $s-tab--smaller;
@@ -74,13 +75,14 @@
       transform: scale(1.1);
       transition: $t-fast;
 
-      @include tb{
+      @include lg{
         transform: inherit;
-        margin-left: $s-mob--smaller;
+        padding-left: $s-desk--smaller/2;
 
         &::after{
           transition: $t-fast;
-          margin-left: -$s-mob--smaller;
+          // position: relative;
+          margin-left: -$s-desk--smaller/2;
         }
       }
     }
@@ -177,9 +179,11 @@
     margin-top: $s-mob--smallest;
     padding-left:  $s-mob--smallest/2;
     padding-right:  $s-mob--smallest/2;
+    opacity: 0.2;
+    cursor: not-allowed;
 
     @include tb{
-      margin-top: $s-tab--smaller;
+      margin-top: $s-tab--smallest;
       padding-left:  $s-tab--smallest/2;
       padding-right:  $s-tab--smallest/2;
     }
@@ -207,9 +211,15 @@
     }
   }
 
-  &--convert-disabled{
-    opacity: 0.2;
-    cursor: not-allowed;
+  &--convert-enabled{
+    opacity: 1;
+    cursor: pointer;
+
+    &:hover{
+      background-color: inherit;
+      outline: 1px solid $c-black;
+      color: $c-black;
+    }
   }
 
 }
