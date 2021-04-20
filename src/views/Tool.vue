@@ -63,7 +63,7 @@ export default {
     const inputFeedback = ref('')
     const textInput = ref(null)
     const btnConvert = ref(null)
-    const canConvert = ref(true)
+    const canConvert = ref(false)
     const feedbackActive = ref(false)
     const BtnCopyActive = ref(false)
     const BtnEraseActive = ref(false)
@@ -73,13 +73,12 @@ export default {
     let userTextMod = null
     let correctorArray = null
 
-    const convertTextPrimer = () => {
+    const convertText = () => {
       // console.clear()
       if (canConvert.value === true) {
         canConvert.value = !canConvert.value
       }
 
-      console.log('it works.')
       if (textInput.value === null || textInput.value === '') {
         if (feedbackActive.value === false) {
           inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
@@ -91,84 +90,67 @@ export default {
           setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
         }
       } else {
-        convertText()
-      }
-    }
+        const isModified = false
 
-    const convertText = () => {
-      // if (textInput.value === null || textInput.value === '') {
-      //   if (feedbackActive.value === false) {
-      //     inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
-      //     feedbackActive.value = !feedbackActive.value
-      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      //   }
+        // if (feedbackActive.value === false) {
+        //   inputFeedback.value = 'Modifications en cours&nbsp;!'
+        //   feedbackActive.value = !feedbackActive.value
+        // }
+        userText = textInput.value
+        userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
+          return el !== ''
+        })
+        userTextMod.forEach((el, index) => {
+          el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+          el = el.filter(subEl => subEl.trim() || subEl === null)
+          userTextMod[index] = el
+        })
 
-      //   if (canConvert.value === false) {
-      //     setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
-      //   }
-      // } else {
-      // const isModified = false
-
-      if (feedbackActive.value === false) {
-        inputFeedback.value = 'Modifications en cours&nbsp;!'
-        feedbackActive.value = !feedbackActive.value
-      }
-      userText = textInput.value
-      userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
-        return el !== ''
-      })
-      userTextMod.forEach((el, index) => {
-        el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
-        el = el.filter(subEl => subEl.trim() || subEl === null)
-        userTextMod[index] = el
-      })
-
-      userTextMod.forEach((el, index) => {
-        el.forEach((subEl, subIndex) => {
+        userTextMod.forEach((el, index) => {
+          el.forEach((subEl, subIndex) => {
           // console.log(subEl)
 
-          // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
-          // console.log('singulier')
-          // } else {
-          // console.log('masculin')
-          // }
+            // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
+            // console.log('singulier')
+            // } else {
+            // console.log('masculin')
+            // }
 
-          correctorArray.forEach((word) => {
-            const regexChecked = new RegExp('\\b(' + word.checked + ')(?![A-zÀ-ú])', 'gi')
-            const regexToCheck = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
+            correctorArray.forEach((word) => {
+              const regexChecked = new RegExp('\\b(' + word.checked + ')(?![A-zÀ-ú])', 'gi')
+              const regexToCheck = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
 
-            if (subEl.match(regexChecked)) {
-              console.log('déjà inclusif !')
+              if (subEl.match(regexChecked)) {
+                console.log('déjà inclusif !')
               //   // console.log(word.checked)
-            } else if (subEl.match(regexToCheck)) {
-              console.log('ping !')
-              console.log(word.wordID + ' ' + word.toCheck)
-              subEl = subEl.replace(regexToCheck, word.checked)
-              const firstLetter = subEl.charAt(0).toUpperCase()
-              subEl = firstLetter + subEl.substring(1)
+              } else if (subEl.match(regexToCheck)) {
+                console.log('ping !')
+                console.log(word.wordID + ' ' + word.toCheck)
+                subEl = subEl.replace(regexToCheck, word.checked)
+                const firstLetter = subEl.charAt(0).toUpperCase()
+                subEl = firstLetter + subEl.substring(1)
               // isModified = true
-            }
+              }
+            })
+            userTextMod[index][subIndex] = subEl
           })
-          userTextMod[index][subIndex] = subEl
+          // console.log(userTextMod)
+          userTextMod[index] = userTextMod[index].join(' ')
         })
-        // console.log(userTextMod)
-        userTextMod[index] = userTextMod[index].join(' ')
-      })
 
-      userTextMod = userTextMod.join('\n\n')
-      textInput.value = userTextMod
+        userTextMod = userTextMod.join('\n\n')
+        textInput.value = userTextMod
 
-      console.log(feedbackActive.value)
+        if (isModified === true) {
+          inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
+          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+        } else {
+          inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
+          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+        }
 
-      // if (isModified === true) {
-      //   inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
-      //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      // } else {
-      //   inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
-      //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      // }
-      // }
       // feedbackActive.value = !feedbackActive.value
+      }
     }
 
     const isWriting = () => {
@@ -239,7 +221,7 @@ export default {
         text: 'Convertir&nbsp;!',
         textTrig: 'Converti&nbsp;!',
         ref: 'BtnConvert',
-        action: convertTextPrimer
+        action: convertText
       },
       {
         class: 'undo',
@@ -282,7 +264,7 @@ export default {
     })
 
     return {
-      convertTextPrimer,
+      convertText,
       convertText,
       undoConvert,
       cancelChange,
