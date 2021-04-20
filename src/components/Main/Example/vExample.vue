@@ -48,44 +48,51 @@ export default {
 }
 
 .correction-example{
-  outline: 1px solid $c-white;
+  border-bottom: 1px solid $c-white;
   display: flex;
-  justify-content: center;
-  padding: $s-mob--smallest $s-mob--smallest/2;
+  justify-content: space-around;
+  padding: $s-mob--smallest $s-mob--smallest/4;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  max-width: 300px;
+  width: 100%;
 
   @include sm{
-    display: -webkit-inline-flex;
-    display: inline-flex;
-    display: -ms-inline-flexbox;
-    padding: $s-mob--smallest $s-mob--smallest;
-    margin-left: $s-mob--smaller + $s-mob--medium;
-
+    width: fit-content;
+    max-width: 250px;
+    margin-left: $s-mob--medium * 2;
   }
   @include tb{
-    margin-left: $s-tab--small + $s-tab--small;
+    border-bottom: none;
+    border-left: 1px solid $c-white;
     max-width: inherit;
-    padding: $s-tab--small;
+    margin-left: $s-tab--small * 2;
+    padding: $s-tab--smallest/4 $s-tab--smallest;
   }
-
   @include lg{
-    margin-left: $s-desk--medium-small + $s-desk--smaller;
-    padding: $s-desk--smallest;
-  }
+    margin-left: $s-desk--medium-small * 2;
+    width: 100%;
+    max-width: 400px;
+    justify-content: space-between;
+    padding: 0 $s-desk--small;
 
+  }
   @include xl{
-    margin-left: $s-desk--big + $s-desk--medium;
+    margin-left: $s-desk--medium-plus + $s-desk--medium-small;
+    max-width: 500px;
+
   }
   @include xxl{
-    margin-left: $s-desk--big + $s-desk--medium-plus;
+    margin-left: $s-desk--big + $s-desk--medium-small;
+    max-width: 700px;
+    justify-content: flex-start;
   }
 
   p{
     font-size: $s-mob--smallest;
     margin: 0;
+    font-style: italic;
+
     padding: 0;
 
     @include tb{
@@ -110,14 +117,16 @@ export default {
 
     @include sm{
     padding: 0 $s-mob--smallest;
+    max-width: $s-mob--bigger;
     }
     @include tb{
-        padding: 0 $s-tab--small;
-        max-width: $s-tab--big;
+      padding: 0 $s-tab--small;
+      max-width: $s-tab--big;
     }
     @include lg{
       max-width: $s-desk--medium-plus;
       padding: 0 $s-desk--smallest;
+      // display: block;
     }
     @include xl{
       max-width: $s-desk--medium-plus;

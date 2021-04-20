@@ -121,7 +121,7 @@ body{
   &--white{
     background-color: $c-white;
 
-    .title, p, a, span{
+    .title, p, a, span, img{
       &::selection{
         background-color: $c-black;
         color: $c-white;
@@ -133,7 +133,7 @@ body{
     background-color: $c-black;
     color: $c-white;
 
-      .title, p, a, span{
+      .title, p, a, span, img{
       &::selection{
         background-color: $c-white;
         color: $c-black;

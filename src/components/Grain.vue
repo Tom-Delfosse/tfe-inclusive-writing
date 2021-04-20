@@ -22,6 +22,11 @@
       height: 100%;
       animation: grainMove 0.0024s steps(8) infinite;
 
+      @include lg {
+        width: 100%;
+        height: 100%;
+      }
+
       @include retina{
         background-image: url('/assets/img/grain-tile@2x.png');
         opacity: 0.15;

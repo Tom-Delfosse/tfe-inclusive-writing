@@ -111,7 +111,7 @@ export default {
 
     @include xl{
       max-width: $s-desk--big * 4;
-      
+
     }
     @include xxl{
       max-width: $s-desk--bigger * 5;

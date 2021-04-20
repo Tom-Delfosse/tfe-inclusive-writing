@@ -3,7 +3,7 @@
     <div class="correction-example__bef">
       <p>L’écriture inclusive est accesible à tous, y compris aux personnes non&nbsp;concernées.</p>
     </div>
-    <img src="/assets/img/svg/arrow-long-curly_5.svg" class="img img--arrow" alt="flèche directionnelle">
+    <img src="/assets/img/svg/arrow-long_6.svg" class="img img--arrow" alt="flèche directionnelle">
     <div class="correction-example__aft">
       <p>L'écriture inclusive est accessible à <span class="word-corrected no-break">tous·te·s</span>, y compris aux personnes non&nbsp;<span class="word-corrected no-break">concerné·e·s</span>.</p>
     </div>
@@ -16,6 +16,8 @@
     padding: $s-mob--small;
     margin: $s-mob--small auto $s-mob--biggest ;
     max-width: inherit;
+    border: none;
+    outline: 1px solid $c-white;
     width: auto;
 
     @include sm{

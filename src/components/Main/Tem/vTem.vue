@@ -2,7 +2,7 @@
   <ul class="list list--example">
     <li v-for="tem in tems" :key="tem" class="list--tem__el">
       <figure class="tem-group">
-        <img :src="(`/assets/img/svg/${tem.img}`)" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
+        <img :src="tem.img" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
         <figcaption>
           <p class="tem-group__quote" v-html="tem.explanation" />
           <p v-html="tem.author" />
@@ -28,7 +28,7 @@ export default {
   margin-top: $s-mob--big;
 
   @include tb{
-    margin-top: $s-tab--big;
+    margin-top: $s-tab--big * 1.5;
   }
   @include xl{
     margin-top: $s-desk--medium-big;

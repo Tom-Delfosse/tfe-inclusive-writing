@@ -52,6 +52,7 @@
 import vBtn from '@/components/Tool/vBtn.vue'
 import vFooter from '@/components/Footer/vFooter.vue'
 import { ref, onMounted } from 'vue'
+import { textConverter } from '@/textconverter.worker'
 export default {
   components: {
     vBtn,
@@ -90,7 +91,7 @@ export default {
           setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
         }
       } else {
-        const isModified = false
+        let isModified = false
 
         // if (feedbackActive.value === false) {
         //   inputFeedback.value = 'Modifications en cours&nbsp;!'
@@ -116,25 +117,44 @@ export default {
             // console.log('masculin')
             // }
 
-            correctorArray.forEach((word) => {
-              const regexChecked = new RegExp('\\b(' + word.checked + ')(?![A-zÀ-ú])', 'gi')
-              const regexToCheck = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
+            for (let i = 0; i < correctorArray.length; i++) {
+              const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
+              const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
 
               if (subEl.match(regexChecked)) {
                 console.log('déjà inclusif !')
-              //   // console.log(word.checked)
+                // console.log(regexChecked + ' ' + correctorArray[i].toCheck)
+                continue
+              // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
               } else if (subEl.match(regexToCheck)) {
                 console.log('ping !')
-                console.log(word.wordID + ' ' + word.toCheck)
-                subEl = subEl.replace(regexToCheck, word.checked)
-                const firstLetter = subEl.charAt(0).toUpperCase()
-                subEl = firstLetter + subEl.substring(1)
-              // isModified = true
+                console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
+                subEl = subEl.replace(regexToCheck, correctorArray[i].checked)
+                isModified = true
+                continue
               }
-            })
+            }
+
+            // correctorArray.forEach((word) => {
+            //   const regexChecked = new RegExp('\\b(' + word.checked + ')(?![A-zÀ-ú])', 'gi')
+            //   const regexToCheck = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
+
+            //   if (subEl.match(regexChecked)) {
+            //     console.log('déjà inclusif !')
+            //   //   // console.log(word.checked)
+            //   } else if (subEl.match(regexToCheck)) {
+            //     console.log('ping !')
+            //     console.log(word.wordID + ' ' + word.toCheck)
+            //     subEl = subEl.replace(regexToCheck, word.checked)
+            //     const firstLetter = subEl.charAt(0).toUpperCase()
+            //     subEl = firstLetter + subEl.substring(1)
+            //   // isModified = true
+            //   }
+            // })
             userTextMod[index][subIndex] = subEl
           })
           // console.log(userTextMod)
+          console.log('fin de ConvertText')
           userTextMod[index] = userTextMod[index].join(' ')
         })
 
@@ -154,8 +174,8 @@ export default {
     }
 
     const isWriting = () => {
-      if (textInput.value.match(/([^\s]+)/g)) {
-        wordCounter.value = textInput.value.match(/([^\s]+)/g).length
+      if (textInput.value.match(/([^\s,!.;:]+)/g)) {
+        wordCounter.value = textInput.value.match(/([^\s,!.;:]+)/g).length
       } else {
         wordCounter.value = 0
       }
@@ -174,11 +194,36 @@ export default {
       if (canConvert.value === false) {
         canConvert.value = !canConvert.value
       }
+
+      if (feedbackActive.value === false) {
+        inputFeedback.value = 'Les modifications ont été&nbsp;retirées.'
+        feedbackActive.value = !feedbackActive.value
+      } else {
+        feedbackActive.value = !feedbackActive.value
+        setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 300)
+        setTimeout(() => { inputFeedback.value = 'Les modifications ont été&nbsp;retirées.' }, 300)
+      }
+      setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
     }
 
     const eraseText = (e) => {
-      textInput.value = ''
-      wordCounter.value = 0
+      // console.log(textInput.value)
+      if (textInput.value !== null) {
+        textInput.value = ''
+        wordCounter.value = 0
+
+        if (feedbackActive.value === false) {
+          inputFeedback.value = 'Le texte a été&nbsp;supprimé.'
+          feedbackActive.value = !feedbackActive.value
+          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+        } else {
+          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 100)
+          // setTimeout(() => {
+          inputFeedback.value = 'Le texte a été&nbsp;supprimé.'
+          feedbackActive.value = !feedbackActive.value
+          // }, 4000)
+        }
+      }
     }
 
     const copyText = (e) => {
@@ -194,31 +239,10 @@ export default {
       }
     }
 
-    // for (let i = 0; i < correctorArray.length; i++) {
-    //   const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
-    //   const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
-    // console.log(regexChecked)
-    // console.log(correctorArray[i].toCheck)
-
-    // if (subEl.match(regexChecked)) {
-    //   console.log('déjà inclusif !')
-    //   console.log(regexChecked + ' ' + correctorArray[i].toCheck)
-    //   // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
-    // if (subEl.match(regexToCheck)) {
-    //   console.log('ping !')
-    //   console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
-    //   subEl = subEl.replace(regexChecked, correctorArray[i].checked)
-    //   console.log(subEl)
-    // }
-    // if (i === 24) {
-    //   return console.log('ping')
-    // }
-    // }
-
     const btnArray = [
       {
         class: 'convert',
-        text: 'Convertir&nbsp;!',
+        text: 'Convertir',
         textTrig: 'Converti&nbsp;!',
         ref: 'BtnConvert',
         action: convertText
@@ -253,18 +277,31 @@ export default {
 
     onMounted(async () => {
       console.clear()
+      // async function demo () {
+      // await textConverter('dog')
+      // }
 
-      await fetch('./assets/data/CorrectorMini.json')
+      // demo()
+      // await fetch('https://tomdelfosse.be/projets/tfe/api/tfe.php', {
+      //   method: 'GET',
+      //   credentials: 'same-origin',
+      //   headers: {
+      //     // 'Content-Type': 'application/json',
+      //     // Accept: 'application/json'
+      //   }
+      // })
+      await fetch('/assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
         .then(function (data) {
           correctorArray = data
+          // console.log(data)
         }).catch(function (error) {
           console.error(error)
+          console.log('triste')
         })
     })
 
     return {
-      convertText,
       convertText,
       undoConvert,
       cancelChange,
@@ -284,7 +321,8 @@ export default {
       inputFeedback,
       feedbackActive,
       canConvert,
-      btnConvert
+      btnConvert,
+      textConverter
     }
   }
 }
@@ -414,6 +452,7 @@ export default {
             pointer-events: none;
           &--active{
             opacity: 1;
+            transition: $t-fast;
             pointer-events: inherit;
           }
         }
