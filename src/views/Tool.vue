@@ -79,11 +79,12 @@ export default {
     let btnCopy = ''
     let btnUndo = ''
     const btnList = ref(null)
-    const userText = null
-    const userTextMod = null
+    let userText = null
+    let userTextMod = null
 
     // const btnList = ref(null)
     let correctorArray = null
+    const timer = 3500
 
     const isWriting = () => {
       if (textInput.value.match(/([^\s,!.;:]+)/g)) {
@@ -119,86 +120,81 @@ export default {
         if (btnListChildren[i].disabled) {
           btnListChildren[i].removeAttribute('disabled')
         }
-        // btnListChildren[i].disabled ? btnListChildren[i].removeAttribute('disabled') : ''
       }
-      // console.clear()
 
-      // if (canConvert.value === true) {
-      //   canConvert.value = !canConvert.value
-      // }
+      if (textInput.value === null || textInput.value === '') {
+        if (feedbackActive.value === false) {
+          inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
+          feedbackActive.value = !feedbackActive.value
+          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+        }
+      } else {
+        // let isModified = false
 
-      // if (textInput.value === null || textInput.value === '') {
-      //   if (feedbackActive.value === false) {
-      //     inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
-      //     feedbackActive.value = !feedbackActive.value
-      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      //   }
+        // if (feedbackActive.value === false) {
+        //   inputFeedback.value = 'Modifications en cours&nbsp;!'
+        //   feedbackActive.value = !feedbackActive.value
+        // }
+        userText = textInput.value
+        userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
+          return el !== ''
+        })
+        userTextMod.forEach((el, index) => {
+          el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+          el = el.filter(subEl => subEl.trim() || subEl === null)
+          userTextMod[index] = el
+        })
 
-      //   if (canConvert.value === false) {
-      //     setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
-      //   }
-      // } else {
-      //   let isModified = false
+        userTextMod.forEach((el, index) => {
+          el.forEach((subEl, subIndex) => {
+          // console.log(subEl)
 
-      //   // if (feedbackActive.value === false) {
-      //   //   inputFeedback.value = 'Modifications en cours&nbsp;!'
-      //   //   feedbackActive.value = !feedbackActive.value
-      //   // }
-      //   userText = textInput.value
-      //   userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
-      //     return el !== ''
-      //   })
-      //   userTextMod.forEach((el, index) => {
-      //     el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
-      //     el = el.filter(subEl => subEl.trim() || subEl === null)
-      //     userTextMod[index] = el
-      //   })
+            // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
+            // console.log('singulier')
+            // } else {
+            // console.log('masculin')
+            // }
 
-      //   userTextMod.forEach((el, index) => {
-      //     el.forEach((subEl, subIndex) => {
-      //     // console.log(subEl)
+            for (let i = 0; i < correctorArray.length; i++) {
+              // if (correctorArray[i].toCheck === correctorArray[i + 1].toCheck) {
+              //   console.log('___')
+              //   console.log(correctorArray[i].toCheck)
+              //   console.log(correctorArray[i + 1].toCheck + ' après')
+              //   // correctorArray[i].removeChild(i)
+              // }
+              const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
+              const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
+              // console.log(subEl)
+              if (subEl.match(regexChecked)) {
+                console.log('déjà inclusif !')
+                continue
+              // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
+              } else if (subEl.match(regexToCheck)) {
+                console.log('ping !')
+                console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
+                subEl = subEl.replace(regexToCheck, correctorArray[i].checked)
+                // isModified = true
+                continue
+              }
+            }
+            userTextMod[index][subIndex] = subEl
+          })
+          // console.log(userTextMod)
+          console.log('fin de ConvertText')
+          userTextMod[index] = userTextMod[index].join(' ')
+        })
 
-      //       // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
-      //       // console.log('singulier')
-      //       // } else {
-      //       // console.log('masculin')
-      //       // }
+        userTextMod = userTextMod.join('\n\n')
+        textInput.value = userTextMod
 
-      //       for (let i = 0; i < correctorArray.length; i++) {
-      //         const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
-      //         const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
-
-      //         if (subEl.match(regexChecked)) {
-      //           console.log('déjà inclusif !')
-      //           // console.log(regexChecked + ' ' + correctorArray[i].toCheck)
-      //           continue
-      //         // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
-      //         } else if (subEl.match(regexToCheck)) {
-      //           console.log('ping !')
-      //           console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
-      //           subEl = subEl.replace(regexToCheck, correctorArray[i].checked)
-      //           isModified = true
-      //           continue
-      //         }
-      //       }
-      //       userTextMod[index][subIndex] = subEl
-      //     })
-      //     // console.log(userTextMod)
-      //     console.log('fin de ConvertText')
-      //     userTextMod[index] = userTextMod[index].join(' ')
-      //   })
-
-      //   userTextMod = userTextMod.join('\n\n')
-      //   textInput.value = userTextMod
-
-      //   if (isModified === true) {
-      //     inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
-      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      //   } else {
-      //     inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
-      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      //   }
-      // }
+        // if (isModified === true) {
+        //   inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
+        //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+        // } else {
+        //   inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
+        //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+        // }
+      }
     }
 
     const undoConvert = (e) => {
@@ -206,7 +202,8 @@ export default {
     }
 
     const cancelChange = (e) => {
-      // textInput.value = userText
+      textInput.value = userText
+      FeedbackOutput('Les modifications ont été&nbsp;retirées.')
 
       btnConvert.removeAttribute('disabled')
       // btnUndo.setAttribute('disabled', true)
@@ -215,6 +212,8 @@ export default {
 
     const eraseText = (e) => {
       // console.log(textInput.value)
+      FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
+
       if (textInput.value !== null) {
         textInput.value = ''
         isWriting()
@@ -223,15 +222,23 @@ export default {
 
     const copyText = (e) => {
       navigator.clipboard.writeText(textInput.value).then(function () {
-        inputFeedback.value = 'Copié avec succès !'
+        FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
-        inputFeedback.value = 'Une erreur est survenue, impossible de copier dans le presse-papier :(.'
+        FeedbackOutput('Une erreur est survenue, impossible de copier dans le&nbsp;presse-papier.')
       })
+    }
 
-      // if (feedbackActive.value === false) {
-      //   feedbackActive.value = !feedbackActive.value
-      //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      // }
+    const FeedbackOutput = (text) => {
+      console.log('hello')
+      inputFeedback.value = text
+      const FeedbackVanish = setTimeout(() => { feedbackActive.value = !feedbackActive.value }, timer)
+
+      if (feedbackActive.value === false) {
+        feedbackActive.value = !feedbackActive.value
+      } else {
+        console.log('clearTimeout')
+        clearTimeout(FeedbackVanish)
+      }
     }
 
     const btnArray = [
@@ -285,20 +292,10 @@ export default {
       // await textConverter('dog')
       // }
 
-      // demo()
-      // await fetch('https://tomdelfosse.be/projets/tfe/api/tfe.php', {
-      //   method: 'GET',
-      //   credentials: 'same-origin',
-      //   headers: {
-      //     // 'Content-Type': 'application/json',
-      //     // Accept: 'application/json'
-      //   }
-      // })
       await fetch('/assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
         .then(function (data) {
           correctorArray = data
-          // console.log(data)
         }).catch(function (error) {
           console.error(error)
           console.log('triste')
@@ -320,7 +317,6 @@ export default {
       isWriting,
       inputFeedback,
       feedbackActive,
-      // canConvert,
       textConverter,
       btnConvert,
       btnUndo,

@@ -14,7 +14,7 @@
 
     &::before{
       content: '';
-      background-image: url('/assets/img/grain-tile.png');
+      background-image: url('/assets/img/grain-tile@075x.png');
       opacity: 0.4;
       filter: brightness(0.9);
       position: absolute;
@@ -23,14 +23,14 @@
       animation: grainMove 0.0024s steps(8) infinite;
 
       @include lg {
-        width: 100%;
-        height: 100%;
+        opacity: 0.3;
+      background-image: url('/assets/img/grain-tile.png');
       }
 
       @include retina{
-        background-image: url('/assets/img/grain-tile@2x.png');
-        opacity: 0.15;
-        filter: brightness(1);
+        background-image: url('/assets/img/grain-tile@05x.png');
+        filter: brightness(1.2);
+        opacity: 0.6;
       }
     }
   }
