@@ -26,6 +26,19 @@
     width: $s-mob--medium;
     height: $s-mob--medium;
     padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    cursor: not-allowed;
+    position: absolute;
+    margin-left: $s-mob--medium-plus;
+
+    @include sm{
+      margin-left: $s-mob--big;
+    }
+
+    &:nth-child(1){
+      margin-left: 0;
+    }
 
     @include tb{
       font-size: $s-tab--smaller;
@@ -33,11 +46,13 @@
       height: inherit;
       overflow: inherit;
       text-indent: inherit;
+      margin-left: $s-tab--smaller;
     }
 
     @include lg{
       font-size: $s-desk--smallest;
       margin-top: $s-desk--smallest;
+      margin-left: 0;
 
       &:nth-child(1){
         margin-top: 0;
@@ -47,6 +62,29 @@
     @include xl{
       font-size: $s-desk--smaller;
       margin-top: $s-desk--smaller;
+    }
+
+    &:enabled{
+      opacity: 1;
+      cursor: pointer;
+      position: relative;
+      pointer-events: inherit;
+
+      &:hover{
+        transform: scale(1.1);
+        transition: $t-fast;
+
+        @include lg{
+          transform: inherit;
+          padding-left: $s-desk--smaller/2;
+
+          &::after{
+            transition: $t-fast;
+            // position: relative;
+            margin-left: -$s-desk--smaller/2;
+          }
+        }
+      }
     }
 
     &:nth-last-of-type(2){
@@ -67,22 +105,6 @@
 
         @include xl{
         margin-top: $s-desk--smaller;
-        }
-      }
-    }
-
-    &:hover{
-      transform: scale(1.1);
-      transition: $t-fast;
-
-      @include lg{
-        transform: inherit;
-        padding-left: $s-desk--smaller/2;
-
-        &::after{
-          transition: $t-fast;
-          // position: relative;
-          margin-left: -$s-desk--smaller/2;
         }
       }
     }
@@ -179,9 +201,9 @@
     margin-top: $s-mob--smallest;
     padding-left:  $s-mob--smallest/2;
     padding-right:  $s-mob--smallest/2;
-    opacity: 0.2;
-    cursor: not-allowed;
-
+    pointer-events: inherit;
+    opacity: 0.3;
+    position: relative;
     @include tb{
       margin-top: $s-tab--smallest;
       padding-left:  $s-tab--smallest/2;
@@ -209,19 +231,18 @@
         margin-left: inherit;
       }
     }
-  }
 
-  &--convert-enabled{
-    opacity: 1;
-    cursor: pointer;
+    &:enabled{
+      opacity: 1;
+      cursor: pointer;
 
-    &:hover{
-      background-color: inherit;
-      outline: 1px solid $c-black;
-      color: $c-black;
+      &:hover{
+        background-color: inherit;
+        outline: 1px solid $c-black;
+        color: $c-black;
+      }
     }
   }
-
 }
 
 </style>

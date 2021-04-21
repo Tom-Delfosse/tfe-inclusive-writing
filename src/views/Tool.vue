@@ -26,18 +26,20 @@
             :key="btn"
             :ref="btn.ref"
             class="btn"
-            :class="[`btn--${btn.class}`, {'btn--convert-enabled' : canConvert}]"
+            disabled
+            :class="[`btn--${btn.class}`]"
             @click="btn.action"
             v-html="btn.text"
           />
         </div>
 
-        <div class="options">
+        <div ref="btnList" class="options">
           <vBtn
             v-for="btn in btnArray.slice(1)"
             :key="btn"
             :ref="btn.ref"
             class="btn"
+            disabled
             :class="`btn--${btn.class}`"
             @click="btn.action"
             v-html="btn.text"
@@ -63,166 +65,159 @@ export default {
     const wordCounter = ref(0)
     const inputFeedback = ref('')
     const textInput = ref(null)
-    const btnConvert = ref(null)
-    const canConvert = ref(false)
     const feedbackActive = ref(false)
-    const BtnCopyActive = ref(false)
-    const BtnEraseActive = ref(false)
-    const BtnCancelActive = ref(false)
-    const BtnUndoActive = ref(false)
-    let userText = null
-    let userTextMod = null
+
+    // const btnConvert = ref(null)
+    // const btnCopy = ref(null)
+    // const btnCancel = ref(null)
+    // const btnUndo = ref(null)
+    // const btnErase = ref(null)
+
+    let btnConvert = ''
+    let btnErase = ''
+    let btnCancel = ''
+    let btnCopy = ''
+    let btnUndo = ''
+    const btnList = ref(null)
+    const userText = null
+    const userTextMod = null
+
+    // const btnList = ref(null)
     let correctorArray = null
-
-    const convertText = () => {
-      // console.clear()
-      if (canConvert.value === true) {
-        canConvert.value = !canConvert.value
-      }
-
-      if (textInput.value === null || textInput.value === '') {
-        if (feedbackActive.value === false) {
-          inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
-          feedbackActive.value = !feedbackActive.value
-          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-        }
-
-        if (canConvert.value === false) {
-          setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
-        }
-      } else {
-        let isModified = false
-
-        // if (feedbackActive.value === false) {
-        //   inputFeedback.value = 'Modifications en cours&nbsp;!'
-        //   feedbackActive.value = !feedbackActive.value
-        // }
-        userText = textInput.value
-        userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
-          return el !== ''
-        })
-        userTextMod.forEach((el, index) => {
-          el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
-          el = el.filter(subEl => subEl.trim() || subEl === null)
-          userTextMod[index] = el
-        })
-
-        userTextMod.forEach((el, index) => {
-          el.forEach((subEl, subIndex) => {
-          // console.log(subEl)
-
-            // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
-            // console.log('singulier')
-            // } else {
-            // console.log('masculin')
-            // }
-
-            for (let i = 0; i < correctorArray.length; i++) {
-              const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
-              const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
-
-              if (subEl.match(regexChecked)) {
-                console.log('déjà inclusif !')
-                // console.log(regexChecked + ' ' + correctorArray[i].toCheck)
-                continue
-              // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
-              } else if (subEl.match(regexToCheck)) {
-                console.log('ping !')
-                console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
-                subEl = subEl.replace(regexToCheck, correctorArray[i].checked)
-                isModified = true
-                continue
-              }
-            }
-
-            // correctorArray.forEach((word) => {
-            //   const regexChecked = new RegExp('\\b(' + word.checked + ')(?![A-zÀ-ú])', 'gi')
-            //   const regexToCheck = new RegExp('\\b(' + word.toCheck + ')(?![A-zÀ-ú])', 'gi')
-
-            //   if (subEl.match(regexChecked)) {
-            //     console.log('déjà inclusif !')
-            //   //   // console.log(word.checked)
-            //   } else if (subEl.match(regexToCheck)) {
-            //     console.log('ping !')
-            //     console.log(word.wordID + ' ' + word.toCheck)
-            //     subEl = subEl.replace(regexToCheck, word.checked)
-            //     const firstLetter = subEl.charAt(0).toUpperCase()
-            //     subEl = firstLetter + subEl.substring(1)
-            //   // isModified = true
-            //   }
-            // })
-            userTextMod[index][subIndex] = subEl
-          })
-          // console.log(userTextMod)
-          console.log('fin de ConvertText')
-          userTextMod[index] = userTextMod[index].join(' ')
-        })
-
-        userTextMod = userTextMod.join('\n\n')
-        textInput.value = userTextMod
-
-        if (isModified === true) {
-          inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
-          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-        } else {
-          inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
-          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-        }
-
-      // feedbackActive.value = !feedbackActive.value
-      }
-    }
 
     const isWriting = () => {
       if (textInput.value.match(/([^\s,!.;:]+)/g)) {
         wordCounter.value = textInput.value.match(/([^\s,!.;:]+)/g).length
+
+        if (btnConvert.disabled) {
+          btnConvert.removeAttribute('disabled')
+        }
+        if (btnCopy.disabled) {
+          btnCopy.removeAttribute('disabled')
+        }
+
+        if (btnErase.disabled) {
+          btnErase.removeAttribute('disabled')
+        }
       } else {
         wordCounter.value = 0
-      }
 
-      if (canConvert.value === false) {
-        canConvert.value = !canConvert.value
+        btnConvert.toggleAttribute('disabled')
+        const btnListChildren = btnList.value.children
+        for (let i = 0; i < btnListChildren.length; i++) {
+          if (!btnListChildren[i].disabled) {
+            btnListChildren[i].setAttribute('disabled', true)
+          }
+        }
       }
+    }
+
+    const convertText = () => {
+      btnConvert.toggleAttribute('disabled')
+      const btnListChildren = btnList.value.children
+      for (let i = 0; i < btnListChildren.length; i++) {
+        if (btnListChildren[i].disabled) {
+          btnListChildren[i].removeAttribute('disabled')
+        }
+        // btnListChildren[i].disabled ? btnListChildren[i].removeAttribute('disabled') : ''
+      }
+      // console.clear()
+
+      // if (canConvert.value === true) {
+      //   canConvert.value = !canConvert.value
+      // }
+
+      // if (textInput.value === null || textInput.value === '') {
+      //   if (feedbackActive.value === false) {
+      //     inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
+      //     feedbackActive.value = !feedbackActive.value
+      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      //   }
+
+      //   if (canConvert.value === false) {
+      //     setTimeout(function () { canConvert.value = !canConvert.value }, 4000)
+      //   }
+      // } else {
+      //   let isModified = false
+
+      //   // if (feedbackActive.value === false) {
+      //   //   inputFeedback.value = 'Modifications en cours&nbsp;!'
+      //   //   feedbackActive.value = !feedbackActive.value
+      //   // }
+      //   userText = textInput.value
+      //   userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
+      //     return el !== ''
+      //   })
+      //   userTextMod.forEach((el, index) => {
+      //     el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+      //     el = el.filter(subEl => subEl.trim() || subEl === null)
+      //     userTextMod[index] = el
+      //   })
+
+      //   userTextMod.forEach((el, index) => {
+      //     el.forEach((subEl, subIndex) => {
+      //     // console.log(subEl)
+
+      //       // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
+      //       // console.log('singulier')
+      //       // } else {
+      //       // console.log('masculin')
+      //       // }
+
+      //       for (let i = 0; i < correctorArray.length; i++) {
+      //         const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
+      //         const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
+
+      //         if (subEl.match(regexChecked)) {
+      //           console.log('déjà inclusif !')
+      //           // console.log(regexChecked + ' ' + correctorArray[i].toCheck)
+      //           continue
+      //         // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
+      //         } else if (subEl.match(regexToCheck)) {
+      //           console.log('ping !')
+      //           console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
+      //           subEl = subEl.replace(regexToCheck, correctorArray[i].checked)
+      //           isModified = true
+      //           continue
+      //         }
+      //       }
+      //       userTextMod[index][subIndex] = subEl
+      //     })
+      //     // console.log(userTextMod)
+      //     console.log('fin de ConvertText')
+      //     userTextMod[index] = userTextMod[index].join(' ')
+      //   })
+
+      //   userTextMod = userTextMod.join('\n\n')
+      //   textInput.value = userTextMod
+
+      //   if (isModified === true) {
+      //     inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
+      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      //   } else {
+      //     inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
+      //     setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      //   }
+      // }
     }
 
     const undoConvert = (e) => {
-      console.log(canConvert.value)
+      console.log(btnCopy)
     }
 
     const cancelChange = (e) => {
-      textInput.value = userText
-      if (canConvert.value === false) {
-        canConvert.value = !canConvert.value
-      }
+      // textInput.value = userText
 
-      if (feedbackActive.value === false) {
-        inputFeedback.value = 'Les modifications ont été&nbsp;retirées.'
-        feedbackActive.value = !feedbackActive.value
-      } else {
-        feedbackActive.value = !feedbackActive.value
-        setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 300)
-        setTimeout(() => { inputFeedback.value = 'Les modifications ont été&nbsp;retirées.' }, 300)
-      }
-      setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      btnConvert.removeAttribute('disabled')
+      // btnUndo.setAttribute('disabled', true)
+      btnCancel.setAttribute('disabled', true)
     }
 
     const eraseText = (e) => {
       // console.log(textInput.value)
       if (textInput.value !== null) {
         textInput.value = ''
-        wordCounter.value = 0
-
-        if (feedbackActive.value === false) {
-          inputFeedback.value = 'Le texte a été&nbsp;supprimé.'
-          feedbackActive.value = !feedbackActive.value
-          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-        } else {
-          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 100)
-          // setTimeout(() => {
-          inputFeedback.value = 'Le texte a été&nbsp;supprimé.'
-          feedbackActive.value = !feedbackActive.value
-          // }, 4000)
-        }
+        isWriting()
       }
     }
 
@@ -233,10 +228,10 @@ export default {
         inputFeedback.value = 'Une erreur est survenue, impossible de copier dans le presse-papier :(.'
       })
 
-      if (feedbackActive.value === false) {
-        feedbackActive.value = !feedbackActive.value
-        setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-      }
+      // if (feedbackActive.value === false) {
+      //   feedbackActive.value = !feedbackActive.value
+      //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+      // }
     }
 
     const btnArray = [
@@ -244,39 +239,48 @@ export default {
         class: 'convert',
         text: 'Convertir',
         textTrig: 'Converti&nbsp;!',
-        ref: 'BtnConvert',
-        action: convertText
+        action: convertText,
+        ref: btnConvert
       },
       {
         class: 'undo',
         text: 'Retour <span class="hide">en&nbsp;arrière</span>',
-        ref: 'BtnUndo',
-        action: undoConvert
+        action: undoConvert,
+        ref: btnUndo
+
       },
       {
         class: 'cancel',
         text: 'Annuler <span class="hide">les&nbsp;modifications</span>',
         textTrig: 'Annulé&nbsp;!',
-        ref: 'BtnCancel',
-        action: cancelChange
+        action: cancelChange,
+        ref: btnCancel
+
       },
       {
         class: 'erase',
         text: 'Supprimer <span class="hide">le&nbsp;texte</span>',
-        ref: 'BtnErase',
-        action: eraseText
+        action: eraseText,
+        ref: btnErase
+
       },
       {
         class: 'copy',
         text: 'Copier <span class="hide">le&nbsp;texte</span>',
         textTrig: 'Copié&nbsp;!',
-        ref: 'BtnCopy',
-        action: copyText
+        action: copyText,
+        ref: btnCopy
       }
     ]
 
     onMounted(async () => {
       console.clear()
+      // console.log(btnConvert.value)
+      btnConvert = document.querySelector('.btn--convert')
+      btnErase = document.querySelector('.btn--erase')
+      btnCancel = document.querySelector('.btn--cancel')
+      btnCopy = document.querySelector('.btn--copy')
+      btnUndo = document.querySelector('.btn--undo')
       // async function demo () {
       // await textConverter('dog')
       // }
@@ -305,12 +309,8 @@ export default {
       convertText,
       undoConvert,
       cancelChange,
-      BtnCancelActive,
       eraseText,
-      BtnEraseActive,
-      BtnUndoActive,
       copyText,
-      BtnCopyActive,
       btnArray,
       wordCounter,
       textInput,
@@ -320,9 +320,14 @@ export default {
       isWriting,
       inputFeedback,
       feedbackActive,
-      canConvert,
+      // canConvert,
+      textConverter,
       btnConvert,
-      textConverter
+      btnUndo,
+      btnCopy,
+      btnErase,
+      btnCancel,
+      btnList
     }
   }
 }
@@ -460,10 +465,12 @@ export default {
 
     .options{
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
+      // border-top: 1px solid $c-black;
       margin-left: auto;
       margin-right: auto;
       margin-top: $s-mob--medium;
+      position: relative;
 
       @include sm{
         margin-top: $s-mob--medium;
