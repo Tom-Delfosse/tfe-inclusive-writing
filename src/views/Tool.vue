@@ -8,7 +8,7 @@
               v-model="textInput"
               class="text-editor"
               placeholder="Inscrivez votre texte&nbsp;ci-dessous&nbsp;!"
-              @input="isWriting"
+              @input="canConvert = true"
             />
             <p
               class="input-feedback"
@@ -21,12 +21,15 @@
             {{ wordCounter }}&nbsp;mot<span v-if="wordCounter > 1">s</span>
           </p>
 
+          <p v-if="loading">
+            LOADING...
+          </p>
+
           <vBtn
             v-for="btn in btnArray.slice(0, 1)"
-            :key="btn"
+            :key="btn.ref"
             :ref="btn.ref"
-            class="btn"
-            disabled
+            :disabled="isDisabled[btn.ref]"
             :class="[`btn--${btn.class}`]"
             @click="btn.action"
             v-html="btn.text"
@@ -36,10 +39,9 @@
         <div ref="btnList" class="options">
           <vBtn
             v-for="btn in btnArray.slice(1)"
-            :key="btn"
+            :key="btn.ref"
             :ref="btn.ref"
-            class="btn"
-            disabled
+            :disabled="isDisabled[btn.ref]"
             :class="`btn--${btn.class}`"
             @click="btn.action"
             v-html="btn.text"
@@ -53,8 +55,8 @@
 <script>
 import vBtn from '@/components/Tool/vBtn.vue'
 import vFooter from '@/components/Footer/vFooter.vue'
-import { ref, onMounted } from 'vue'
-import { textConverter } from '@/textconverter.worker'
+import { ref, onMounted, computed } from 'vue'
+
 export default {
   components: {
     vBtn,
@@ -62,65 +64,96 @@ export default {
   },
 
   setup () {
-    const wordCounter = ref(0)
     const inputFeedback = ref('')
-    const textInput = ref(null)
+    const loading = ref(false)
+    const canConvert = ref(false)
+    const textInput = ref('')
     const feedbackActive = ref(false)
 
-    // const btnConvert = ref(null)
-    // const btnCopy = ref(null)
-    // const btnCancel = ref(null)
-    // const btnUndo = ref(null)
-    // const btnErase = ref(null)
+    const wordCounter = computed(() => textInput.value.match(/([^\s,!.? ;:]+)/g)?.length || 0)
 
-    let btnConvert = ''
-    let btnErase = ''
-    let btnCancel = ''
-    let btnCopy = ''
-    let btnUndo = ''
+    const isDisabled = computed(() => {
+      const isWriting = wordCounter.value >= 1
+      return {
+        btnConvert: !isWriting || !canConvert.value,
+        btnCopy: !isWriting,
+        btnCancel: false,
+        btnUndo: false,
+        btnErase: !isWriting
+      }
+    })
+
+    const strimHtml = (html) => {
+      const tmp = document.createElement('DIV')
+      tmp.innerHTML = html
+      return tmp.textContent || tmp.innerText || ''
+    }
+
     const btnList = ref(null)
-    let userText = null
-    let userTextMod = null
-
-    // const btnList = ref(null)
-    let correctorArray = null
+    const userText = ref('')
+    const correctorArray = ref([])
     const timer = 3500
 
-    const isWriting = () => {
-      if (textInput.value.match(/([^\s,!.;:]+)/g)) {
-        wordCounter.value = textInput.value.match(/([^\s,!.;:]+)/g).length
+    const inclusify = (text) => {
+      return new Promise((resolve, reject) => {
+        try {
+          let sanitizedText = strimHtml(textInput.value)
+          userText.value = sanitizedText
 
-        if (btnConvert.disabled) {
-          btnConvert.removeAttribute('disabled')
-        }
-        if (btnCopy.disabled) {
-          btnCopy.removeAttribute('disabled')
-        }
+          sanitizedText = sanitizedText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
+            return el !== ''
+          })
 
-        if (btnErase.disabled) {
-          btnErase.removeAttribute('disabled')
-        }
-      } else {
-        wordCounter.value = 0
+          sanitizedText.forEach((el, index) => {
+            el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+            el = el.filter(subEl => subEl.trim() || subEl === null)
+            sanitizedText[index] = el
+          })
 
-        btnConvert.toggleAttribute('disabled')
-        const btnListChildren = btnList.value.children
-        for (let i = 0; i < btnListChildren.length; i++) {
-          if (!btnListChildren[i].disabled) {
-            btnListChildren[i].setAttribute('disabled', true)
-          }
+          sanitizedText.forEach((el, index) => {
+            el.forEach((subEl, subIndex) => {
+            // console.log(subEl)
+
+              // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
+              // console.log('singulier')
+              // } else {
+              // console.log('masculin')
+              // }
+
+              for (let i = 0; i < correctorArray.value.length; i++) {
+                const regexChecked = new RegExp('\\b(' + correctorArray.value[i].checked + ')(?![A-zÀ-ú])', 'gi')
+                const regexToCheck = new RegExp('\\b(' + correctorArray.value[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
+                // console.log(subEl)
+                if (subEl.match(regexChecked)) {
+                  console.log('déjà inclusif !')
+                  console.log(correctorArray.value[i].wordID + ' ' + correctorArray.value[i].toCheck)
+                  continue
+                } else if (subEl.match(regexToCheck)) {
+                  console.log('ping !')
+                  console.log(correctorArray.value[i].wordID + ' ' + correctorArray.value[i].checked)
+                  subEl = subEl.replace(regexToCheck, correctorArray.value[i].checked)
+                  const firstLetter = subEl.charAt(0).toUpperCase()
+                  subEl = firstLetter + subEl.substring(1)
+                  continue
+                }
+              }
+              sanitizedText[index][subIndex] = subEl
+              console.log(subEl)
+            })
+            console.log('fin de ConvertText')
+            sanitizedText[index] = sanitizedText[index].join(' ')
+          })
+          sanitizedText = sanitizedText.join('\n\n')
+
+          resolve(sanitizedText)
+        } catch (e) {
+          reject(e)
         }
-      }
+      })
     }
 
     const convertText = () => {
-      btnConvert.toggleAttribute('disabled')
-      const btnListChildren = btnList.value.children
-      for (let i = 0; i < btnListChildren.length; i++) {
-        if (btnListChildren[i].disabled) {
-          btnListChildren[i].removeAttribute('disabled')
-        }
-      }
+      canConvert.value = !canConvert.value
 
       if (textInput.value === null || textInput.value === '') {
         if (feedbackActive.value === false) {
@@ -129,94 +162,28 @@ export default {
           setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
         }
       } else {
-        // let isModified = false
-
-        // if (feedbackActive.value === false) {
-        //   inputFeedback.value = 'Modifications en cours&nbsp;!'
-        //   feedbackActive.value = !feedbackActive.value
-        // }
-        userText = textInput.value
-        userTextMod = userText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
-          return el !== ''
-        })
-        userTextMod.forEach((el, index) => {
-          el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
-          el = el.filter(subEl => subEl.trim() || subEl === null)
-          userTextMod[index] = el
-        })
-
-        userTextMod.forEach((el, index) => {
-          el.forEach((subEl, subIndex) => {
-          // console.log(subEl)
-
-            // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
-            // console.log('singulier')
-            // } else {
-            // console.log('masculin')
-            // }
-
-            for (let i = 0; i < correctorArray.length; i++) {
-              // if (correctorArray[i].toCheck === correctorArray[i + 1].toCheck) {
-              //   console.log('___')
-              //   console.log(correctorArray[i].toCheck)
-              //   console.log(correctorArray[i + 1].toCheck + ' après')
-              //   // correctorArray[i].removeChild(i)
-              // }
-              const regexChecked = new RegExp('\\b(' + correctorArray[i].checked + ')(?![A-zÀ-ú])', 'gi')
-              const regexToCheck = new RegExp('\\b(' + correctorArray[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
-              // console.log(subEl)
-              if (subEl.match(regexChecked)) {
-                console.log('déjà inclusif !')
-                continue
-              // console.log(correctorArray[i].wordID + ' ' + correctorArray[i].toCheck)
-              } else if (subEl.match(regexToCheck)) {
-                console.log('ping !')
-                console.log(correctorArray[i].wordID + ' ' + correctorArray[i].checked)
-                subEl = subEl.replace(regexToCheck, correctorArray[i].checked)
-                // isModified = true
-                continue
-              }
-            }
-            userTextMod[index][subIndex] = subEl
-          })
-          // console.log(userTextMod)
-          console.log('fin de ConvertText')
-          userTextMod[index] = userTextMod[index].join(' ')
-        })
-
-        userTextMod = userTextMod.join('\n\n')
-        textInput.value = userTextMod
-
-        // if (isModified === true) {
-        //   inputFeedback.value = 'Le texte a été modifié avec succès&nbsp;!'
-        //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-        // } else {
-        //   inputFeedback.value = 'Aucune modification effectuée&nbsp;!'
-        //   setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
-        // }
+        loading.value = true
+        setTimeout(async () => {
+          textInput.value = await inclusify()
+        }, 300)
+        loading.value = false
       }
     }
 
     const undoConvert = (e) => {
-      console.log(btnCopy)
     }
 
     const cancelChange = (e) => {
-      textInput.value = userText
+      textInput.value = userText.value
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
-
-      btnConvert.removeAttribute('disabled')
-      // btnUndo.setAttribute('disabled', true)
-      btnCancel.setAttribute('disabled', true)
     }
 
     const eraseText = (e) => {
-      // console.log(textInput.value)
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
 
       if (textInput.value !== null) {
         textInput.value = ''
-        isWriting()
+        // isWriting()
       }
     }
 
@@ -245,15 +212,14 @@ export default {
       {
         class: 'convert',
         text: 'Convertir',
-        textTrig: 'Converti&nbsp;!',
         action: convertText,
-        ref: btnConvert
+        ref: 'btnConvert'
       },
       {
         class: 'undo',
         text: 'Retour <span class="hide">en&nbsp;arrière</span>',
         action: undoConvert,
-        ref: btnUndo
+        ref: 'btnUndo'
 
       },
       {
@@ -261,14 +227,14 @@ export default {
         text: 'Annuler <span class="hide">les&nbsp;modifications</span>',
         textTrig: 'Annulé&nbsp;!',
         action: cancelChange,
-        ref: btnCancel
+        ref: 'btnCancel'
 
       },
       {
         class: 'erase',
         text: 'Supprimer <span class="hide">le&nbsp;texte</span>',
         action: eraseText,
-        ref: btnErase
+        ref: 'btnErase'
 
       },
       {
@@ -276,33 +242,33 @@ export default {
         text: 'Copier <span class="hide">le&nbsp;texte</span>',
         textTrig: 'Copié&nbsp;!',
         action: copyText,
-        ref: btnCopy
+        ref: 'btnCopy'
       }
     ]
 
     onMounted(async () => {
-      console.clear()
-      // console.log(btnConvert.value)
-      btnConvert = document.querySelector('.btn--convert')
-      btnErase = document.querySelector('.btn--erase')
-      btnCancel = document.querySelector('.btn--cancel')
-      btnCopy = document.querySelector('.btn--copy')
-      btnUndo = document.querySelector('.btn--undo')
-      // async function demo () {
-      // await textConverter('dog')
-      // }
-
-      await fetch('/assets/data/CorrectorMini.json')
-        .then(function (response) { return response.json() })
-        .then(function (data) {
-          correctorArray = data
-        }).catch(function (error) {
-          console.error(error)
-          console.log('triste')
-        })
+      console.log('____Mounted_____')
+      // await fetch('/assets/data/CorrectorMini.json')
+      // .then(function (response) { return response.json() })
+      // .then(function (data) {
+      //   correctorArray.value = data
+      // }).catch(function (error) {
+      //   console.error(error)
+      //   console.log('triste')
+      // })
+      try {
+        const response = await fetch('/assets/data/CorrectorMini.json')
+        correctorArray.value = await response.json()
+      } catch (error) {
+        console.error(error)
+        console.log('triste')
+      }
     })
 
     return {
+      isDisabled,
+      loading,
+      canConvert,
       convertText,
       undoConvert,
       cancelChange,
@@ -312,17 +278,10 @@ export default {
       wordCounter,
       textInput,
       userText,
-      userTextMod,
       correctorArray,
-      isWriting,
+      // isWriting,
       inputFeedback,
       feedbackActive,
-      textConverter,
-      btnConvert,
-      btnUndo,
-      btnCopy,
-      btnErase,
-      btnCancel,
       btnList
     }
   }
