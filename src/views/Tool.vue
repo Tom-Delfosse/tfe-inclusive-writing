@@ -98,16 +98,19 @@ export default {
 
       if (textInput.value === null || textInput.value === '') {
         if (feedbackActive.value === false) {
-          inputFeedback.value = 'Veuillez rédigez un mot ou deux avant de modifier le&nbsp;texte.'
-          feedbackActive.value = !feedbackActive.value
-          setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
+          FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
         const sanitizedText = strimHtml(textInput.value)
         userText.value = sanitizedText
         const textOutput = await textConverter(sanitizedText)
         textInput.value = textOutput
-        isConverted.value = !isConverted.value
+        isConverted.value = true
+        if (textOutput === userText.value) {
+          FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
+        } else {
+          FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
+        }
       }
     }
 
@@ -117,11 +120,12 @@ export default {
     const cancelChange = (e) => {
       textInput.value = userText.value
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
-      isConverted.value = !isConverted.value
+      isConverted.value = false
     }
 
     const eraseText = (e) => {
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
+      isConverted.value = false
 
       if (textInput.value !== null) {
         textInput.value = ''
