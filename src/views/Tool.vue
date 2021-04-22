@@ -21,9 +21,9 @@
             {{ wordCounter }}&nbsp;mot<span v-if="wordCounter > 1">s</span>
           </p>
 
-          <p v-if="loading">
+          <!-- <p v-if="loading">
             LOADING...
-          </p>
+          </p> -->
 
           <vBtn
             v-for="btn in btnArray.slice(0, 1)"
@@ -56,6 +56,7 @@
 import vBtn from '@/components/Tool/vBtn.vue'
 import vFooter from '@/components/Footer/vFooter.vue'
 import { ref, onMounted, computed } from 'vue'
+import { textConverter } from '@/textConvert.worker'
 
 export default {
   components: {
@@ -65,7 +66,7 @@ export default {
 
   setup () {
     const inputFeedback = ref('')
-    const loading = ref(false)
+    const isConverted = ref(false)
     const canConvert = ref(false)
     const textInput = ref('')
     const feedbackActive = ref(false)
@@ -77,8 +78,8 @@ export default {
       return {
         btnConvert: !isWriting || !canConvert.value,
         btnCopy: !isWriting,
-        btnCancel: false,
-        btnUndo: false,
+        btnCancel: !isConverted.value,
+        btnUndo: !isConverted.value,
         btnErase: !isWriting
       }
     })
@@ -89,70 +90,10 @@ export default {
       return tmp.textContent || tmp.innerText || ''
     }
 
-    const btnList = ref(null)
     const userText = ref('')
-    const correctorArray = ref([])
     const timer = 3500
 
-    const inclusify = (text) => {
-      return new Promise((resolve, reject) => {
-        try {
-          let sanitizedText = strimHtml(textInput.value)
-          userText.value = sanitizedText
-
-          sanitizedText = sanitizedText.replace(/\n?\n/g, '|').split('|').filter(function (el) {
-            return el !== ''
-          })
-
-          sanitizedText.forEach((el, index) => {
-            el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
-            el = el.filter(subEl => subEl.trim() || subEl === null)
-            sanitizedText[index] = el
-          })
-
-          sanitizedText.forEach((el, index) => {
-            el.forEach((subEl, subIndex) => {
-            // console.log(subEl)
-
-              // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
-              // console.log('singulier')
-              // } else {
-              // console.log('masculin')
-              // }
-
-              for (let i = 0; i < correctorArray.value.length; i++) {
-                const regexChecked = new RegExp('\\b(' + correctorArray.value[i].checked + ')(?![A-zÀ-ú])', 'gi')
-                const regexToCheck = new RegExp('\\b(' + correctorArray.value[i].toCheck + ')(?![A-zÀ-ú])', 'gi')
-                // console.log(subEl)
-                if (subEl.match(regexChecked)) {
-                  console.log('déjà inclusif !')
-                  console.log(correctorArray.value[i].wordID + ' ' + correctorArray.value[i].toCheck)
-                  continue
-                } else if (subEl.match(regexToCheck)) {
-                  console.log('ping !')
-                  console.log(correctorArray.value[i].wordID + ' ' + correctorArray.value[i].checked)
-                  subEl = subEl.replace(regexToCheck, correctorArray.value[i].checked)
-                  const firstLetter = subEl.charAt(0).toUpperCase()
-                  subEl = firstLetter + subEl.substring(1)
-                  continue
-                }
-              }
-              sanitizedText[index][subIndex] = subEl
-              console.log(subEl)
-            })
-            console.log('fin de ConvertText')
-            sanitizedText[index] = sanitizedText[index].join(' ')
-          })
-          sanitizedText = sanitizedText.join('\n\n')
-
-          resolve(sanitizedText)
-        } catch (e) {
-          reject(e)
-        }
-      })
-    }
-
-    const convertText = () => {
+    const convertText = async () => {
       canConvert.value = !canConvert.value
 
       if (textInput.value === null || textInput.value === '') {
@@ -162,11 +103,11 @@ export default {
           setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 4000)
         }
       } else {
-        loading.value = true
-        setTimeout(async () => {
-          textInput.value = await inclusify()
-        }, 300)
-        loading.value = false
+        const sanitizedText = strimHtml(textInput.value)
+        userText.value = sanitizedText
+        const textOutput = await textConverter(sanitizedText)
+        textInput.value = textOutput
+        isConverted.value = !isConverted.value
       }
     }
 
@@ -176,6 +117,7 @@ export default {
     const cancelChange = (e) => {
       textInput.value = userText.value
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
+      isConverted.value = !isConverted.value
     }
 
     const eraseText = (e) => {
@@ -196,7 +138,6 @@ export default {
     }
 
     const FeedbackOutput = (text) => {
-      console.log('hello')
       inputFeedback.value = text
       const FeedbackVanish = setTimeout(() => { feedbackActive.value = !feedbackActive.value }, timer)
 
@@ -247,42 +188,26 @@ export default {
     ]
 
     onMounted(async () => {
+      console.clear()
       console.log('____Mounted_____')
-      // await fetch('/assets/data/CorrectorMini.json')
-      // .then(function (response) { return response.json() })
-      // .then(function (data) {
-      //   correctorArray.value = data
-      // }).catch(function (error) {
-      //   console.error(error)
-      //   console.log('triste')
-      // })
-      try {
-        const response = await fetch('/assets/data/CorrectorMini.json')
-        correctorArray.value = await response.json()
-      } catch (error) {
-        console.error(error)
-        console.log('triste')
-      }
     })
 
     return {
       isDisabled,
-      loading,
+      // loading,
       canConvert,
-      convertText,
-      undoConvert,
-      cancelChange,
-      eraseText,
-      copyText,
+      // convertText,
+      // undoConvert,
+      // cancelChange,
+      // eraseText,
+      // copyText,
       btnArray,
       wordCounter,
       textInput,
       userText,
-      correctorArray,
-      // isWriting,
       inputFeedback,
-      feedbackActive,
-      btnList
+      feedbackActive
+      // btnList
     }
   }
 }
