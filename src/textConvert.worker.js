@@ -32,9 +32,7 @@ export const textConverter = async (textToConvert) => {
           const regexToCheck = new RegExp('\\b(' + array[i].toCheck + ')(?![A-zÀ-ú])(?!‧)', 'gi')
 
           if (subEl.match(regexToCheck)) {
-            // console.log('ping !')
-            // console.log(array[i].wordID + ' ' + array[i].checked)
-            subEl = subEl.replace(regexToCheck, array[i].checked)
+            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">' + array[i].checked + '<button @click="bing" class="btn btn--delete">X</button></span>')
             const firstLetter = subEl.charAt(0).toUpperCase()
             subEl = firstLetter + subEl.substring(1)
             continue

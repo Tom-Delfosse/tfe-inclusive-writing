@@ -10,7 +10,7 @@
               contenteditable="true"
               @input="TextWriting"
             >
-              Inscrivez votre texte ici&nbsp;!
+              Inscrivez votre texte ici&nbsp;! connectée.
             </div>
 
             <p
@@ -67,14 +67,12 @@ export default {
     const inputFeedback = ref('')
     const isConverted = ref(false)
     const canConvert = ref(false)
-    // const textInput = ref('')
     const feedbackActive = ref(false)
     const userText = ref('')
     const timer = 3500
     const textEditor = ref('Inscrivez votre texte ici&nbsp;!')
     console.log('before WordCounter_______________')
-    // const wordCounterOld = computed(() => textEditor.value.length || 2)
-    // console.log(wordCounterOld.value)
+
     const wordCounter = ref(0)
 
     const isDisabled = computed(() => {
@@ -88,12 +86,6 @@ export default {
       }
     })
 
-    // const strimHtml = (html) => {
-    //   const tmp = document.createElement('DIV')
-    //   tmp.innerHTML = html
-    //   return tmp.textContent || tmp.innerText || ''
-    // }
-
     const convertText = async () => {
       canConvert.value = !canConvert.value
 
@@ -104,14 +96,14 @@ export default {
       } else {
         // console.log(textEditor.value.textContent)
         const textOutput = await textConverter(textEditor.value.textContent)
-        textEditor.value.textContent = textOutput
+        userText.value = textEditor.value.textContent
+        textEditor.value.innerHTML = textOutput
         isConverted.value = true
         if (textOutput === userText.value) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
-        // tex.value = textOutput
       }
     }
 
@@ -119,7 +111,9 @@ export default {
     }
 
     const cancelChange = (e) => {
-      textEditor.value = userText.value
+      textEditor.value.innerHTML = userText.value
+      console.log(userText.value)
+
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
       isConverted.value = false
     }
@@ -127,15 +121,15 @@ export default {
     const eraseText = (e) => {
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
       isConverted.value = false
-
-      if (textEditor.value !== null) {
-        textEditor.value = ''
-        // isWriting()
+      if (textEditor.value.innerHTML !== null) {
+        textEditor.value.innerHTML = ''
       }
     }
 
+    const bing = () => { console.log('binged!') }
+
     const copyText = (e) => {
-      navigator.clipboard.writeText(textEditor.value).then(function () {
+      navigator.clipboard.writeText(textEditor.value.textContent).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
         FeedbackOutput('Une erreur est survenue, impossible de copier dans le&nbsp;presse-papier.')
@@ -155,9 +149,6 @@ export default {
     }
     const TextWriting = () => {
       canConvert.value = true
-      // console.log(textEditor.value.textContent)
-      // console.log(wordCounterOld.value)
-
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     }
 
@@ -202,24 +193,21 @@ export default {
     onMounted(async () => {
       console.clear()
       console.log('____Mounted_____')
-      // console.log(textEditor.value.textContent.length)
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length
-
-      // console.log(wordCounter)
     })
 
     return {
       isDisabled,
       canConvert,
       btnArray,
-      // wordCounterOld,
-      // textInput,
+
       userText,
       inputFeedback,
       feedbackActive,
       textEditor,
       TextWriting,
-      wordCounter
+      wordCounter,
+      bing
     }
   }
 }
@@ -297,7 +285,7 @@ export default {
 
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
-          line-height: 160%;
+          line-height: 150%;
 
           @include tb{
             font-size: $s-tab--smaller;
@@ -320,8 +308,62 @@ export default {
           }
         }
 
-        .text-output p{
-          margin-left: 0;
+        .corrected{
+          white-space: nowrap;
+          border: 1px solid $c-black;
+          padding: 0 $s-mob--smallest/4 0 $s-mob--smallest/4 ;
+          position: relative;
+          display: inline;
+          margin: 0;
+          height: auto;
+          margin-right: $s-mob--small;
+
+          @include sm{
+            margin-right: $s-mob--medium;
+          }
+
+          @include tb{
+            padding: 0 $s-tab--smallest/4;
+            margin-right: $s-tab--small;
+          }
+
+          @include lg{
+            padding: 0 $s-desk--smallest/4;
+            margin-right: $s-desk--smaller;
+          }
+
+          .btn--delete{
+            background-color: $c-black;
+            font-family: font1;
+            color: $c-white;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            position: absolute;
+            left: 100% ;
+            width: 100%;
+            top: -1px;
+            border: 1px solid $c-black;
+            box-sizing: content-box;
+            padding: 0 ;
+            max-width: $s-desk--smallest;
+            font-size: $s-mob--smallest/1.20;
+
+            @include sm{
+              font-size: $s-mob--smallest;
+              max-width: $s-mob--medium;
+            }
+            @include tb{
+              font-size: $s-tab--tiny;
+              max-width: $s-tab--smaller;
+            }
+            @include lg{
+              font-size: $s-desk--tiny;
+              max-width: $s-desk--smallest;
+            }
+          }
         }
 
         .word-counter{
