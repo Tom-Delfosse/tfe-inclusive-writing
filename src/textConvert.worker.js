@@ -21,26 +21,20 @@ export const textConverter = async (textToConvert) => {
 
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
-        // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
-        // console.log('singulier')
-        // } else {
-        // console.log('masculin')
-        // }
-
-        // console.log(subEl + ' __')
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('\\b(' + array[i].toCheck + ')(?![A-zÀ-ú])(?!‧)', 'gi')
 
           if (subEl.match(regexToCheck)) {
-            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">' + array[i].checked + '<button @click="bing" class="btn btn--delete">X</button></span>')
+            console.log(array[i].wordID + ' ' + array[i].toCheck)
+            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">' + array[i].checked + '<button ref="btnDelete" class="btn btn--delete">X</button></span>')
             const firstLetter = subEl.charAt(0).toUpperCase()
+            console.log(firstLetter)
             subEl = firstLetter + subEl.substring(1)
             continue
           }
         }
         textToConvert[index][subIndex] = subEl
       })
-      console.log('fin de ConvertText')
       textToConvert[index] = textToConvert[index].join(' ')
     })
     textToConvert = textToConvert.join('\n\n')

@@ -8,10 +8,9 @@
               ref="textEditor"
               class="text-editor"
               contenteditable="true"
+              placeholder="Inscrivez votre texte ici&nbsp;!"
               @input="TextWriting"
-            >
-              Inscrivez votre texte ici&nbsp;! connectée.
-            </div>
+            />
 
             <p
               class="input-feedback"
@@ -70,8 +69,7 @@ export default {
     const feedbackActive = ref(false)
     const userText = ref('')
     const timer = 3500
-    const textEditor = ref('Inscrivez votre texte ici&nbsp;!')
-    console.log('before WordCounter_______________')
+    const textEditor = ref('')
 
     const wordCounter = ref(0)
 
@@ -94,7 +92,12 @@ export default {
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
-        // console.log(textEditor.value.textContent)
+        if (textEditor.value.contains(document.querySelector('.corrected'))) {
+          const spanList = document.querySelectorAll('.corrected')
+          for (let i = 0; i < spanList.length; i++) {
+            spanList[i].removeChild(document.querySelector('.btn--delete'))
+          }
+        }
         const textOutput = await textConverter(textEditor.value.textContent)
         userText.value = textEditor.value.textContent
         textEditor.value.innerHTML = textOutput
@@ -104,10 +107,13 @@ export default {
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
+
+        console.log(textEditor.value)
       }
     }
 
     const undoConvert = (e) => {
+      console.log('j"ai essayé au moins')
     }
 
     const cancelChange = (e) => {
@@ -193,7 +199,7 @@ export default {
     onMounted(async () => {
       console.clear()
       console.log('____Mounted_____')
-      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length
+      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     })
 
     return {
@@ -261,7 +267,6 @@ export default {
         }
 
         .input-container{
-          // display: block;
           width: 100%;
           position: relative;
           border-bottom: 1px solid $c-black;
@@ -282,10 +287,18 @@ export default {
           width: 100%;
           height: 100%;
           white-space: pre-line;
+          word-wrap: break-word;
 
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
           line-height: 150%;
+
+          &:empty::before{
+            content: attr(placeholder);
+            pointer-events: none;
+            display: block;
+            opacity: .7;
+          }
 
           @include tb{
             font-size: $s-tab--smaller;
@@ -319,7 +332,7 @@ export default {
           margin-right: $s-mob--small;
 
           @include sm{
-            margin-right: $s-mob--medium;
+            margin-right: $s-mob--small;
           }
 
           @include tb{
@@ -353,7 +366,7 @@ export default {
 
             @include sm{
               font-size: $s-mob--smallest;
-              max-width: $s-mob--medium;
+              max-width: $s-mob--smaller;
             }
             @include tb{
               font-size: $s-tab--tiny;
