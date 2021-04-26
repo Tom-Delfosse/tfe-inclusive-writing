@@ -4,12 +4,15 @@
       <div class="section__content">
         <div class="main">
           <div class="input-container">
-            <textarea
-              v-model="textInput"
+            <div
+              ref="textEditor"
               class="text-editor"
-              placeholder="Inscrivez votre texte&nbsp;ci-dessous&nbsp;!"
-              @input="canConvert = true"
-            />
+              contenteditable="true"
+              @input="TextWriting"
+            >
+              Inscrivez votre texte ici&nbsp;!
+            </div>
+
             <p
               class="input-feedback"
               :class="{'input-feedback--active' : feedbackActive}"
@@ -20,10 +23,6 @@
           <p class="word-counter">
             {{ wordCounter }}&nbsp;mot<span v-if="wordCounter > 1">s</span>
           </p>
-
-          <!-- <p v-if="loading">
-            LOADING...
-          </p> -->
 
           <vBtn
             v-for="btn in btnArray.slice(0, 1)"
@@ -68,10 +67,15 @@ export default {
     const inputFeedback = ref('')
     const isConverted = ref(false)
     const canConvert = ref(false)
-    const textInput = ref('')
+    // const textInput = ref('')
     const feedbackActive = ref(false)
-
-    const wordCounter = computed(() => textInput.value.match(/([^\s,!.? ;:]+)/g)?.length || 0)
+    const userText = ref('')
+    const timer = 3500
+    const textEditor = ref('Inscrivez votre texte ici&nbsp;!')
+    console.log('before WordCounter_______________')
+    // const wordCounterOld = computed(() => textEditor.value.length || 2)
+    // console.log(wordCounterOld.value)
+    const wordCounter = ref(0)
 
     const isDisabled = computed(() => {
       const isWriting = wordCounter.value >= 1
@@ -84,33 +88,30 @@ export default {
       }
     })
 
-    const strimHtml = (html) => {
-      const tmp = document.createElement('DIV')
-      tmp.innerHTML = html
-      return tmp.textContent || tmp.innerText || ''
-    }
-
-    const userText = ref('')
-    const timer = 3500
+    // const strimHtml = (html) => {
+    //   const tmp = document.createElement('DIV')
+    //   tmp.innerHTML = html
+    //   return tmp.textContent || tmp.innerText || ''
+    // }
 
     const convertText = async () => {
       canConvert.value = !canConvert.value
 
-      if (textInput.value === null || textInput.value === '') {
+      if (textEditor.value === null || textEditor.value === '') {
         if (feedbackActive.value === false) {
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
-        const sanitizedText = strimHtml(textInput.value)
-        userText.value = sanitizedText
-        const textOutput = await textConverter(sanitizedText)
-        textInput.value = textOutput
+        // console.log(textEditor.value.textContent)
+        const textOutput = await textConverter(textEditor.value.textContent)
+        textEditor.value.textContent = textOutput
         isConverted.value = true
         if (textOutput === userText.value) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
+        // tex.value = textOutput
       }
     }
 
@@ -118,7 +119,7 @@ export default {
     }
 
     const cancelChange = (e) => {
-      textInput.value = userText.value
+      textEditor.value = userText.value
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
       isConverted.value = false
     }
@@ -127,14 +128,14 @@ export default {
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
       isConverted.value = false
 
-      if (textInput.value !== null) {
-        textInput.value = ''
+      if (textEditor.value !== null) {
+        textEditor.value = ''
         // isWriting()
       }
     }
 
     const copyText = (e) => {
-      navigator.clipboard.writeText(textInput.value).then(function () {
+      navigator.clipboard.writeText(textEditor.value).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
         FeedbackOutput('Une erreur est survenue, impossible de copier dans le&nbsp;presse-papier.')
@@ -151,6 +152,13 @@ export default {
         console.log('clearTimeout')
         clearTimeout(FeedbackVanish)
       }
+    }
+    const TextWriting = () => {
+      canConvert.value = true
+      // console.log(textEditor.value.textContent)
+      // console.log(wordCounterOld.value)
+
+      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     }
 
     const btnArray = [
@@ -194,24 +202,24 @@ export default {
     onMounted(async () => {
       console.clear()
       console.log('____Mounted_____')
+      // console.log(textEditor.value.textContent.length)
+      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length
+
+      // console.log(wordCounter)
     })
 
     return {
       isDisabled,
-      // loading,
       canConvert,
-      // convertText,
-      // undoConvert,
-      // cancelChange,
-      // eraseText,
-      // copyText,
       btnArray,
-      wordCounter,
-      textInput,
+      // wordCounterOld,
+      // textInput,
       userText,
       inputFeedback,
-      feedbackActive
-      // btnList
+      feedbackActive,
+      textEditor,
+      TextWriting,
+      wordCounter
     }
   }
 }
@@ -302,6 +310,18 @@ export default {
           @include xl{
             font-size: $s-desk--smaller;
           }
+
+          p{
+            margin-left: 0;
+
+            &:focus-visible{
+              outline: 0;
+            }
+          }
+        }
+
+        .text-output p{
+          margin-left: 0;
         }
 
         .word-counter{
