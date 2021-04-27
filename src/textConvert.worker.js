@@ -15,8 +15,8 @@ export const textConverter = async (textToConvert, wordArray) => {
     })
 
     textToConvert.forEach((el, index) => {
-      el = el.replace(/(\.?\.?[.?!])\s/g, '$1|').split('|')
-      el = el.filter(subEl => subEl.trim() || subEl === null)
+      el = el.replace(/(\.?\.?[.?!]\s?)/g, '$1|').split('|')
+      el = el.filter(subEl => subEl === null || subEl.trim())
       textToConvert[index] = el
     })
 
@@ -32,6 +32,7 @@ export const textConverter = async (textToConvert, wordArray) => {
             // console.log(firstLetter)
             // subEl = firstLetter + subEl.substring(1)
             // console.log('index /' + subIndex)
+            // console.log(subEl)
             continue
           }
         }

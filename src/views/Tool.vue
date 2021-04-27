@@ -97,10 +97,9 @@ export default {
             spanList[i].removeChild(document.querySelector('.btn--delete'))
           }
         }
-        const textOutput = await textConverter(textEditor.value.textContent)
         userText.value = textEditor.value.textContent
+        const textOutput = await textConverter(textEditor.value.textContent)
         textEditor.value.innerHTML = textOutput
-        isConverted.value = true
 
         const btnDeleteList = document.querySelectorAll('.btn--delete')
         btnDeleteList.forEach((btn) => {
@@ -112,12 +111,12 @@ export default {
           })
         })
 
-        if (textOutput === userText.value) {
+        if (!textEditor.value.children.length > 0) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
           canConvert.value = true
-          isConverted.value = false
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
+          isConverted.value = true
         }
       }
     }
