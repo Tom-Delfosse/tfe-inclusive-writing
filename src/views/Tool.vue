@@ -72,7 +72,6 @@ export default {
     const textEditor = ref('')
     const wordArray = ref('')
     const wordCounter = ref(0)
-
     const isDisabled = computed(() => {
       const isWriting = wordCounter.value >= 1
       return {
