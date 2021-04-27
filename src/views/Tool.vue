@@ -70,6 +70,7 @@ export default {
     const userText = ref('')
     const timer = 3500
     const textEditor = ref('')
+    const wordArray = ref('')
 
     const wordCounter = ref(0)
 
@@ -89,6 +90,7 @@ export default {
 
       if (textEditor.value === null || textEditor.value === '') {
         if (feedbackActive.value === false) {
+          s
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
@@ -102,22 +104,35 @@ export default {
         userText.value = textEditor.value.textContent
         textEditor.value.innerHTML = textOutput
         isConverted.value = true
+
+        const btnDeleteList = document.querySelectorAll('.btn--delete')
+        btnDeleteList.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const span = e.currentTarget.parentNode
+            const spanId = span.className.replace('corrected corrected--', '')
+            console.log(span)
+            span.parentNode.replaceChild(document.createTextNode(wordArray.value[spanId].toCheck), span)
+          })
+        })
+
         if (textOutput === userText.value) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
 
-        console.log(textEditor.value)
+        // console.log(textEditor.value)
       }
     }
 
     const undoConvert = (e) => {
       console.log('j"ai essayé au moins')
+      // console.log(btnDeleteList)
     }
 
     const cancelChange = (e) => {
       textEditor.value.innerHTML = userText.value
+      canConvert.value = true
       console.log(userText.value)
 
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
@@ -131,8 +146,6 @@ export default {
         textEditor.value.innerHTML = ''
       }
     }
-
-    const bing = () => { console.log('binged!') }
 
     const copyText = (e) => {
       navigator.clipboard.writeText(textEditor.value.textContent).then(function () {
@@ -200,20 +213,29 @@ export default {
       console.clear()
       console.log('____Mounted_____')
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
+
+      await fetch('/assets/data/CorrectorMini.json')
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+          wordArray.value = data
+        }).catch(function (error) {
+          console.error(error)
+          console.log('triste')
+        })
     })
 
     return {
       isDisabled,
       canConvert,
       btnArray,
-
       userText,
       inputFeedback,
       feedbackActive,
       textEditor,
       TextWriting,
       wordCounter,
-      bing
+      wordArray
+      // btnDeleteList
     }
   }
 }
