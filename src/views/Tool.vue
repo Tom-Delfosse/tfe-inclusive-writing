@@ -4,12 +4,14 @@
       <div class="section__content">
         <div class="main">
           <div class="input-container">
-            <textarea
-              v-model="textInput"
+            <div
+              ref="textEditor"
               class="text-editor"
-              placeholder="Inscrivez votre texte&nbsp;ci-dessous&nbsp;!"
-              @input="canConvert = true"
+              contenteditable="true"
+              placeholder="Inscrivez votre texte ici&nbsp;!"
+              @input="TextWriting"
             />
+
             <p
               class="input-feedback"
               :class="{'input-feedback--active' : feedbackActive}"
@@ -20,10 +22,6 @@
           <p class="word-counter">
             {{ wordCounter }}&nbsp;mot<span v-if="wordCounter > 1">s</span>
           </p>
-
-          <!-- <p v-if="loading">
-            LOADING...
-          </p> -->
 
           <vBtn
             v-for="btn in btnArray.slice(0, 1)"
@@ -68,10 +66,12 @@ export default {
     const inputFeedback = ref('')
     const isConverted = ref(false)
     const canConvert = ref(false)
-    const textInput = ref('')
     const feedbackActive = ref(false)
-
-    const wordCounter = computed(() => textInput.value.match(/([^\s,!.? ;:]+)/g)?.length || 0)
+    const userText = ref('')
+    const timer = 3500
+    const textEditor = ref('')
+    const wordArray = ref('')
+    const wordCounter = ref(0)
 
     const isDisabled = computed(() => {
       const isWriting = wordCounter.value >= 1
@@ -79,46 +79,59 @@ export default {
         btnConvert: !isWriting || !canConvert.value,
         btnCopy: !isWriting,
         btnCancel: !isConverted.value,
-        btnUndo: !isConverted.value,
+        // btnUndo: !isConverted.value,
         btnErase: !isWriting
       }
     })
 
-    const strimHtml = (html) => {
-      const tmp = document.createElement('DIV')
-      tmp.innerHTML = html
-      return tmp.textContent || tmp.innerText || ''
-    }
-
-    const userText = ref('')
-    const timer = 3500
-
     const convertText = async () => {
       canConvert.value = !canConvert.value
 
-      if (textInput.value === null || textInput.value === '') {
+      if (textEditor.value === null || textEditor.value === '') {
         if (feedbackActive.value === false) {
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
-        const sanitizedText = strimHtml(textInput.value)
-        userText.value = sanitizedText
-        const textOutput = await textConverter(sanitizedText)
-        textInput.value = textOutput
+        if (textEditor.value.contains(document.querySelector('.corrected'))) {
+          const spanList = document.querySelectorAll('.corrected')
+          for (let i = 0; i < spanList.length; i++) {
+            spanList[i].removeChild(document.querySelector('.btn--delete'))
+          }
+        }
+        const textOutput = await textConverter(textEditor.value.textContent)
+        userText.value = textEditor.value.textContent
+        textEditor.value.innerHTML = textOutput
         isConverted.value = true
+
+        const btnDeleteList = document.querySelectorAll('.btn--delete')
+        btnDeleteList.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const span = e.currentTarget.parentNode
+            const spanId = span.className.replace('corrected corrected--', '')
+            console.log(span)
+            span.parentNode.replaceChild(document.createTextNode(wordArray.value[spanId].toCheck), span)
+          })
+        })
+
         if (textOutput === userText.value) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
+          canConvert.value = true
+          isConverted.value = false
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
       }
     }
 
-    const undoConvert = (e) => {
-    }
+    // const undoConvert = (e) => {
+    //   console.log('j"ai essayé au moins')
+    // }
 
     const cancelChange = (e) => {
-      textInput.value = userText.value
+      textEditor.value.innerHTML = userText.value
+      canConvert.value = true
+      console.log(userText.value)
+
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
       isConverted.value = false
     }
@@ -126,15 +139,14 @@ export default {
     const eraseText = (e) => {
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
       isConverted.value = false
-
-      if (textInput.value !== null) {
-        textInput.value = ''
-        // isWriting()
+      if (textEditor.value.innerHTML !== null) {
+        textEditor.value.innerHTML = ''
       }
     }
 
     const copyText = (e) => {
-      navigator.clipboard.writeText(textInput.value).then(function () {
+      const textCopied = textEditor.value.textContent.replace((/\B(X)/g), (''))
+      navigator.clipboard.writeText(textCopied).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
         FeedbackOutput('Une erreur est survenue, impossible de copier dans le&nbsp;presse-papier.')
@@ -152,6 +164,10 @@ export default {
         clearTimeout(FeedbackVanish)
       }
     }
+    const TextWriting = () => {
+      canConvert.value = true
+      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
+    }
 
     const btnArray = [
       {
@@ -160,13 +176,13 @@ export default {
         action: convertText,
         ref: 'btnConvert'
       },
-      {
-        class: 'undo',
-        text: 'Retour <span class="hide">en&nbsp;arrière</span>',
-        action: undoConvert,
-        ref: 'btnUndo'
+      // {
+      //   class: 'undo',
+      //   text: 'Retour <span class="hide">en&nbsp;arrière</span>',
+      //   action: undoConvert,
+      //   ref: 'btnUndo'
 
-      },
+      // },
       {
         class: 'cancel',
         text: 'Annuler <span class="hide">les&nbsp;modifications</span>',
@@ -194,24 +210,28 @@ export default {
     onMounted(async () => {
       console.clear()
       console.log('____Mounted_____')
+      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
+
+      await fetch('./assets/data/CorrectorMini.json')
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+          wordArray.value = data
+        }).catch(function (error) {
+          console.error(error)
+        })
     })
 
     return {
       isDisabled,
-      // loading,
       canConvert,
-      // convertText,
-      // undoConvert,
-      // cancelChange,
-      // eraseText,
-      // copyText,
       btnArray,
-      wordCounter,
-      textInput,
       userText,
       inputFeedback,
-      feedbackActive
-      // btnList
+      feedbackActive,
+      textEditor,
+      TextWriting,
+      wordCounter,
+      wordArray
     }
   }
 }
@@ -265,7 +285,6 @@ export default {
         }
 
         .input-container{
-          // display: block;
           width: 100%;
           position: relative;
           border-bottom: 1px solid $c-black;
@@ -286,10 +305,18 @@ export default {
           width: 100%;
           height: 100%;
           white-space: pre-line;
+          word-wrap: break-word;
 
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
-          line-height: 160%;
+          line-height: 150%;
+
+          &:empty::before{
+            content: attr(placeholder);
+            pointer-events: none;
+            display: block;
+            opacity: .7;
+          }
 
           @include tb{
             font-size: $s-tab--smaller;
@@ -301,6 +328,72 @@ export default {
           }
           @include xl{
             font-size: $s-desk--smaller;
+          }
+
+          p{
+            margin-left: 0;
+
+            &:focus-visible{
+              outline: 0;
+            }
+          }
+        }
+
+        .corrected{
+          white-space: nowrap;
+          border: 1px solid $c-black;
+          padding: 0 $s-mob--smallest/4 0 $s-mob--smallest/4 ;
+          position: relative;
+          display: inline;
+          margin: 0;
+          height: auto;
+          margin-right: $s-mob--small;
+
+          @include sm{
+            margin-right: $s-mob--small;
+          }
+
+          @include tb{
+            padding: 0 $s-tab--smallest/4;
+            margin-right: $s-tab--small;
+          }
+
+          @include lg{
+            padding: 0 $s-desk--smallest/4;
+            margin-right: $s-desk--smaller;
+          }
+
+          .btn--delete{
+            background-color: $c-black;
+            font-family: font1;
+            color: $c-white;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            position: absolute;
+            left: 100% ;
+            width: 100%;
+            top: -1px;
+            border: 1px solid $c-black;
+            box-sizing: content-box;
+            padding: 0 ;
+            max-width: $s-desk--smallest;
+            font-size: $s-mob--smallest/1.20;
+
+            @include sm{
+              font-size: $s-mob--smallest;
+              max-width: $s-mob--smaller;
+            }
+            @include tb{
+              font-size: $s-tab--tiny;
+              max-width: $s-tab--smaller;
+            }
+            @include lg{
+              font-size: $s-desk--tiny;
+              max-width: $s-desk--smallest;
+            }
           }
         }
 
