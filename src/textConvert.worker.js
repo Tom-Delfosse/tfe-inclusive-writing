@@ -1,4 +1,4 @@
-export const textConverter = async (textToConvert) => {
+export const textConverter = async (textToConvert, wordArray) => {
   let array = []
   try {
     const response = await fetch('/assets/data/CorrectorMini.json')
@@ -7,6 +7,7 @@ export const textConverter = async (textToConvert) => {
     console.error(error)
     console.log("le fetch n'a pas fonctionné.")
   }
+  // console.log(wordArray)
 
   try {
     textToConvert = textToConvert.replace(/\n?\n/g, '|').split('|').filter(function (el) {
@@ -14,7 +15,7 @@ export const textConverter = async (textToConvert) => {
     })
 
     textToConvert.forEach((el, index) => {
-      el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+      el = el.replace(/(\.?\.?[.?!])\s/g, '$1|').split('|')
       el = el.filter(subEl => subEl.trim() || subEl === null)
       textToConvert[index] = el
     })
@@ -26,7 +27,7 @@ export const textConverter = async (textToConvert) => {
 
           if (subEl.match(regexToCheck)) {
             console.log(array[i].wordID + ' ____ ' + array[i].toCheck)
-            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button ref="btnDelete" class="btn btn--delete">X</button>' + array[i].checked + '</span>')
+            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">' + array[i].checked + '<button ref="btnDelete" class="btn btn--delete">X</button></span>')
             // const firstLetter = subEl.charAt(0).toUpperCase()
             // console.log(firstLetter)
             // subEl = firstLetter + subEl.substring(1)

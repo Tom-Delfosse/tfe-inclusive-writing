@@ -80,7 +80,7 @@ export default {
         btnConvert: !isWriting || !canConvert.value,
         btnCopy: !isWriting,
         btnCancel: !isConverted.value,
-        btnUndo: !isConverted.value,
+        // btnUndo: !isConverted.value,
         btnErase: !isWriting
       }
     })
@@ -90,7 +90,6 @@ export default {
 
       if (textEditor.value === null || textEditor.value === '') {
         if (feedbackActive.value === false) {
-          s
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
@@ -117,18 +116,17 @@ export default {
 
         if (textOutput === userText.value) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
+          canConvert.value = true
+          isConverted.value = false
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
-
-        // console.log(textEditor.value)
       }
     }
 
-    const undoConvert = (e) => {
-      console.log('j"ai essayé au moins')
-      // console.log(btnDeleteList)
-    }
+    // const undoConvert = (e) => {
+    //   console.log('j"ai essayé au moins')
+    // }
 
     const cancelChange = (e) => {
       textEditor.value.innerHTML = userText.value
@@ -148,7 +146,8 @@ export default {
     }
 
     const copyText = (e) => {
-      navigator.clipboard.writeText(textEditor.value.textContent).then(function () {
+      const textCopied = textEditor.value.textContent.replace((/\B(X)/g), (''))
+      navigator.clipboard.writeText(textCopied).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
         FeedbackOutput('Une erreur est survenue, impossible de copier dans le&nbsp;presse-papier.')
@@ -178,13 +177,13 @@ export default {
         action: convertText,
         ref: 'btnConvert'
       },
-      {
-        class: 'undo',
-        text: 'Retour <span class="hide">en&nbsp;arrière</span>',
-        action: undoConvert,
-        ref: 'btnUndo'
+      // {
+      //   class: 'undo',
+      //   text: 'Retour <span class="hide">en&nbsp;arrière</span>',
+      //   action: undoConvert,
+      //   ref: 'btnUndo'
 
-      },
+      // },
       {
         class: 'cancel',
         text: 'Annuler <span class="hide">les&nbsp;modifications</span>',
@@ -214,13 +213,12 @@ export default {
       console.log('____Mounted_____')
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
 
-      await fetch('/assets/data/CorrectorMini.json')
+      await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
         .then(function (data) {
           wordArray.value = data
         }).catch(function (error) {
           console.error(error)
-          console.log('triste')
         })
     })
 
@@ -235,7 +233,6 @@ export default {
       TextWriting,
       wordCounter,
       wordArray
-      // btnDeleteList
     }
   }
 }
