@@ -75,7 +75,7 @@ export default {
   }
   @include tb{
     margin-bottom: $s-tab--medium;
-    max-width: $s-tab--big;
+    max-width: $s-tab--bigger;
   }
   @include lg{
     max-width: $s-desk--medium*2;
@@ -90,7 +90,7 @@ export default {
     height: 100%;
     cursor: pointer;
 
-    @include lg{
+    @include tb{
       stroke-width: 0.7px;
     }
 

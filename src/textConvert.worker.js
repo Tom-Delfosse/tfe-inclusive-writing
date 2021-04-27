@@ -1,4 +1,4 @@
-export const textConverter = async (textToConvert) => {
+export const textConverter = async (textToConvert, wordArray) => {
   let array = []
   try {
     const response = await fetch('/assets/data/CorrectorMini.json')
@@ -7,6 +7,7 @@ export const textConverter = async (textToConvert) => {
     console.error(error)
     console.log("le fetch n'a pas fonctionné.")
   }
+  // console.log(wordArray)
 
   try {
     textToConvert = textToConvert.replace(/\n?\n/g, '|').split('|').filter(function (el) {
@@ -14,35 +15,28 @@ export const textConverter = async (textToConvert) => {
     })
 
     textToConvert.forEach((el, index) => {
-      el = el.replace(/([.?!])\s*(?=[a-z])?(?=[A-Z])?(?=[0-9])?/g, '$1|').split('|')
+      el = el.replace(/(\.?\.?[.?!])\s/g, '$1|').split('|')
       el = el.filter(subEl => subEl.trim() || subEl === null)
       textToConvert[index] = el
     })
 
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
-        // if (subEl.match(/\b(je|on|il|elle|le|la|iel|ellui|l'|là|son|sa|ma|ta)(?![A-zÀ-ú])/gi)) {
-        // console.log('singulier')
-        // } else {
-        // console.log('masculin')
-        // }
-
-        // console.log(subEl + ' __')
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('\\b(' + array[i].toCheck + ')(?![A-zÀ-ú])(?!‧)', 'gi')
 
           if (subEl.match(regexToCheck)) {
-            // console.log('ping !')
-            // console.log(array[i].wordID + ' ' + array[i].checked)
-            subEl = subEl.replace(regexToCheck, array[i].checked)
-            const firstLetter = subEl.charAt(0).toUpperCase()
-            subEl = firstLetter + subEl.substring(1)
+            console.log(array[i].wordID + ' ____ ' + array[i].toCheck)
+            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">' + array[i].checked + '<button ref="btnDelete" class="btn btn--delete">X</button></span>')
+            // const firstLetter = subEl.charAt(0).toUpperCase()
+            // console.log(firstLetter)
+            // subEl = firstLetter + subEl.substring(1)
+            // console.log('index /' + subIndex)
             continue
           }
         }
         textToConvert[index][subIndex] = subEl
       })
-      console.log('fin de ConvertText')
       textToConvert[index] = textToConvert[index].join(' ')
     })
     textToConvert = textToConvert.join('\n\n')
