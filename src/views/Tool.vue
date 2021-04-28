@@ -64,7 +64,6 @@ export default {
 
   setup () {
     const inputFeedback = ref('')
-    const isConverted = ref(false)
     const canConvert = ref(false)
     const feedbackActive = ref(false)
     const userText = ref('')
@@ -72,12 +71,13 @@ export default {
     const textEditor = ref('')
     const wordArray = ref('')
     const wordCounter = ref(0)
+    const btnDeleteList = ref([])
     const isDisabled = computed(() => {
       const isWriting = wordCounter.value >= 1
       return {
         btnConvert: !isWriting || !canConvert.value,
         btnCopy: !isWriting,
-        btnCancel: !isConverted.value,
+        btnCancel: !btnDeleteList.value.length > 0,
         // btnUndo: !isConverted.value,
         btnErase: !isWriting
       }
@@ -85,7 +85,6 @@ export default {
 
     const convertText = async () => {
       canConvert.value = !canConvert.value
-
       if (textEditor.value === null || textEditor.value === '') {
         if (feedbackActive.value === false) {
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
@@ -98,16 +97,27 @@ export default {
           }
         }
         userText.value = textEditor.value.textContent
-        const textOutput = await textConverter(textEditor.value.textContent)
+        const textOutput = await textConverter({ textToConvert: textEditor.value.textContent, wordArray: wordArray })
         textEditor.value.innerHTML = textOutput
 
-        const btnDeleteList = document.querySelectorAll('.btn--delete')
-        btnDeleteList.forEach((btn) => {
+        btnDeleteList.value = document.getElementsByClassName('btn--delete')
+        // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
+
+        // console.log('POST__ATTRIBUTION')
+        // console.log(btnDeleteList.value)
+        // console.log(btnDeleteList.value.length)
+        btnDeleteList.value.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const span = e.currentTarget.parentNode
             const spanId = span.className.replace('corrected corrected--', '')
-            console.log(span)
             span.parentNode.replaceChild(document.createTextNode(wordArray.value[spanId].toCheck), span)
+            // console.log(btnDeleteList.value)
+            // console.log(btnDeleteList.value.length)
+
+            if (btnDeleteList.value.length === 0) {
+              btnDeleteList.value = ''
+              canConvert.value = true
+            }
           })
         })
 
@@ -116,7 +126,6 @@ export default {
           canConvert.value = true
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
-          isConverted.value = true
         }
       }
     }
@@ -126,20 +135,21 @@ export default {
     // }
 
     const cancelChange = (e) => {
+      console.log(btnDeleteList.value.length)
       textEditor.value.innerHTML = userText.value
       canConvert.value = true
       console.log(userText.value)
-
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
-      isConverted.value = false
     }
 
     const eraseText = (e) => {
-      FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
-      isConverted.value = false
       if (textEditor.value.innerHTML !== null) {
         textEditor.value.innerHTML = ''
       }
+      FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
+      console.log(btnDeleteList.value.length)
+      btnDeleteList.value = ''
+      wordCounter.value = 0
     }
 
     const copyText = (e) => {
@@ -208,7 +218,8 @@ export default {
     onMounted(async () => {
       console.clear()
       console.log('____Mounted_____')
-      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
+
+      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
 
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
@@ -230,6 +241,7 @@ export default {
       TextWriting,
       wordCounter,
       wordArray
+      // isConverted
     }
   }
 }
@@ -267,7 +279,6 @@ export default {
         @include tb{
           max-width: 600px;
           max-width: inherit;
-
         }
 
         @include lg{
@@ -301,13 +312,15 @@ export default {
           padding: 0;
           margin: 0;
           width: 100%;
+          overflow-y: auto;
           height: 100%;
           white-space: pre-line;
           word-wrap: break-word;
 
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
-          line-height: 150%;
+          line-height: 160%;
+          // line-height: 100px;
 
           &:empty::before{
             content: attr(placeholder);
@@ -340,25 +353,19 @@ export default {
         .corrected{
           white-space: nowrap;
           border: 1px solid $c-black;
-          padding: 0 $s-mob--smallest/4 0 $s-mob--smallest/4 ;
-          position: relative;
-          display: inline;
-          margin: 0;
+          display: inline-flex;
+          justify-content: space-between;
           height: auto;
-          margin-right: $s-mob--small;
-
+          margin: 0;
+          padding-left: $s-mob--smallest/6;
           @include sm{
-            margin-right: $s-mob--small;
+            padding-left: $s-mob--smallest/3;
           }
-
           @include tb{
-            padding: 0 $s-tab--smallest/4;
-            margin-right: $s-tab--small;
+            padding-left: $s-tab--smallest/3;
           }
-
           @include lg{
-            padding: 0 $s-desk--smallest/4;
-            margin-right: $s-desk--smaller;
+            padding-left: $s-desk--smallest/4;
           }
 
           .btn--delete{
@@ -369,28 +376,34 @@ export default {
             border: none;
             padding: 0;
             margin: 0;
-            height: 100%;
-            position: absolute;
-            left: 100% ;
+            align-self: stretch;
+            display: inline-block;
             width: 100%;
-            top: -1px;
             border: 1px solid $c-black;
             box-sizing: content-box;
             padding: 0 ;
             max-width: $s-desk--smallest;
             font-size: $s-mob--smallest/1.20;
+            padding: 0 $s-mob--smallest/6;
+            margin-left: $s-mob--smallest/6;
 
             @include sm{
               font-size: $s-mob--smallest;
-              max-width: $s-mob--smaller;
+              padding: 0 $s-mob--smallest/3;
+              margin-left: $s-mob--smallest/3;
+
             }
             @include tb{
+              padding: 0 $s-tab--tiny/4;
               font-size: $s-tab--tiny;
-              max-width: $s-tab--smaller;
+              margin-left: $s-tab--smallest/3;
+
             }
             @include lg{
               font-size: $s-desk--tiny;
-              max-width: $s-desk--smallest;
+              padding: 0 $s-desk--smallest/4;
+              margin-left: $s-desk--smallest/4;
+
             }
           }
         }

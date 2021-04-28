@@ -1,4 +1,6 @@
 export const textConverter = async (textToConvert, wordArray) => {
+  console.log('inside worker____')
+  console.log(wordArray)
   let array = []
   try {
     const response = await fetch('/assets/data/CorrectorMini.json')
