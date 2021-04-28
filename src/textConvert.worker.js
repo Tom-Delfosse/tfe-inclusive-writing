@@ -13,11 +13,15 @@ export const textConverter = async (textToConvert, array) => {
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
         for (let i = 0; i < array.length; i++) {
-          const regexToCheck = new RegExp('\\b(' + array[i].toCheck + ')(?![A-zÀ-ú])(?!‧)', 'gi')
-
+          // const regexToCheck = new RegExp('\\b(' + array[i].toCheck + ')(?![A-zÀ-ú])(?!‧)', 'gi')
+          const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?:\\s)', 'gi')
           if (subEl.match(regexToCheck)) {
-            console.log(array[i].wordID + ' ____ ' + array[i].toCheck)
-            subEl = subEl.replace(regexToCheck, array[i].checked)
+            const matchedWord = regexToCheck.exec(subEl)
+            // console.log(matchedWord[1])
+            // console.log(regexToCheck)
+            // console.log(array[i].wordID + ' ____ ' + array[i].toCheck)
+            // subEl = subEl.replace(regexToCheck, array[i].checked)
+            subEl = subEl.replace(matchedWord[1], array[i].checked)
             const firstLetter = subEl.charAt(0).toUpperCase()
             subEl = firstLetter + subEl.substring(1)
             // Comme je travaille en asynchrone sur un worker, je ne peux référencer le DOM ni le document lui même, et par conséquent, je ne peux créer de nouveaux éléments. Raison pour laquelle j'ai décidé d'utiliser Regex, bien qu'inadapté à cet usage, afin de parvenir à mes fins.
