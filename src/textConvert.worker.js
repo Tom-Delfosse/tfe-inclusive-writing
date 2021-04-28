@@ -1,16 +1,4 @@
-export const textConverter = async (textToConvert, wordArray) => {
-  console.log('inside worker____')
-  console.log(wordArray)
-  let array = []
-  try {
-    const response = await fetch('/assets/data/CorrectorMini.json')
-    array = await response.json()
-  } catch (error) {
-    console.error(error)
-    console.log("le fetch n'a pas fonctionné.")
-  }
-  // console.log(wordArray)
-
+export const textConverter = async (textToConvert, array) => {
   try {
     textToConvert = textToConvert.replace(/\n?\n/g, '|').split('|').filter(function (el) {
       return el !== ''
@@ -29,12 +17,16 @@ export const textConverter = async (textToConvert, wordArray) => {
 
           if (subEl.match(regexToCheck)) {
             console.log(array[i].wordID + ' ____ ' + array[i].toCheck)
-            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">' + array[i].checked + '<button ref="btnDelete" class="btn btn--delete">X</button></span>')
-            // const firstLetter = subEl.charAt(0).toUpperCase()
-            // console.log(firstLetter)
-            // subEl = firstLetter + subEl.substring(1)
-            // console.log('index /' + subIndex)
-            // console.log(subEl)
+            subEl = subEl.replace(regexToCheck, array[i].checked)
+            const firstLetter = subEl.charAt(0).toUpperCase()
+            subEl = firstLetter + subEl.substring(1)
+            // Comme je travaille en asynchrone sur un worker, je ne peux référencer le DOM ni le document lui même, et par conséquent, je ne peux créer de nouveaux éléments. Raison pour laquelle j'ai décidé d'utiliser Regex, bien qu'inadapté à cet usage, afin de parvenir à mes fins.
+            const regexAddSpan = new RegExp('\\b(' + array[i].checked + ')(?![A-zÀ-ú])(?!‧)', 'gi')
+            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">$1<button ref="btnDelete" class="btn btn--delete">X</button></span>')
+            continue
+          } else {
+            const firstLetter = subEl.charAt(0).toUpperCase()
+            subEl = firstLetter + subEl.substring(1)
             continue
           }
         }

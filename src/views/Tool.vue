@@ -69,7 +69,7 @@ export default {
     const userText = ref('')
     const timer = 3500
     const textEditor = ref('')
-    const wordArray = ref('')
+    let CorrectorArray = ''
     const wordCounter = ref(0)
     const btnDeleteList = ref([])
     const isDisabled = computed(() => {
@@ -97,22 +97,17 @@ export default {
           }
         }
         userText.value = textEditor.value.textContent
-        const textOutput = await textConverter({ textToConvert: textEditor.value.textContent, wordArray: wordArray })
+        const textOutput = await textConverter(textEditor.value.textContent, CorrectorArray)
         textEditor.value.innerHTML = textOutput
 
         btnDeleteList.value = document.getElementsByClassName('btn--delete')
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
 
-        // console.log('POST__ATTRIBUTION')
-        // console.log(btnDeleteList.value)
-        // console.log(btnDeleteList.value.length)
         btnDeleteList.value.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const span = e.currentTarget.parentNode
             const spanId = span.className.replace('corrected corrected--', '')
-            span.parentNode.replaceChild(document.createTextNode(wordArray.value[spanId].toCheck), span)
-            // console.log(btnDeleteList.value)
-            // console.log(btnDeleteList.value.length)
+            span.parentNode.replaceChild(document.createTextNode(CorrectorArray[spanId].toCheck), span)
 
             if (btnDeleteList.value.length === 0) {
               btnDeleteList.value = ''
@@ -224,7 +219,7 @@ export default {
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
         .then(function (data) {
-          wordArray.value = data
+          CorrectorArray = data
         }).catch(function (error) {
           console.error(error)
         })
@@ -240,8 +235,7 @@ export default {
       textEditor,
       TextWriting,
       wordCounter,
-      wordArray
-      // isConverted
+      CorrectorArray
     }
   }
 }
