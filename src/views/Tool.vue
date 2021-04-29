@@ -94,8 +94,13 @@ export default {
         const btnDeleteListPrev = btnDeleteList.value.length
         // console.log(document.querySelectorAll('br').length)
         // console.log(textEditor.value.textContent)
-        // console.log(textEditor.value.innerText)
-        const textOutput = await textConverter(textEditor.value.innerText, CorrectorArray)
+        const textToConvert = textEditor.value.innerText.replace(/\nX\n/g, 'X')
+        // if (textEditor.value.innerText.match(/\nX/gi)) {
+        // console.log('attention aux spans!')
+        // textEditor.value.innerText = textEditor.value.innerText.replace(/\nX\n/gi, 'X')
+        // }
+        // console.log(textToConvert)
+        const textOutput = await textConverter(textToConvert, CorrectorArray)
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
         // console.log(textEditor.value.textContent.length)
@@ -107,10 +112,10 @@ export default {
               const span = e.currentTarget.parentNode
               const spanId = span.className.replace('corrected corrected--', '')
               span.parentNode.replaceChild(document.createTextNode(CorrectorArray[spanId].toCheck), span)
+              canConvert.value = true
 
               if (btnDeleteList.value.length < 1) {
                 btnDeleteList.value = ''
-                canConvert.value = true
               }
             })
           })
@@ -144,7 +149,7 @@ export default {
         textEditor.value.innerHTML = ''
       }
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
-      console.log(btnDeleteList.value.length)
+      // console.log(btnDeleteList.value.length)
       btnDeleteList.value = ''
       wordCounter.value = 0
     }
@@ -402,7 +407,7 @@ export default {
             padding: 0;
             margin: 0;
             align-self: stretch;
-            display: inline-block;
+            display: inline;
             width: 100%;
             border: 1px solid $c-black;
             box-sizing: content-box;
