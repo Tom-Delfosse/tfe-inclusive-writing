@@ -66,12 +66,12 @@ export default {
     const inputFeedback = ref('')
     const canConvert = ref(false)
     const feedbackActive = ref(false)
-    const userText = ref('')
     const timer = 3500
     const textEditor = ref('')
     let CorrectorArray = ''
     const wordCounter = ref(0)
-    const btnDeleteList = ref([])
+    const spanList = ref('')
+    const btnDeleteList = ref('')
     const isDisabled = computed(() => {
       const isWriting = wordCounter.value >= 1
       return {
@@ -90,19 +90,11 @@ export default {
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
-        if (textEditor.value.contains(document.querySelector('.corrected'))) {
-          const spanList = document.querySelectorAll('.corrected')
-          for (let i = 0; i < spanList.length; i++) {
-            spanList[i].removeChild(document.querySelector('.btn--delete'))
-          }
-        }
-        userText.value = textEditor.value.textContent
         const textOutput = await textConverter(textEditor.value.textContent, CorrectorArray)
         textEditor.value.innerHTML = textOutput
-
+        spanList.value = document.querySelectorAll('.corrected')
         btnDeleteList.value = document.getElementsByClassName('btn--delete')
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
-
         btnDeleteList.value.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const span = e.currentTarget.parentNode
@@ -130,10 +122,15 @@ export default {
     // }
 
     const cancelChange = (e) => {
-      console.log(btnDeleteList.value.length)
-      textEditor.value.innerHTML = userText.value
       canConvert.value = true
-      console.log(userText.value)
+      const spanId = []
+
+      for (let i = 0; i < spanList.value.length; i++) {
+        spanId.push(spanList.value[i].className.replace(/[^0-9]/g, ''))
+        spanList.value[i].replaceWith(CorrectorArray[spanId[i]].toCheck)
+        continue
+      }
+
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
     }
 
@@ -229,7 +226,6 @@ export default {
       isDisabled,
       canConvert,
       btnArray,
-      userText,
       inputFeedback,
       feedbackActive,
       textEditor,
