@@ -94,11 +94,11 @@ export default {
         const btnDeleteListPrev = btnDeleteList.value.length
         // console.log(document.querySelectorAll('br').length)
         // console.log(textEditor.value.textContent)
-        console.log(textEditor.value.innerText)
+        // console.log(textEditor.value.innerText)
         const textOutput = await textConverter(textEditor.value.innerText, CorrectorArray)
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
-        console.log(textEditor.value.textContent.length)
+        // console.log(textEditor.value.textContent.length)
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
           btnDeleteList.value = document.getElementsByClassName('btn--delete')
@@ -118,7 +118,7 @@ export default {
           canConvert.value = true
         }
 
-        console.log(btnDeleteListPrev)
+        // console.log(btnDeleteListPrev)
         if (btnDeleteList.value.length <= btnDeleteListPrev) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
           canConvert.value = true
@@ -177,12 +177,11 @@ export default {
     const TextPasting = (e) => {
       e.stopPropagation()
       e.preventDefault()
-
       const clipboardData = e.clipboardData || window.clipboardData
       const ClipboardText = clipboardData.getData('Text')
-      console.log(ClipboardText)
+      textEditor.value.focus()
+      textEditor.value.innerText = textEditor.value.innerText + ClipboardText
 
-      textEditor.value.innerText = ClipboardText
       TextWriting()
       // source : https://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser Solution 1
     }
