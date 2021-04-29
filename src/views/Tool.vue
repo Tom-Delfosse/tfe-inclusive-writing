@@ -9,7 +9,8 @@
               class="text-editor"
               contenteditable="true"
               placeholder="Inscrivez votre texte ici&nbsp;!"
-              @input="TextWriting"
+              @keypress="TextWriting"
+              @paste="TextPasting"
             />
 
             <p
@@ -91,9 +92,13 @@ export default {
         }
       } else {
         const btnDeleteListPrev = btnDeleteList.value.length
-        const textOutput = await textConverter(textEditor.value.textContent, CorrectorArray)
+        // console.log(document.querySelectorAll('br').length)
+        // console.log(textEditor.value.textContent)
+        console.log(textEditor.value.innerText)
+        const textOutput = await textConverter(textEditor.value.innerText, CorrectorArray)
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
+        console.log(textEditor.value.textContent.length)
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
           btnDeleteList.value = document.getElementsByClassName('btn--delete')
@@ -105,6 +110,7 @@ export default {
 
               if (btnDeleteList.value.length < 1) {
                 btnDeleteList.value = ''
+                canConvert.value = true
               }
             })
           })
@@ -166,6 +172,19 @@ export default {
     const TextWriting = () => {
       canConvert.value = true
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
+    }
+
+    const TextPasting = (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+
+      const clipboardData = e.clipboardData || window.clipboardData
+      const ClipboardText = clipboardData.getData('Text')
+      console.log(ClipboardText)
+
+      textEditor.value.innerText = ClipboardText
+      TextWriting()
+      // source : https://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser Solution 1
     }
 
     // const undoConvert = (e) => {
@@ -234,7 +253,8 @@ export default {
       textEditor,
       TextWriting,
       wordCounter,
-      CorrectorArray
+      CorrectorArray,
+      TextPasting
     }
   }
 }
@@ -320,6 +340,19 @@ export default {
             pointer-events: none;
             display: block;
             opacity: .7;
+          }
+
+          &::selection{
+            background-color: $c-black;
+            color: $c-white;
+          }
+
+          & div::selection{
+          background-color: $c-black;
+          color: $c-white;
+              br{
+                background-color: $c-black;
+              }
           }
 
           @include tb{
