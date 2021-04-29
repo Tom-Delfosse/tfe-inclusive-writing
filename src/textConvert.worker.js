@@ -13,20 +13,18 @@ export const textConverter = async (textToConvert, array) => {
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
         for (let i = 0; i < array.length; i++) {
-          // const regexToCheck = new RegExp('\\b(' + array[i].toCheck + ')(?![A-zÀ-ú])(?!‧)', 'gi')
-          const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?:\\s)', 'gi')
+          const regexToCheck = new RegExp('(\\b)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
+
           if (subEl.match(regexToCheck)) {
-            const matchedWord = regexToCheck.exec(subEl)
-            // console.log(matchedWord[1])
-            // console.log(regexToCheck)
-            // console.log(array[i].wordID + ' ____ ' + array[i].toCheck)
-            // subEl = subEl.replace(regexToCheck, array[i].checked)
-            subEl = subEl.replace(matchedWord[1], array[i].checked)
-            const firstLetter = subEl.charAt(0).toUpperCase()
-            subEl = firstLetter + subEl.substring(1)
-            // Comme je travaille en asynchrone sur un worker, je ne peux référencer le DOM ni le document lui même, et par conséquent, je ne peux créer de nouveaux éléments. Raison pour laquelle j'ai décidé d'utiliser Regex, bien qu'inadapté à cet usage, afin de parvenir à mes fins.
-            const regexAddSpan = new RegExp('\\b(' + array[i].checked + ')(?![A-zÀ-ú])(?!‧)', 'gi')
-            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">$1<button ref="btnDelete" class="btn btn--delete">X</button></span>')
+            console.log(array[i].toCheck)
+            // subEl = subEl.replace(regexToCheck, ' ' + array[i].checked)
+            // const firstLetter = subEl.charAt(0).toUpperCase()
+            // console.log(firstLetter)
+            // subEl = firstLetter + subEl.substring(1)
+
+            // const regexAddSpan = new RegExp('\\b(' + array[i].checked + ')(?![A-zÀ-ú])(?!‧)', 'gi')
+            subEl = subEl.replace(regexToCheck, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">' + array[i].checked + '<button ref="btnDelete" class="btn btn--delete">X</button></span>')
+            // console.log(subEl)
             continue
           } else {
             const firstLetter = subEl.charAt(0).toUpperCase()
@@ -34,6 +32,7 @@ export const textConverter = async (textToConvert, array) => {
             continue
           }
         }
+        // subEl = subEl.substring(1)
         textToConvert[index][subIndex] = subEl
       })
       textToConvert[index] = textToConvert[index].join(' ')
