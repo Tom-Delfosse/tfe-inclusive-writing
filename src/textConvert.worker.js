@@ -49,7 +49,7 @@ export const textConverter = async (textToConvert, array) => {
       textToConvert[index] = textToConvert[index].join(' ')
     })
     textToConvert = textToConvert.join('\n\n')
-    console.log('on quitte le worker')
+    console.log('_on quitte le worker_')
     return textToConvert
   } catch (e) {
     console.log(e)

@@ -63,12 +63,12 @@ export default {
   },
 
   setup () {
+    const timer = 3500
+    let CorrectorArray = ''
     const inputFeedback = ref('')
     const canConvert = ref(false)
     const feedbackActive = ref(false)
-    const timer = 3500
     const textEditor = ref('')
-    let CorrectorArray = ''
     const wordCounter = ref(0)
     const spanList = ref('')
     const btnDeleteList = ref('')
@@ -77,7 +77,7 @@ export default {
       return {
         btnConvert: !isWriting || !canConvert.value,
         btnCopy: !isWriting,
-        btnCancel: !btnDeleteList.value.length > 0,
+        btnCancel: btnDeleteList.value.length < 1,
         // btnUndo: !isConverted.value,
         btnErase: !isWriting
       }
@@ -90,25 +90,30 @@ export default {
           FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
+        const btnDeleteListPrev = btnDeleteList.value.length
         const textOutput = await textConverter(textEditor.value.textContent, CorrectorArray)
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
-        btnDeleteList.value = document.getElementsByClassName('btn--delete')
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
-        btnDeleteList.value.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-            const span = e.currentTarget.parentNode
-            const spanId = span.className.replace('corrected corrected--', '')
-            span.parentNode.replaceChild(document.createTextNode(CorrectorArray[spanId].toCheck), span)
+        if (document.getElementsByClassName('btn--delete').length > 0) {
+          btnDeleteList.value = document.getElementsByClassName('btn--delete')
+          btnDeleteList.value.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              const span = e.currentTarget.parentNode
+              const spanId = span.className.replace('corrected corrected--', '')
+              span.parentNode.replaceChild(document.createTextNode(CorrectorArray[spanId].toCheck), span)
 
-            if (btnDeleteList.value.length === 0) {
-              btnDeleteList.value = ''
-              canConvert.value = true
-            }
+              if (btnDeleteList.value.length < 1) {
+                btnDeleteList.value = ''
+              }
+            })
           })
-        })
+        } else {
+          canConvert.value = true
+        }
 
-        if (!textEditor.value.children.length > 0) {
+        console.log(btnDeleteListPrev)
+        if (btnDeleteList.value.length <= btnDeleteListPrev) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
           canConvert.value = true
         } else {
@@ -117,20 +122,14 @@ export default {
       }
     }
 
-    // const undoConvert = (e) => {
-    //   console.log('j"ai essayé au moins')
-    // }
-
     const cancelChange = (e) => {
       canConvert.value = true
-      const spanId = []
-
       for (let i = 0; i < spanList.value.length; i++) {
-        spanId.push(spanList.value[i].className.replace(/[^0-9]/g, ''))
-        spanList.value[i].replaceWith(CorrectorArray[spanId[i]].toCheck)
+        spanList.value[i].replaceWith(CorrectorArray[spanList.value[i].className.replace(/[^0-9]/g, '')].toCheck)
         continue
       }
-
+      btnDeleteList.value = ''
+      textEditor.value.innerHTML = textEditor.value.textContent
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
     }
 
@@ -168,6 +167,10 @@ export default {
       canConvert.value = true
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     }
+
+    // const undoConvert = (e) => {
+    //   console.log('j"ai essayé au moins')
+    // }
 
     const btnArray = [
       {
