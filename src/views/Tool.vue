@@ -92,31 +92,11 @@ export default {
         }
       } else {
         const btnDeleteListPrev = btnDeleteList.value.length
-        // console.log(document.querySelectorAll('br').length)
-        // console.log(textEditor.value.textContent)
         const textToConvert = textEditor.value.innerText.replace(/\nX\n/g, 'X')
-        // if (textEditor.value.innerText.match(/\nX/gi)) {
-        // console.log('attention aux spans!')
-        // textEditor.value.innerText = textEditor.value.innerText.replace(/\nX\n/gi, 'X')
-        // }
-        // console.log(textToConvert)
         const textOutput = await textConverter(textToConvert, CorrectorArray)
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
 
-        const sentenceList = textEditor.value.textContent.replace(/\.\n?\s/g, '.|').split('|')
-
-        // console.log('sentenceList')
-        // console.log(sentenceList)
-        // sentenceList.forEach((sentence, index) => {
-        //   console.log(sentence.charAt(2))
-        //   console.log(sentence.substring(2))
-        //   sentence = '  ' + sentence.charAt(2).toUpperCase() + sentence.substring(3)
-        //   sentenceList[index] = sentence
-        // })
-        // sentenceList = sentenceList.join('')
-        // console.log(sentenceList)
-        // console.log(textEditor.value.textContent.length)
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
           btnDeleteList.value = document.getElementsByClassName('btn--delete')
@@ -136,7 +116,6 @@ export default {
           canConvert.value = true
         }
 
-        // console.log(btnDeleteListPrev)
         if (btnDeleteList.value.length <= btnDeleteListPrev) {
           FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
           canConvert.value = true
@@ -162,13 +141,11 @@ export default {
         textEditor.value.innerHTML = ''
       }
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
-      // console.log(btnDeleteList.value.length)
       btnDeleteList.value = ''
       wordCounter.value = 0
     }
 
     const copyText = (e) => {
-      console.log('copied')
       const textCopied = textEditor.value.innerText.replace((/\n(X)\n/g), (''))
       navigator.clipboard.writeText(textCopied).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
@@ -431,6 +408,7 @@ export default {
             font-size: $s-mob--smallest/1.20;
             padding: 0 $s-mob--smallest/6;
             margin-left: $s-mob--smallest/6;
+            user-select: none;
 
             @include sm{
               font-size: $s-mob--smallest;

@@ -13,11 +13,8 @@ export const textConverter = async (textToConvert, array) => {
       el.forEach((subEl, subIndex) => {
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
         console.log(subEl)
-        // subEl = ' ' + subEl
-        // console.log(subEl)
         const firstLetter = subEl.charAt(1).toUpperCase()
         console.log(firstLetter)
-        // console.log(subEl)
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
           const regexSpanCheck = new RegExp('(?:\\s)' + array[i].checked + '(X)(?!‧|[A-zÀ-ú])', 'gi')
@@ -41,11 +38,11 @@ export const textConverter = async (textToConvert, array) => {
             continue
           }
         }
-        // console.log(subEl.charAt(0))
+        console.log(subEl)
         subEl = ' ' + firstLetter + subEl.substring(2)
+        console.log(subEl)
         textToConvert[index][subIndex] = subEl
       })
-      // console.log(textToConvert)
       textToConvert[index] = textToConvert[index].join('')
     })
     textToConvert = textToConvert.join('\n\n')
@@ -55,3 +52,5 @@ export const textConverter = async (textToConvert, array) => {
     console.log(e)
   }
 }
+
+// <.*?>
