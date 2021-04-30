@@ -103,6 +103,19 @@ export default {
         const textOutput = await textConverter(textToConvert, CorrectorArray)
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
+
+        const sentenceList = textEditor.value.textContent.replace(/\.\n?\s/g, '.|').split('|')
+
+        // console.log('sentenceList')
+        // console.log(sentenceList)
+        // sentenceList.forEach((sentence, index) => {
+        //   console.log(sentence.charAt(2))
+        //   console.log(sentence.substring(2))
+        //   sentence = '  ' + sentence.charAt(2).toUpperCase() + sentence.substring(3)
+        //   sentenceList[index] = sentence
+        // })
+        // sentenceList = sentenceList.join('')
+        // console.log(sentenceList)
         // console.log(textEditor.value.textContent.length)
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
@@ -155,7 +168,8 @@ export default {
     }
 
     const copyText = (e) => {
-      const textCopied = textEditor.value.textContent.replace((/\B(X)/g), (''))
+      console.log('copied')
+      const textCopied = textEditor.value.innerText.replace((/\n(X)\n/g), (''))
       navigator.clipboard.writeText(textCopied).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
@@ -185,6 +199,7 @@ export default {
       const clipboardData = e.clipboardData || window.clipboardData
       const ClipboardText = clipboardData.getData('Text')
       textEditor.value.focus()
+      console.log(ClipboardText)
       textEditor.value.innerText = textEditor.value.innerText + ClipboardText
 
       TextWriting()

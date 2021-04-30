@@ -12,6 +12,11 @@ export const textConverter = async (textToConvert, array) => {
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
+        console.log(subEl)
+        // subEl = ' ' + subEl
+        // console.log(subEl)
+        const firstLetter = subEl.charAt(1).toUpperCase()
+        console.log(firstLetter)
         // console.log(subEl)
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
@@ -19,10 +24,6 @@ export const textConverter = async (textToConvert, array) => {
 
           if (subEl.match(regexSpanCheck)) {
             subEl = subEl.replace(regexSpanCheck, ' ' + array[i].checked)
-            // console.log(subEl)
-            // console.log('ping!')
-            // const firstLetter = subEl.charAt(1).toUpperCase()
-            // subEl = firstLetter + subEl.substring(2)
 
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
             subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' +
@@ -32,19 +33,16 @@ export const textConverter = async (textToConvert, array) => {
             continue
           } else if (subEl.match(regexToCheck)) {
             subEl = subEl.replace(regexToCheck, ' ' + array[i].checked)
-            // console.log(subEl)
-
-            const firstLetter = subEl.charAt(1).toUpperCase()
-            subEl = firstLetter + subEl.substring(2)
 
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
-            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' +
+            subEl = subEl.replace(regexAddSpan, ' ' + '<span contenteditable="false" class="corrected corrected--' +
               array[i].wordID +
               '">$1<button class="btn btn--delete">X</button contenteditable="false"></span>')
             continue
           }
         }
-        // subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
+        // console.log(subEl.charAt(0))
+        subEl = ' ' + firstLetter + subEl.substring(2)
         textToConvert[index][subIndex] = subEl
       })
       // console.log(textToConvert)
