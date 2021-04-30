@@ -10,3 +10,5 @@ First of all, this tool is supposed to help everyone have an easier and more pra
 ## Credit
 - Lexique 3.83 (<http://www.lexique.org/shiny/lexique>)
 - Pallier, Christophe & New, Boris (2019** Openlexicon, GitHub repository, https://github.com/chrplr/openlexicon
+## License
+This repository is distributed under a CC BY-SA 4.0 LICENSE (see more at https://creativecommons.org/licenses/by-sa/4.0/).
