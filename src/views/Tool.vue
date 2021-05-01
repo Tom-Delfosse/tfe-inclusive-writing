@@ -9,7 +9,7 @@
               class="text-editor"
               contenteditable="true"
               placeholder="Inscrivez votre texte ici&nbsp;!"
-              @keypress="TextWriting"
+              @keyup="TextWriting"
               @paste="TextPasting"
             />
 
@@ -166,6 +166,7 @@ export default {
       }
     }
     const TextWriting = () => {
+      console.log('isWriting!')
       canConvert.value = true
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     }
