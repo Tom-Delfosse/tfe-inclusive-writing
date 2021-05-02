@@ -166,12 +166,13 @@ export default {
       }
     }
     const TextWriting = () => {
-      console.log('isWriting!')
+      // console.log('isWriting!')
       canConvert.value = true
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     }
 
     const TextPasting = (e) => {
+      // console.log('pasted')
       e.stopPropagation()
       e.preventDefault()
       const clipboardData = e.clipboardData || window.clipboardData
