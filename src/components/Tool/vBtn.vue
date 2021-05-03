@@ -31,6 +31,7 @@
     cursor: not-allowed;
     position: absolute;
     margin-left: $s-mob--medium-plus;
+    user-select: none;
 
     @include sm{
       margin-left: $s-mob--big;

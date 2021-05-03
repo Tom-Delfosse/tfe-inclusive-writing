@@ -35,13 +35,13 @@
           />
         </div>
 
-        <div ref="btnList" class="options">
+        <div ref="btnList" class="options" :class="{'options--deactivated' : isDeactivated}">
           <vBtn
             v-for="btn in btnArray.slice(1)"
             :key="btn.ref"
             :ref="btn.ref"
             :disabled="isDisabled[btn.ref]"
-            :class="`btn--${btn.class}`"
+            :class="[`btn--${btn.class}`]"
             @click="btn.action"
             v-html="btn.text"
           />
@@ -64,7 +64,6 @@ export default {
   },
 
   setup () {
-    // const timer = 3500
     let CorrectorArray = ''
     let feedbackBye = null
     const inputFeedback = ref('')
@@ -72,6 +71,7 @@ export default {
     const feedbackActive = ref(false)
     const textEditor = ref('')
     const wordCounter = ref(0)
+    const isDeactivated = ref(false)
     const spanList = ref('')
     const btnDeleteList = ref('')
     const isDisabled = computed(() => {
@@ -106,11 +106,12 @@ export default {
           feedbackActive.value = true
           inputFeedback.value.innerHTML = loadingMsg
         }
-
+        isDeactivated.value = true
         const textOutput = await textConverter(textToConvert, CorrectorArray)
+        isDeactivated.value = false
+
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
-
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
           btnDeleteList.value = document.getElementsByClassName('btn--delete')
@@ -139,7 +140,7 @@ export default {
       }
     }
 
-    const cancelChange = (e) => {
+    const cancelChange = () => {
       canConvert.value = true
       for (let i = 0; i < spanList.value.length; i++) {
         spanList.value[i].replaceWith(CorrectorArray[spanList.value[i].className.replace(/[^0-9]/g, '')].toCheck)
@@ -150,7 +151,7 @@ export default {
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
     }
 
-    const eraseText = (e) => {
+    const eraseText = () => {
       if (textEditor.value.innerHTML !== null) {
         textEditor.value.innerHTML = ''
       }
@@ -159,7 +160,7 @@ export default {
       wordCounter.value = 0
     }
 
-    const copyText = (e) => {
+    const copyText = () => {
       const textCopied = textEditor.value.innerText.replace((/\n(X)\n/g), (''))
       navigator.clipboard.writeText(textCopied).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
@@ -258,7 +259,8 @@ export default {
       TextWriting,
       wordCounter,
       CorrectorArray,
-      TextPasting
+      TextPasting,
+      isDeactivated
     }
   }
 }
@@ -266,6 +268,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .section--tool{
     padding-top: 20vh;
     height: 80vh;
@@ -503,6 +506,11 @@ export default {
       margin-right: auto;
       margin-top: $s-mob--medium;
       position: relative;
+
+      &--deactivated .btn{
+        opacity: 0.3;
+        pointer-events: none;
+      }
 
       @include sm{
         margin-top: $s-mob--medium;
