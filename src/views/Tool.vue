@@ -14,9 +14,9 @@
             />
 
             <p
+              ref="inputFeedback"
               class="input-feedback"
               :class="{'input-feedback--active' : feedbackActive}"
-              v-html="inputFeedback"
             />
           </div>
 
@@ -64,8 +64,9 @@ export default {
   },
 
   setup () {
-    const timer = 3500
+    // const timer = 3500
     let CorrectorArray = ''
+    let feedbackBye = null
     const inputFeedback = ref('')
     const canConvert = ref(false)
     const feedbackActive = ref(false)
@@ -155,16 +156,21 @@ export default {
     }
 
     const FeedbackOutput = (text) => {
-      inputFeedback.value = text
-      const FeedbackVanish = setTimeout(() => { feedbackActive.value = !feedbackActive.value }, timer)
+      clearTimeout(feedbackBye)
 
-      if (feedbackActive.value === false) {
-        feedbackActive.value = !feedbackActive.value
+      if (feedbackActive.value === true) {
+        feedbackActive.value = false
+        setTimeout(() => {
+          feedbackActive.value = true
+          inputFeedback.value.innerHTML = text
+        }, 150)
       } else {
-        console.log('clearTimeout')
-        clearTimeout(FeedbackVanish)
+        feedbackActive.value = true
+        inputFeedback.value.innerHTML = text
       }
+      feedbackBye = setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 3000)
     }
+
     const TextWriting = () => {
       // console.log('isWriting!')
       canConvert.value = true
@@ -452,11 +458,11 @@ export default {
           max-width: 100%;
           position: absolute;
           background-color: $c-black;
-          bottom: 0;
+          bottom: -15px;
           color: $c-white;
           margin: 0;
           padding: $s-mob--smallest/2 $s-mob--smaller*2;
-          transition: $t-smooth;
+          transition: $t-fast;
           box-sizing: border-box;
 
           @include tb{
@@ -470,8 +476,10 @@ export default {
             pointer-events: none;
           &--active{
             opacity: 1;
+            bottom: 0;
             transition: $t-fast;
             pointer-events: inherit;
+
           }
         }
     }
