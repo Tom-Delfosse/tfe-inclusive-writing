@@ -95,7 +95,7 @@ export default {
         const textToConvert = textEditor.value.innerText.replace(/\nX\n/g, 'X')
         const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
         clearTimeout(feedbackBye)
-        console.log(feedbackActive.value)
+        // console.log(feedbackActive.value)
         if (feedbackActive.value === true) {
           feedbackActive.value = false
           setTimeout(() => {
@@ -106,6 +106,7 @@ export default {
           feedbackActive.value = true
           inputFeedback.value.innerHTML = loadingMsg
         }
+
         isDeactivated.value = true
         const textOutput = await textConverter(textToConvert, CorrectorArray)
         isDeactivated.value = false
@@ -137,6 +138,7 @@ export default {
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
+        console.log(textEditor.value.innerText)
       }
     }
 
@@ -161,7 +163,9 @@ export default {
     }
 
     const copyText = () => {
-      const textCopied = textEditor.value.innerText.replace((/\n(X)\n/g), (''))
+      console.log(textEditor.value.innerText)
+      const textCopied = textEditor.value.innerText.replace((/\n(X)\n?/g), (''))
+      console.log(textCopied)
       navigator.clipboard.writeText(textCopied).then(function () {
         FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
@@ -197,7 +201,7 @@ export default {
       const ClipboardText = clipboardData.getData('Text')
       textEditor.value.focus()
       console.log(ClipboardText)
-      textEditor.value.innerText = textEditor.value.innerText + ClipboardText
+      textEditor.value.innerText = textEditor.value.innerText.replace((/\n(X)\n?/g), ('')) + ClipboardText
 
       TextWriting()
       // source : https://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser Solution 1
