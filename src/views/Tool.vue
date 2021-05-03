@@ -80,7 +80,6 @@ export default {
         btnConvert: !isWriting || !canConvert.value,
         btnCopy: !isWriting,
         btnCancel: btnDeleteList.value.length < 1,
-        // btnUndo: !isConverted.value,
         btnErase: !isWriting
       }
     })
@@ -94,6 +93,20 @@ export default {
       } else {
         const btnDeleteListPrev = btnDeleteList.value.length
         const textToConvert = textEditor.value.innerText.replace(/\nX\n/g, 'X')
+        const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
+        clearTimeout(feedbackBye)
+        console.log(feedbackActive.value)
+        if (feedbackActive.value === true) {
+          feedbackActive.value = false
+          setTimeout(() => {
+            feedbackActive.value = true
+            inputFeedback.value.innerHTML = loadingMsg
+          }, 150)
+        } else {
+          feedbackActive.value = true
+          inputFeedback.value.innerHTML = loadingMsg
+        }
+
         const textOutput = await textConverter(textToConvert, CorrectorArray)
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
@@ -118,7 +131,7 @@ export default {
         }
 
         if (btnDeleteList.value.length <= btnDeleteListPrev) {
-          FeedbackOutput("Il n'y avait aucune modification à&nbsp;effectuer&nbsp;!")
+          FeedbackOutput("Il n'y a aucune modification à&nbsp;effectuer&nbsp;!")
           canConvert.value = true
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
@@ -157,6 +170,7 @@ export default {
 
     const FeedbackOutput = (text) => {
       clearTimeout(feedbackBye)
+      feedbackBye = setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 3000)
 
       if (feedbackActive.value === true) {
         feedbackActive.value = false
@@ -168,17 +182,14 @@ export default {
         feedbackActive.value = true
         inputFeedback.value.innerHTML = text
       }
-      feedbackBye = setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 3000)
     }
 
     const TextWriting = () => {
-      // console.log('isWriting!')
       canConvert.value = true
       wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     }
 
     const TextPasting = (e) => {
-      // console.log('pasted')
       e.stopPropagation()
       e.preventDefault()
       const clipboardData = e.clipboardData || window.clipboardData
@@ -191,10 +202,6 @@ export default {
       // source : https://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser Solution 1
     }
 
-    // const undoConvert = (e) => {
-    //   console.log('j"ai essayé au moins')
-    // }
-
     const btnArray = [
       {
         class: 'convert',
@@ -202,13 +209,6 @@ export default {
         action: convertText,
         ref: 'btnConvert'
       },
-      // {
-      //   class: 'undo',
-      //   text: 'Retour <span class="hide">en&nbsp;arrière</span>',
-      //   action: undoConvert,
-      //   ref: 'btnUndo'
-
-      // },
       {
         class: 'cancel',
         text: 'Annuler <span class="hide">les&nbsp;modifications</span>',
@@ -481,13 +481,24 @@ export default {
             pointer-events: inherit;
 
           }
+
+          .animated{
+            animation: loading 0.8s infinite;
+
+            &:nth-child(2){
+              animation-delay: 0.2s;
+            }
+
+            &:nth-child(3){
+              animation-delay: 0.4s;
+            }
+          }
         }
     }
 
     .options{
       display: flex;
       justify-content: flex-end;
-      // border-top: 1px solid $c-black;
       margin-left: auto;
       margin-right: auto;
       margin-top: $s-mob--medium;
@@ -525,4 +536,12 @@ export default {
     display: inline-block;
   }
 }
+
+@keyframes loading {
+
+  to{
+    opacity: 0;
+  }
+}
+
 </style>
