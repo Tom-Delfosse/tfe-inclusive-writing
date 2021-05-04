@@ -142,11 +142,11 @@ export default {
     }
 
     const cancelChange = () => {
-      console.log(textEditor.value.innerText)
-      console.log(spanList.value)
+      // console.log(textEditor.value.innerText)
+      // console.log(spanList.value)
       canConvert.value = true
       for (let i = 0; i < spanList.value.length; i++) {
-        console.log(spanList.value[i])
+        // console.log(spanList.value[i])
         spanList.value[i].replaceWith(CorrectorArray[spanList.value[i].className.replace(/[^0-9]/g, '')].toCheck)
         continue
       }
@@ -160,6 +160,7 @@ export default {
       if (textEditor.value.innerHTML !== null) {
         textEditor.value.innerHTML = ''
       }
+
       FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
       btnDeleteList.value = ''
       wordCounter.value = 0
@@ -213,9 +214,6 @@ export default {
       const selection = window.getSelection()
       selection.removeAllRanges()
       selection.addRange(range)
-      // console.log(textEditor.value.textContent)
-      // console.log(textEditor.value.innerText)
-      // console.log(textEditor.value.innerHTML)
       TextWriting()
 
       // source : https://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser Solution 1
@@ -342,6 +340,7 @@ export default {
         }
 
         .text-editor{
+          overflow-x: hidden;
           background-color: inherit;
           border: none;
           border-radius: inherit;
@@ -355,11 +354,9 @@ export default {
           height: 100%;
           white-space: pre-line;
           word-wrap: break-word;
-
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
-          line-height: 160%;
-          // line-height: 100px;
+          line-height: 180%;
 
           &:empty::before{
             content: attr(placeholder);
@@ -383,7 +380,8 @@ export default {
 
           @include tb{
             font-size: $s-tab--smaller;
-            font-weight: 300;
+            font-weight: $w-light;
+            line-height: 230%;
           }
 
           @include lg{
@@ -405,58 +403,60 @@ export default {
         .corrected{
           white-space: nowrap;
           border: 1px solid $c-black;
+          position: relative;
           display: inline-flex;
           justify-content: space-between;
-          height: auto;
-          margin: 0;
-          padding-left: $s-mob--smallest/6;
-          @include sm{
-            padding-left: $s-mob--smallest/3;
-          }
+          padding-left: $s-mob--smaller/4;
+          margin: $s-mob--smaller/4 0;
+
           @include tb{
-            padding-left: $s-tab--smallest/3;
+            display: inline;
+            padding: $s-tab--smallest/6 $s-tab--smallest/3;
           }
+
           @include lg{
-            padding-left: $s-desk--smallest/4;
+            padding: $s-desk--smallest/6 $s-desk--smallest/3;
+          }
+
+          @include xl{
+            padding: $s-desk--smallest/5 $s-desk--smallest/2.5;
           }
 
           .btn--delete{
-            background-color: $c-black;
             font-family: font1;
             color: $c-white;
+            background-color: $c-black;
+            margin-left: $s-mob--smaller/4;
+            font-size: $s-mob--smallest/1.20;
             cursor: pointer;
             border: none;
-            padding: 0;
-            margin: 0;
-            align-self: stretch;
-            display: inline;
-            width: 100%;
-            border: 1px solid $c-black;
-            box-sizing: content-box;
-            padding: 0 ;
-            max-width: $s-desk--smallest;
-            font-size: $s-mob--smallest/1.20;
-            padding: 0 $s-mob--smallest/6;
-            margin-left: $s-mob--smallest/6;
             user-select: none;
+            padding: 0 $s-mob--smallest/4;
 
             @include sm{
-              font-size: $s-mob--smallest;
-              padding: 0 $s-mob--smallest/3;
-              margin-left: $s-mob--smallest/3;
-
+              padding: 0 $s-mob--smallest/2;
             }
+
             @include tb{
-              padding: 0 $s-tab--tiny/4;
-              font-size: $s-tab--tiny;
-              margin-left: $s-tab--smallest/3;
-
+              font-size: $s-tab--smallest/1.125;
+              position: absolute;
+              right: 0;
+              top: 0;
+              padding: $s-tab--smallest/3;
+              background-color: $c-white;
+              color: $c-black;
+              transform: translate(50%, -50%);
+              -webkit-text-stroke: 1px;
             }
-            @include lg{
-              font-size: $s-desk--tiny;
-              padding: 0 $s-desk--smallest/4;
-              margin-left: $s-desk--smallest/4;
 
+            @include lg{
+              font-size: $s-desk--tiny/1.25;
+              padding: $s-desk--tiny/3;
+            }
+
+            @include xl{
+              font-size: $s-desk--tiny;
+              padding: $s-desk--tiny/3;
             }
           }
         }
@@ -486,6 +486,8 @@ export default {
           padding: $s-mob--smallest/2 $s-mob--smaller*2;
           transition: $t-fast;
           box-sizing: border-box;
+          opacity: 0;
+          pointer-events: none;
 
           @include tb{
             padding: $s-tab--smallest/3 $s-tab--smaller;
@@ -494,8 +496,6 @@ export default {
             padding: $s-desk--smaller/4 $s-desk--smaller;
           }
 
-            opacity: 0;
-            pointer-events: none;
           &--active{
             opacity: 1;
             bottom: 0;

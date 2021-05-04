@@ -23,7 +23,7 @@
       animation: grainMove 0.0024s steps(8) infinite;
 
       @include lg {
-        opacity: 0.4;
+        opacity: 0.3;
         filter: brightness(1.1);
         background-image: url('/assets/img/grain-tile.png');
       }
