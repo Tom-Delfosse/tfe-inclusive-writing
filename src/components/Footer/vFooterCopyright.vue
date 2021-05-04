@@ -52,11 +52,15 @@
     @include tb{
       margin-bottom: $s-tab--smaller;
       max-width: 70%;
-
     }
+
     @include lg{
       margin-bottom: $s-desk--smallest;
       max-width: 70%;
+    }
+
+    @include xl{
+      margin-bottom: $s-desk--smaller;
     }
 
     &:nth-child(1){
@@ -88,27 +92,48 @@
 
   .img--copy {
     margin-right: $s-mob--smallest;
+    transition: $t-smooth;
+    border: 1px solid $c-white;
 
     @include sm{
       margin-right: $s-mob--smaller;
     }
     @include tb{
-      margin-right: $s-tab--smaller;
+      margin-right: $s-tab--smallest;
     }
     @include lg{
       margin-right: $s-desk--tiny;
     }
 
+    @include xl{
+      margin-right: $s-desk--smallest;
+    }
+
+    &:hover{
+      transition: $t-fast;
+      background-color: $c-white;
+      svg{
+        // border: none;
+        fill: $c-white;
+        path{
+          // stroke: $c-white;
+          transition: $t-fast;
+          fill: $c-black;
+        }
+      }
+    }
+
     svg{
-    border: 1px solid $c-white;
     padding: $s-mob--smallest/3;
+    display: block;
 
     @include sm{
       padding: $s-mob--smallest/2;
     }
     @include tb{
-      padding: $s-tab--smallest/2;
+      padding: $s-tab--smallest/3;
     }
+
     @include lg{
       padding: $s-desk--smallest/3;
     }
