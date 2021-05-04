@@ -25,7 +25,6 @@ a{
     height: 100%;
     display: block;
     cursor: pointer;
-    // height: 100%;
 
     @include tb{
       max-width: $s-tab--big;

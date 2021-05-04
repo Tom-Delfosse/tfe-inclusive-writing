@@ -55,7 +55,6 @@ export default {
       margin: 0 15%;
       max-height: $s-desk--big * 4;
     }
-
   }
 
   .title{

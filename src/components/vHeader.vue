@@ -41,13 +41,11 @@ export default {
   @include tb{
     margin-top: $s-tab--medium;
     max-width: 80%;
-
   }
 
   @include lg{
     margin-top: $s-desk--medium-small;
     max-width: 70%;
-
   }
 
   .nav{
@@ -68,7 +66,6 @@ export default {
 
     @include lg{
       font-size: $s-desk--smallest;
-
     }
 
     &__link{
@@ -101,14 +98,14 @@ export default {
 
           @include tb{
             padding: 0 $s-tab--smallest;
-
           }
+
           @include lg{
             padding: 0 $s-desk--tiny;
-
           }
         }
       }
+
       &:nth-last-child(1){
         border: 1px solid $c-black;
         padding:  $s-mob--smallest/3;
@@ -137,7 +134,6 @@ export default {
             padding-left:  $s-desk--tiny;
             padding-right:  $s-desk--tiny;
           }
-
         }
       }
 
