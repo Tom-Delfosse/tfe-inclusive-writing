@@ -14,10 +14,7 @@
       </div>
     </section>
 
-    <main
-      class="
-          section--main"
-    >
+    <main class="section--main">
       <section id="section--about" ref="sectionAboutRef" class="section section--about section--dark">
         <div class="section__content">
           <svg
@@ -72,9 +69,7 @@
       <section class="section section--white section--tem">
         <div class="section__content">
           <vTemHeader />
-          <ul class="list list--tem">
-            <vTem />
-          </ul>
+          <vTem />
         </div>
       </section>
       <section class="section section--dark section--other">

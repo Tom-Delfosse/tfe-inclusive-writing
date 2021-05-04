@@ -1,5 +1,5 @@
 <template>
-  <ul class="list list--example">
+  <ul class="list list--tem">
     <li v-for="tem in tems" :key="tem" class="list--tem__el">
       <figure class="tem-group">
         <img :src="tem.img" alt="Avatar d'une personne concerné‧e." class="img img--avatar">
