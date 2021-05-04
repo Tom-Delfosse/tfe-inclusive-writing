@@ -7,7 +7,8 @@
             <div
               ref="textEditor"
               class="text-editor"
-              contenteditable="true"
+              :class="{'text-editor--disabled' : isDeactivated}"
+              :contenteditable="[ isDeactivated ? false : true]"
               placeholder="Inscrivez votre texte ici&nbsp;!"
               @keyup="TextWriting"
               @paste="TextPasting"
@@ -77,7 +78,7 @@ export default {
     const isDisabled = computed(() => {
       const isWriting = wordCounter.value >= 1
       return {
-        btnConvert: !isWriting || !canConvert.value,
+        btnConvert: !isWriting || !canConvert.value || isDeactivated.value,
         btnCopy: !isWriting,
         btnCancel: btnDeleteList.value.length < 1,
         btnErase: !isWriting
@@ -108,7 +109,6 @@ export default {
 
         isDeactivated.value = true
         const textOutput = await textConverter(textToConvert, CorrectorArray)
-        isDeactivated.value = false
 
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
@@ -138,15 +138,13 @@ export default {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
         console.log(textEditor.value.innerText)
+        isDeactivated.value = false
       }
     }
 
     const cancelChange = () => {
-      // console.log(textEditor.value.innerText)
-      // console.log(spanList.value)
       canConvert.value = true
       for (let i = 0; i < spanList.value.length; i++) {
-        // console.log(spanList.value[i])
         spanList.value[i].replaceWith(CorrectorArray[spanList.value[i].className.replace(/[^0-9]/g, '')].toCheck)
         continue
       }
@@ -340,7 +338,6 @@ export default {
         }
 
         .text-editor{
-          overflow-x: hidden;
           background-color: inherit;
           border: none;
           border-radius: inherit;
@@ -350,6 +347,7 @@ export default {
           padding: 0;
           margin: 0;
           width: 100%;
+          overflow-x: visible;
           overflow-y: auto;
           height: 100%;
           white-space: pre-line;
@@ -357,6 +355,10 @@ export default {
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
           line-height: 180%;
+
+          &--disabled{
+            cursor: not-allowed;
+          }
 
           &:empty::before{
             content: attr(placeholder);
@@ -381,7 +383,7 @@ export default {
           @include tb{
             font-size: $s-tab--smaller;
             font-weight: $w-light;
-            line-height: 230%;
+            line-height: 240%;
           }
 
           @include lg{
@@ -412,6 +414,13 @@ export default {
           @include tb{
             display: inline;
             padding: $s-tab--smallest/6 $s-tab--smallest/3;
+
+            &:hover{
+              .btn--delete{
+                transform: translate(50%, -50%) rotate(15deg);
+                transition: $t-fast;
+              }
+            }
           }
 
           @include lg{
@@ -432,6 +441,7 @@ export default {
             border: none;
             user-select: none;
             padding: 0 $s-mob--smallest/4;
+            vertical-align: center;
 
             @include sm{
               padding: 0 $s-mob--smallest/2;
@@ -447,6 +457,15 @@ export default {
               color: $c-black;
               transform: translate(50%, -50%);
               -webkit-text-stroke: 1px;
+              transition: $t-smooth;
+
+              &:hover{
+                transition: $t-smooth;
+                // background-color: $c-black;
+                // color: $c-white;
+                transform: translate(50%, -50%) rotate(180deg);
+
+              }
             }
 
             @include lg{
