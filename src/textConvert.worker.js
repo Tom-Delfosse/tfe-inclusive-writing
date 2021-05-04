@@ -12,16 +12,13 @@ export const textConverter = async (textToConvert, array) => {
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
-        // console.log(subEl)
         const firstLetter = subEl.charAt(1).toUpperCase()
-        // console.log(firstLetter)
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
           const regexSpanCheck = new RegExp('(?:\\s)' + array[i].checked + '(X)?(?!‧|[A-zÀ-ú])', 'gi')
 
           if (subEl.match(regexSpanCheck)) {
             subEl = subEl.replace(regexSpanCheck, ' ' + array[i].checked)
-            // console.log('ping ' + array[i].checked)
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
             subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">$1<button class="btn btn--delete">X</button></span>')
 
@@ -34,9 +31,7 @@ export const textConverter = async (textToConvert, array) => {
             continue
           }
         }
-        // console.log(subEl)
         subEl = ' ' + firstLetter + subEl.substring(2)
-        // console.log(subEl)
         textToConvert[index][subIndex] = subEl
       })
       textToConvert[index] = textToConvert[index].join('')

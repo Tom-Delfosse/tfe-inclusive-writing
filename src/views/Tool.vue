@@ -95,7 +95,6 @@ export default {
         const textToConvert = textEditor.value.innerText.replace(/\nX\n/g, 'X')
         const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
         clearTimeout(feedbackBye)
-        // console.log(feedbackActive.value)
         if (feedbackActive.value === true) {
           feedbackActive.value = false
           setTimeout(() => {
@@ -143,13 +142,17 @@ export default {
     }
 
     const cancelChange = () => {
+      console.log(textEditor.value.innerText)
+      console.log(spanList.value)
       canConvert.value = true
       for (let i = 0; i < spanList.value.length; i++) {
+        console.log(spanList.value[i])
         spanList.value[i].replaceWith(CorrectorArray[spanList.value[i].className.replace(/[^0-9]/g, '')].toCheck)
         continue
       }
+
       btnDeleteList.value = ''
-      textEditor.value.innerHTML = textEditor.value.textContent
+      textEditor.value.innerHTML = textEditor.value.innerText.replace((/\n(X)\n?/g), (''))
       FeedbackOutput('Les modifications ont été&nbsp;retirées.')
     }
 
@@ -198,13 +201,25 @@ export default {
       e.stopPropagation()
       e.preventDefault()
       const clipboardData = e.clipboardData || window.clipboardData
-      const ClipboardText = clipboardData.getData('Text')
-      textEditor.value.focus()
-      console.log(ClipboardText)
-      textEditor.value.innerText = textEditor.value.innerText.replace((/\n(X)\n?/g), ('')) + ClipboardText
-
+      let clipboardText = clipboardData.getData('Text')
+      const tmp = document.createElement('div')
+      tmp.innerHTML = clipboardText
+      clipboardText = tmp.innerText
+      console.log(clipboardText)
+      textEditor.value.innerHTML = textEditor.value.innerHTML + clipboardText
+      const range = document.createRange()
+      range.selectNodeContents(textEditor.value)
+      range.collapse(false)
+      const selection = window.getSelection()
+      selection.removeAllRanges()
+      selection.addRange(range)
+      // console.log(textEditor.value.textContent)
+      // console.log(textEditor.value.innerText)
+      // console.log(textEditor.value.innerHTML)
       TextWriting()
+
       // source : https://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser Solution 1
+      // source : https://stackoverflow.com/questions/12305269/move-caret-position-after-focus-for-contenteditable-div
     }
 
     const btnArray = [
