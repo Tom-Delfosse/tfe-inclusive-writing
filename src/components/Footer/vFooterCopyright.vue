@@ -113,10 +113,8 @@
       transition: $t-fast;
       background-color: $c-white;
       svg{
-        // border: none;
         fill: $c-white;
         path{
-          // stroke: $c-white;
           transition: $t-fast;
           fill: $c-black;
         }

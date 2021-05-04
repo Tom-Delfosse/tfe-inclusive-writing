@@ -14,23 +14,24 @@
 
     &::before{
       content: '';
-      background-image: url('/assets/img/grain-tile@075x.png');
-      opacity: 0.4;
-      filter: brightness(0.9);
+      background-image: url('/assets/img/grain-tile@2x.png');
+      opacity: 0.2;
+      filter: brightness(0.5);
       position: absolute;
       width: 100%;
       height: 100%;
       animation: grainMove 0.0024s steps(8) infinite;
 
       @include lg {
-        opacity: 0.3;
-      background-image: url('/assets/img/grain-tile.png');
+        opacity: 0.45;
+        filter: brightness(0.9);
+        background-image: url('/assets/img/grain-tile.png');
       }
 
       @include retina{
-        background-image: url('/assets/img/grain-tile@05x.png');
-        filter: brightness(1.2);
-        opacity: 0.6;
+        background-image: url('/assets/img/grain-tile@2x.png');
+        filter: brightness(0.60);
+        opacity: 0.25;
       }
     }
   }

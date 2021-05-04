@@ -66,7 +66,6 @@ export default {
 
     @include lg {
       border-bottom: inherit;
-      // align-items: center;
     }
 
     .img--avatar{
@@ -123,6 +122,7 @@ export default {
           font-size: $s-desk--small;
         }
       }
+
       p{
         margin: 0;
         padding-bottom: $s-mob--smallest;

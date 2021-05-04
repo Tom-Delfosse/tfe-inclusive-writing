@@ -46,14 +46,6 @@ export default {
 <style lang="scss" scoped>
 .section--footer{
   position: relative;
-
-  @include sm{}
-  @include tb{}
-  @include lg{}
-  @include xl{}
-  @include xxl{}
-  @include xxxl{}
-
   .section__content{
     border: 0;
   }
