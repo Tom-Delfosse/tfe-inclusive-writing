@@ -9,6 +9,7 @@ export const textConverter = async (textToConvert, array) => {
       el = el.filter(subEl => subEl === null || subEl.trim())
       textToConvert[index] = el
     })
+
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
@@ -31,7 +32,15 @@ export const textConverter = async (textToConvert, array) => {
             continue
           }
         }
-        subEl = ' ' + firstLetter + subEl.substring(2)
+        // console.log(subEl)
+        if (subEl.startsWith('  <span')) {
+          console.log('_____contains span at front______')
+          let firstWord = subEl.match(/(?:\s\s<.*?>)([^\s,!.? ;:<]+)/)[1]
+          firstWord = firstWord.charAt(0).toUpperCase() + firstWord.substring(1)
+          subEl = subEl.replace(/(\s\s<.*?>)([^\s,!.? ;:<]+)/, '$1' + firstWord)
+        } else {
+          subEl = ' ' + firstLetter + subEl.substring(2)
+        }
         textToConvert[index][subIndex] = subEl
       })
       textToConvert[index] = textToConvert[index].join('')
