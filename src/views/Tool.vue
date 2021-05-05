@@ -109,7 +109,6 @@ export default {
 
         isDeactivated.value = true
         const textOutput = await textConverter(textToConvert, CorrectorArray)
-
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
         console.log(textEditor.value.innerText)
@@ -139,7 +138,6 @@ export default {
         } else {
           FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
-        console.log(textEditor.value.innerText)
         isDeactivated.value = false
       }
     }
@@ -336,6 +334,7 @@ export default {
           border-bottom: 1px solid $c-black;
           height: 55vh;
           max-height: 1000px;
+          user-select: none;
         }
 
         .text-editor{
@@ -413,6 +412,7 @@ export default {
           border: 1px solid $c-black;
           position: relative;
           display: inline-flex;
+          flex-direction: row-reverse;
           justify-content: space-between;
           padding-left: $s-mob--smaller/4;
           margin: $s-mob--smaller/4 0;
@@ -467,10 +467,7 @@ export default {
 
               &:hover{
                 transition: $t-smooth;
-                // background-color: $c-black;
-                // color: $c-white;
                 transform: translate(50%, -50%) rotate(180deg);
-
               }
             }
 
@@ -490,6 +487,7 @@ export default {
           padding: 0;
           margin: 0;
           margin-top: $s-mob--smallest;
+          // user-select: none;
 
           @include tb{
             margin-top: $s-tab--smallest;

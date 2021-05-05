@@ -21,14 +21,14 @@ export const textConverter = async (textToConvert, array) => {
           if (subEl.match(regexSpanCheck)) {
             subEl = subEl.replace(regexSpanCheck, ' ' + array[i].checked)
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
-            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">$1<button class="btn btn--delete">X</button></span>')
+            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>$1</span>')
 
             continue
           } else if (subEl.match(regexToCheck)) {
             subEl = subEl.replace(regexToCheck, ' ' + array[i].checked)
 
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
-            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">$1<button class="btn btn--delete">X</button contenteditable="false"></span>')
+            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button contenteditable="false">$1</span>')
             continue
           }
         }
