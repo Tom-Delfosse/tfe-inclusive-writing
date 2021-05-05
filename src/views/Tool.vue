@@ -112,6 +112,8 @@ export default {
 
         textEditor.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
+        console.log(textEditor.value.innerText)
+
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
           btnDeleteList.value = document.getElementsByClassName('btn--delete')

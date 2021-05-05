@@ -28,17 +28,20 @@ export const textConverter = async (textToConvert, array) => {
             subEl = subEl.replace(regexToCheck, ' ' + array[i].checked)
 
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
-            subEl = subEl.replace(regexAddSpan, ' ' + '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">$1<button class="btn btn--delete">X</button contenteditable="false"></span>')
+            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '">$1<button class="btn btn--delete">X</button contenteditable="false"></span>')
             continue
           }
         }
         // console.log(subEl)
-        if (subEl.startsWith('  <span')) {
-          console.log('_____contains span at front______')
-          let firstWord = subEl.match(/(?:\s\s<.*?>)([^\s,!.? ;:<]+)/)[1]
+        if (subEl.startsWith(' <span')) {
+          console.log('ping')
+          let firstWord = subEl.match(/(?:\s<.*?>)([^\s,!.? ;:<]+)/)[1]
           firstWord = firstWord.charAt(0).toUpperCase() + firstWord.substring(1)
-          subEl = subEl.replace(/(\s\s<.*?>)([^\s,!.? ;:<]+)/, '$1' + firstWord)
+          console.log(firstWord)
+          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.? ;:<]+)/, '$1' + firstWord).substring(1)
+          console.log(subEl)
         } else {
+          console.log('string simple')
           subEl = ' ' + firstLetter + subEl.substring(2)
         }
         textToConvert[index][subIndex] = subEl
