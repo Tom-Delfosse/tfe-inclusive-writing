@@ -336,7 +336,6 @@ export default {
           border-bottom: 1px solid $c-black;
           height: 55vh;
           max-height: 1000px;
-
         }
 
         .text-editor{
@@ -359,7 +358,12 @@ export default {
           line-height: 180%;
 
           &--disabled{
-            cursor: not-allowed;
+            cursor: wait;
+            opacity: 0.8;
+
+            span{
+              pointer-events: none;
+            }
           }
 
           &:empty::before{

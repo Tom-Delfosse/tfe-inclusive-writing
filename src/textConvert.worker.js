@@ -32,16 +32,15 @@ export const textConverter = async (textToConvert, array) => {
             continue
           }
         }
-        // console.log(subEl)
+        if (subEl.endsWith('>')) {
+          subEl = subEl + '.'
+        }
+
         if (subEl.startsWith(' <span')) {
-          console.log('ping')
           let firstWord = subEl.match(/(?:\s<.*?>)([^\s,!.? ;:<]+)/)[1]
           firstWord = firstWord.charAt(0).toUpperCase() + firstWord.substring(1)
-          console.log(firstWord)
-          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.? ;:<]+)/, '$1' + firstWord).substring(1)
-          console.log(subEl)
+          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.? ;:<]+)/, '$1' + firstWord).substring(1) + ' '
         } else {
-          console.log('string simple')
           subEl = ' ' + firstLetter + subEl.substring(2)
         }
         textToConvert[index][subIndex] = subEl
@@ -55,5 +54,3 @@ export const textConverter = async (textToConvert, array) => {
     console.log(e)
   }
 }
-
-// <.*?>
