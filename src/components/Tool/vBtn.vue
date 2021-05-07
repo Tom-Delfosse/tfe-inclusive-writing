@@ -29,9 +29,9 @@
     user-select: none;
     opacity: 0;
 
-    &--deactivated{
-      opacity: 0.5;
-    }
+    // &--deactivated{
+      // opacity: 0.5;
+    // }
 
     &:enabled {
       opacity: 1;
