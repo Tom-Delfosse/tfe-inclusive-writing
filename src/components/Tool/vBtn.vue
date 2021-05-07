@@ -25,8 +25,13 @@
     width: $s-mob--medium;
     height: $s-mob--medium;
     padding: 0;
-    opacity: 0;
     pointer-events: none;
+    user-select: none;
+    opacity: 0;
+
+    &--deactivated{
+      opacity: 0.5;
+    }
 
     &:enabled {
       opacity: 1;

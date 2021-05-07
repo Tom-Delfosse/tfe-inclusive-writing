@@ -4,8 +4,6 @@ export const textConverter = async (textToConvert, array) => {
       return el !== ''
     })
 
-    // console.log(textToConvert)
-
     textToConvert.forEach((el, index) => {
       el = el.replace(/(\.?\.?[.?!]\s?)/g, '$1|').split('|')
       el = el.filter(subEl => subEl === null || subEl.trim())
@@ -38,13 +36,10 @@ export const textConverter = async (textToConvert, array) => {
         if (subEl.endsWith('>')) {
           subEl = subEl + '.'
         }
-        console.log(subEl)
 
         if (subEl.startsWith(' <span')) {
-          console.log('ping')
           firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1]
           firstLetter = firstLetter.charAt(0).toUpperCase() + firstLetter.substring(1)
-          console.log(firstLetter)
           subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/, '$1' + firstLetter).substring(1) + ' '
         } else {
           subEl = ' ' + firstLetter + subEl.substring(2)
