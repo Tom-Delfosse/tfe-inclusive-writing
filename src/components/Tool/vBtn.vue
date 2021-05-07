@@ -26,9 +26,11 @@
     height: $s-mob--medium;
     padding: 0;
     opacity: 0;
+    pointer-events: none;
 
     &:enabled {
       opacity: 1;
+      pointer-events: initial;
     }
 
     @include tb{

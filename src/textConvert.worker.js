@@ -4,6 +4,8 @@ export const textConverter = async (textToConvert, array) => {
       return el !== ''
     })
 
+    // console.log(textToConvert)
+
     textToConvert.forEach((el, index) => {
       el = el.replace(/(\.?\.?[.?!]\s?)/g, '$1|').split('|')
       el = el.filter(subEl => subEl === null || subEl.trim())
@@ -13,12 +15,13 @@ export const textConverter = async (textToConvert, array) => {
     textToConvert.forEach((el, index) => {
       el.forEach((subEl, subIndex) => {
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
-        const firstLetter = subEl.charAt(1).toUpperCase()
+        let firstLetter = subEl.charAt(1).toUpperCase()
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
-          const regexSpanCheck = new RegExp('(?:\\s)' + array[i].checked + '(X)?(?!‧|[A-zÀ-ú])', 'gi')
+          const regexSpanCheck = new RegExp('(?:\\s)X?' + array[i].checked + '(?!‧|[A-zÀ-ú])', 'gi')
 
           if (subEl.match(regexSpanCheck)) {
+            // console.log('ping')
             subEl = subEl.replace(regexSpanCheck, ' ' + array[i].checked)
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
             subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>$1</span>')
@@ -28,18 +31,21 @@ export const textConverter = async (textToConvert, array) => {
             subEl = subEl.replace(regexToCheck, ' ' + array[i].checked)
 
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
-            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button contenteditable="false">$1</span>')
+            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>$1</span>')
             continue
           }
         }
         if (subEl.endsWith('>')) {
           subEl = subEl + '.'
         }
+        console.log(subEl)
 
         if (subEl.startsWith(' <span')) {
-          let firstWord = subEl.match(/(?:\s<.*?>)([^\s,!.? ;:<]+)/)[1]
-          firstWord = firstWord.charAt(0).toUpperCase() + firstWord.substring(1)
-          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.? ;:<]+)/, '$1' + firstWord).substring(1) + ' '
+          console.log('ping')
+          firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1]
+          firstLetter = firstLetter.charAt(0).toUpperCase() + firstLetter.substring(1)
+          console.log(firstLetter)
+          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/, '$1' + firstLetter).substring(1) + ' '
         } else {
           subEl = ' ' + firstLetter + subEl.substring(2)
         }

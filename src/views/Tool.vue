@@ -41,7 +41,7 @@
             v-for="btn in btnArray.slice(1)"
             :key="btn.ref"
             class="list--btn__el"
-            :class="{'list--btn__el-hide' : isDisabled[btn.ref]}"
+            :class="{'list--btn__el-disabled' : isDisabled[btn.ref]}"
           >
             <vBtn
               :ref="btn.ref"
@@ -98,7 +98,9 @@ export default {
         }
       } else {
         const btnDeleteListPrev = btnDeleteList.value.length
-        const textToConvert = inputText.value.innerText.replace(/\nX\n/g, 'X')
+        // console.log(inputText.value.innerText)
+        const textToConvert = inputText.value.innerText.replace(/\n?X\n/gi, 'X')
+        // console.log(textToConvert)
         const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
         clearTimeout(feedbackBye)
         if (feedbackActive.value === true) {
@@ -116,7 +118,7 @@ export default {
         const textOutput = await textConverter(textToConvert, CorrectorArray)
         inputText.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
-        console.log(inputText.value.innerText)
+        // console.log(inputText.value.innerText)
 
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
@@ -144,6 +146,9 @@ export default {
           inputFeedbackMessage('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
         isDeactivated.value = false
+        console.log(inputText.value.innerText)
+        // console.log(inputText.value.textContent)
+        // console.log(inputText.value.innerHTML)
       }
     }
 
@@ -339,7 +344,7 @@ export default {
           border-bottom: 1px solid $c-black;
           height: 55vh;
           max-height: 1000px;
-          user-select: none;
+          // user-select: none;
         }
 
         .input__text{
@@ -558,7 +563,7 @@ export default {
         display: inline;
         transition: $t-smooth;
 
-        &-hide{
+        &-disabled{
           opacity: 0;
           pointer-events: none;
         }
@@ -646,8 +651,10 @@ export default {
 .list--deactivated {
   .list--btn__el{
     opacity: 0.3;
+    cursor: not-allowed;
     pointer-events: none;
   }
+
 }
 
 .hide{
