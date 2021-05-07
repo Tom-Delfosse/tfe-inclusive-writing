@@ -36,17 +36,21 @@
           />
         </div>
 
-        <ul ref="btnList" class="list list--btn" :class="{'list--deactivated' : isDeactivated}">
+        <ul
+          ref="btnList"
+          class="list list--btn"
+          :class="{'list--deactivated' : isDeactivated}"
+        >
           <li
             v-for="btn in btnArray.slice(1)"
             :key="btn.ref"
             class="list--btn__el"
-            :class="{'list--btn__el-disabled' : isDisabled[btn.ref]}"
+            :class="{'list--btn__el-disabled' : isDisabled[btn.ref], 'list--btn__el-deactivated' : isDeactivated}"
           >
             <vBtn
               :ref="btn.ref"
               :disabled="isDisabled[btn.ref] || isDeactivated"
-              :class="[`btn btn--${btn.class}`, {'btn--deactivated' : isDeactivated && !isDisabled[btn.ref]}]"
+              :class="[`btn btn--${btn.class}`]"
               @click="btn.action"
               v-html="btn.text"
             />
@@ -556,6 +560,10 @@ export default {
         margin-left: $s-mob--medium-plus;
         display: inline;
         transition: $t-smooth;
+
+        &-deactivated{
+          opacity: 0.6;
+        }
 
         &-disabled{
           opacity: 0;

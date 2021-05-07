@@ -27,7 +27,7 @@
     padding: 0;
     pointer-events: none;
     user-select: none;
-    opacity: 0;
+    // opacity: 0;
 
     // &--deactivated{
       // opacity: 0.5;
