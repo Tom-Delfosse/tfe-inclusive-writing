@@ -3,11 +3,11 @@
     <section class="section section--white section--tool">
       <div class="section__content">
         <div class="main">
-          <div class="input-container">
+          <div class="input">
             <div
-              ref="textEditor"
-              class="text-editor"
-              :class="{'text-editor--disabled' : isDeactivated}"
+              ref="inputText"
+              class="input__text"
+              :class="{'input__text--disabled' : isDeactivated}"
               :contenteditable="[ isDeactivated ? false : true]"
               placeholder="Inscrivez votre texte ici&nbsp;!"
               @keyup="TextWriting"
@@ -16,13 +16,13 @@
 
             <p
               ref="inputFeedback"
-              class="input-feedback"
-              :class="{'input-feedback--active' : feedbackActive}"
+              class="input__feedback"
+              :class="{'input__feedback--active' : feedbackActive}"
             />
           </div>
 
           <p class="word-counter">
-            {{ wordCounter }}&nbsp;mot<span v-if="wordCounter > 1">s</span>
+            {{ wordCounter }}&nbsp;mot<span v-if="wordCounter != 1">s</span>
           </p>
 
           <vBtn
@@ -30,23 +30,28 @@
             :key="btn.ref"
             :ref="btn.ref"
             :disabled="isDisabled[btn.ref]"
-            :class="[`btn--${btn.class}`]"
+            :class="[`btn btn--${btn.class}`]"
             @click="btn.action"
             v-html="btn.text"
           />
         </div>
 
-        <div ref="btnList" class="options" :class="{'options--deactivated' : isDeactivated}">
-          <vBtn
+        <ul ref="btnList" class="list list--btn" :class="{'list--deactivated' : isDeactivated}">
+          <li
             v-for="btn in btnArray.slice(1)"
             :key="btn.ref"
-            :ref="btn.ref"
-            :disabled="isDisabled[btn.ref]"
-            :class="[`btn--${btn.class}`]"
-            @click="btn.action"
-            v-html="btn.text"
-          />
-        </div>
+            class="list--btn__el"
+            :class="{'list--btn__el-hide' : isDisabled[btn.ref]}"
+          >
+            <vBtn
+              :ref="btn.ref"
+              :disabled="isDisabled[btn.ref]"
+              :class="[`btn btn--${btn.class}`]"
+              @click="btn.action"
+              v-html="btn.text"
+            />
+          </li>
+        </ul>
       </div>
     </section>
     <vFooter />
@@ -70,7 +75,7 @@ export default {
     const inputFeedback = ref('')
     const canConvert = ref(false)
     const feedbackActive = ref(false)
-    const textEditor = ref('')
+    const inputText = ref('')
     const wordCounter = ref(0)
     const isDeactivated = ref(false)
     const spanList = ref('')
@@ -87,13 +92,13 @@ export default {
 
     const convertText = async () => {
       canConvert.value = !canConvert.value
-      if (textEditor.value === null || textEditor.value === '') {
+      if (inputText.value === null || inputText.value === '') {
         if (feedbackActive.value === false) {
-          FeedbackOutput('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
+          inputFeedbackMessage('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
         const btnDeleteListPrev = btnDeleteList.value.length
-        const textToConvert = textEditor.value.innerText.replace(/\nX\n/g, 'X')
+        const textToConvert = inputText.value.innerText.replace(/\nX\n/g, 'X')
         const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
         clearTimeout(feedbackBye)
         if (feedbackActive.value === true) {
@@ -109,9 +114,9 @@ export default {
 
         isDeactivated.value = true
         const textOutput = await textConverter(textToConvert, CorrectorArray)
-        textEditor.value.innerHTML = textOutput
+        inputText.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
-        console.log(textEditor.value.innerText)
+        console.log(inputText.value.innerText)
 
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
         if (document.getElementsByClassName('btn--delete').length > 0) {
@@ -133,10 +138,10 @@ export default {
         }
 
         if (btnDeleteList.value.length <= btnDeleteListPrev) {
-          FeedbackOutput("Il n'y a aucune modification à&nbsp;effectuer&nbsp;!")
+          inputFeedbackMessage("Il n'y a aucune modification à&nbsp;effectuer&nbsp;!")
           canConvert.value = true
         } else {
-          FeedbackOutput('Le texte a été modifié avec&nbsp;succès&nbsp;!')
+          inputFeedbackMessage('Le texte a été modifié avec&nbsp;succès&nbsp;!')
         }
         isDeactivated.value = false
       }
@@ -150,32 +155,32 @@ export default {
       }
 
       btnDeleteList.value = ''
-      textEditor.value.innerHTML = textEditor.value.innerText.replace((/\n(X)\n?/g), (''))
-      FeedbackOutput('Les modifications ont été&nbsp;retirées.')
+      inputText.value.innerHTML = inputText.value.innerText.replace((/\n(X)\n?/g), (''))
+      inputFeedbackMessage('Les modifications ont été&nbsp;retirées.')
     }
 
     const eraseText = () => {
-      if (textEditor.value.innerHTML !== null) {
-        textEditor.value.innerHTML = ''
+      if (inputText.value.innerHTML !== null) {
+        inputText.value.innerHTML = ''
       }
 
-      FeedbackOutput('Le texte a bien été supprimé&nbsp;!')
+      inputFeedbackMessage('Le texte a bien été supprimé&nbsp;!')
       btnDeleteList.value = ''
       wordCounter.value = 0
     }
 
     const copyText = () => {
-      console.log(textEditor.value.innerText)
-      const textCopied = textEditor.value.innerText.replace((/\n(X)\n?/g), (''))
+      console.log(inputText.value.innerText)
+      const textCopied = inputText.value.innerText.replace((/\n(X)\n?/g), (''))
       console.log(textCopied)
       navigator.clipboard.writeText(textCopied).then(function () {
-        FeedbackOutput('Texte copié avec&nbsp;succès&nbsp;!')
+        inputFeedbackMessage('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
-        FeedbackOutput('Une erreur est survenue, impossible de copier dans le&nbsp;presse-papier.')
+        inputFeedbackMessage('Une erreur est survenue, impossible de copier dans le&nbsp;presse-papier.')
       })
     }
 
-    const FeedbackOutput = (text) => {
+    const inputFeedbackMessage = (text) => {
       clearTimeout(feedbackBye)
       feedbackBye = setTimeout(() => { feedbackActive.value = !feedbackActive.value }, 3000)
 
@@ -193,7 +198,7 @@ export default {
 
     const TextWriting = () => {
       canConvert.value = true
-      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
+      wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
     }
 
     const TextPasting = (e) => {
@@ -205,9 +210,9 @@ export default {
       tmp.innerHTML = clipboardText
       clipboardText = tmp.innerText
       console.log(clipboardText)
-      textEditor.value.innerHTML = textEditor.value.innerHTML + clipboardText
+      inputText.value.innerHTML = inputText.value.innerHTML + clipboardText
       const range = document.createRange()
-      range.selectNodeContents(textEditor.value)
+      range.selectNodeContents(inputText.value)
       range.collapse(false)
       const selection = window.getSelection()
       selection.removeAllRanges()
@@ -253,7 +258,7 @@ export default {
       console.clear()
       console.log('____Mounted_____')
 
-      wordCounter.value = textEditor.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
+      wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
 
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
@@ -270,7 +275,7 @@ export default {
       btnArray,
       inputFeedback,
       feedbackActive,
-      textEditor,
+      inputText,
       TextWriting,
       wordCounter,
       CorrectorArray,
@@ -328,7 +333,7 @@ export default {
           max-width: 650px;
         }
 
-        .input-container{
+        .input{
           width: 100%;
           position: relative;
           border-bottom: 1px solid $c-black;
@@ -337,7 +342,7 @@ export default {
           user-select: none;
         }
 
-        .text-editor{
+        .input__text{
           background-color: inherit;
           border: none;
           border-radius: inherit;
@@ -487,7 +492,6 @@ export default {
           padding: 0;
           margin: 0;
           margin-top: $s-mob--smallest;
-          // user-select: none;
 
           @include tb{
             margin-top: $s-tab--smallest;
@@ -498,7 +502,7 @@ export default {
           }
         }
 
-        .input-feedback{
+        .input__feedback{
           width: inherit;
           max-width: 100%;
           position: absolute;
@@ -524,7 +528,6 @@ export default {
             bottom: 0;
             transition: $t-fast;
             pointer-events: inherit;
-
           }
 
           .animated{
@@ -541,17 +544,78 @@ export default {
         }
     }
 
-    .options{
+    .list--btn{
       display: flex;
       justify-content: flex-end;
       margin-left: auto;
       margin-right: auto;
       margin-top: $s-mob--medium;
       position: relative;
+      list-style-type: none;
 
-      &--deactivated .btn{
-        opacity: 0.3;
-        pointer-events: none;
+      &__el{
+        margin-left: $s-mob--medium-plus;
+        display: inline;
+        transition: $t-smooth;
+
+        &-hide{
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        &:hover{
+          transform: scale(1.1);
+          transition: $t-fast;
+        }
+
+        @include sm{
+          margin-left: $s-mob--big;
+        }
+
+        &:nth-child(1){
+          margin-left: 0;
+        }
+        @include tb{
+          margin-left: $s-tab--smaller;
+        }
+        @include lg{
+          margin-left: 0;
+          margin-top: $s-desk--smallest;
+
+          &:hover{
+            transform: inherit;
+            margin-left: $s-desk--smaller/2;
+
+            &:hover{
+              &::after{
+                margin-left: -$s-desk--smaller/2;
+                transition: $t-fast;
+              }
+            }
+          }
+
+          &:nth-child(1){
+            margin-top: 0;
+          }
+
+          &:nth-last-of-type(2){
+            &::after{
+              content: '';
+              display: block;
+              height: 1px;
+              width: 100%;
+              background-color: $c-black;
+              margin-top: $s-desk--smallest;
+              margin-bottom: -1px;
+              transition: $t-smooth;
+              transform: inherit;
+            }
+          }
+        }
+
+        @include xl{
+          margin-top: $s-desk--smaller;
+        }
       }
 
       @include sm{
@@ -579,6 +643,13 @@ export default {
   }
 }
 
+.list--deactivated {
+  .list--btn__el{
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
 .hide{
   display: none;
 
@@ -588,7 +659,6 @@ export default {
 }
 
 @keyframes loading {
-
   to{
     opacity: 0;
   }

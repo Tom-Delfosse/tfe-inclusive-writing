@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" v-bind="$attrs" />
+  <button v-bind="$attrs" />
 </template>
 
 <style lang="scss" scoped>
@@ -18,7 +18,6 @@
     text-indent: 400px;
     white-space: nowrap;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
     background-repeat: no-repeat;
@@ -27,18 +26,9 @@
     height: $s-mob--medium;
     padding: 0;
     opacity: 0;
-    pointer-events: none;
-    cursor: not-allowed;
-    position: absolute;
-    margin-left: $s-mob--medium-plus;
-    user-select: none;
 
-    @include sm{
-      margin-left: $s-mob--big;
-    }
-
-    &:nth-child(1){
-      margin-left: 0;
+    &:enabled {
+      opacity: 1;
     }
 
     @include tb{
@@ -47,67 +37,14 @@
       height: inherit;
       overflow: inherit;
       text-indent: inherit;
-      margin-left: $s-tab--smaller;
     }
 
     @include lg{
       font-size: $s-desk--smallest;
-      margin-top: $s-desk--smallest;
-      margin-left: 0;
-
-      &:nth-child(1){
-        margin-top: 0;
-      }
     }
 
     @include xl{
       font-size: $s-desk--smaller;
-      margin-top: $s-desk--smaller;
-    }
-
-    &:enabled{
-      opacity: 1;
-      cursor: pointer;
-      position: relative;
-      pointer-events: inherit;
-
-      &:hover{
-        transform: scale(1.1);
-        transition: $t-fast;
-
-        @include lg{
-          transform: inherit;
-          padding-left: $s-desk--smaller/2;
-
-          &::after{
-            transition: $t-fast;
-            // position: relative;
-            margin-left: -$s-desk--smaller/2;
-          }
-        }
-      }
-    }
-
-    &:nth-last-of-type(2){
-      &::after{
-        content: none;
-
-        @include lg{
-          content: '';
-          display: block;
-          height: 1px;
-          width: 100%;
-          background-color: $c-black;
-          margin-top: $s-desk--smallest;
-          margin-bottom: -1px;
-          transition: $t-smooth;
-          transform: inherit;
-          }
-
-        @include xl{
-        margin-top: $s-desk--smaller;
-        }
-      }
     }
 
     &::before{
@@ -139,7 +76,7 @@
       @include xxl{
         margin-right: $s-desk--smallest;
       }
-  }
+    }
 
     &--undo{
       background-image: url('/assets/img/svg/arrow-rewind.svg');
