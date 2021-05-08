@@ -62,6 +62,7 @@
   </div>
 </template>
 <script>
+
 import vBtn from '@/components/Tool/vBtn.vue'
 import vFooter from '@/components/Footer/vFooter.vue'
 import { ref, onMounted, computed } from 'vue'
@@ -158,7 +159,7 @@ export default {
       }
 
       btnDeleteList.value = ''
-      inputText.value.innerHTML = inputText.value.innerText.replace((/\n(X)\n?/g), (''))
+      inputText.value.innerHTML = inputText.value.innerText.replace((/\n?(X)\n/g), (''))
       inputFeedbackMessage('Les modifications ont été&nbsp;retirées.')
     }
 
@@ -563,6 +564,11 @@ export default {
 
         &-deactivated{
           opacity: 0.6;
+          cursor: not-allowed;
+
+          &:hover{
+            margin-left: 0;
+          }
         }
 
         &-disabled{
@@ -650,23 +656,6 @@ export default {
     }
   }
 }
-
-// .list--deactivated {
-//   pointer-events: none;
-//   .btn{
-//     pointer-events: none;
-//     cursor: not-allowed;
-//   }
-//   .list--btn__el{
-//     opacity: 0.3;
-//     cursor: not-allowed;
-//     // pointer-events: none;
-//     &:hover{
-//       // opacity: 0.8;
-//     }
-//   }
-
-// }
 
 .hide{
   display: none;
