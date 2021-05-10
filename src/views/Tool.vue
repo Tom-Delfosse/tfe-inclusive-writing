@@ -657,14 +657,6 @@ export default {
   }
 }
 
-.hide{
-  display: none;
-
-  @include xl{
-    display: inline-block;
-  }
-}
-
 @keyframes loading {
   to{
     opacity: 0;

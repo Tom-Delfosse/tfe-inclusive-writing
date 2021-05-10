@@ -19,7 +19,6 @@ export const textConverter = async (textToConvert, array) => {
           const regexSpanCheck = new RegExp('(?:\\s)X?' + array[i].checked + '(?!‧|[A-zÀ-ú])', 'gi')
 
           if (subEl.match(regexSpanCheck)) {
-            // console.log('ping')
             subEl = subEl.replace(regexSpanCheck, ' ' + array[i].checked)
             const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
             subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>$1</span>')
@@ -38,9 +37,9 @@ export const textConverter = async (textToConvert, array) => {
         }
 
         if (subEl.startsWith(' <span')) {
-          firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1]
-          firstLetter = firstLetter.charAt(0).toUpperCase() + firstLetter.substring(1)
-          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/, '$1' + firstLetter).substring(1) + ' '
+          firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].charAt(0).toUpperCase()
+          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/,
+            '$1' + firstLetter + subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].substring(1)).substring(1)
         } else {
           subEl = ' ' + firstLetter + subEl.substring(2)
         }

@@ -45,18 +45,6 @@ body{
 
 }
 
-// .fade-enter{
-//   &-from, &-to, &-active{
-//     background-color: green;
-//   }
-// }
-
-// .fade-leave{
-//   &-from, &-to, &-active{
-//     background-color: red;
-//   }
-// }
-
 .list{
   list-style-type: none;
   padding: 0;
@@ -306,7 +294,7 @@ p{
 .hide{
   display: none;
   @include tb{
-    display: inline;
+    display: inline-block;
   }
 }
 
