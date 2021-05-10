@@ -366,7 +366,7 @@ export default {
           line-height: 180%;
 
           &--disabled{
-            cursor: wait;
+            cursor: not-allowed;
             opacity: 0.8;
 
             span{
