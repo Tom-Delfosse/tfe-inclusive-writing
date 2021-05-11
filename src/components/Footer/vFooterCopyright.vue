@@ -141,7 +141,7 @@
 
   small{
     display: inline-block;
-    font-size: $s-mob--smallest;
+    font-size: $s-mob--smaller;
     transition: $t-smooth;
 
     @include tb{
