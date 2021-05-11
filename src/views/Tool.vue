@@ -12,6 +12,7 @@
               placeholder="Inscrivez votre texte ici&nbsp;!"
               @keyup="TextWriting"
               @paste="TextPasting"
+              @click="noScroll"
             />
 
             <p
@@ -95,6 +96,12 @@ export default {
       }
     })
 
+    const noScroll = () => {
+      if (!matchMedia('(pointer:fine)').matches) {
+        window.scrollTo(0, 0)
+      }
+    }
+
     const convertText = async () => {
       canConvert.value = !canConvert.value
       if (inputText.value === null || inputText.value === '') {
@@ -137,10 +144,13 @@ export default {
                 btnDeleteList.value = ''
               }
             })
-            if (window.innerWidth <= 768) {
+            console.log(window.scrollY)
+            // console.log(document.body.scrollTop)
+            if (!matchMedia('(pointer:fine)').matches) {
               console.log(btn.parentNode)
+              btn.classList.add('btn--delete-hide')
               btn.parentNode.addEventListener('click', (e) => {
-                // console.log('iibfibfisdbf')
+                window.scrollTo(0, 0)
                 btn.classList.remove('btn--delete-hide')
 
                 setTimeout(() => { btn.classList.add('btn--delete-hide') }, 2000)
@@ -148,22 +158,7 @@ export default {
             }
           })
 
-          if (matchMedia('(pointer:fine)').matches) {
-            console.log('pingpong')
-            const spanList = document.getElementsByClassName('corrected')
-            spanList.forEach(span => {
-              span.addEventListener('click', (e) => {
-                console.log('blop')
-                console.log(span)
-              })
-            })
-
-            btnDeleteList.value.forEach((btn) => {
-              btn.classList.add('btn--delete-hide')
-            })
-          } else {
-            console.log('pas de pingpong')
-          }
+          // if (matchMedia('(pointer:fine)').matches) {
         } else {
           canConvert.value = true
         }
@@ -312,7 +307,8 @@ export default {
       wordCounter,
       CorrectorArray,
       TextPasting,
-      isDeactivated
+      isDeactivated,
+      noScroll
     }
   }
 }
@@ -487,7 +483,7 @@ export default {
             user-select: none;
             width: 100%;
             height: 100%;
-            vertical-align: center;
+            // vertical-align: center;
             position: absolute;
             transition: $t-fast;
             padding: 0 $s-mob--smaller/4;
@@ -501,8 +497,8 @@ export default {
             @include tb{
               width: inherit;
               height: inherit;
+              top: 0;
               font-size: $s-tab--smallest/1.125;
-              right: 0;
               padding: $s-tab--smallest/6;
               background-color: $c-white;
               color: $c-black;
