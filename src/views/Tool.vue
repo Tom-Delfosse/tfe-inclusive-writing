@@ -12,6 +12,7 @@
               placeholder="Inscrivez votre texte ici&nbsp;!"
               @keyup="TextWriting"
               @paste="TextPasting"
+              @click="noScroll"
             />
 
             <p
@@ -95,6 +96,12 @@ export default {
       }
     })
 
+    const noScroll = () => {
+      if (!matchMedia('(pointer:fine)').matches) {
+        window.scrollTo(0, 0)
+      }
+    }
+
     const convertText = async () => {
       canConvert.value = !canConvert.value
       if (inputText.value === null || inputText.value === '') {
@@ -123,6 +130,7 @@ export default {
         spanList.value = document.querySelectorAll('.corrected')
 
         // La raison pour laquelle j'utilise getElementByClassName au lieu d'un QuerySelector est tout simplement parce que QuerySelectorAll() renvoie une liste statique et non dynamique du contenu du DOM.
+
         if (document.getElementsByClassName('btn--delete').length > 0) {
           btnDeleteList.value = document.getElementsByClassName('btn--delete')
           btnDeleteList.value.forEach((btn) => {
@@ -136,7 +144,21 @@ export default {
                 btnDeleteList.value = ''
               }
             })
+            console.log(window.scrollY)
+            // console.log(document.body.scrollTop)
+            if (!matchMedia('(pointer:fine)').matches) {
+              console.log(btn.parentNode)
+              btn.classList.add('btn--delete-hide')
+              btn.parentNode.addEventListener('click', (e) => {
+                window.scrollTo(0, 0)
+                btn.classList.remove('btn--delete-hide')
+
+                setTimeout(() => { btn.classList.add('btn--delete-hide') }, 2000)
+              })
+            }
           })
+
+          // if (matchMedia('(pointer:fine)').matches) {
         } else {
           canConvert.value = true
         }
@@ -225,6 +247,7 @@ export default {
 
       // source : https://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser Solution 1
       // source : https://stackoverflow.com/questions/12305269/move-caret-position-after-focus-for-contenteditable-div
+      // source :https://stackoverflow.com/questions/21054126/how-to-detect-if-a-device-has-mouse-support
     }
 
     const btnArray = [
@@ -284,7 +307,8 @@ export default {
       wordCounter,
       CorrectorArray,
       TextPasting,
-      isDeactivated
+      isDeactivated,
+      noScroll
     }
   }
 }
@@ -423,10 +447,13 @@ export default {
           display: inline-flex;
           flex-direction: row-reverse;
           justify-content: space-between;
-          padding-left: $s-mob--smaller/4;
+          padding: 0 $s-mob--smaller/4;
           margin: $s-mob--smaller/4 0;
+          box-sizing: border-box;
+          cursor: pointer;
 
           @include tb{
+            cursor: initial;
             display: inline;
             padding: $s-tab--smallest/6 $s-tab--smallest/3;
 
@@ -450,24 +477,29 @@ export default {
             font-family: font1;
             color: $c-white;
             background-color: $c-black;
-            margin-left: $s-mob--smaller/4;
-            font-size: $s-mob--smallest/1.20;
+            font-size: $s-mob--smallest;
             cursor: pointer;
             border: none;
             user-select: none;
-            padding: 0 $s-mob--smallest/4;
-            vertical-align: center;
+            width: 100%;
+            height: 100%;
+            // vertical-align: center;
+            position: absolute;
+            transition: $t-fast;
+            padding: 0 $s-mob--smaller/4;
+            right: 0;
 
-            @include sm{
-              padding: 0 $s-mob--smallest/2;
+            &-hide{
+              pointer-events: none;
+              opacity: 0;
             }
 
             @include tb{
-              font-size: $s-tab--smallest/1.125;
-              position: absolute;
-              right: 0;
+              width: inherit;
+              height: inherit;
               top: 0;
-              padding: $s-tab--smallest/3;
+              font-size: $s-tab--smallest/1.125;
+              padding: $s-tab--smallest/6;
               background-color: $c-white;
               color: $c-black;
               transform: translate(50%, -50%);

@@ -39,7 +39,7 @@ export const textConverter = async (textToConvert, array) => {
         } else {
           subEl = ' ' + firstLetter + subEl.substring(2)
         }
-        console.log(subEl)
+        // console.log(subEl)
         textToConvert[index][subIndex] = subEl
       })
       textToConvert[index] = textToConvert[index].join('')
