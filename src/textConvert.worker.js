@@ -16,19 +16,15 @@ export const textConverter = async (textToConvert, array) => {
         let firstLetter = subEl.charAt(1).toUpperCase()
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
-          const regexSpanCheck = new RegExp('(?:\\s)X?' + array[i].checked + '(?!‧|[A-zÀ-ú])', 'gi')
+          const regexSpanCheck = new RegExp('(?:\\s)X' + array[i].checked + '(?!‧|[A-zÀ-ú])', 'gi')
 
           if (subEl.match(regexSpanCheck)) {
             subEl = subEl.replace(regexSpanCheck, ' ' + array[i].checked)
-            const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
+            const regexAddSpan = new RegExp('(' + array[i].checked + ')', 'gi')
             subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>$1</span>')
-
             continue
           } else if (subEl.match(regexToCheck)) {
-            subEl = subEl.replace(regexToCheck, ' ' + array[i].checked)
-
-            const regexAddSpan = new RegExp('(' + array[i].checked + ')(?!X)(?!<button)', 'gi')
-            subEl = subEl.replace(regexAddSpan, '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>$1</span>')
+            subEl = subEl.replace(regexToCheck, ' ' + '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>' + array[i].checked + '</span>')
             continue
           }
         }
@@ -38,11 +34,12 @@ export const textConverter = async (textToConvert, array) => {
 
         if (subEl.startsWith(' <span')) {
           firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].charAt(0).toUpperCase()
-          subEl = ' ' + subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/,
-            '$1' + firstLetter + subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].substring(1)).substring(1)
+          subEl = subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/,
+            '$1' + firstLetter + subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].substring(1))
         } else {
           subEl = ' ' + firstLetter + subEl.substring(2)
         }
+        console.log(subEl)
         textToConvert[index][subIndex] = subEl
       })
       textToConvert[index] = textToConvert[index].join('')

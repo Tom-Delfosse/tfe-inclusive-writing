@@ -293,7 +293,7 @@ p{
 
 .hide{
   display: none;
-  @include tb{
+  @include xl{
     display: inline-block;
   }
 }
