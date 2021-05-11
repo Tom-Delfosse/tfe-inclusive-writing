@@ -88,10 +88,10 @@ export default {
   top:inherit;
   bottom: 0px;
   transform: inherit;
-  max-width: $s-mob--big*3;
+  max-width: $s-mob--big*2.8;
 
     @include sm{
-      max-width: $s-mob--bigger*3;
+      max-width: $s-mob--bigger*2.8;
     }
 
     @include tb{
