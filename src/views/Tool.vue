@@ -189,9 +189,8 @@ export default {
     }
 
     const copyText = () => {
-      console.log(inputText.value.innerText)
-      const textCopied = inputText.value.innerText.replace((/\n(X)\n?/g), (''))
-      console.log(textCopied)
+      let textCopied = '\n' + inputText.value.textContent
+      textCopied = inputText.value.innerText.replace((/\n?(X)\n/g), (''))
       navigator.clipboard.writeText(textCopied).then(function () {
         inputFeedbackMessage('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {

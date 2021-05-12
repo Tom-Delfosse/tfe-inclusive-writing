@@ -16,7 +16,7 @@ export const textConverter = async (textToConvert, array) => {
         let firstLetter = subEl.charAt(1).toUpperCase()
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
-          const regexSpanCheck = new RegExp('(?:\\s)X' + array[i].checked + '(?!‧|[A-zÀ-ú])', 'gi')
+          const regexSpanCheck = new RegExp('(?:\\s)X?' + array[i].checked + '(?!‧|[A-zÀ-ú])', 'gi')
 
           if (subEl.match(regexSpanCheck)) {
             subEl = subEl.replace(regexSpanCheck, ' ' + array[i].checked)
