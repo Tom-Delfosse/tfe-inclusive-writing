@@ -109,7 +109,7 @@ body{
   &--white{
     background-color: $c-white;
 
-    .title, p, a, span, img{
+    .title, p, a, span, img, small{
       &::selection{
         background-color: $c-black;
         color: $c-white;
