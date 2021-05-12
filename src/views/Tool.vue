@@ -144,21 +144,14 @@ export default {
                 btnDeleteList.value = ''
               }
             })
-            console.log(window.scrollY)
-            // console.log(document.body.scrollTop)
-            if (!matchMedia('(pointer:fine)').matches) {
-              console.log(btn.parentNode)
+            if (!matchMedia('(pointer:fine)').matches && window.innerWidth < 700) {
               btn.classList.add('btn--delete-hide')
-              btn.parentNode.addEventListener('click', (e) => {
-                window.scrollTo(0, 0)
+              btn.parentNode.addEventListener('click', () => {
                 btn.classList.remove('btn--delete-hide')
-
                 setTimeout(() => { btn.classList.add('btn--delete-hide') }, 2000)
               })
             }
           })
-
-          // if (matchMedia('(pointer:fine)').matches) {
         } else {
           canConvert.value = true
         }
@@ -282,11 +275,7 @@ export default {
     ]
 
     onMounted(async () => {
-      console.clear()
-      console.log('____Mounted_____')
-
       wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
-
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
         .then(function (data) {
