@@ -84,8 +84,8 @@
           <vCTA class="CTA-container--dark" />
         </div>
       </section>
-      <vFooter />
     </main>
+    <vFooter />
   </div>
 </template>
 
