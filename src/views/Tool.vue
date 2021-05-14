@@ -227,7 +227,6 @@ export default {
       const tmp = document.createElement('div')
       tmp.innerHTML = clipboardText
       clipboardText = tmp.innerText
-      console.log(clipboardText)
       inputText.value.innerHTML = inputText.value.innerHTML + clipboardText
       const range = document.createRange()
       range.selectNodeContents(inputText.value)

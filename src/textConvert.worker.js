@@ -39,13 +39,11 @@ export const textConverter = async (textToConvert, array) => {
         } else {
           subEl = ' ' + firstLetter + subEl.substring(2)
         }
-        // console.log(subEl)
         textToConvert[index][subIndex] = subEl
       })
       textToConvert[index] = textToConvert[index].join('')
     })
     textToConvert = textToConvert.join('\n\n')
-    console.log('_on quitte le worker_')
     return textToConvert
   } catch (e) {
     console.log(e)
