@@ -47,7 +47,7 @@
           <h3 class="title title--small">
             Pourquoi utiliser l'écriture&nbsp;inclusive&nbsp;?
           </h3>
-          <p>Utiliser l’écriture inclusive, c’est avant toute chose une forme de respect envers le récipient ou le lecteur‧trice qui lira le texte : elle permet non seulement de s’adresser aux hommes comme aux femmes sans directement faire référence à leur identité de genre comme on le faisait dans le passé, mais aussi d’accepter l’existence des personnes qui ne s’identifient pas dans cette binarité femme / homme et de les inclure dans la langue&nbsp;française.</p>
+          <p>Utiliser l’écriture inclusive, c’est avant toute chose une forme de respect envers la personne qui lira le texte : elle permet non seulement de s’adresser aux hommes comme aux femmes sans directement faire référence à leur identité de genre comme on le faisait dans le passé, mais aussi d’accepter l’existence des personnes qui ne s’identifient pas dans cette binarité femme / homme et de les inclure dans la langue&nbsp;française.</p>
 
           <h3 class="title title--small">
             Comment <span class="no-break">fonctionne-t-elle&nbsp;?</span>
