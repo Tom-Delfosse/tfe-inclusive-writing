@@ -5,7 +5,6 @@
         <h3 class="title title--small" v-html="other.name" />
 
         <img class="img img--arrow" :src="(`/assets/img/svg/${other.img}`)" alt="flèche directionnelle">
-        <!-- <img class="img img--arrow" :src="require(`/assets/img/svg/${other.img}`)" alt="flèche directionnelle"> -->
       </a>
       <p v-html="other.explanation" />
     </li>
