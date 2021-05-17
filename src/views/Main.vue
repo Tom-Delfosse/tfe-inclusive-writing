@@ -35,7 +35,7 @@
             <h2 class="title title--medium">
               De quoi <span class="no-break">s'agit-iel&nbsp;?</span>
             </h2>
-            <p>«&#8239;Correction inclusive&#8239;» est un outil visant à modifier des articles déjà rédigés pour ajouter une forme d’écriture inclusive là où&nbsp;nécessaire.</p>
+            <p>«&#8239;Correction inclusive&#8239;» est avant tout un outil visant à contextualiser l'écriture inclusive, tout en permettant de modifier des articles déjà rédigés pour ajouter une forme d’écriture inclusive là où&nbsp;nécessaire.</p>
           </div>
 
           <h3 class="title title--small">
