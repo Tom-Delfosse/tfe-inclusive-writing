@@ -4,7 +4,7 @@
       <div class="section__content">
         <div class="title-wrap">
           <h1 class="title title--bigger">
-            Correction inclusive
+            Correction inclusive final
           </h1>
           <p class="baseline">
             Outil de grammaire inclusive à la portée de&nbsp;<span class="no-break">tous‧tes</span>.
