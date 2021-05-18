@@ -60,7 +60,7 @@
             Pourquoi <span class="no-break">existe-iel&nbsp;</span>?
           </h2>
           <p>Correction inclusive a pour objectif de faciliter l’emploi de l’écriture inclusive sur Internet et de favoriser son usage auprès des personnes non concerné‧e‧s par son&nbsp;utilisation.</p>
-          <p>Avec une base de données d’approximativement 20 000 mots, ce correcteur peut convertir toute une large panoplie de sujets différents, tout en laissant la possibilité aux utilisateur‧trices de modifier le texte final à&nbsp;leur&nbsp;guise.</p>
+          <p>Avec une base de données d’approximativement 20 000 mots, ce correcteur peut convertir toute une large panoplie de sujets différents, tout en laissant la possibilité aux utilisateur‧trice‧s de modifier le texte final à&nbsp;leur&nbsp;guise.</p>
           <p>Voici un exemple de ce que l’outil puisse&nbsp;faire.</p>
           <vExampleBig />
           <vCTA />
