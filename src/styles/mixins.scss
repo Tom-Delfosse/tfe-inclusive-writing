@@ -4,6 +4,12 @@
     }
 }
 
+@mixin smx{
+    @media (min-width: #{$screen-smx}){
+        @content;
+    }
+}
+
 @mixin tb{
     @media (min-width: #{$screen-tb}){
         @content;
