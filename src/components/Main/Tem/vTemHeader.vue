@@ -74,13 +74,18 @@
       box-sizing: border-box;
       margin:  0 $s-mob--smaller;
       max-width: calc(100% - #{$s-mob--smaller} * 2);
-      max-height: 53.5%;
+      max-height: 59%;
 
       @include sm{
         margin:  0 $s-mob--medium;
         max-width: calc(100% - #{$s-mob--medium}* 2);
+        max-height: 50%;
+      }
+
+      @include smx{
         max-height: 55%;
       }
+
       @include tb{
         margin:  0 10%;
         max-width: 80%;

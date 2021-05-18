@@ -30,7 +30,7 @@
 
       @include retina{
         background-image: url('/assets/img/grain-tile@2x.png');
-        filter: brightness(0.6);
+        filter: brightness(0.55);
         opacity: 0.2;
       }
     }
