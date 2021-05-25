@@ -364,7 +364,6 @@ export default {
           border-bottom: 1px solid $c-black;
           height: 55vh;
           max-height: 1000px;
-          // user-select: none;
         }
 
         .input__text{
@@ -481,7 +480,6 @@ export default {
             user-select: none;
             width: 100%;
             height: 100%;
-            // vertical-align: center;
             position: absolute;
             transition: $t-fast;
             padding: 0 $s-mob--smaller/4;
@@ -497,7 +495,7 @@ export default {
               height: inherit;
               top: 0;
               font-size: $s-tab--smallest/1.125;
-              padding: $s-tab--smallest/6;
+              padding: $s-tab--smallest/8 $s-tab--smallest/4;
               background-color: $c-white;
               color: $c-black;
               transform: translate(50%, -50%);
@@ -512,12 +510,12 @@ export default {
 
             @include lg{
               font-size: $s-desk--tiny/1.25;
-              padding: $s-desk--tiny/3;
+              padding: $s-desk--tiny/6;
+              // padding: 0;
             }
 
             @include xl{
               font-size: $s-desk--tiny;
-              padding: $s-desk--tiny/3;
             }
           }
         }
