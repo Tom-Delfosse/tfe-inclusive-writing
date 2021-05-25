@@ -110,25 +110,17 @@ export default {
         }
       } else {
         isDeactivated.value = true
-
         const btnDeleteListPrev = btnDeleteList.value.length
         const tempText = inputText.value.cloneNode(true)
-        console.log(tempText)
-
         const tempTextSpanList = tempText.querySelectorAll('.corrected')
         if (tempTextSpanList.length > 0) {
           for (let i = 0; i < tempTextSpanList.length; i++) {
-            // tempTextSpanList[i].replaceWith('NON FONCTIONNEL')
             tempTextSpanList[i].replaceWith(CorrectorArray[tempTextSpanList[i].className.replace(/[^0-9]/g, '')].toCheck)
             continue
           }
-
-          console.log(tempText.innerText.replace(/\n?X\n/gi, ''))
-          console.log(inputText.value)
         }
 
         const textToConvert = tempText.innerText.replace(/\n?X\n/gi, '')
-
         const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
         clearTimeout(feedbackBye)
         if (feedbackActive.value === true) {
