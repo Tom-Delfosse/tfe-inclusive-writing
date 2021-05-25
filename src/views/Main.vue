@@ -33,9 +33,9 @@
           </svg>
           <div class="text-short">
             <h2 class="title title--medium">
-              De quoi <span class="no-break">s'agit-iel&nbsp;?</span>
+              De quoi <span class="no-break">s'agit-il&nbsp;?</span>
             </h2>
-            <p>«&#8239;Correction inclusive&#8239;» est un outil visant à modifier des articles déjà rédigés pour ajouter une forme d’écriture inclusive là où&nbsp;nécessaire.</p>
+            <p>«&#8239;Correction inclusive&#8239;» est avant tout un outil visant à contextualiser l'écriture inclusive, tout en permettant de modifier des articles déjà rédigés pour ajouter une forme d’écriture inclusive là où&nbsp;nécessaire.</p>
           </div>
 
           <h3 class="title title--small">
@@ -47,7 +47,7 @@
           <h3 class="title title--small">
             Pourquoi utiliser l'écriture&nbsp;inclusive&nbsp;?
           </h3>
-          <p>Utiliser l’écriture inclusive, c’est avant toute chose une forme de respect envers le récipient ou le lecteur‧trice qui lira le texte : elle permet non seulement de s’adresser aux hommes comme aux femmes sans directement faire référence à leur identité de genre comme on le faisait dans le passé, mais aussi d’accepter l’existence des personnes qui ne s’identifient pas dans cette binarité femme / homme et de les inclure dans la langue&nbsp;française.</p>
+          <p>Utiliser l’écriture inclusive, c’est avant toute chose une forme de respect envers la personne qui lira le texte : elle permet non seulement de s’adresser aux hommes comme aux femmes sans directement faire référence à leur identité de genre comme on le faisait dans le passé, mais aussi d’accepter l’existence des personnes qui ne s’identifient pas dans cette binarité femme / homme et de les inclure dans la langue&nbsp;française.</p>
 
           <h3 class="title title--small">
             Comment <span class="no-break">fonctionne-t-elle&nbsp;?</span>
@@ -57,10 +57,11 @@
           <vExample />
 
           <h2 class="title title--medium">
-            Pourquoi <span class="no-break">existe-iel&nbsp;</span>?
+            Pourquoi <span class="no-break">existe-il&nbsp;</span>?
           </h2>
           <p>Correction inclusive a pour objectif de faciliter l’emploi de l’écriture inclusive sur Internet et de favoriser son usage auprès des personnes non concerné‧e‧s par son&nbsp;utilisation.</p>
           <p>Avec une base de données d’approximativement 20 000 mots, ce correcteur peut convertir toute une large panoplie de sujets différents, tout en laissant la possibilité aux utilisateur‧trice‧s de modifier le texte final à&nbsp;leur&nbsp;guise.</p>
+
           <p>Voici un exemple de ce que l’outil puisse&nbsp;faire.</p>
           <vExampleBig />
           <vCTA />

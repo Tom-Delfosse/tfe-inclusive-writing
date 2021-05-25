@@ -14,11 +14,6 @@
     </svg>
   </div>
 </template>
-<script>
-export default {
-
-}
-</script>
 <style lang="scss" scoped>
 .section--other__outro{
   position: absolute;

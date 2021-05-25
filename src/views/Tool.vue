@@ -11,7 +11,7 @@
               :contenteditable="[ isDeactivated ? false : true]"
               placeholder="Inscrivez votre texte ici&nbsp;!"
               @keyup="TextWriting"
-              @paste="TextPasting"
+              @paste.prevent="TextPasting"
               @click="noScroll"
             />
 
@@ -230,7 +230,7 @@ export default {
 
     const TextPasting = (e) => {
       e.stopPropagation()
-      e.preventDefault()
+      // e.preventDefault()
       const clipboardData = e.clipboardData || window.clipboardData
       let clipboardText = clipboardData.getData('Text')
       const tmp = document.createElement('div')
