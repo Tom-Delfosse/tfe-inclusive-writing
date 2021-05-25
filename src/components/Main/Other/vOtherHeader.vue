@@ -16,11 +16,6 @@
     </svg>
   </div>
 </template>
-<script>
-export default {
-
-}
-</script>
 <style lang="scss" scoped>
     .title-wrap{
       position: absolute;

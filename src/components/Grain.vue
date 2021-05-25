@@ -14,7 +14,7 @@
 
     &::before{
       content: '';
-      background-image: url('/assets/img/grain-tile@2x.png');
+      background-image: url('/assets/img/grain-tile.png');
       opacity: 0.2;
       filter: brightness(0.5);
       position: absolute;
@@ -25,7 +25,6 @@
       @include lg {
         opacity: 0.4;
         filter: brightness(1);
-        background-image: url('/assets/img/grain-tile.png');
       }
 
       @include retina{
