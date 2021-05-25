@@ -511,7 +511,6 @@ export default {
             @include lg{
               font-size: $s-desk--tiny/1.25;
               padding: $s-desk--tiny/6;
-              // padding: 0;
             }
 
             @include xl{
