@@ -109,8 +109,26 @@ export default {
           inputFeedbackMessage('Veuillez inscrire au moins un mot avant de&nbsp;convertir.')
         }
       } else {
+        isDeactivated.value = true
+
         const btnDeleteListPrev = btnDeleteList.value.length
-        const textToConvert = inputText.value.innerText.replace(/\n?X\n/gi, 'X')
+        const tempText = inputText.value.cloneNode(true)
+        console.log(tempText)
+
+        const tempTextSpanList = tempText.querySelectorAll('.corrected')
+        if (tempTextSpanList.length > 0) {
+          for (let i = 0; i < tempTextSpanList.length; i++) {
+            // tempTextSpanList[i].replaceWith('NON FONCTIONNEL')
+            tempTextSpanList[i].replaceWith(CorrectorArray[tempTextSpanList[i].className.replace(/[^0-9]/g, '')].toCheck)
+            continue
+          }
+
+          console.log(tempText.innerText.replace(/\n?X\n/gi, ''))
+          console.log(inputText.value)
+        }
+
+        const textToConvert = tempText.innerText.replace(/\n?X\n/gi, '')
+
         const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
         clearTimeout(feedbackBye)
         if (feedbackActive.value === true) {
@@ -124,7 +142,6 @@ export default {
           inputFeedback.value.innerHTML = loadingMsg
         }
 
-        isDeactivated.value = true
         const textOutput = await textConverter(textToConvert, CorrectorArray)
         inputText.value.innerHTML = textOutput
         spanList.value = document.querySelectorAll('.corrected')
@@ -273,6 +290,7 @@ export default {
     ]
 
     onMounted(async () => {
+      console.clear()
       wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
@@ -375,10 +393,11 @@ export default {
           font-size: $s-mob--smaller;
           letter-spacing: $ls-smaller;
           line-height: 180%;
+          transition: $t-fast;
 
           &--disabled{
             cursor: not-allowed;
-            opacity: 0.8;
+            opacity: 0.75;
 
             span{
               pointer-events: none;
