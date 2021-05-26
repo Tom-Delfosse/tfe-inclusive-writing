@@ -11,27 +11,35 @@ export const textConverter = async (textToConvert, array) => {
     })
 
     textToConvert.forEach((el, index) => {
-      console.log(el)
+      // console.log(el)
       el.forEach((subEl, subIndex) => {
-        console.log(subEl)
+        // console.log(subEl)
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
-        let firstLetter = subEl.charAt(1).toUpperCase()
-        subEl = subEl.replace(/\s\s+/g, '')
+        // console.log(subEl)
+        let firstLetter = subEl.charAt(0).toUpperCase()
+        subEl = subEl.replace(/\s\s+/g, ' ')
+        // console.log(subEl)
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
 
           if (subEl.match(regexToCheck)) {
-            subEl = subEl.replace(regexToCheck, ' ' + '<span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>' + array[i].checked + '</span>')
+            subEl = subEl.replace(regexToCheck, ' <span contenteditable="false" class="corrected corrected--' + array[i].wordID + '"><button class="btn btn--delete">X</button>' + array[i].checked + '</span>')
             continue
           }
         }
+
         // Rajoute une majuscule à chaque phrase.
         if (subEl.startsWith(' <span')) {
           firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].charAt(0).toUpperCase()
           subEl = subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/,
             '$1' + firstLetter + subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].substring(1))
+        } else if (subEl.startsWith('  ')) {
+          // console.log('espace')
         } else {
-          subEl = ' ' + firstLetter + subEl.substring(2)
+          // console.log('else')
+          // console.log(subEl)
+          subEl = firstLetter + subEl.substring(1)
+          // console.log(subEl)
         }
 
         // retire les espaces en fin de ligne.

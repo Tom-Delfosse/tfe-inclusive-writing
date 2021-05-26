@@ -398,7 +398,7 @@ export default {
 
           &--disabled{
             cursor: not-allowed;
-            opacity: 0.75;
+            opacity: 0.6;
 
             span{
               pointer-events: none;
