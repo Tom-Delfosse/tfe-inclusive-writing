@@ -11,14 +11,10 @@ export const textConverter = async (textToConvert, array) => {
     })
 
     textToConvert.forEach((el, index) => {
-      // console.log(el)
       el.forEach((subEl, subIndex) => {
-        // console.log(subEl)
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
-        // console.log(subEl)
         let firstLetter = subEl.charAt(0).toUpperCase()
         subEl = subEl.replace(/\s\s+/g, ' ')
-        // console.log(subEl)
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
 
@@ -33,13 +29,8 @@ export const textConverter = async (textToConvert, array) => {
           firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].charAt(0).toUpperCase()
           subEl = subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/,
             '$1' + firstLetter + subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].substring(1))
-        } else if (subEl.startsWith('  ')) {
-          // console.log('espace')
         } else {
-          // console.log('else')
-          // console.log(subEl)
           subEl = firstLetter + subEl.substring(1)
-          // console.log(subEl)
         }
 
         // retire les espaces en fin de ligne.
