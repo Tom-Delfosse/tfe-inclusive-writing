@@ -113,7 +113,6 @@ export default {
         const btnDeleteListPrev = btnDeleteList.value.length
 
         const tempText = inputText.value.cloneNode(true)
-        console.log(tempText)
         for (let i = 0; i < tempText.children.length; i++) {
           if (tempText.children[i].querySelector('br')) {
             tempText.children[i].replaceWith('\n\n')
@@ -387,7 +386,7 @@ export default {
           padding: 0;
           margin: 0;
           width: 100%;
-          overflow-x: visible;
+          overflow-x: hidden;
           overflow-y: auto;
           height: 100%;
           white-space: pre-line;

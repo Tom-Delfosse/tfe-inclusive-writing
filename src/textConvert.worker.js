@@ -11,9 +11,12 @@ export const textConverter = async (textToConvert, array) => {
     })
 
     textToConvert.forEach((el, index) => {
+      console.log(el)
       el.forEach((subEl, subIndex) => {
+        console.log(subEl)
         subEl = ' ' + subEl.charAt(0).toUpperCase() + subEl.substring(1)
         let firstLetter = subEl.charAt(1).toUpperCase()
+        subEl = subEl.replace(/\s\s+/g, '')
         for (let i = 0; i < array.length; i++) {
           const regexToCheck = new RegExp('(?:\\s)(' + array[i].toCheck + ')(?!‧|[A-zÀ-ú])', 'gi')
 
@@ -22,7 +25,7 @@ export const textConverter = async (textToConvert, array) => {
             continue
           }
         }
-
+        // Rajoute une majuscule à chaque phrase.
         if (subEl.startsWith(' <span')) {
           firstLetter = subEl.match(/(?:\s<.*?>)([^\s,!.?X ;:<]+)/)[1].charAt(0).toUpperCase()
           subEl = subEl.replace(/(\s<.*?>)([^\s,!.?X ;:<]+)/,
@@ -31,11 +34,13 @@ export const textConverter = async (textToConvert, array) => {
           subEl = ' ' + firstLetter + subEl.substring(2)
         }
 
+        // retire les espaces en fin de ligne.
         if (subEl.match(/(?!\s[^*])\s/g)) {
           subEl = subEl.slice(0, -1)
         }
 
-        if (!subEl.match(/\.?[.,;?!](?![^\s])/g)) {
+        // rajoute un point s'il n'y en a pas déjà un.
+        if (!subEl.match(/\.?[.,;?!](?!.)/g)) {
           subEl = subEl + '.'
         }
         textToConvert[index][subIndex] = subEl
