@@ -115,9 +115,6 @@ export default {
         const tempText = inputText.value.cloneNode(true)
         console.log(tempText)
         for (let i = 0; i < tempText.children.length; i++) {
-          console.log(tempText.children[i])
-          console.log(tempText.children[i].children)
-
           if (tempText.children[i].querySelector('br')) {
             tempText.children[i].replaceWith('\n\n')
             continue
