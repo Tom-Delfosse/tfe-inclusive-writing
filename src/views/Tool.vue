@@ -111,7 +111,21 @@ export default {
       } else {
         isDeactivated.value = true
         const btnDeleteListPrev = btnDeleteList.value.length
+
         const tempText = inputText.value.cloneNode(true)
+        console.log(tempText)
+        for (let i = 0; i < tempText.children.length; i++) {
+          console.log(tempText.children[i])
+          console.log(tempText.children[i].children)
+
+          if (tempText.children[i].querySelector('br')) {
+            tempText.children[i].replaceWith('\n\n')
+            continue
+          } else if (!tempText.children[i].querySelector('.corrected')) {
+            tempText.children[i].innerHTML = '\t' + tempText.children[i].innerHTML
+          }
+        }
+
         const tempTextSpanList = tempText.querySelectorAll('.corrected')
         if (tempTextSpanList.length > 0) {
           for (let i = 0; i < tempTextSpanList.length; i++) {
@@ -120,7 +134,7 @@ export default {
           }
         }
 
-        const textToConvert = tempText.innerText.replace(/\n?X\n/gi, '')
+        const textToConvert = tempText.innerText
         const loadingMsg = 'En cours de&nbsp;modification<span class="animated">.</span><span class="animated">.</span><span class="animated">.</span>'
         clearTimeout(feedbackBye)
         if (feedbackActive.value === true) {
@@ -410,9 +424,9 @@ export default {
           & div::selection{
           background-color: $c-black;
           color: $c-white;
-              br{
-                background-color: $c-black;
-              }
+              // br{
+                // background-color: $c-black;
+              // }
           }
 
           @include tb{

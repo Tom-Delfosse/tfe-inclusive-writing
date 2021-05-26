@@ -35,7 +35,7 @@ export const textConverter = async (textToConvert, array) => {
           subEl = subEl.slice(0, -1)
         }
 
-        if (!subEl.match(/\.?[.?!](?![^\s])/g)) {
+        if (!subEl.match(/\.?[.,;?!](?![^\s])/g)) {
           subEl = subEl + '.'
         }
         textToConvert[index][subIndex] = subEl
