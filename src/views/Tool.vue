@@ -420,9 +420,6 @@ export default {
           & div::selection{
           background-color: $c-black;
           color: $c-white;
-              // br{
-                // background-color: $c-black;
-              // }
           }
 
           @include tb{
