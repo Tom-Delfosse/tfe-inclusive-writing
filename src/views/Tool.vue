@@ -111,10 +111,9 @@ export default {
       } else {
         isDeactivated.value = true
         const btnDeleteListPrev = btnDeleteList.value.length
-
         const tempText = inputText.value.cloneNode(true)
-
         const tempTextSpanList = tempText.querySelectorAll('.corrected')
+
         if (tempTextSpanList.length > 0) {
           for (let i = 0; i < tempTextSpanList.length; i++) {
             tempTextSpanList[i].replaceWith(CorrectorArray[tempTextSpanList[i].className.replace(/[^0-9]/g, '')].toCheck)
@@ -123,7 +122,6 @@ export default {
         }
 
         for (let i = 0; i < tempText.children.length; i++) {
-          console.log(tempText.children)
           if (tempText.children[i].querySelector('br')) {
             tempText.children[i].replaceWith('\n\n')
             continue
@@ -293,7 +291,6 @@ export default {
     ]
 
     onMounted(async () => {
-      console.clear()
       wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
