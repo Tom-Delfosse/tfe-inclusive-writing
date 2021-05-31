@@ -291,7 +291,6 @@ export default {
     ]
 
     onMounted(async () => {
-      console.clear()
       wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
