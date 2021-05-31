@@ -113,20 +113,22 @@ export default {
         const btnDeleteListPrev = btnDeleteList.value.length
 
         const tempText = inputText.value.cloneNode(true)
-        for (let i = 0; i < tempText.children.length; i++) {
-          if (tempText.children[i].querySelector('br')) {
-            tempText.children[i].replaceWith('\n\n')
-            continue
-          } else if (!tempText.children[i].querySelector('.corrected')) {
-            tempText.children[i].innerHTML = '\t' + tempText.children[i].innerHTML
-          }
-        }
 
         const tempTextSpanList = tempText.querySelectorAll('.corrected')
         if (tempTextSpanList.length > 0) {
           for (let i = 0; i < tempTextSpanList.length; i++) {
             tempTextSpanList[i].replaceWith(CorrectorArray[tempTextSpanList[i].className.replace(/[^0-9]/g, '')].toCheck)
             continue
+          }
+        }
+
+        for (let i = 0; i < tempText.children.length; i++) {
+          console.log(tempText.children)
+          if (tempText.children[i].querySelector('br')) {
+            tempText.children[i].replaceWith('\n\n')
+            continue
+          } else {
+            tempText.children[i].innerHTML = '\n' + tempText.children[i].innerHTML
           }
         }
 
@@ -240,7 +242,6 @@ export default {
 
     const TextPasting = (e) => {
       e.stopPropagation()
-      // e.preventDefault()
       const clipboardData = e.clipboardData || window.clipboardData
       let clipboardText = clipboardData.getData('Text')
       const tmp = document.createElement('div')
@@ -506,7 +507,6 @@ export default {
               background-color: $c-white;
               color: $c-black;
               transform: translate(50%, -50%);
-              -webkit-text-stroke: 1px;
               transition: $t-smooth;
 
               &:hover{
