@@ -207,8 +207,10 @@ export default {
     }
 
     const copyText = () => {
+      console.log(inputText.value.innerText)
       let textCopied = ''
       textCopied = inputText.value.innerText.replace((/\n?(X)\n/g), ('')).replace((/\n+/g), ('\n\n'))
+      console.log(textCopied)
       navigator.clipboard.writeText(textCopied).then(function () {
         inputFeedbackMessage('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
@@ -290,6 +292,7 @@ export default {
     ]
 
     onMounted(async () => {
+      console.clear()
       wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })

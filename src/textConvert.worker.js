@@ -47,7 +47,7 @@ export const textConverter = async (textToConvert, array) => {
 
       textToConvert[index] = textToConvert[index].join('')
     })
-    textToConvert = textToConvert.join('\n\n')
+    textToConvert = textToConvert.join('<div><br></div>')
     return textToConvert
   } catch (e) {
     console.log(e)
