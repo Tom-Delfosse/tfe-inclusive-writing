@@ -113,6 +113,7 @@ export default {
         const btnDeleteListPrev = btnDeleteList.value.length
         const tempText = inputText.value.cloneNode(true)
         const tempTextSpanList = tempText.querySelectorAll('.corrected')
+        const tempTextChildren = tempText.querySelectorAll('br')
 
         if (tempTextSpanList.length > 0) {
           for (let i = 0; i < tempTextSpanList.length; i++) {
@@ -121,13 +122,8 @@ export default {
           }
         }
 
-        for (let i = 0; i < tempText.children.length; i++) {
-          if (tempText.children[i].querySelector('br')) {
-            tempText.children[i].replaceWith('\n\n')
-            continue
-          } else {
-            tempText.children[i].innerHTML = '\n' + tempText.children[i].innerHTML
-          }
+        for (let i = 0; i < tempTextChildren.length; i++) {
+          tempTextChildren[i].replaceWith('\n\n')
         }
 
         const textToConvert = tempText.innerText
@@ -193,7 +189,6 @@ export default {
       }
 
       btnDeleteList.value = ''
-      inputText.value.innerHTML = inputText.value.innerText.replace((/\n?(X)\n/g), (''))
       inputFeedbackMessage('Les modifications ont été&nbsp;retirées.')
     }
 
@@ -208,8 +203,8 @@ export default {
     }
 
     const copyText = () => {
-      let textCopied = '\n' + inputText.value.textContent
-      textCopied = inputText.value.innerText.replace((/\n?(X)\n/g), (''))
+      let textCopied = ''
+      textCopied = inputText.value.innerText.replace((/\n?(X)\n/g), ('')).replace((/\n+/g), ('\n\n'))
       navigator.clipboard.writeText(textCopied).then(function () {
         inputFeedbackMessage('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
@@ -235,16 +230,17 @@ export default {
 
     const TextWriting = () => {
       canConvert.value = true
-      wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:]+)/g)?.length || 0
+      wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:\n]+)/g)?.length || 0
     }
 
     const TextPasting = (e) => {
       e.stopPropagation()
       const clipboardData = e.clipboardData || window.clipboardData
+
       let clipboardText = clipboardData.getData('Text')
       const tmp = document.createElement('div')
       tmp.innerHTML = clipboardText
-      clipboardText = tmp.innerText
+      clipboardText = tmp.innerText.replace((/\n+/g), ('\n\n'))
       inputText.value.innerHTML = inputText.value.innerHTML + clipboardText
       const range = document.createRange()
       range.selectNodeContents(inputText.value)
@@ -291,6 +287,7 @@ export default {
     ]
 
     onMounted(async () => {
+      console.clear()
       wordCounter.value = inputText.value.textContent.match(/([^\s,!.? ;:']+)/g)?.length || 0
       await fetch('./assets/data/CorrectorMini.json')
         .then(function (response) { return response.json() })
