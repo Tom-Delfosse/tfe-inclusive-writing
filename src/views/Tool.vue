@@ -193,7 +193,6 @@ export default {
       }
 
       btnDeleteList.value = ''
-      inputText.value.innerHTML = inputText.value.innerText.replace((/\n?(X)\n/g), (''))
       inputFeedbackMessage('Les modifications ont été&nbsp;retirées.')
     }
 
@@ -208,8 +207,8 @@ export default {
     }
 
     const copyText = () => {
-      let textCopied = '\n' + inputText.value.textContent
-      textCopied = inputText.value.innerText.replace((/\n?(X)\n/g), (''))
+      let textCopied = ''
+      textCopied = inputText.value.innerText.replace((/\n?(X)\n/g), ('')).replace((/\n+/g), ('\n\n'))
       navigator.clipboard.writeText(textCopied).then(function () {
         inputFeedbackMessage('Texte copié avec&nbsp;succès&nbsp;!')
       }, function () {
