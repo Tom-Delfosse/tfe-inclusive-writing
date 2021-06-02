@@ -1,11 +1,11 @@
 export const textConverter = async (textToConvert, array) => {
   try {
-    textToConvert = textToConvert.replace(/\n?\n\n+/g, '|').split('|').filter(function (el) {
+    textToConvert = textToConvert.replace(/\n\n+/g, '|').split('|').filter(function (el) {
       return el !== ''
     })
 
     textToConvert.forEach((el, index) => {
-      el = el.replace(/(\.?\.?[.?!]\s?\s+|\n)/g, '$1|').split('|')
+      el = el.replace(/(\.?\.?[.?!]\s?\s+)/g, '$1|').split('|')
       el = el.filter(subEl => subEl === null || subEl.trim())
       textToConvert[index] = el
     })
@@ -42,6 +42,7 @@ export const textConverter = async (textToConvert, array) => {
         if (!subEl.match(/\.?[.,;?!](?!.)/g)) {
           subEl = subEl + '.'
         }
+
         textToConvert[index][subIndex] = subEl
       })
 
