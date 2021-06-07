@@ -94,7 +94,6 @@ export default {
       .img, .title{
         transition: $t-smooth;
         margin-bottom: $s-mob--small;
-        // flex-shrink: 0;
 
         @include tb{
           margin-bottom: $s-tab--small;

@@ -279,7 +279,6 @@ export default {
     }
     @include xl{
       max-width: $s-desk--big * 4;
-      // display: none;
       transform: translateY( calc(-50% - #{$s-desk--medium-plus}));
     }
     @include xxl{
