@@ -226,7 +226,6 @@ export default {
   }
 
   &--tem{
-
     .section__content{
       padding-bottom: $s-mob--massive*3;
 

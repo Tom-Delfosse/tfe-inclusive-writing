@@ -18,7 +18,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
 .section--404{
     padding-top: 20vh;
