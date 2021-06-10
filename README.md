@@ -5,7 +5,7 @@ This project consists in a simple but contextualised tool that could help french
 
 ## Why is this ?
 
-First of all, this tool is supposed to help everyone have an easier and more practical time with the so-called 'inclusive french', which has been causing some trouble since its modern inception due to the difficulty and impracticality that come with it : poor access to characters, unsupported text-to-speech by many popular characters, and so forth.
+This tool is supposed to help everyone have an easier and more practical time with the so-called 'inclusive french', which has been causing some trouble since its modern inception due to the difficulty and impracticality that come with it : poor access to characters, unsupported text-to-speech by many popular characters, and so forth.
 
 ## Credit
 - Lexique 3.83 (<http://www.lexique.org/shiny/lexique>)
