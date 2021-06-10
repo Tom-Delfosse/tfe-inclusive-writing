@@ -69,6 +69,7 @@ export default {
     }
 
     .img--avatar{
+      user-select: none;
       max-width: $s-mob--biggest*3;
       flex: 1;
       height: auto;

@@ -125,6 +125,7 @@ export default {
       width: 100vw;
       height: 100%;
       max-width: $s-mob--big;
+      user-select: none;
       padding: 0;
       flex-shrink: 0;
       min-width: 0;
