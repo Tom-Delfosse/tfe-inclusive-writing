@@ -10,12 +10,12 @@ const routes = [
   {
     path: '/Tool',
     name: 'Tool',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Tool.vue')
+    component: () => import('../views/Tool.vue')
   },
   {
     path: '/:catchAll(.*)',
     name: 'vNotFound',
-    component: () => import(/* webpackChunkName: "about" */ '../views/vNotFound.vue')
+    component: () => import('../views/vNotFound.vue')
   }
 ]
 
