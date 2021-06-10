@@ -112,6 +112,7 @@ export default {
     width: 100%;
     height: 100%;
     max-width: $s-mob--big;
+    user-select: none;
     flex-grow: 1;
     padding: 0 $s-mob--smallest/2;
 
