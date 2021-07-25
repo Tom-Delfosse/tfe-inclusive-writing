@@ -23,14 +23,14 @@
       animation: grainMove 0.0024s steps(8) infinite;
 
       @include lg {
-        opacity: 0.4;
-        filter: brightness(1);
+        opacity: 0.45;
+        filter: brightness(1.4);
       }
 
       @include retina{
         background-image: url('/assets/img/grain-tile@2x.png');
-        filter: brightness(0.55);
-        opacity: 0.2;
+        filter: brightness(0.7);
+        opacity: 0.3;
       }
     }
   }

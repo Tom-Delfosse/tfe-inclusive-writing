@@ -52,7 +52,7 @@
           <h3 class="title title--small">
             Comment <span class="no-break">fonctionne-t-elle&nbsp;?</span>
           </h3>
-          <p>L’écriture neutre se base sur quelques formulations précises afin de mettre d’éviter dans la mesure du possible de mentionner le genre du groupe&nbsp;sujet&#8239;:</p>
+          <p>L’écriture neutre se base sur quelques formulations précises afin d’éviter dans la mesure du possible de mentionner le genre du groupe&nbsp;sujet&#8239;:</p>
 
           <vExample />
 

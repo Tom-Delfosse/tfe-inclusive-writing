@@ -88,7 +88,7 @@
     }
 
     @include xxl{
-      max-width: 400px;
+      max-width: 350px;
     }
 
     &:hover{
@@ -147,7 +147,7 @@
     }
 
     @include xxl{
-      font-size: $s-desk--medium-small;
+      // font-size: $s-desk--medium-small;
     }
   }
 

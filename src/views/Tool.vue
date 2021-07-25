@@ -457,7 +457,7 @@ export default {
 
             &:hover{
               .btn--delete{
-                transform: translate(50%, -50%) rotate(15deg);
+                // transform: translate(50%, -50%) rotate(15deg);
                 transition: $t-fast;
               }
             }
@@ -472,7 +472,8 @@ export default {
           }
 
           .btn--delete{
-            font-family: font1;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: $w-light;
             color: $c-white;
             background-color: $c-black;
             font-size: $s-mob--smallest;
@@ -494,23 +495,24 @@ export default {
             @include tb{
               width: inherit;
               height: inherit;
-              top: 0;
+              top: 0px;
               font-size: $s-tab--smallest/1.125;
               padding: $s-tab--smallest/8 $s-tab--smallest/4;
               background-color: $c-white;
-              color: $c-black;
-              transform: translate(50%, -50%);
-              transition: $t-smooth;
 
-              &:hover{
-                transition: $t-smooth;
-                transform: translate(50%, -50%) rotate(180deg);
-              }
+              color: $c-black;
+              transform: translate3d(50%, -50%, 0);
             }
 
             @include lg{
               font-size: $s-desk--tiny/1.25;
-              padding: $s-desk--tiny/6;
+              padding: $s-desk--smallest/8 $s-desk--smallest/4;
+
+              &:hover{
+                transition: $t-smooth;
+                transform: translate3d(50%,- 50%, 0) rotate(180deg);
+                backface-visibility: none;
+              }
             }
 
             @include xl{
